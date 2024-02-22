@@ -15,6 +15,12 @@ public class ServerMain {
                 ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
                 //creates a stream for reading objects from the client
                 ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
+
+                //the below will not work until me and zara merge on friday
+                //creates a thread for echoing to the client
+                Thread t = new Thread(new ServersListener(is,os));
+                //starts the thread(calls run)
+                t.start();
             }
         }
         catch(Exception error){

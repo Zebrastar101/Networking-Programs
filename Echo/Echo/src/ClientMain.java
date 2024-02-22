@@ -18,9 +18,11 @@ public class ClientMain {
             do{
                 System.out.print("Enter text to send to the server (\"exit\" to quit): ");
                 text=keyboard.next();
-                os.writeObject(text);
-                os.reset();
                 if (!text.equals("exit")) {
+                    //writes the given text to the server
+                    os.writeObject(text);
+                    os.reset();
+                    //reads the text back from the server
                     String echo = (String) is.readObject();
                     System.out.println("\t echo: " + echo);
                 }
