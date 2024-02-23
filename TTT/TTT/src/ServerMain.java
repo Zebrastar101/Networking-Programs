@@ -15,7 +15,7 @@ public class ServerMain {
             ObjectInputStream xis = new ObjectInputStream(xCon.getInputStream());
 
             // Lets the client know they are the X player
-            xos.writeObject(new CommandFromServer(CommandFromServer.CONNECTED_AS_X,null));
+            xos.writeObject(new CommandFromServer(CommandFromServer.CONNECT_AS_X,null));
             System.out.println("X has Connected.");
 
             // Creates a Thread to listen to the X client
@@ -29,7 +29,7 @@ public class ServerMain {
             ObjectInputStream ois = new ObjectInputStream(oCon.getInputStream());
 
             // Lets the client know they are the X player
-            oos.writeObject(new CommandFromServer(CommandFromServer.CONNECTED_AS_O,null));
+            oos.writeObject(new CommandFromServer(CommandFromServer.CONNECT_AS_O,null));
             System.out.println("O has Connected.");
 
             // Creates a Thread to listen to the X client

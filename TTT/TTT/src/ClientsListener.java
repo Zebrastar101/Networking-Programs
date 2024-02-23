@@ -40,11 +40,11 @@ public class ClientsListener implements Runnable{
                 {
                     frame.setText("Tie game.");
                 }
-                else if(cfs.getCommand() == CommandFromServer.X_WINS)
+                else if(cfs.getCommand() == CommandFromServer.X_WIN)
                 {
                     frame.setText("X wins!");
                 }
-                else if(cfs.getCommand() == CommandFromServer.O_WINS)
+                else if(cfs.getCommand() == CommandFromServer.O_WIN)
                 {
                     frame.setText("O wins!");
                 }
