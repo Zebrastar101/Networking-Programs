@@ -2,7 +2,7 @@
 import java.awt.*;
 import java.awt.event.KeyListener;
 import javax.swing.*;
-public class TTTFrame extends JFrame implements KeyListener {
+public class TTTFrame extends JFrame implements KeyListener{
     //Display message
     private String text="";
     //the letter you are playing
@@ -74,5 +74,5 @@ public class TTTFrame extends JFrame implements KeyListener {
     public void setTurn(char turn) {
         this.turn = turn;
     }
-    
+
 }
