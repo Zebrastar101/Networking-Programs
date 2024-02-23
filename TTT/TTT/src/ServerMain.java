@@ -17,6 +17,8 @@ public class ServerMain {
             xos.writeObject(new CommandFromServer(CommandFromServer.CONNECTED_AS_X,null));
             System.out.println("X has connected");
 
+            ServersListener sl = new ServersListener();
+
             //allow O to connect and build streams to&from O
             Socket oConnection = serverSocket.accept();
             ObjectOutputStream oos = new ObjectOutputStream(oConnection.getOutputStream());
