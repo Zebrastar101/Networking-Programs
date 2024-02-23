@@ -5,6 +5,8 @@ import java.net.Socket;
 public class ClientMain {
     public static void main(String[] args) {
         try{
+            //creates an object for the TTT game
+            GameData gameData=new GameData();
             //create a connection to server
             Socket socket = new Socket("127.0.0.1", 8001);
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
@@ -12,12 +14,17 @@ public class ClientMain {
 
             //determine if playing as X or O
             CommandFromServer cfs = (CommandFromServer)is.readObject();
+            TTTFrame frame;
+
             if (cfs.getCommand() == CommandFromServer.CONNECTED_AS_X){
-                System.out.println("Connected as X");
+                frame = new TTTFrame(gameData, 'X');
             }
             else{
-                System.out.println("Connected as O");
+                frame = new TTTFrame(gameData, 'O');
             }
+            ClientsListener cl = new ClientsListener(is, os, frame);
+            Thread t = new Thread(cl);
+            t.start();
         }
         catch(Exception error){
             error.printStackTrace();
