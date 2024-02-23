@@ -17,10 +17,10 @@ public class ClientMain {
             TTTFrame frame;
 
             if (cfs.getCommand() == CommandFromServer.CONNECT_AS_X){
-                frame = new TTTFrame(gameData, 'X');
+                frame = new TTTFrame(gameData, os,'X');
             }
             else{
-                frame = new TTTFrame(gameData, 'O');
+                frame = new TTTFrame(gameData,os, 'O');
             }
             ClientsListener cl = new ClientsListener(is, os, frame);
             Thread t = new Thread(cl);
