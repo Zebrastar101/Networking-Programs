@@ -16,7 +16,7 @@ public class ClientMain {
             CommandFromServer cfs = (CommandFromServer)is.readObject();
             TTTFrame frame;
 
-            if (cfs.getCommand() == CommandFromServer.CONNECTED_AS_X){
+            if (cfs.getCommand() == CommandFromServer.CONNECT_AS_X){
                 frame = new TTTFrame(gameData, 'X');
             }
             else{
