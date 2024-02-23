@@ -55,44 +55,5 @@ public class ClientsListener implements Runnable{
 
         }
     }
-    public void changeTurn()
-    {
-        // changes the turn
-        if(turn=='X')
-            turn = 'O';
-        else
-            turn ='X';
 
-        // informs both client of the new player turn
-        if (turn == 'X')
-            sendCommand(new CommandFromServer(CommandFromServer.X_TURN, null));
-        else
-            sendCommand(new CommandFromServer(CommandFromServer.O_TURN, null));
-    }
-
-    public void checkGameOver()
-    {
-        int command = -1;
-        if(gameData.isCat())
-            command = CommandFromServer.TIE;
-        else if(gameData.isWinner('X'))
-            command = CommandFromServer.X_WINS;
-        else if(gameData.isWinner('O'))
-            command = CommandFromServer.O_WINS;
-
-        // if the game ended, informs both clients of the game's end state
-        if(command!=-1)
-            sendCommand(new CommandFromServer(command, null));
-    }
-    public void sendCommand(CommandFromServer cfs)
-    {
-        // Sends command to both players
-        for (ObjectOutputStream o : outs) {
-            try {
-                o.writeObject(cfs);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
