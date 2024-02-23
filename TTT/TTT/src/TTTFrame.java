@@ -50,7 +50,7 @@ public class TTTFrame extends JFrame implements KeyListener{
             for(int c=0; c<gameData.getGrid().length; c++) {
                 if(gameData.getGrid()[r][c] != ' ') {
                     g.setColor(Color.RED);
-                    g.drawString(""+gameData.getGrid()[r][c], c*133+42, r*133+100);
+                    g.drawString(""+gameData.getGrid()[r][c], c*133+42, r*133+150);
                 }
             }
         }
@@ -60,19 +60,91 @@ public class TTTFrame extends JFrame implements KeyListener{
         this.text = text;
         repaint();
     }
-
-    public char getPlayer() {
-        return player;
-    }
-    public void setPlayer(char player) {
-        this.player = player;
-    }
-
-    public char getTurn() {
-        return turn;
-    }
     public void setTurn(char turn) {
-        this.turn = turn;
+        if(turn==player)
+            text = "Your turn";
+        else
+        {
+            text = turn+"'s turn.";
+        }
+        repaint();
     }
+
+    public void makeMove(int c, int r, char letter)
+    {
+        gameData.getGrid()[r][c] = letter;
+        repaint();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent event) {
+        char key = event.getKeyChar();
+        int r;
+        int c;
+
+        // sets the row and column, based on the entered key
+        switch(key)
+        {
+            case '1':
+                r=0;
+                c=0;
+                break;
+            case '2':
+                r=0;
+                c=1;
+                break;
+            case '3':
+                r=0;
+                c=2;
+                break;
+            case '4':
+                r=1;
+                c=0;
+                break;
+            case '5':
+                r=1;
+                c=1;
+                break;
+            case '6':
+                r=1;
+                c=2;
+                break;
+            case '7':
+                r=2;
+                c=0;
+                break;
+            case '8':
+                r=2;
+                c=1;
+                break;
+            case '9':
+                r=2;
+                c=2;
+                break;
+            default:
+                r=c=-1;
+        }
+        // if a valid enter was entered, send the move to the server
+        if(c!=-1) {
+            try {
+                os.writeObject(new CommandFromClient(CommandFromClient.MOVE, "" + c + r + player));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+}
+
 
 }
