@@ -12,4 +12,19 @@ public class ClientsListener implements Runnable{
         this.frame = frame;
     }
 
+    @Override
+    public void run() {
+        try{
+            while(true){
+                //reads commands from the server
+                CommandFromServer cfs= (CommandFromServer)is.readObject();
+                //processes the received command
+
+            }
+        }
+        catch(Exception error){
+            error.printStackTrace();
+
+        }
+    }
 }
