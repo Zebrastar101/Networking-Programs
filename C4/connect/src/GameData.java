@@ -32,7 +32,7 @@ public class GameData
                 grid[4][0] !=' '&& grid[4][1] !=' '&& grid[4][2] !=' '&& grid[4][3] !=' '&&
                 grid[4][4] !=' '&& grid[4][5] !=' '&& grid[4][6] !=' '&&
                 grid[5][0] !=' '&& grid[5][1] !=' '&& grid[5][2] !=' '&& grid[5][3] !=' '&&
-                grid[5][4] !=' '&& grid[5][5] !=' '&& grid[5][6] !=' '&&isWinner('X')==false&&isWinner('O')==false)
+                grid[5][4] !=' '&& grid[5][5] !=' '&& grid[5][6] !=' '&&isWinner('Y')==false&&isWinner('R')==false)
             return true;
         else
             return false;
