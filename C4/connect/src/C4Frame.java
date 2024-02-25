@@ -1,19 +1,28 @@
 import javax.swing.*;
-import java.awt.event.KeyListener;
+import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.*;
 
-public class C4Frame extends JFrame{
-    //create frame
+public class C4Frame extends JFrame {
+
+
     public C4Frame(){
-        setTitle("Connect 4 Game");
-        setSize(600, 600);
+        super("C4");
+        setSize(600,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
+        setResizable(false);
+        getContentPane().setBackground(Color.yellow);
+        //create cicular buttons
+        JButton b00 = new JButton();
 
-        //create 42 cicular buttons
-        JButton b1= new JButton("");
-        b1.setBounds(0, 0, 100, 100);
-        add(b1);
+        b00.setLocation(50,50);
+        
+
+
         setVisible(true);
     }
+
+
+
 }
