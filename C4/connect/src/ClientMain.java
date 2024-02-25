@@ -16,11 +16,11 @@ public class ClientMain {
             CommandFromServer cfs = (CommandFromServer)is.readObject();
             C4Frame frame;
 
-            if (cfs.getCommand() == CommandFromServer.CONNECT_AS_X){
-                frame = new TTTFrame(gameData, os,'X');
+            if (cfs.getCommand() == CommandFromServer.CONNECT_AS_Y){
+                frame = new TTTFrame(gameData, os,'Y');
             }
             else{
-                frame = new TTTFrame(gameData,os, 'O');
+                frame = new TTTFrame(gameData,os, 'R');
             }
             ClientsListener cl = new ClientsListener(is, os, frame);
             Thread t = new Thread(cl);
