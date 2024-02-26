@@ -17,7 +17,7 @@ public class C4Frame extends JFrame {
         JButton b00 = new JButton();
 
         b00.setLocation(50,50);
-        
+
 
 
         setVisible(true);
