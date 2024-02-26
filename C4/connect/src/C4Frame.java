@@ -38,7 +38,8 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
 
 
         g.setColor(Color.WHITE);
-        g.drawOval(20,20, 50, 50);
+        g.drawOval(20,40, 50, 50);
+        g.
     }
 
     @Override
