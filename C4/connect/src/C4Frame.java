@@ -28,6 +28,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
     public void mousePressed(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
+        //call drop method
 
     }
 
