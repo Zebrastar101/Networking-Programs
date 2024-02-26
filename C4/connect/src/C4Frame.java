@@ -13,7 +13,6 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setResizable(false);
-        getContentPane().setBackground(Color.GRAY);
 
 
         setVisible(true);
@@ -34,7 +33,12 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
 
     @Override
     public void paint(Graphics g) {
-        g.drawOval(5,5, 50, 50);
+        g.setColor(Color.GRAY);
+        g.fillRect(0,0,getWidth(),getHeight());
+
+
+        g.setColor(Color.WHITE);
+        g.drawOval(20,20, 50, 50);
     }
 
     @Override
