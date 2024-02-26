@@ -27,8 +27,12 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         int x = e.getX();
-        int y = e.getY();
-        //call drop method
+        //int y = e.getY();
+        //call drop method which is similar to the makeMove method in the TTTFrame in tic tac toe
+
+    }
+
+    public void drop(int x){
 
     }
 
