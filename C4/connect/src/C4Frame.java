@@ -1,11 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class C4Frame extends JFrame {
+public class C4Frame extends JFrame implements WindowListener, MouseListener{
     JButton button00 = new JButton();
     public C4Frame(){
         super("C4");
-        setSize(400,460);
+        setSize(600,660);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setResizable(false);
