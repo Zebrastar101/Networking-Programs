@@ -32,7 +32,71 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
 
     }
 
-    public void drop(int x){
+    public void drop(int x, char letter){
+        //7 if statements for 7 columns
+        //column 1
+        if(x>=20 && x <=80){
+            for(int i=6 ; i>=0 ; i--){
+                if (gameData[i][0]==' '){
+                    gameData[i][0]=letter;
+                    break;
+                }
+            }
+        }
+        //column 2
+        if(x>=100 && x <=160){
+            for(int i=6 ; i>=0 ; i--){
+                if (gameData[i][1]==' '){
+                    gameData[i][1]=letter;
+                    break;
+                }
+            }
+        }
+        //column 3
+        if(x>=180 && x <=240){
+            for(int i=6 ; i>=0 ; i--){
+                if (gameData[i][2]==' '){
+                    gameData[i][2]=letter;
+                    break;
+                }
+            }
+        }
+        //column 4
+        if(x>=260 && x <=320){
+            for(int i=6 ; i>=0 ; i--){
+                if (gameData[i][3]==' '){
+                    gameData[i][3]=letter;
+                    break;
+                }
+            }
+        }
+        //column 5
+        if(x>=340 && x <=400){
+            for(int i=6 ; i>=0 ; i--){
+                if (gameData[i][4]==' '){
+                    gameData[i][4]=letter;
+                    break;
+                }
+            }
+        }
+        //column 6
+        if(x>=420 && x <=480){
+            for(int i=6 ; i>=0 ; i--){
+                if (gameData[i][5]==' '){
+                    gameData[i][5]=letter;
+                    break;
+                }
+            }
+        }
+        //column 7
+        if(x>=500 && x <=560){
+            for(int i=6 ; i>=0 ; i--){
+                if (gameData[i][6]==' '){
+                    gameData[i][6]=letter;
+                    break;
+                }
+            }
+        }
 
     }
 
