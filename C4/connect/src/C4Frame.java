@@ -50,20 +50,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
     public void mousePressed(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        if(x>0 && x<600 && y>0 && y<600)
-        {
-            int c = x/100;
-            int r = y/100;
-            if(gameData.getGrid()[r][c] == ' ')
-            {
-                gameData.getGrid()[r][c] = player;
-                try {
-                    os.writeObject(gameData);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        }
+        
 
     }
     public void setTurn(char turn) {
