@@ -13,7 +13,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setResizable(false);
-        getContentPane().setBackground(Color.BLUE);
+        getContentPane().setBackground(Color.GRAY);
 
 
         setVisible(true);
@@ -22,11 +22,13 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
 
     }
 
