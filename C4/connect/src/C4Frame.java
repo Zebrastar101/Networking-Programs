@@ -34,7 +34,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
 
     @Override
     public void paint(Graphics g) {
-        super.paint(g);
+
     }
 
     @Override
