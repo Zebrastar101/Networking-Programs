@@ -120,6 +120,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
 
     @Override
     public void paint(Graphics g) {
+        //not finished
         g.setColor(Color.PINK);
         g.fillRect(0,0,getWidth(),getHeight());
         for(int c=0; c<6; c++){
