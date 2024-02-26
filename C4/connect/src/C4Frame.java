@@ -27,18 +27,16 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         int x = e.getX();
-        //int y = e.getY();
-        //call drop method which is similar to the makeMove method in the TTTFrame in tic tac toe
-
-    }
-
-    public void drop(int x, char letter){
+        // will indirectly call drop method which is similar to the makeMove method in the TTTFrame in tic tac toe
+        int r=-1;
+        int c=-1;
         //7 if statements for 7 columns
         //column 1
         if(x>=20 && x <=80){
             for(int i=6 ; i>=0 ; i--){
                 if (gameData[i][0]==' '){
-                    gameData[i][0]=letter;
+                    r=i;
+                    c=0;
                     break;
                 }
             }
@@ -47,7 +45,8 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         if(x>=100 && x <=160){
             for(int i=6 ; i>=0 ; i--){
                 if (gameData[i][1]==' '){
-                    gameData[i][1]=letter;
+                    r=i;
+                    c=1;
                     break;
                 }
             }
@@ -56,7 +55,8 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         if(x>=180 && x <=240){
             for(int i=6 ; i>=0 ; i--){
                 if (gameData[i][2]==' '){
-                    gameData[i][2]=letter;
+                    r=i;
+                    c=2;
                     break;
                 }
             }
@@ -65,7 +65,8 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         if(x>=260 && x <=320){
             for(int i=6 ; i>=0 ; i--){
                 if (gameData[i][3]==' '){
-                    gameData[i][3]=letter;
+                    r=i;
+                    c=3;
                     break;
                 }
             }
@@ -74,7 +75,8 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         if(x>=340 && x <=400){
             for(int i=6 ; i>=0 ; i--){
                 if (gameData[i][4]==' '){
-                    gameData[i][4]=letter;
+                    r=i;
+                    c=4;
                     break;
                 }
             }
@@ -83,7 +85,8 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         if(x>=420 && x <=480){
             for(int i=6 ; i>=0 ; i--){
                 if (gameData[i][5]==' '){
-                    gameData[i][5]=letter;
+                    r=i;
+                    c=5;
                     break;
                 }
             }
@@ -92,12 +95,27 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         if(x>=500 && x <=560){
             for(int i=6 ; i>=0 ; i--){
                 if (gameData[i][6]==' '){
-                    gameData[i][6]=letter;
+                    r=i;
+                    c=6;
                     break;
                 }
             }
         }
 
+        if (c!=-1){
+            try {
+                os.writeObject(new CommandFromClient(CommandFromClient.MOVE, "" + c + r + player));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public void drop(int c, int r, char letter)
+    {
+        gameData.getGrid()[r][c] = letter;
+        repaint();
     }
 
     @Override
