@@ -1,4 +1,4 @@
-/* import java.io.ObjectInputStream;
+ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class ClientsListener implements Runnable{
@@ -33,7 +33,7 @@ public class ClientsListener implements Runnable{
                     int r = data.charAt(1) - '0';
 
                     // changes the board and redraw the screen
-                    frame.makeMove(c,r,data.charAt(2));
+                    frame.drop(c,r,data.charAt(2));
                 }
                 // handles the various end game states
                 else if(cfs.getCommand() == CommandFromServer.TIE)
@@ -58,5 +58,5 @@ public class ClientsListener implements Runnable{
 
 }
 
- */
+
 
