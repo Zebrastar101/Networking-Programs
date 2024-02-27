@@ -24,7 +24,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
 
         // Set initial frame message
         if(player == 'X')
-            text = "Waiting for O to Connect";
+            text = "Waiting for R to Connect";
 
         setSize(600,560);
         setResizable(false);
@@ -48,8 +48,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
+
         
 
     }
