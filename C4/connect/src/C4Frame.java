@@ -128,8 +128,8 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         if (c!=-1) {
             try {
                 os.writeObject(new CommandFromClient(CommandFromClient.MOVE, "" + c + r + player));
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception z) {
+                z.printStackTrace();
             }
         }
 
