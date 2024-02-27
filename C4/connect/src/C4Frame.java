@@ -31,7 +31,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         setAlwaysOnTop(true);
         setVisible(true);
     }
-    
+
 
     @Override
     public void mouseClicked(MouseEvent e) {
