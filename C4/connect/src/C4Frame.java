@@ -148,9 +148,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         }
         repaint();
     }
-    public char getTurn(char turn) {
-        return turn;
-    }
+
     public void drop(int c, int r, char letter)
     {
         gameData.getGrid()[r][c] = letter;
@@ -162,6 +160,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         g.setColor(Color.GRAY);
         g.setColor(Color.PINK);
         g.fillRect(0,0,getWidth(),getHeight());
+        g.drawString(text, 300, 500);
         for(int c=0; c<6; c++){
             int y=40+(c*80);
             for(int i=0; i<7; i++){
