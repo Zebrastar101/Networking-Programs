@@ -31,11 +31,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         setAlwaysOnTop(true);
         setVisible(true);
     }
-    public void makeMove(int c, int r, char letter)
-    {
-        gameData.getGrid()[r][c] = letter;
-        repaint();
-    }
+    
 
     @Override
     public void mouseClicked(MouseEvent e) {
