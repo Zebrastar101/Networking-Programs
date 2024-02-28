@@ -24,7 +24,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         // Set initial frame message
-        if(player == 'X')
+        if(player == 'Y')
             text = "Waiting for R to Connect";
 
         setSize(600,560);
