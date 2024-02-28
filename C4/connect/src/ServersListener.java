@@ -33,9 +33,9 @@ public class ServersListener implements Runnable{
 
                 //quit
                 if(cfc.getCommand()==CommandFromClient.QUIT){
-                    String data=cfc.getData();
+                    //String data=cfc.getData();
                     System.out.println("got quit, sending to clients");
-                    sendCommand(new CommandFromServer(CommandFromServer.QUIT,data));
+                    sendCommand(new CommandFromServer(CommandFromServer.QUIT,null));
                 }
 
                 // handle the received command

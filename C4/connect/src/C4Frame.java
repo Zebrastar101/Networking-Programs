@@ -206,7 +206,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
     @Override
     public void windowClosing(WindowEvent e) {
             try {
-                os.writeObject(new CommandFromClient(CommandFromClient.QUIT, "" + player));
+                os.writeObject(new CommandFromClient(CommandFromClient.QUIT, null));
             } catch (Exception z) {
                 z.printStackTrace();
             }
