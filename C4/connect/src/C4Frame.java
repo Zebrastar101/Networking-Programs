@@ -179,7 +179,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
             int y=40+(c*80);
             for(int i=0; i<7; i++){
                 if(gameData.getGrid()[c][i] == 'R'){
-                    g.setColor(Color.);
+                    g.setColor(Color.RED);
                     g.drawOval(20 + (i*80),y, 60, 60);
                     g.fillOval(20 + (i*80),y,60,60);
                 }
