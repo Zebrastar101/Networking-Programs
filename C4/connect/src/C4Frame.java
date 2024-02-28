@@ -172,7 +172,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         //text
         g.setColor(Color.RED);
         g.setFont(new Font("Times New Roman",Font.BOLD,30));
-        g.drawString(text,250,540);
+        g.drawString(text,225,540);
 
 
 
