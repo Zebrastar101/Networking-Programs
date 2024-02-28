@@ -57,7 +57,6 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
                 if (gameData.getGrid()[i][0]==' '){
                     r=i;
                     c=0;
-                    System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
                     break;
                 }
             }
@@ -68,7 +67,6 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
                 if (gameData.getGrid()[i][1]==' '){
                     r=i;
                     c=1;
-                    System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
                     break;
                 }
             }
@@ -79,7 +77,6 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
                 if (gameData.getGrid()[i][2]==' '){
                     r=i;
                     c=2;
-                    System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
                     break;
                 }
             }
@@ -90,7 +87,6 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
                 if (gameData.getGrid()[i][3]==' '){
                     r=i;
                     c=3;
-                    System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
                     break;
                 }
             }
@@ -101,7 +97,6 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
                 if (gameData.getGrid()[i][4]==' '){
                     r=i;
                     c=4;
-                    System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
                     break;
                 }
             }
@@ -112,7 +107,6 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
                 if (gameData.getGrid()[i][5]==' '){
                     r=i;
                     c=5;
-                    System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
                     break;
                 }
             }
@@ -123,7 +117,6 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
                 if (gameData.getGrid()[i][6]==' '){
                     r=i;
                     c=6;
-                    System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
                     break;
                 }
             }
@@ -212,7 +205,9 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
 
     @Override
     public void windowClosing(WindowEvent e) {
+        if(!gameData.isWinner('Y') && !gameData.isWinner('R') && !gameData.isCat()){
 
+        }
     }
 
     @Override
