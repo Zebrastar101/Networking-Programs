@@ -36,7 +36,23 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        //Right Clicked
+       if(e.getButton()==3){
+           if(player=='R') {
+               if (gameData.isWinner('Y') || gameData.isWinner('R') || gameData.isCat()) {
+                   text = "Waiting for Y to agree to a new game";
 
+               }
+           }
+
+
+           } else if (player=='Y') {
+               if(gameData.isWinner('Y')|| gameData.isWinner('R')||gameData.isCat()){
+                   text="Waiting for R to agree to a new game";
+               }
+
+           }
+       }
     }
     public void setText(String text) {
         this.text = text;
