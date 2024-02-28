@@ -157,10 +157,10 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
 
     @Override
     public void paint(Graphics g) {
+        //default
         g.setColor(Color.GRAY);
         g.setColor(Color.PINK);
         g.fillRect(0,0,getWidth(),getHeight());
-        g.drawString(text, 300, 500);
         for(int c=0; c<6; c++){
             int y=40+(c*80);
             for(int i=0; i<7; i++){
@@ -169,6 +169,10 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
                 g.fillOval(20 + (i*80),y,60,60);
             }
         }
+        //text
+        g.setColor(Color.RED);
+        g.setFont(new Font("Times New Roman",Font.BOLD,30));
+        g.drawString(text,250,540);
 
 
 
