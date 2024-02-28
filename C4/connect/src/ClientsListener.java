@@ -23,7 +23,7 @@ public class ClientsListener implements Runnable{
                 //quit
                 if(cfs.getCommand() == CommandFromServer.QUIT){
                     //might need an if statement to check which player quit
-                    frame.setText("Your opponent quit ");
+                    frame.setText("Your opponent left(this frame will close in 5 seconds)");
                     frame.closeIn5();
                 }
 
