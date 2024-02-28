@@ -30,6 +30,12 @@ public class ServersListener implements Runnable{
             while(true)
             {
                 CommandFromClient cfc = (CommandFromClient) is.readObject();
+                
+                //quit
+                if(cfc.getCommand()==CommandFromClient.QUIT){
+                    String data=cfc.getData();
+                    sendCommand(new CommandFromServer(CommandFromServer.QUIT,data));
+                }
 
                 // handle the received command
                 if(cfc.getCommand()==CommandFromClient.MOVE &&

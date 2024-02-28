@@ -205,9 +205,12 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
 
     @Override
     public void windowClosing(WindowEvent e) {
-        if(!gameData.isWinner('Y') && !gameData.isWinner('R') && !gameData.isCat()){
+            try {
+                os.writeObject(new CommandFromClient(CommandFromClient.QUIT, "" + player));
+            } catch (Exception z) {
+                z.printStackTrace();
+            }
 
-        }
     }
 
     @Override
