@@ -158,7 +158,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
     @Override
     public void paint(Graphics g) {
         //default
-        g.setColor(Color.PINK);
+        g.setColor(new Color(165, 150, 234));
         g.fillRect(0,0,getWidth(),getHeight());
 
         //text
@@ -177,12 +177,12 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
                     g.fillOval(20 + (i*80),y,60,60);
                 }
                 if(gameData.getGrid()[c][i] == 'R'){
-                    g.setColor(Color.RED);
+                    g.setColor(new Color(108, 170, 239));
                     g.drawOval(20 + (i*80),y, 60, 60);
                     g.fillOval(20 + (i*80),y,60,60);
                 }
                 else if(gameData.getGrid()[c][i] == 'Y'){
-                    g.setColor(Color.YELLOW);
+                    g.setColor(new Color(243, 103, 103));
                     g.drawOval(20 + (i*80),y, 60, 60);
                     g.fillOval(20 + (i*80),y,60,60);
                 }
