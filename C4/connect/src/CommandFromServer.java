@@ -16,7 +16,7 @@ public class CommandFromServer implements Serializable{
     public static final int R_WIN = 6;
     public static final int TIE = 7;
 
-    public static final int QUIT = 7;
+    public static final int QUIT = 8;
 
 
     public CommandFromServer(int command, String data){

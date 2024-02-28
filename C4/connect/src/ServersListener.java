@@ -39,7 +39,7 @@ public class ServersListener implements Runnable{
                 }
 
                 // handle the received command
-                if(cfc.getCommand()==CommandFromClient.MOVE &&
+                else if(cfc.getCommand()==CommandFromClient.MOVE &&
                         turn==player && !gameData.isWinner('Y')
                         && !gameData.isWinner('R')
                         && !gameData.isCat())

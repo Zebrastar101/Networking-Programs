@@ -19,11 +19,10 @@ public class ClientsListener implements Runnable{
             while(true)
             {
                 CommandFromServer cfs = (CommandFromServer)is.readObject();
-                System.out.println("got a command");
+                //System.out.println(cfs.getCommand());
                 //quit
                 if(cfs.getCommand() == CommandFromServer.QUIT){
                     //might need an if statement to check which player quit
-                    System.out.println("got QUIT command");
                     frame.setText("Your opponent quit ");
                 }
 
