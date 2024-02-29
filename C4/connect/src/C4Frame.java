@@ -46,6 +46,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
 
 
            try {
+               System.out.print("Right CLicked ");
                os.writeObject(new CommandFromClient(CommandFromClient.RESTART, "" + player));
            } catch (Exception z) {
                z.printStackTrace();

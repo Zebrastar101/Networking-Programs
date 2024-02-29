@@ -61,12 +61,14 @@ public class ServersListener implements Runnable{
                 }
                 if(cfc.getCommand()==CommandFromClient.RESTART&&(gameData.isCat()||gameData.isWinner('Y')||gameData.isWinner('R'))){
                     if (restar[0]==true){
+                        System.out.print("Both restarting");
                         sendCommand(new CommandFromServer(CommandFromServer.RESTART, "Yas"));
 
                         restar[0]=false;
 
                     }
                     else if(restar[0]=false){
+                        System.out.print("Wanst to retart:"+player);
                         restar[0]=true;
                         sendCommand(new CommandFromServer(CommandFromServer.RESTART, ""+player));
                     }
