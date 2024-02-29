@@ -65,99 +65,101 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("mouse pressed");
-        int x = e.getX();
-        // will indirectly call drop method which is similar to the makeMove method in the TTTFrame in tic tac toe
-        int r=-1;
-        int c=-1;
-        //7 if statements for 7 columns
-        //column 1
-        if(x>=20 && x <=80){
-            for(int i=5 ; i>=0 ; i--){
-                if (gameData.getGrid()[i][0]==' '){
-                    r=i;
-                    c=0;
-                    System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
-                    break;
+        if(!gameData.isWinner('R')||!gameData.isWinner('Y')||!gameData.isCat()){
+            System.out.println("mouse pressed");
+            int x = e.getX();
+            // will indirectly call drop method which is similar to the makeMove method in the TTTFrame in tic tac toe
+            int r=-1;
+            int c=-1;
+            //7 if statements for 7 columns
+            //column 1
+            if(x>=20 && x <=80){
+                for(int i=5 ; i>=0 ; i--){
+                    if (gameData.getGrid()[i][0]==' '){
+                        r=i;
+                        c=0;
+                        System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
+                        break;
+                    }
                 }
             }
-        }
-        //column 2
-        if(x>=100 && x <=160){
-            for(int i=5 ; i>=0 ; i--){
-                if (gameData.getGrid()[i][1]==' '){
-                    r=i;
-                    c=1;
-                    System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
-                    break;
+            //column 2
+            if(x>=100 && x <=160){
+                for(int i=5 ; i>=0 ; i--){
+                    if (gameData.getGrid()[i][1]==' '){
+                        r=i;
+                        c=1;
+                        System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
+                        break;
+                    }
                 }
             }
-        }
-        //column 3
-        if(x>=180 && x <=240){
-            for(int i=5 ; i>=0 ; i--){
-                if (gameData.getGrid()[i][2]==' '){
-                    r=i;
-                    c=2;
-                    System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
-                    break;
+            //column 3
+            if(x>=180 && x <=240){
+                for(int i=5 ; i>=0 ; i--){
+                    if (gameData.getGrid()[i][2]==' '){
+                        r=i;
+                        c=2;
+                        System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
+                        break;
+                    }
                 }
             }
-        }
-        //column 4
-        if(x>=260 && x <=320){
-            for(int i=5 ; i>=0 ; i--){
-                if (gameData.getGrid()[i][3]==' '){
-                    r=i;
-                    c=3;
-                    System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
-                    break;
+            //column 4
+            if(x>=260 && x <=320){
+                for(int i=5 ; i>=0 ; i--){
+                    if (gameData.getGrid()[i][3]==' '){
+                        r=i;
+                        c=3;
+                        System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
+                        break;
+                    }
                 }
             }
-        }
-        //column 5
-        if(x>=340 && x <=400){
-            for(int i=5 ; i>=0 ; i--){
-                if (gameData.getGrid()[i][4]==' '){
-                    r=i;
-                    c=4;
-                    System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
-                    break;
+            //column 5
+            if(x>=340 && x <=400){
+                for(int i=5 ; i>=0 ; i--){
+                    if (gameData.getGrid()[i][4]==' '){
+                        r=i;
+                        c=4;
+                        System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
+                        break;
+                    }
                 }
             }
-        }
-        //column 6
-        if(x>=420 && x <=480){
-            for(int i=5 ; i>=0 ; i--){
-                if (gameData.getGrid()[i][5]==' '){
-                    r=i;
-                    c=5;
-                    System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
-                    break;
+            //column 6
+            if(x>=420 && x <=480){
+                for(int i=5 ; i>=0 ; i--){
+                    if (gameData.getGrid()[i][5]==' '){
+                        r=i;
+                        c=5;
+                        System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
+                        break;
+                    }
                 }
             }
-        }
-        //column 7
-        if(x>=500 && x <=560){
-            for(int i=5 ; i>=0 ; i--){
-                if (gameData.getGrid()[i][6]==' '){
-                    r=i;
-                    c=6;
-                    System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
-                    break;
+            //column 7
+            if(x>=500 && x <=560){
+                for(int i=5 ; i>=0 ; i--){
+                    if (gameData.getGrid()[i][6]==' '){
+                        r=i;
+                        c=6;
+                        System.out.println("r: "+r+" c: "+c+" Mouse Clicked Worked");
+                        break;
+                    }
                 }
             }
-        }
 
 
-        if (c!=-1) {
-            try {
-                os.writeObject(new CommandFromClient(CommandFromClient.MOVE, "" + c + r + player));
-            } catch (Exception z) {
-                z.printStackTrace();
+            if (c!=-1) {
+                try {
+                    os.writeObject(new CommandFromClient(CommandFromClient.MOVE, "" + c + r + player));
+                } catch (Exception z) {
+                    z.printStackTrace();
+                }
             }
-        }
 
+        }
     }
     public void setTurn(char turn) {
         if(turn==player)
