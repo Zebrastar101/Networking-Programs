@@ -206,7 +206,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
     @Override
     public void windowClosing(WindowEvent e) {
             try {
-                os.writeObject(new CommandFromClient(CommandFromClient.QUIT, null));
+                os.writeObject(new CommandFromClient(CommandFromClient.QUIT, ""+player));
             } catch (Exception z) {
                 z.printStackTrace();
             }
@@ -217,6 +217,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
     {
         //copied from https://stackoverflow.com/questions/62539867/how-to-make-a-jframe-close-itself-after-10-seconds
         new Timer(5_000, (e) -> { setVisible(false); dispose(); }).start();
+        //System.exit(0);
     }
 
     @Override
