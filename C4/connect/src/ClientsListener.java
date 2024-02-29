@@ -48,6 +48,9 @@ public class ClientsListener implements Runnable{
                 {
                     frame.setText("Red wins!");
                 }
+                else if(cfs.getCommand()== CommandFromServer.RESTART){
+                    
+                }
             }
         }
         catch(Exception error){

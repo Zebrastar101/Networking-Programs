@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 public class C4Frame extends JFrame implements WindowListener, MouseListener {
@@ -32,24 +33,25 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         setAlwaysOnTop(true);
         setVisible(true);
     }
+    public void restarting() {
+        repaint();
+    }
 
 
     @Override
     public void mouseClicked(MouseEvent e) {
         //Right Clicked
        if(e.getButton()==3){
-           if(player=='R') {
-               if (gameData.isWinner('Y') || gameData.isWinner('R') || gameData.isCat()) {
-                   text = "Waiting for Y to agree to a new game";
-
-               }
-           }
 
 
-           } else if (player=='Y') {
-               if(gameData.isWinner('Y')|| gameData.isWinner('R')||gameData.isCat()){
-                   text="Waiting for R to agree to a new game";
-               }
+                   try {
+                       os.writeObject(new CommandFromClient(CommandFromClient.RESTART, "" + player));
+                   } catch (IOException ex) {
+                       throw new RuntimeException(ex);
+                   }
+
+
+
 
            }
        }

@@ -13,7 +13,10 @@ public class ServersListener implements Runnable{
     private static char turn = 'Y';
     private static GameData gameData = new GameData();
     private static ArrayList<ObjectOutputStream> outs = new ArrayList<>();
+
     //do i need the arrayList for Connect4 too?
+    private static boolean restar[]= {false, false};
+
 
 
     public ServersListener(ObjectInputStream is, ObjectOutputStream os, char player) {
@@ -56,6 +59,19 @@ public class ServersListener implements Runnable{
                     changeTurn();
                     checkGameOver();
                 }
+                if(cfc.getCommand()==CommandFromClient.RESTART&&(gameData.isCat()||gameData.isWinner('Y')||gameData.isWinner('R'))){
+                    if (restar[0]==true){
+                        gameData.reset();
+
+                        restar[0]=false;
+
+                    }
+                    else if(restar[0]=false){
+                        restar[0]=true;
+                        sendCommand(new CommandFromServer(CommandFromServer.RESTART, ""+player));
+                    }
+                }
+
             }
         }
         catch(Exception e)
