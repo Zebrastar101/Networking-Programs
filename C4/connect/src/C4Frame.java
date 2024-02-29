@@ -34,6 +34,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         setVisible(true);
     }
     public void restarting() {
+        gameData.reset();
         repaint();
     }
 
@@ -44,18 +45,18 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
        if(e.getButton()==3){
 
 
-                   try {
-                       os.writeObject(new CommandFromClient(CommandFromClient.RESTART, "" + player));
-                   } catch (IOException ex) {
-                       throw new RuntimeException(ex);
-                   }
+           try {
+               os.writeObject(new CommandFromClient(CommandFromClient.RESTART, "" + player));
+           } catch (Exception z) {
+               z.printStackTrace();
+           }
 
 
 
 
            }
        }
-    }
+
     public void setText(String text) {
         this.text = text;
         repaint();
