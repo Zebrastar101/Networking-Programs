@@ -25,7 +25,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         // Set initial frame message
-        if(player == 'X')
+        if(player == 'Y')
             text = "Waiting for R to Connect";
 
         setSize(600,560);
@@ -65,7 +65,7 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if(!gameData.isWinner('R')&&!gameData.isWinner('Y')&&!gameData.isCat()){
+        if(text!="Waiting for R to Connect"){
 
             int x = e.getX();
             // will indirectly call drop method which is similar to the makeMove method in the TTTFrame in tic tac toe
