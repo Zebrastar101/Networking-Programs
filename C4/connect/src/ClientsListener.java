@@ -19,6 +19,18 @@ public class ClientsListener implements Runnable{
             while(true)
             {
                 CommandFromServer cfs = (CommandFromServer)is.readObject();
+                //System.out.println(cfs.getCommand());
+                //quit
+                if(cfs.getCommand() == CommandFromServer.QUIT){
+                    String data=cfs.getData();
+                    if(data.equals("Y")){
+                        frame.setText("Y left(this frame will close in 5 seconds)");
+                    }
+                    else{
+                        frame.setText("R left(this frame will close in 5 seconds)");
+                    }
+                    frame.closeIn5();
+                }
 
                 // processes the received command
                 if(cfs.getCommand() == CommandFromServer.Y_TURN)
@@ -38,15 +50,15 @@ public class ClientsListener implements Runnable{
                 // handles the various end game states
                 else if(cfs.getCommand() == CommandFromServer.TIE)
                 {
-                    frame.setText("Tie game.");
+                    frame.setText("Tie game.(Right click to restart)");
                 }
                 else if(cfs.getCommand() == CommandFromServer.Y_WIN)
                 {
-                    frame.setText("Yellow wins!");
+                    frame.setText("Yellow wins!(Right click to restart)");
                 }
                 else if(cfs.getCommand() == CommandFromServer.R_WIN)
                 {
-                    frame.setText("Red wins!");
+                    frame.setText("Red wins!(Right click to restart)");
                 }
                 else if(cfs.getCommand()== CommandFromServer.RESTART){
                     if(cfs.getData().equals("R")){

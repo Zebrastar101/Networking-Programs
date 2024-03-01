@@ -34,8 +34,15 @@ public class ServersListener implements Runnable{
             {
                 CommandFromClient cfc = (CommandFromClient) is.readObject();
 
+                //quit
+                if(cfc.getCommand()==CommandFromClient.QUIT){
+                    String data=cfc.getData();
+                    System.out.println("got quit, sending to clients");
+                    sendCommand(new CommandFromServer(CommandFromServer.QUIT,data));
+                }
+
                 // handle the received command
-                if(cfc.getCommand()==CommandFromClient.MOVE &&
+                else if(cfc.getCommand()==CommandFromClient.MOVE &&
                         turn==player && !gameData.isWinner('Y')
                         && !gameData.isWinner('R')
                         && !gameData.isCat())
