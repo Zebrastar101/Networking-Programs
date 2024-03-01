@@ -67,7 +67,7 @@ public class ServersListener implements Runnable{
                         restar[0]=false;
 
                     }
-                    else if(restar[0]=false){
+                    else if(restar[0]==false){
                         System.out.print("Wanst to retart:"+player);
                         restar[0]=true;
                         sendCommand(new CommandFromServer(CommandFromServer.RESTART, ""+player));
