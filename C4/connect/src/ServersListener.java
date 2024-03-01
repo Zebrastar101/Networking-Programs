@@ -70,7 +70,7 @@ public class ServersListener implements Runnable{
                     if (restar[0]==true){
                         System.out.print("Both restarting");
                         sendCommand(new CommandFromServer(CommandFromServer.RESTART, "Yas"));
-                        turn='R';
+                        turn='Y';
                         gameData.reset();
                         restar[0]=false;
 
