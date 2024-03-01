@@ -15,9 +15,9 @@ public class CommandFromServer implements Serializable{
     public static final int Y_WIN = 5;
     public static final int R_WIN = 6;
     public static final int TIE = 7;
-    public static final int RESTART=9;
+    public static final int RESTART=8;
 
-    public static final int QUIT = 8;
+    public static final int QUIT = 9;
 
 
 
