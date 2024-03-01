@@ -160,6 +160,22 @@ public class C4Frame extends JFrame implements WindowListener, MouseListener {
         }
 
     }
+    public void setTextForRestart(char playerWhoWantsToRestart){
+        if(playerWhoWantsToRestart==player) {
+            if(player=='Y'){
+                text = "Waiting for R to agree to a new game.";
+            }
+            else{
+                text = "Waiting for Y to agree to a new game.";
+            }
+
+        }
+        else
+        {
+            text = playerWhoWantsToRestart+" wants to play a new game. Right click if you do too.";
+        }
+        repaint();
+    }
     public void setTurn(char turn) {
         if(turn==player)
             text = "Your turn";
