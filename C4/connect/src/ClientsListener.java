@@ -71,6 +71,7 @@ public class ClientsListener implements Runnable{
                     } else if (cfs.getData().equals("Yas")) {
                         System.out.print("Both Restarting");
                         frame.restarting();
+                        frame.setTurn('Y');
                     }
                 }
             }
