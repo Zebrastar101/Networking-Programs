@@ -10,12 +10,10 @@ public class ServersListener implements Runnable{
     private char chatter;
 
     // static data that is shared between both listeners
-    private static char turn = 'Y';
-    private static GameData gameData = new GameData();
+
     private static ArrayList<ObjectOutputStream> outs = new ArrayList<>();
 
-    //do i need the arrayList for Connect4 too?
-    private static boolean restar[]= {false, false};
+
 
 
 
@@ -52,7 +50,7 @@ public class ServersListener implements Runnable{
         for (ObjectOutputStream o : outs) {
             try {
                 o.writeObject(cfs);
-                
+                o.reset();
             } catch (Exception e) {
                 e.printStackTrace();
             }
