@@ -115,14 +115,14 @@ public class FrameEX extends JFrame implements WindowListener{
 
         add(textsJList);
 
-        Scroller = new JScrollPane(textsJList);
+        Scroller = new JScrollPane(textsJList, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         Scroller.setBounds(10,30,500,400);
         add(Scroller);
 
 
         add(UsersJList);
 
-        Scroller = new JScrollPane(UsersJList);
+        Scroller = new JScrollPane(UsersJList, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         Scroller.setBounds(525,30,150,400);
         add(Scroller);
 
