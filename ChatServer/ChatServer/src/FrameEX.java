@@ -98,6 +98,7 @@ public class FrameEX extends JFrame implements WindowListener{
         SendButton.setBounds(550,445,100,40);
         add(SendButton);
         SendButton.setFont(new Font("Calibri", Font.BOLD, 20));
+        SendButton.addActionListener();
 
         ExitButton.setBounds(550,490,100,40);
         add(ExitButton);

@@ -1,4 +1,4 @@
-/*
+
 import java.io.Serializable;
 public class CommandFromServer implements Serializable{
     //The command being sent to the client
@@ -30,5 +30,5 @@ public class CommandFromServer implements Serializable{
 
 }
 
- */
+
 

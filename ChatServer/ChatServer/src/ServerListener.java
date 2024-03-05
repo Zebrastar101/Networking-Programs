@@ -1,4 +1,4 @@
-/*import java.io.ObjectInputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ public class ServersListener implements Runnable{
     private ObjectOutputStream os = null;
 
     // Stores the which player this listener is for
-    private char chatter;
+    private String chatter;
 
     // static data that is shared between both listeners
 
@@ -17,7 +17,7 @@ public class ServersListener implements Runnable{
 
 
 
-    public ServersListener(ObjectInputStream is, ObjectOutputStream os, char chatter) {
+    public ServersListener(ObjectInputStream is, ObjectOutputStream os, String chatter) {
         this.is = is;
         this.os = os;
         this.chatter = chatter;
@@ -58,7 +58,7 @@ public class ServersListener implements Runnable{
     }
 }
 
- */
+
 
 
 

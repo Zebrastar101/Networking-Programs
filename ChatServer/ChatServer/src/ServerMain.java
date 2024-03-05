@@ -1,4 +1,4 @@
-/*import java.io.ObjectInputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -22,7 +22,7 @@ public class ServerMain {
                 System.out.println("new person connected");
 
                 // Creates a Thread to listen to the Y client
-                ServersListener sl = new ServersListener(xis,xos,'idk');
+                ServersListener sl = new ServersListener(xis,xos,"idk");
                 Thread t = new Thread(sl);
                 t.start();
             }
@@ -35,4 +35,4 @@ public class ServerMain {
     }
 }
 
- */
+
