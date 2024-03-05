@@ -7,32 +7,30 @@ public class FrameEX extends JFrame implements WindowListener{
 
     //labels and texts
 
-    JLabel FirstNameLabel = new JLabel("First Name: ");
-    JTextField FirstNameText = new JTextField("");
-    JLabel LastNameLabel = new JLabel("Last Name: ");
-    JTextField LastNameText = new JTextField("");
-    JLabel PhoneNumLabel = new JLabel("Phone Number: ");
-    JTextField PhoneNumText = new JTextField("");
-    JLabel AddressLabel = new JLabel("Address: ");
-    JTextField AddressText = new JTextField("");
+    JLabel ChatLabel = new JLabel("Chat");
+    JTextField textToSend = new JTextField("teeeheee");
+    JLabel Userslabel = new JLabel("Users");
 
-    //Save and New buttons
 
-    JButton SaveButton = new JButton("Save");
-    JButton NewButton = new JButton("New");
+    //Send and Exit buttons
 
-    //Save Changes && Delete Changes Buttons
-    JButton SaveChangesButton = new JButton("Save Changes");
-    JButton DeleteContactButton = new JButton("Delete Contact");
+    JButton SendButton = new JButton("Send");
+    JButton ExitButton = new JButton("Exit");
+
 
 
     //Scroll
     JScrollPane Scroller = null;
 
     //JList
-    JList<Contact> ContactJList = new JList<>();
+    JList<String> UsersJList = new JList<>();
 
-    ArrayList<Contact> ContactArrayList = new ArrayList<>();
+    JList<String> textsJList = new JList<>();
+
+    //arrayLists that will convert to JList
+    ArrayList<String> UsersArrayList = new ArrayList<>();
+
+    ArrayList<String> textsArrayList = new ArrayList<>();
 
 
     @Override
@@ -78,28 +76,57 @@ public class FrameEX extends JFrame implements WindowListener{
 
 
         super("nuh uh");
-        setSize(950,720);
+        setSize(700,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setResizable(false);
 
-
+        getContentPane().setBackground(new Color(45, 45, 45));
 
 
         //labels and buttons
+        ChatLabel.setBounds(10,20,40,15);
+        add(ChatLabel);
+        ChatLabel.setFont(new Font("Calibri", Font.BOLD, 15));
+        ChatLabel.setForeground(Color.white);
+
+        Userslabel.setBounds(525,20,40,15);
+        add(Userslabel);
+        Userslabel.setFont(new Font("Calibri", Font.BOLD, 15));
+        Userslabel.setForeground(Color.white);
+
+        SendButton.setBounds(550,445,100,40);
+        add(SendButton);
+        SendButton.setFont(new Font("Calibri", Font.BOLD, 20));
+
+        ExitButton.setBounds(550,490,100,40);
+        add(ExitButton);
+        ExitButton.setFont(new Font("Calibri", Font.BOLD, 20));
+
+        //textbox
+        textToSend.setBounds(10,440,500,100);
+        add(textToSend);
+        textToSend.setFont(new Font("Calibri", Font.BOLD, 15));
 
 
 
-        // ContactJList
+        // JList and ScrollPane
 
-        //ContactJList.setSelectedIndex(0);
-        ContactJList.addListSelectionListener(e->alrExistingContact());
-        ContactJList.setBorder(BorderFactory.createLineBorder(Color.black));
-        add(ContactJList);
 
-        Scroller = new JScrollPane(ContactJList);
-        Scroller.setBounds(10,20,430,650);
+        add(textsJList);
+
+        Scroller = new JScrollPane(textsJList);
+        Scroller.setBounds(10,30,500,400);
         add(Scroller);
+
+
+        add(UsersJList);
+
+        Scroller = new JScrollPane(UsersJList);
+        Scroller.setBounds(525,30,150,400);
+        add(Scroller);
+
+
 
 
 
