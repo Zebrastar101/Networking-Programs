@@ -13,6 +13,10 @@ public class ServersListener implements Runnable{
 
     private static ArrayList<ObjectOutputStream> outs = new ArrayList<>();
 
+    private static ArrayList<ObjectOutputStream> existingUsers = new ArrayList<>();
+    
+
+
 
 
 
@@ -57,6 +61,8 @@ public class ServersListener implements Runnable{
         }
     }
 }
+
+
 
 
 

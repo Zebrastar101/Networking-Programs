@@ -98,11 +98,12 @@ public class FrameEX extends JFrame implements WindowListener{
         SendButton.setBounds(550,445,100,40);
         add(SendButton);
         SendButton.setFont(new Font("Calibri", Font.BOLD, 20));
-        SendButton.addActionListener();
+        SendButton.addActionListener(e -> {SendMethod();});
 
         ExitButton.setBounds(550,490,100,40);
         add(ExitButton);
         ExitButton.setFont(new Font("Calibri", Font.BOLD, 20));
+        SendButton.addActionListener(e -> {ExitMethod();});
 
         //textbox
         textToSend.setBounds(10,440,500,100);
@@ -135,11 +136,29 @@ public class FrameEX extends JFrame implements WindowListener{
         setVisible(true);
     }
 
+    public void SendMethod(){
+        if (!textToSend.getText().equals("")){
+            textsArrayList.add(textToSend.getText());
+            String[] textsArray = new String[textsArrayList.size()];
+            for (int i=0; i<textsArrayList.size(); i++){
+                textsArray[i]=textsArrayList.get(i);
+            }
 
+            textsJList.setListData(textsArray);
+            clearMethod();
+        }
+        else{
+            int errorMessage = JOptionPane.showConfirmDialog(null, "you have not typed anything", "Error", JOptionPane.OK_CANCEL_OPTION);
+        }
+    }
 
+    public void ExitMethod(){
 
+    }
 
-
+    public void clearMethod(){
+        textToSend.setText("");
+    }
 
 
 
