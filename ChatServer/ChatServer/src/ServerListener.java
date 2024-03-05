@@ -14,11 +14,6 @@ public class ServersListener implements Runnable{
     private static ArrayList<ObjectOutputStream> outs = new ArrayList<>();
 
     private static ArrayList<ObjectOutputStream> existingUsers = new ArrayList<>();
-    
-
-
-
-
 
 
     public ServersListener(ObjectInputStream is, ObjectOutputStream os, String chatter) {
@@ -28,6 +23,7 @@ public class ServersListener implements Runnable{
         outs.add(os);
     }
 
+
     @Override
     public void run() {
         try
@@ -35,6 +31,16 @@ public class ServersListener implements Runnable{
             while(true)
             {
                 CommandFromClient cfc = (CommandFromClient) is.readObject();
+
+                //new User
+
+                if(cfc.getCommand()==CommandFromClient.NEWUSER){
+                    String user=cfc.getData();
+                    if(!existingUsers.contains(user)){
+                        sendCommand(new CommandFromServer(CommandFromServer.NEWUSER,user));
+                    }
+                }
+
 
                 //quit
 

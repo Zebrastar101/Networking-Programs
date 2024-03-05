@@ -12,7 +12,6 @@ public class CommandFromServer implements Serializable{
 
 
 
-
     public CommandFromServer(int command, String data){
         this.command = command;
         this.data = data;
