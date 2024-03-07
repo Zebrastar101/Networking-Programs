@@ -7,7 +7,7 @@ public class ServersListener implements Runnable{
     private ObjectOutputStream os = null;
 
     // Stores the which player this listener is for
-    private String chatter;
+    private String user;
 
     // static data that is shared between both listeners
 
@@ -16,10 +16,10 @@ public class ServersListener implements Runnable{
     private static ArrayList<ObjectOutputStream> existingUsers = new ArrayList<>();
 
 
-    public ServersListener(ObjectInputStream is, ObjectOutputStream os, String chatter) {
+    public ServersListener(ObjectInputStream is, ObjectOutputStream os, String user) {
         this.is = is;
         this.os = os;
-        this.chatter = chatter;
+        this.user = user;
         outs.add(os);
     }
 

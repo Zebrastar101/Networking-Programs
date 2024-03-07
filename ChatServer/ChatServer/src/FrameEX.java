@@ -103,7 +103,7 @@ public class FrameEX extends JFrame implements WindowListener{
         ExitButton.setBounds(550,490,100,40);
         add(ExitButton);
         ExitButton.setFont(new Font("Calibri", Font.BOLD, 20));
-        SendButton.addActionListener(e -> {ExitMethod();});
+        ExitButton.addActionListener(e -> {ExitMethod();});
 
         //textbox
         textToSend.setBounds(10,440,500,100);
@@ -136,6 +136,28 @@ public class FrameEX extends JFrame implements WindowListener{
         setVisible(true);
     }
 
+    public void newUser(String newUser){
+        // add (newUser + " has connected") to textsArrayList
+        textsArrayList.add(newUser + " has connected");
+        String[] textsArray = new String[textsArrayList.size()];
+        for (int i=0; i<textsArrayList.size(); i++){
+            textsArray[i]=textsArrayList.get(i);
+        }
+
+        textsJList.setListData(textsArray);
+        clearMethod();
+
+        // add newUser to UsersArrayList
+        UsersArrayList.add(newUser);
+        String[] usersArray = new String[UsersArrayList.size()];
+        for (int i=0; i<UsersArrayList.size(); i++){
+            usersArray[i]=UsersArrayList.get(i);
+        }
+
+        UsersJList.setListData(textsArray);
+
+    }
+
     public void SendMethod(){
         if (!textToSend.getText().equals("")){
             textsArrayList.add(textToSend.getText());
@@ -152,8 +174,15 @@ public class FrameEX extends JFrame implements WindowListener{
         }
     }
 
-    public void ExitMethod(){
+    public void ExitMethod(String UserThatLeft){
+        // add (newUser + " has connected") to textsArrayList
+        textsArrayList.add(UserThatLeft + " disconnected");
+        String[] textsArray = new String[textsArrayList.size()];
+        for (int i=0; i<textsArrayList.size(); i++){
+            textsArray[i]=textsArrayList.get(i);
+        }
 
+        textsJList.setListData(textsArray);
     }
 
     public void clearMethod(){
