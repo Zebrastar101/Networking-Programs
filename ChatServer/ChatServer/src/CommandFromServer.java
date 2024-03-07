@@ -7,7 +7,7 @@ public class CommandFromServer implements Serializable{
     private String data="";
 
     //Command list
-    public static final int NEWGUY = 0;
+    public static final int NEWUSER = 0;
     public static final int EXIT = 1;
 
 

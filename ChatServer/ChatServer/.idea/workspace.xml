@@ -34,20 +34,6 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/chemb/OneDrive/Desktop/gitHub Folder/Tic/ChatServer/ChatServer&quot;
   }
 }</component>
-  <component name="RunManager">
-    <configuration name="mainEX" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="mainEX" />
-      <module name="ChatServer" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.mainEX" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
