@@ -2,11 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.ObjectOutputStream;
 import java.util.*;
 public class FrameEX extends JFrame implements WindowListener{
 
     //labels and texts
-
     JLabel ChatLabel = new JLabel("Chat");
     JTextField textToSend = new JTextField("teeeheee");
     JLabel Userslabel = new JLabel("Users");
@@ -33,49 +33,14 @@ public class FrameEX extends JFrame implements WindowListener{
     ArrayList<String> textsArrayList = new ArrayList<>();
 
 
-    @Override
-    public void windowOpened(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowClosing(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowClosed(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowIconified(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowDeiconified(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowActivated(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowDeactivated(WindowEvent e) {
-
-    }
+    private ObjectOutputStream os;
+    private char user;
 
 
-
-    public FrameEX(){
-
-
-
-
+    public FrameEX(ObjectOutputStream os, char user){
         super("nuh uh");
+        this.os = os;
+        this.user = user;
         setSize(700,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
@@ -103,7 +68,7 @@ public class FrameEX extends JFrame implements WindowListener{
         ExitButton.setBounds(550,490,100,40);
         add(ExitButton);
         ExitButton.setFont(new Font("Calibri", Font.BOLD, 20));
-        ExitButton.addActionListener(e -> {ExitMethod();});
+        ExitButton.addActionListener(e -> {ExitByButtonMethod();});
 
         //textbox
         textToSend.setBounds(10,440,500,100);
@@ -174,7 +139,26 @@ public class FrameEX extends JFrame implements WindowListener{
         }
     }
 
-    public void ExitMethod(String UserThatLeft){
+    public void ExitByButtonMethod(){
+        // add (newUser + " has connected") to textsArrayList
+        textsArrayList.add(user + " has disconnected");
+        String[] textsArray = new String[textsArrayList.size()];
+        for (int i=0; i<textsArrayList.size(); i++){
+            textsArray[i]=textsArrayList.get(i);
+        }
+
+        textsJList.setListData(textsArray);
+
+        //remove user from UsersArrayList;
+        UsersArrayList.remove(user);
+        String[] usersArray = new String[UsersArrayList.size()];
+        for (int i=0; i<UsersArrayList.size(); i++){
+            usersArray[i]=UsersArrayList.get(i);
+        }
+        UsersJList.setListData(usersArray);
+    }
+
+    public void ExitByWindowClosingMethod(String UserThatLeft){
         // add (newUser + " has connected") to textsArrayList
         textsArrayList.add(UserThatLeft + " disconnected");
         String[] textsArray = new String[textsArrayList.size()];
@@ -183,12 +167,55 @@ public class FrameEX extends JFrame implements WindowListener{
         }
 
         textsJList.setListData(textsArray);
+
+        //remove user from UsersArrayList;
+        UsersArrayList.remove(UserThatLeft);
+        String[] usersArray = new String[UsersArrayList.size()];
+        for (int i=0; i<UsersArrayList.size(); i++){
+            usersArray[i]=UsersArrayList.get(i);
+        }
+        UsersJList.setListData(usersArray);
     }
 
     public void clearMethod(){
         textToSend.setText("");
     }
 
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        //needs to indirectly call ExitByWindowClosingMethod
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
+    }
 
 
 
