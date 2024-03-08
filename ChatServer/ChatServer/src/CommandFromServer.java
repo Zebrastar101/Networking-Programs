@@ -10,6 +10,8 @@ public class CommandFromServer implements Serializable{
     public static final int NEWUSER = 0;
     public static final int EXIT = 1;
 
+    public static final int SENDMESSAGE = 1;
+
 
 
     public CommandFromServer(int command, String data){

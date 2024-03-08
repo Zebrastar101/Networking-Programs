@@ -65,7 +65,7 @@ public class CSFrame extends JFrame implements WindowListener{
         SendButton.setBounds(550,445,100,40);
         add(SendButton);
         SendButton.setFont(new Font("Calibri", Font.BOLD, 20));
-        SendButton.addActionListener(e -> {SendMethod();});
+        SendButton.addActionListener(e -> {SendButtonMethod();});
 
         ExitButton.setBounds(550,490,100,40);
         add(ExitButton);
@@ -125,15 +125,13 @@ public class CSFrame extends JFrame implements WindowListener{
 
     }
 
-    public void SendMethod(){
-        if (!textToSend.getText().equals("")){
-            textsArrayList.add(textToSend.getText());
-            String[] textsArray = new String[textsArrayList.size()];
-            for (int i=0; i<textsArrayList.size(); i++){
-                textsArray[i]=textsArrayList.get(i);
+    public void SendButtonMethod(){
+        if (!textToSend.getText().equals("")) {
+            try {
+                os.writeObject(new CommandFromClient(CommandFromClient.SENDMESSAGE, "" + user + " " + textToSend.getText()));
+            } catch (Exception z) {
+                z.printStackTrace();
             }
-
-            textsJList.setListData(textsArray);
             clearMethod();
         }
         else{
@@ -141,26 +139,25 @@ public class CSFrame extends JFrame implements WindowListener{
         }
     }
 
-    public void ExitByButtonMethod(){
-        // add (newUser + " has connected") to textsArrayList
-        textsArrayList.add(user + " has disconnected");
-        String[] textsArray = new String[textsArrayList.size()];
-        for (int i=0; i<textsArrayList.size(); i++){
-            textsArray[i]=textsArrayList.get(i);
-        }
+    public void SendCalledByClientListener(String user, String text){
+            textsArrayList.add(user + ": " + text);
+            String[] textsArray = new String[textsArrayList.size()];
+            for (int i=0; i<textsArrayList.size(); i++){
+                textsArray[i]=textsArrayList.get(i);
+            }
 
-        textsJList.setListData(textsArray);
-
-        //remove user from UsersArrayList;
-        UsersArrayList.remove(user);
-        String[] usersArray = new String[UsersArrayList.size()];
-        for (int i=0; i<UsersArrayList.size(); i++){
-            usersArray[i]=UsersArrayList.get(i);
-        }
-        UsersJList.setListData(usersArray);
+            textsJList.setListData(textsArray);
     }
 
-    public void ExitByWindowClosingMethod(String UserThatLeft){
+    public void ExitByButtonMethod(){
+        try {
+            os.writeObject(new CommandFromClient(CommandFromClient.EXIT, ""+user));
+        } catch (Exception z) {
+            z.printStackTrace();
+        }
+    }
+
+    public void ExitCalledByClientListener(String UserThatLeft){
         // add (newUser + " has connected") to textsArrayList
         textsArrayList.add(UserThatLeft + " disconnected");
         String[] textsArray = new String[textsArrayList.size()];
@@ -191,7 +188,11 @@ public class CSFrame extends JFrame implements WindowListener{
 
     @Override
     public void windowClosing(WindowEvent e) {
-        //needs to indirectly call ExitByWindowClosingMethod
+        try {
+            os.writeObject(new CommandFromClient(CommandFromClient.EXIT, ""+user));
+        } catch (Exception z) {
+            z.printStackTrace();
+        }
     }
 
     @Override
