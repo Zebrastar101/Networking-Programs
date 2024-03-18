@@ -6,8 +6,9 @@ public class ServerListener implements Runnable{
     private ObjectInputStream is = null;
     private ObjectOutputStream os = null;
 
-    // Stores the which player this listener is for
+    /*Stores the which player this listener is for
     private String user;
+     */
 
     // static data that is shared between both listeners
 
@@ -16,10 +17,9 @@ public class ServerListener implements Runnable{
     private static ArrayList<ObjectOutputStream> existingUsers = new ArrayList<>();
 
 
-    public ServerListener(ObjectInputStream is, ObjectOutputStream os, String user) {
+    public ServerListener(ObjectInputStream is, ObjectOutputStream os) {
         this.is = is;
         this.os = os;
-        this.user = user;
         outs.add(os);
     }
 
@@ -37,7 +37,7 @@ public class ServerListener implements Runnable{
                 if(cfc.getCommand()==CommandFromClient.CHECKNEWUSER){
                     String user=cfc.getData();
                     if(!existingUsers.contains(user)){
-                        sendCommand(new CommandFromServer(CommandFromServer.CHECKNEWUSER,user));
+                        sendCommand(new CommandFromServer(CommandFromServer.VALIDNEWUSER,user));
                     }
                 }
 

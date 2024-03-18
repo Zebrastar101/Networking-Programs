@@ -17,14 +17,9 @@ public class ServerMain {
                 ObjectOutputStream xos = new ObjectOutputStream(xCon.getOutputStream());
                 ObjectInputStream xis = new ObjectInputStream(xCon.getInputStream());
 
-                /*
-                xos.writeObject(new CommandFromServer(CommandFromServer.VALIDNEWUSER, idk));
-                System.out.println("new person connected");
-
-                 */
 
                 // Creates a Thread to listen to the Y client
-                ServerListener sl = new ServerListener(xis,xos,"idk");
+                ServerListener sl = new ServerListener(xis,xos);
                 Thread t = new Thread(sl);
                 t.start();
             }
