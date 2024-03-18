@@ -14,7 +14,7 @@ public class ServerListener implements Runnable{
 
     private static ArrayList<ObjectOutputStream> outs = new ArrayList<>();
 
-    private static ArrayList<ObjectOutputStream> existingUsers = new ArrayList<>();
+    private static ArrayList<String> existingUsers = new ArrayList<>();
 
 
     public ServerListener(ObjectInputStream is, ObjectOutputStream os) {
@@ -37,12 +37,13 @@ public class ServerListener implements Runnable{
                 if(cfc.getCommand()==CommandFromClient.CHECKNEWUSER){
                     String user=cfc.getData();
                     if(!existingUsers.contains(user)){
+                        existingUsers.add(user);
                         sendCommand(new CommandFromServer(CommandFromServer.VALIDNEWUSER,user));
                     }
                 }
 
-
                 //quit
+
 
         }
         catch(Exception e)

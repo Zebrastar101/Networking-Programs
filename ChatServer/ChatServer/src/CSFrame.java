@@ -103,7 +103,7 @@ public class CSFrame extends JFrame implements WindowListener{
         setVisible(true);
     }
 
-    public void newUser(String newUser){
+    public void newUser(String newUser, ArrayList<String> UsersArrayList){
         // add (newUser + " has connected") to textsArrayList
         textsArrayList.add(newUser + " has connected");
         String[] textsArray = new String[textsArrayList.size()];
@@ -114,14 +114,12 @@ public class CSFrame extends JFrame implements WindowListener{
         textsJList.setListData(textsArray);
         clearMethod();
 
-        // add newUser to UsersArrayList
-        UsersArrayList.add(newUser);
+        //update usersJList
         String[] usersArray = new String[UsersArrayList.size()];
         for (int i=0; i<UsersArrayList.size(); i++){
             usersArray[i]=UsersArrayList.get(i);
         }
-
-        UsersJList.setListData(textsArray);
+        UsersJList.setListData(usersArray);
 
     }
 
@@ -157,7 +155,7 @@ public class CSFrame extends JFrame implements WindowListener{
         }
     }
 
-    public void ExitCalledByClientListener(String UserThatLeft){
+    public void ExitCalledByClientListener(String UserThatLeft ,ArrayList<String> UsersArrayList){
         // add (newUser + " has connected") to textsArrayList
         textsArrayList.add(UserThatLeft + " disconnected");
         String[] textsArray = new String[textsArrayList.size()];
@@ -167,8 +165,7 @@ public class CSFrame extends JFrame implements WindowListener{
 
         textsJList.setListData(textsArray);
 
-        //remove user from UsersArrayList;
-        UsersArrayList.remove(UserThatLeft);
+        //update usersJList
         String[] usersArray = new String[UsersArrayList.size()];
         for (int i=0; i<UsersArrayList.size(); i++){
             usersArray[i]=UsersArrayList.get(i);
