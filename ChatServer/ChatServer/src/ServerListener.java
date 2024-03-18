@@ -2,7 +2,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class ServersListener implements Runnable{
+public class ServerListener implements Runnable{
     private ObjectInputStream is = null;
     private ObjectOutputStream os = null;
 
@@ -16,7 +16,7 @@ public class ServersListener implements Runnable{
     private static ArrayList<ObjectOutputStream> existingUsers = new ArrayList<>();
 
 
-    public ServersListener(ObjectInputStream is, ObjectOutputStream os, String user) {
+    public ServerListener(ObjectInputStream is, ObjectOutputStream os, String user) {
         this.is = is;
         this.os = os;
         this.user = user;
