@@ -118,7 +118,7 @@ public class CSFrame extends JFrame implements WindowListener{
     public void SendButtonMethod(){
         if (!textToSend.getText().equals("")) {
             try {
-                os.writeObject(new CommandFromClient(CommandFromClient.SENDMESSAGE, "" + user + " " + textToSend.getText()));
+                os.writeObject(new CommandFromClient(CommandFromClient.SENDMESSAGE,user + ": " + textToSend.getText()));
             } catch (Exception z) {
                 z.printStackTrace();
             }

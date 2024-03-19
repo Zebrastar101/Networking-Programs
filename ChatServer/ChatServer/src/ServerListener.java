@@ -52,10 +52,8 @@ public class ServerListener implements Runnable{
                 }
 
                 if(cfc.getCommand()==CommandFromClient.SENDMESSAGE){
-                    String user=cfc.getData();
-                    existingUsers.remove(user);
-                    sendCommand(new CommandFromServer(CommandFromServer.USERLIST,existingUsers.toString()));
-                    sendCommand(new CommandFromServer(CommandFromServer.EXIT,user));
+                    String data=cfc.getData();
+                    sendCommand(new CommandFromServer(CommandFromServer.EXIT,data));
                 }
 
 
