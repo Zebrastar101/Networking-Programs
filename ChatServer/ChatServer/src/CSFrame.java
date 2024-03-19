@@ -103,7 +103,7 @@ public class CSFrame extends JFrame implements WindowListener{
         setVisible(true);
     }
 
-    public void newUser(String newUser, ArrayList<String> UsersArrayList){
+    public void newUser(String newUser){
         // add (newUser + " has connected") to textsArrayList
         textsArrayList.add(newUser + " has connected");
         String[] textsArray = new String[textsArrayList.size()];
@@ -113,14 +113,6 @@ public class CSFrame extends JFrame implements WindowListener{
 
         textsJList.setListData(textsArray);
         clearMethod();
-
-        //update usersJList
-        String[] usersArray = new String[UsersArrayList.size()];
-        for (int i=0; i<UsersArrayList.size(); i++){
-            usersArray[i]=UsersArrayList.get(i);
-        }
-        UsersJList.setListData(usersArray);
-
     }
 
     public void SendButtonMethod(){
@@ -155,7 +147,7 @@ public class CSFrame extends JFrame implements WindowListener{
         }
     }
 
-    public void ExitCalledByClientListener(String UserThatLeft ,ArrayList<String> UsersArrayList){
+    public void ExitCalledByClientListener(String UserThatLeft){
         // add (newUser + " has connected") to textsArrayList
         textsArrayList.add(UserThatLeft + " disconnected");
         String[] textsArray = new String[textsArrayList.size()];
@@ -165,6 +157,9 @@ public class CSFrame extends JFrame implements WindowListener{
 
         textsJList.setListData(textsArray);
 
+    }
+
+    public void UpdateUserList(ArrayList<String> UsersArrayList){
         //update usersJList
         String[] usersArray = new String[UsersArrayList.size()];
         for (int i=0; i<UsersArrayList.size(); i++){
@@ -172,6 +167,8 @@ public class CSFrame extends JFrame implements WindowListener{
         }
         UsersJList.setListData(usersArray);
     }
+
+
 
     public void clearMethod(){
         textToSend.setText("");
