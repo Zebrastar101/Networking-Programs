@@ -38,8 +38,8 @@ public class ServerListener implements Runnable{
                     String user=cfc.getData();
                     if(!existingUsers.contains(user)){
                         existingUsers.add(user);
-                        os.writeObject(new CommandFromServer(CommandFromServer.USERLIST,existingUsers.toString()));
-                        os.writeObject(new CommandFromServer(CommandFromServer.VALIDNEWUSER,user));
+                        sendCommand(new CommandFromServer(CommandFromServer.USERLIST,existingUsers.toString()));
+                        sendCommand(new CommandFromServer(CommandFromServer.VALIDNEWUSER,user));
                     }
                 }
 
@@ -49,7 +49,13 @@ public class ServerListener implements Runnable{
                     existingUsers.remove(user);
                     sendCommand(new CommandFromServer(CommandFromServer.USERLIST,existingUsers.toString()));
                     sendCommand(new CommandFromServer(CommandFromServer.EXIT,user));
+                }
 
+                if(cfc.getCommand()==CommandFromClient.SENDMESSAGE){
+                    String user=cfc.getData();
+                    existingUsers.remove(user);
+                    sendCommand(new CommandFromServer(CommandFromServer.USERLIST,existingUsers.toString()));
+                    sendCommand(new CommandFromServer(CommandFromServer.EXIT,user));
                 }
 
 
