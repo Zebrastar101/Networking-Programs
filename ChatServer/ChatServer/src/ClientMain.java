@@ -31,7 +31,7 @@ public class ClientMain {
                     }
                 }
             }
-            ClientsListener cl = new ClientsListener(is, os, frame);
+            ClientListener cl = new ClientListener(is, os, frame);
             Thread t = new Thread(cl);
             t.start();
 

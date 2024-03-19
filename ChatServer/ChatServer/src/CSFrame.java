@@ -34,10 +34,10 @@ public class CSFrame extends JFrame implements WindowListener{
 
 
     private ObjectOutputStream os;
-    private char user;
+    private String user;
 
 
-    public CSFrame(ObjectOutputStream os, char user){
+    public CSFrame(ObjectOutputStream os, String user){
         super("nuh uh");
 
         this.os = os;
@@ -102,6 +102,9 @@ public class CSFrame extends JFrame implements WindowListener{
 
         setVisible(true);
     }
+    public String getName(){
+        return user;
+    }
 
     public void newUser(String newUser, ArrayList<String> UsersArrayList){
         // add (newUser + " has connected") to textsArrayList
@@ -137,7 +140,7 @@ public class CSFrame extends JFrame implements WindowListener{
         }
     }
 
-    public void SendCalledByClientListener(String user, String text){
+    public void sendCalledByClientListener(String user, String text){
         textsArrayList.add(user + ": " + text);
         String[] textsArray = new String[textsArrayList.size()];
         for (int i=0; i<textsArrayList.size(); i++){
@@ -155,7 +158,7 @@ public class CSFrame extends JFrame implements WindowListener{
         }
     }
 
-    public void ExitCalledByClientListener(String UserThatLeft ,ArrayList<String> UsersArrayList){
+    public void exitCalledByClientListener(String UserThatLeft ,ArrayList<String> UsersArrayList){
         // add (newUser + " has connected") to textsArrayList
         textsArrayList.add(UserThatLeft + " disconnected");
         String[] textsArray = new String[textsArrayList.size()];
