@@ -33,7 +33,7 @@ public class ServerListener implements Runnable{
                 CommandFromClient cfc = (CommandFromClient) is.readObject();
 
                 //new User
-
+                //still confused about how to operate the UserList, there must be a better way to do it than how I'm doing it
                 if(cfc.getCommand()==CommandFromClient.CHECKNEWUSER){
                     String user=cfc.getData();
                     if(!existingUsers.contains(user)){
