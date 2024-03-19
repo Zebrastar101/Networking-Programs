@@ -21,7 +21,7 @@ public class ClientMain {
             while(r){
                 System.out.println("What is your name: ");
                 String name=sc.nextLine();
-                os.writeObject(os.writeObject(new CommandFromClient(CommandFromClient.CHECKNEWUSER, name ));
+                os.writeObject(os.writeObject(new CommandFromClient(CommandFromClient.VALIDNEWUSER, name ));
                 if(cfs.getCommand()==CommandFromServer.CHECKNEWUSER){
                     r=cfs.getData();
                     if(r==true){

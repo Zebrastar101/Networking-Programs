@@ -11,7 +11,7 @@ public class ClientsListener implements Runnable{
     public static ArrayList<ClientsListener> clientListeners = new ArrayList<ClientsListener>();
     private Socket socket;
     private Scanner scanner;
-    public ClientsListener(ObjectInputStream is, ObjectOutputStream os, ChatServer frame) {
+    public ClientsListener(ObjectInputStream is, ObjectOutputStream os, CSFrame frame) {
         this.is = is;
         this.os = os;
         this.frame = frame;
