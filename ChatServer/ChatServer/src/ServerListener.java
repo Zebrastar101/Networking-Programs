@@ -42,7 +42,7 @@ public class ServerListener implements Runnable{
                         sendCommand(new CommandFromServer(CommandFromServer.VALIDNEWUSER,user));
                     }
                     else{
-                        sendCommand(new CommandFromServer(CommandFromServer.CHECKNEWUSER,null));
+                        sendCommand(new CommandFromServer(CommandFromServer.VALIDNEWUSER,null));
                     }
 
                 }
