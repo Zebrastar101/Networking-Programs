@@ -41,6 +41,9 @@ public class ServerListener implements Runnable{
                         sendCommand(new CommandFromServer(CommandFromServer.USERLIST,existingUsers.toString()));
                         sendCommand(new CommandFromServer(CommandFromServer.VALIDNEWUSER,user));
                     }
+                    else{
+                        sendCommand(new CommandFromServer(CommandFromServer.VALIDNEWUSER,null));
+                    }
 
                 }
 
