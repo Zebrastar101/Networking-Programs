@@ -34,10 +34,10 @@ public class CSFrame extends JFrame implements WindowListener{
 
 
     private ObjectOutputStream os;
-    private char user;
+    private String user;
 
 
-    public CSFrame(ObjectOutputStream os, char user){
+    public CSFrame(ObjectOutputStream os, String user){
         super("nuh uh");
 
         this.os = os;
@@ -65,12 +65,12 @@ public class CSFrame extends JFrame implements WindowListener{
         SendButton.setBounds(550,445,100,40);
         add(SendButton);
         SendButton.setFont(new Font("Calibri", Font.BOLD, 20));
-        SendButton.addActionListener(e -> {SendButtonMethod();});
+        SendButton.addActionListener(e -> {sendButtonMethod();});
 
         ExitButton.setBounds(550,490,100,40);
         add(ExitButton);
         ExitButton.setFont(new Font("Calibri", Font.BOLD, 20));
-        ExitButton.addActionListener(e -> {ExitByButtonMethod();});
+        ExitButton.addActionListener(e -> {exitByButtonMethod();});
 
         //textbox
         textToSend.setBounds(10,440,500,100);
