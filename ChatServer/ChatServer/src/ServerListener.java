@@ -6,20 +6,20 @@ public class ServerListener implements Runnable{
     private ObjectInputStream is = null;
     private ObjectOutputStream os = null;
 
-    // Stores the which player this listener is for
+    /*Stores the which player this listener is for
     private String user;
+     */
 
     // static data that is shared between both listeners
 
     private static ArrayList<ObjectOutputStream> outs = new ArrayList<>();
 
-    private static ArrayList<ObjectOutputStream> existingUsers = new ArrayList<>();
+    private static ArrayList<String> existingUsers = new ArrayList<>();
 
+    public ServerListener(ObjectInputStream is, ObjectOutputStream os) {
 
-    public ServerListener(ObjectInputStream is, ObjectOutputStream os, String user) {
         this.is = is;
         this.os = os;
-        this.user = user;
         outs.add(os);
     }
 
@@ -33,16 +33,30 @@ public class ServerListener implements Runnable{
                 CommandFromClient cfc = (CommandFromClient) is.readObject();
 
                 //new User
-
-                if(cfc.getCommand()==CommandFromClient.NEWUSER){
+                //still confused about how to operate the UserList, there must be a better way to do it than how I'm doing it
+                if(cfc.getCommand()==CommandFromClient.CHECKNEWUSER){
                     String user=cfc.getData();
                     if(!existingUsers.contains(user)){
-                        sendCommand(new CommandFromServer(CommandFromServer.NEWUSER,user));
+                        existingUsers.add(user);
+                        sendCommand(new CommandFromServer(CommandFromServer.USERLIST,existingUsers.toString()));
+                        sendCommand(new CommandFromServer(CommandFromServer.VALIDNEWUSER,user));
                     }
+
                 }
 
-
                 //quit
+                if(cfc.getCommand()==CommandFromClient.EXIT){
+                    String user=cfc.getData();
+                    existingUsers.remove(user);
+                    sendCommand(new CommandFromServer(CommandFromServer.USERLIST,existingUsers.toString()));
+                    sendCommand(new CommandFromServer(CommandFromServer.EXIT,user));
+                }
+
+                if(cfc.getCommand()==CommandFromClient.SENDMESSAGE){
+                    String data=cfc.getData();
+                    sendCommand(new CommandFromServer(CommandFromServer.EXIT,data));
+                }
+
 
         }
         catch(Exception e)
