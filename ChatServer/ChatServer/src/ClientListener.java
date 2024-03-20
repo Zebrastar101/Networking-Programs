@@ -40,7 +40,13 @@ public class ClientListener implements Runnable{
                 }
                 else if(cfs.getCommand()==CommandFromServer.EXIT){
                     s=cfs.getData();
-                    frame.exitCalledByClientListener(frame.getName(), clients);
+                    frame.exitCalledByClientListener(s);
+                    frame.UpdateUserList(clients);
+                }
+                else if (cfs.getCommand()==CommandFromServer.VALIDNEWUSER){
+                    s=cfs.getData();
+                    frame.NewUser(s);
+                    frame.UpdateUserList(clients);
                 }
 
             }

@@ -158,7 +158,7 @@ public class CSFrame extends JFrame implements WindowListener{
         }
     }
 
-    public void exitCalledByClientListener(String UserThatLeft ,ArrayList<String> UsersArrayList){
+    public void exitCalledByClientListener(String UserThatLeft){
         // add (newUser + " has connected") to textsArrayList
         textsArrayList.add(UserThatLeft + " disconnected");
         String[] textsArray = new String[textsArrayList.size()];
