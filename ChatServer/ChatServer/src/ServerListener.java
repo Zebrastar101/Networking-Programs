@@ -57,7 +57,7 @@ public class ServerListener implements Runnable{
 
                 if(cfc.getCommand()==CommandFromClient.SENDMESSAGE){
                     String data=cfc.getData();
-                    sendCommand(new CommandFromServer(CommandFromServer.EXIT,data));
+                    sendCommand(new CommandFromServer(CommandFromServer.SENDMESSAGE,data));
                 }
 
 
