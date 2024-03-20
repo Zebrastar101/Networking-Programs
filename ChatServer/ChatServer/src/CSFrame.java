@@ -129,8 +129,8 @@ public class CSFrame extends JFrame implements WindowListener{
         }
     }
 
-    public void sendCalledByClientListener(String user, String text){
-        textsArrayList.add(user + ": " + text);
+    public void sendCalledByClientListener( String text){
+        textsArrayList.add( text);
         String[] textsArray = new String[textsArrayList.size()];
         for (int i=0; i<textsArrayList.size(); i++){
             textsArray[i]=textsArrayList.get(i);
