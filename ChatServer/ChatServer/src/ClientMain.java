@@ -17,7 +17,7 @@ public class ClientMain {
             CSFrame frame;
 
 
-           boolean r=true;
+            boolean r=true;
             while(r){
                 System.out.println("What is your name: ");
                 String name=sc.nextLine();
