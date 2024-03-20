@@ -34,7 +34,6 @@ public class CSFrame extends JFrame implements WindowListener{
 
 
     private ObjectOutputStream os;
-
     private String user;
 
 
@@ -71,7 +70,7 @@ public class CSFrame extends JFrame implements WindowListener{
         ExitButton.setBounds(550,490,100,40);
         add(ExitButton);
         ExitButton.setFont(new Font("Calibri", Font.BOLD, 20));
-        ExitButton.addActionListener(e -> {ExitByButtonMethod();});
+        ExitButton.addActionListener(e -> {exitByButtonMethod();});
 
         //textbox
         textToSend.setBounds(10,440,500,100);
@@ -105,7 +104,6 @@ public class CSFrame extends JFrame implements WindowListener{
     }
 
     public void newUser(String newUser){
-
         // add (newUser + " has connected") to textsArrayList
         textsArrayList.add(newUser + " has connected");
         String[] textsArray = new String[textsArrayList.size()];
@@ -117,12 +115,10 @@ public class CSFrame extends JFrame implements WindowListener{
         clearMethod();
     }
 
-
-
     public void sendButtonMethod(){
         if (!textToSend.getText().equals("")) {
             try {
-                os.writeObject(new CommandFromClient(CommandFromClient.SENDMESSAGE, "" + user + " " + textToSend.getText()));
+                os.writeObject(new CommandFromClient(CommandFromClient.SENDMESSAGE,user + ": " + textToSend.getText()));
             } catch (Exception z) {
                 z.printStackTrace();
             }
@@ -134,15 +130,14 @@ public class CSFrame extends JFrame implements WindowListener{
     }
 
     public void sendCalledByClientListener(String user, String text){
-            textsArrayList.add(user + ": " + text);
-            String[] textsArray = new String[textsArrayList.size()];
-            for (int i=0; i<textsArrayList.size(); i++){
-                textsArray[i]=textsArrayList.get(i);
-            }
+        textsArrayList.add(user + ": " + text);
+        String[] textsArray = new String[textsArrayList.size()];
+        for (int i=0; i<textsArrayList.size(); i++){
+            textsArray[i]=textsArrayList.get(i);
+        }
 
-            textsJList.setListData(textsArray);
+        textsJList.setListData(textsArray);
     }
-
 
     public void exitByButtonMethod(){
         try {
@@ -165,7 +160,6 @@ public class CSFrame extends JFrame implements WindowListener{
     }
 
     public void updateUserList(ArrayList<String> UsersArrayList){
-
         //update usersJList
         String[] usersArray = new String[UsersArrayList.size()];
         for (int i=0; i<UsersArrayList.size(); i++){
@@ -173,6 +167,7 @@ public class CSFrame extends JFrame implements WindowListener{
         }
         UsersJList.setListData(usersArray);
     }
+
 
 
     public void clearMethod(){
