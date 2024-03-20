@@ -143,17 +143,8 @@ public class CSFrame extends JFrame implements WindowListener{
             textsJList.setListData(textsArray);
     }
 
+
     public void exitByButtonMethod(){
-        textsArrayList.add(user + ": " + text);
-        String[] textsArray = new String[textsArrayList.size()];
-        for (int i=0; i<textsArrayList.size(); i++){
-            textsArray[i]=textsArrayList.get(i);
-        }
-
-        textsJList.setListData(textsArray);
-    }
-
-    public void ExitByButtonMethod(){
         try {
             os.writeObject(new CommandFromClient(CommandFromClient.EXIT, ""+user));
         } catch (Exception z) {

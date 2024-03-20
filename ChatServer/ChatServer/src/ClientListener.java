@@ -9,14 +9,15 @@ import java.util.Scanner;
 public class ClientListener implements Runnable{
     private ObjectInputStream is = null;
     private ObjectOutputStream os = null;
+    private CSFrame frame=null;
 
     public static ArrayList<String> clients;
     private Socket socket;
     private Scanner scanner;
-    public ClientListener(ObjectInputStream is, ObjectOutputStream os, CSFrame f) {
+    public ClientListener(ObjectInputStream is, ObjectOutputStream os, CSFrame frame) {
         this.is = is;
         this.os = os;
-        CSFrame frame = f;
+        this.frame = frame;
     }
 
     @Override
