@@ -21,19 +21,21 @@ public class ClientMain {
             while(r){
                 System.out.println("What is your name: ");
                 String name=sc.nextLine();
-                os.writeObject(os.writeObject(new CommandFromClient(CommandFromClient.VALIDNEWUSER, name ));
-                if(cfs.getCommand()==CommandFromServer.CHECKNEWUSER){
-                    r=cfs.getData();
-                    if(r==true){
+                String checkedName;
+                os.writeObject(os.writeObject(new CommandFromClient(CommandFromClient.CHECKNEWUSER, name )));
+                if(cfs.getCommand()==CommandFromServer.VALIDNEWUSER){
+                    checkedName=cfs.getData();
+                    if(checkedName!=null){
                         frame= new CSFrame(os, name);
+                        ClientListener cl = new ClientListener(is, os, frame);
+                        Thread t = new Thread(cl);
+                        t.start();
                         break;
 
                     }
                 }
             }
-            ClientListener cl = new ClientListener(is, os, frame);
-            Thread t = new Thread(cl);
-            t.start();
+
 
 
         }
