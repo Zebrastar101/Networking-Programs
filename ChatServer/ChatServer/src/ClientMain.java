@@ -22,7 +22,7 @@ public class ClientMain {
                 System.out.println("What is your name: ");
                 String name=sc.nextLine();
                 String checkedName;
-                os.writeObject(os.writeObject(new CommandFromClient(CommandFromClient.CHECKNEWUSER, name )));
+                os.writeObject(new CommandFromClient(CommandFromClient.CHECKNEWUSER, name ));
                 if(cfs.getCommand()==CommandFromServer.VALIDNEWUSER){
                     checkedName=cfs.getData();
                     if(checkedName!=null){
