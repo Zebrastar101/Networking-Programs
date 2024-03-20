@@ -13,10 +13,10 @@ public class ClientListener implements Runnable{
     public static ArrayList<String> clients;
     private Socket socket;
     private Scanner scanner;
-    public ClientListener(ObjectInputStream is, ObjectOutputStream os, CSFrame frame) {
+    public ClientListener(ObjectInputStream is, ObjectOutputStream os, CSFrame f) {
         this.is = is;
         this.os = os;
-        this.frame = frame;
+        CSFrame frame = f;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ClientListener implements Runnable{
                 }
                 else if(cfs.getCommand()==CommandFromServer.SENDMESSAGE){
                     s=cfs.getData();
-                    frame.sendCalledByClientListener(frame.getName(),s);
+                    frame.sendCalledByClientListener(s);
                 }
                 else if(cfs.getCommand()==CommandFromServer.EXIT){
                     s=cfs.getData();
