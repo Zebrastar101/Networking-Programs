@@ -115,7 +115,7 @@ public class CSFrame extends JFrame implements WindowListener{
         clearMethod();
     }
 
-    public void SendButtonMethod(){
+    public void sendButtonMethod(){
         if (!textToSend.getText().equals("")) {
             try {
                 os.writeObject(new CommandFromClient(CommandFromClient.SENDMESSAGE,user + ": " + textToSend.getText()));
@@ -129,7 +129,7 @@ public class CSFrame extends JFrame implements WindowListener{
         }
     }
 
-    public void SendCalledByClientListener(String user, String text){
+    public void sendCalledByClientListener(String user, String text){
             textsArrayList.add(user + ": " + text);
             String[] textsArray = new String[textsArrayList.size()];
             for (int i=0; i<textsArrayList.size(); i++){
@@ -139,7 +139,7 @@ public class CSFrame extends JFrame implements WindowListener{
             textsJList.setListData(textsArray);
     }
 
-    public void ExitByButtonMethod(){
+    public void exitByButtonMethod(){
         try {
             os.writeObject(new CommandFromClient(CommandFromClient.EXIT, ""+user));
         } catch (Exception z) {
@@ -147,7 +147,7 @@ public class CSFrame extends JFrame implements WindowListener{
         }
     }
 
-    public void ExitCalledByClientListener(String UserThatLeft){
+    public void exitCalledByClientListener(String UserThatLeft){
         // add (newUser + " has connected") to textsArrayList
         textsArrayList.add(UserThatLeft + " disconnected");
         String[] textsArray = new String[textsArrayList.size()];
@@ -159,7 +159,7 @@ public class CSFrame extends JFrame implements WindowListener{
 
     }
 
-    public void UpdateUserList(ArrayList<String> UsersArrayList){
+    public void updateUserList(ArrayList<String> UsersArrayList){
         //update usersJList
         String[] usersArray = new String[UsersArrayList.size()];
         for (int i=0; i<UsersArrayList.size(); i++){
