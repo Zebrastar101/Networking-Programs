@@ -34,6 +34,7 @@ public class ClientListener implements Runnable{
                     s=cfs.getData();
                     s=s.substring(1,s.length()-1);
                     clients=new ArrayList<>(List.of(s.split(", ")));
+                    frame.updateUserList(clients);
                 }
                 else if(cfs.getCommand()==CommandFromServer.SENDMESSAGE){
                     s=cfs.getData();
@@ -44,7 +45,7 @@ public class ClientListener implements Runnable{
                     frame.exitCalledByClientListener(s);
                     frame.updateUserList(clients);
                 }
-                else if (cfs.getCommand()==CommandFromServer.VALIDNEWUSER){
+                else if (cfs.getCommand()==CommandFromServer.USER){
                     s=cfs.getData();
                     frame.newUser(s);
                     frame.updateUserList(clients);
