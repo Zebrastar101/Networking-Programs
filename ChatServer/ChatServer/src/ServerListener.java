@@ -38,11 +38,13 @@ public class ServerListener implements Runnable {
                         existingUsers.add(user);
                         sendCommand(new CommandFromServer(CommandFromServer.VALIDNEWUSER, user));
                         sendCommand(new CommandFromServer(CommandFromServer.USERLIST, existingUsers.toString()));
+
                     } else {
                         sendCommand(new CommandFromServer(CommandFromServer.VALIDNEWUSER, null));
                     }
 
                 }
+
 
                 //quit
                 if (cfc.getCommand() == CommandFromClient.EXIT) {

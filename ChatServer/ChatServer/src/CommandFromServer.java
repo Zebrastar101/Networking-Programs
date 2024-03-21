@@ -9,7 +9,7 @@ public class CommandFromServer implements Serializable{
     //Command list
     public static final int CHECKNEWUSER = 0;
     public static final int VALIDNEWUSER = 1;
-
+    public static final int LETIN=5;
     public static final int EXIT = 2;
 
     public static final int SENDMESSAGE = 3;

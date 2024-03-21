@@ -18,6 +18,7 @@ public class ClientMain {
 
             String checkedName="";
             boolean r=true;
+            boolean us=false;
             while(r){
                 System.out.println("What is your name: ");
                 String name=sc.nextLine();
@@ -26,10 +27,12 @@ public class ClientMain {
                 if(cfs.getCommand()==CommandFromServer.VALIDNEWUSER){
                     checkedName=cfs.getData();
                     if(checkedName!=null){
+                        us=true;
                         break;
                     }
                 }
             }
+
             frame= new CSFrame(os, checkedName);
             ClientListener cl = new ClientListener(is, os, frame);
             Thread t = new Thread(cl);

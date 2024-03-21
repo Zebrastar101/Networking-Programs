@@ -13,6 +13,7 @@ public class CommandFromClient implements Serializable{
 
     public static final int SENDMESSAGE = 3;
     public static final int USERLIST = 4;
+    public static final int LETIN=5;
 
 
 
