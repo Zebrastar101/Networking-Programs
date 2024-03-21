@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="497d7901-fd19-4500-b7d7-98b98e4389fa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CommandFromClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CommandFromClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CommandFromServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CommandFromServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerListener.java" afterDir="false" />
-    </list>
+    <list default="true" id="497d7901-fd19-4500-b7d7-98b98e4389fa" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,7 +41,7 @@
   }
 }</component>
   <component name="RunManager" selected="Application.ClientMain">
-    <configuration name="ClientMain" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+    <configuration name="ClientMain" type="Application" factoryName="Application" singleton="true" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ClientMain" />
       <module name="ChatServer" />
       <method v="2">
