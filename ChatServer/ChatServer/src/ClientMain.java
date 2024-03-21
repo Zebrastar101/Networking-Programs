@@ -13,28 +13,27 @@ public class ClientMain {
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             Scanner sc= new Scanner(System.in);
 
-            CommandFromServer cfs = (CommandFromServer)is.readObject();
+
             CSFrame frame;
 
-
+            String checkedName="";
             boolean r=true;
             while(r){
                 System.out.println("What is your name: ");
                 String name=sc.nextLine();
-                String checkedName;
                 os.writeObject(new CommandFromClient(CommandFromClient.CHECKNEWUSER, name ));
+                CommandFromServer cfs = (CommandFromServer)is.readObject();
                 if(cfs.getCommand()==CommandFromServer.VALIDNEWUSER){
                     checkedName=cfs.getData();
                     if(checkedName!=null){
-                        frame= new CSFrame(os, name);
-                        ClientListener cl = new ClientListener(is, os, frame);
-                        Thread t = new Thread(cl);
-                        t.start();
                         break;
-
                     }
                 }
             }
+            frame= new CSFrame(os, checkedName);
+            ClientListener cl = new ClientListener(is, os, frame);
+            Thread t = new Thread(cl);
+            t.start();
 
 
 

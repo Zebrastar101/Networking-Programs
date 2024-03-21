@@ -37,7 +37,7 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/ammar/Documents/Zahraa/Tic/ChatServer/ChatServer&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.ClientMain">
+  <component name="RunManager" selected="Application.ServerMain">
     <configuration name="ClientMain" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ClientMain" />
       <module name="ChatServer" />
