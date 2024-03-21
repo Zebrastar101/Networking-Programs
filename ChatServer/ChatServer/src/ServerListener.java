@@ -2,7 +2,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class ServerListener implements Runnable{
+public class ServerListener implements Runnable {
     private ObjectInputStream is = null;
     private ObjectOutputStream os = null;
 
@@ -16,8 +16,8 @@ public class ServerListener implements Runnable{
 
     private static ArrayList<String> existingUsers = new ArrayList<>();
 
-
     public ServerListener(ObjectInputStream is, ObjectOutputStream os) {
+
         this.is = is;
         this.os = os;
         outs.add(os);
@@ -26,49 +26,46 @@ public class ServerListener implements Runnable{
 
     @Override
     public void run() {
-        try
-        {
-            while(true)
-            {
+        try {
+            while (true) {
                 CommandFromClient cfc = (CommandFromClient) is.readObject();
 
                 //new User
                 //still confused about how to operate the UserList, there must be a better way to do it than how I'm doing it
-                if(cfc.getCommand()==CommandFromClient.CHECKNEWUSER){
-                    String user=cfc.getData();
-                    if(!existingUsers.contains(user)){
+                if (cfc.getCommand() == CommandFromClient.CHECKNEWUSER) {
+                    String user = cfc.getData();
+                    if (!existingUsers.contains(user)) {
                         existingUsers.add(user);
-                        sendCommand(new CommandFromServer(CommandFromServer.USERLIST,existingUsers.toString()));
-                        sendCommand(new CommandFromServer(CommandFromServer.VALIDNEWUSER,user));
+                        sendCommand(new CommandFromServer(CommandFromServer.USERLIST, existingUsers.toString()));
+                        sendCommand(new CommandFromServer(CommandFromServer.VALIDNEWUSER, user));
+                    } else {
+                        sendCommand(new CommandFromServer(CommandFromServer.VALIDNEWUSER, null));
                     }
 
                 }
 
                 //quit
-                if(cfc.getCommand()==CommandFromClient.EXIT){
-                    String user=cfc.getData();
+                if (cfc.getCommand() == CommandFromClient.EXIT) {
+                    String user = cfc.getData();
                     existingUsers.remove(user);
-                    sendCommand(new CommandFromServer(CommandFromServer.USERLIST,existingUsers.toString()));
-                    sendCommand(new CommandFromServer(CommandFromServer.EXIT,user));
+                    sendCommand(new CommandFromServer(CommandFromServer.USERLIST, existingUsers.toString()));
+                    sendCommand(new CommandFromServer(CommandFromServer.EXIT, user));
                 }
 
-                if(cfc.getCommand()==CommandFromClient.SENDMESSAGE){
-                    String data=cfc.getData();
-                    sendCommand(new CommandFromServer(CommandFromServer.EXIT,data));
+                if (cfc.getCommand() == CommandFromClient.SENDMESSAGE) {
+                    String data = cfc.getData();
+                    sendCommand(new CommandFromServer(CommandFromServer.SENDMESSAGE, data));
                 }
 
 
-        }
-        catch(Exception e)
-        {
+            }
+
+        }catch(Exception e){
             e.printStackTrace();
         }
+
     }
-
-
-
-
-    public void sendCommand(CommandFromServer cfs)
+    public void sendCommand (CommandFromServer cfs)
     {
         // Sends command to both players
         for (ObjectOutputStream o : outs) {
