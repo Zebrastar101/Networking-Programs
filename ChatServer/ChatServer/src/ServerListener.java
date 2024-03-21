@@ -36,8 +36,8 @@ public class ServerListener implements Runnable {
                     String user = cfc.getData();
                     if (!existingUsers.contains(user)) {
                         existingUsers.add(user);
-                        sendCommand(new CommandFromServer(CommandFromServer.USERLIST, existingUsers.toString()));
                         sendCommand(new CommandFromServer(CommandFromServer.VALIDNEWUSER, user));
+                        sendCommand(new CommandFromServer(CommandFromServer.USERLIST, existingUsers.toString()));
                     } else {
                         sendCommand(new CommandFromServer(CommandFromServer.VALIDNEWUSER, null));
                     }
