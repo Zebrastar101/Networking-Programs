@@ -6,12 +6,14 @@ import java.util.Scanner;
 public class ClientMain {
     public static void main(String[] args) {
         try{
-
+            Scanner sc= new Scanner(System.in);
+            System.out.println("Enter your ip address: ");
+            String ipAddress=sc.nextLine();
             //create a connection to server
-            Socket socket = new Socket("127.0.0.1", 8001);
+            Socket socket = new Socket(ipAddress, 8001);
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
-            Scanner sc= new Scanner(System.in);
+            //Scanner sc= new Scanner(System.in);
 
 
             CSFrame frame;
@@ -20,7 +22,7 @@ public class ClientMain {
             boolean r=true;
             boolean us=false;
             while(r){
-                System.out.println("What is your name: ");
+                System.out.println("Enter your name: ");
                 String name=sc.nextLine();
                 os.writeObject(new CommandFromClient(CommandFromClient.CHECKNEWUSER, name ));
                 CommandFromServer cfs = (CommandFromServer)is.readObject();

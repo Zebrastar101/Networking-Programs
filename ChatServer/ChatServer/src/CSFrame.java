@@ -145,6 +145,7 @@ public class CSFrame extends JFrame implements WindowListener{
         } catch (Exception z) {
             z.printStackTrace();
         }
+        System.exit(0);
     }
 
     public void exitCalledByClientListener(String UserThatLeft){
@@ -158,6 +159,7 @@ public class CSFrame extends JFrame implements WindowListener{
         textsJList.setListData(textsArray);
 
     }
+
 
     public void updateUserList(ArrayList<String> UsersArrayList){
         //update usersJList
@@ -180,13 +182,16 @@ public class CSFrame extends JFrame implements WindowListener{
 
     }
 
+
     @Override
     public void windowClosing(WindowEvent e) {
-        try {
+        /*try {
             os.writeObject(new CommandFromClient(CommandFromClient.EXIT, ""+user));
         } catch (Exception z) {
             z.printStackTrace();
         }
+
+         */
     }
 
     @Override
