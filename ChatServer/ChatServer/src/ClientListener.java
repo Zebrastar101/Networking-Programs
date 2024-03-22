@@ -45,7 +45,7 @@ public class ClientListener implements Runnable{
                     frame.exitCalledByClientListener(s);
                     frame.updateUserList(clients);
                 }
-                else if (cfs.getCommand()==CommandFromServer.USER){
+                else if (cfs.getCommand()==CommandFromServer.VALIDNEWUSER){
                     s=cfs.getData();
                     frame.newUser(s);
                     frame.updateUserList(clients);
