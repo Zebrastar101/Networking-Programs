@@ -26,7 +26,7 @@ public class ClientMain {
                 String name=sc.nextLine();
                 os.writeObject(new CommandFromClient(CommandFromClient.CHECKNEWUSER, name ));
                 CommandFromServer cfs = (CommandFromServer)is.readObject();
-                if(cfs.getCommand()==CommandFromServer.VALIDNEWUSER){
+                if(cfs.getCommand()==CommandFromServer.CHECKNEWUSER){
                     checkedName=cfs.getData();
                     if(checkedName!=null){
                         us=true;
