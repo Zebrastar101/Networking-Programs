@@ -29,10 +29,17 @@ public class SMFrame extends JFrame {
         dropDown.addItem(course);
         dropDown.addItem(section);
         add(dropDown);
+        dropDown.addActionListener(e->changePanel());
+
 
         setVisible(true);
 
     }
+
+    public void changePanel(){
+
+    }
+
 
 
 
