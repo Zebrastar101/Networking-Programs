@@ -35,6 +35,10 @@ public class SMFrame extends JFrame {
 
 
 
+
+
+
+
         setVisible(true);
 
     }
