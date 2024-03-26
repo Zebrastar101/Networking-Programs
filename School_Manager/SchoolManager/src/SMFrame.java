@@ -12,6 +12,12 @@ public class SMFrame extends JFrame {
     String course="Course";
     String section="Section";
 
+    ViewPanels teacherPan = null;
+    ViewPanels studentPan = null;
+    ViewPanels coursePan = null;
+    ViewPanels sectionPan = null;
+
+
     public SMFrame(){
         super("School Manager");
         setSize(650,720);
