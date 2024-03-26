@@ -37,6 +37,11 @@ public class SMFrame extends JFrame {
         add(dropDown);
         dropDown.addActionListener(e->changePanel());
 
+        teacherPan = new ViewPanels();
+        teacherPan.setLocation(120,20);
+        teacherPan.setBorder(BorderFactory.createLineBorder(Color.black));
+        add(teacherPan);
+
 
 
 

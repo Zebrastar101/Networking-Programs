@@ -2,13 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ViewPanels extends JPanel {
-    public ViewPanels(int w, int h)
+    public ViewPanels()
     {
-        setSize(w,h);
+        add(new JButton("ha"));
     }
 
-    public void paint(Graphics g)
-    {
-        g.fillRect(0,0,getWidth(),getHeight());
-    }
+
 }
