@@ -32,6 +32,9 @@ public class SMFrame extends JFrame {
         dropDown.addActionListener(e->changePanel());
 
 
+
+
+
         setVisible(true);
 
     }
