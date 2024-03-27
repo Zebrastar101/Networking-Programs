@@ -41,7 +41,7 @@ public class SMFrame extends JFrame {
         teacherPan.setBounds(15,40,600,630);
         teacherPan.setBorder(BorderFactory.createLineBorder(Color.black));
         add(teacherPan);
-        //teacherPan.setVisible(false);
+
 
         studentPan = new ViewPanels("studd");
         studentPan.setBounds(15,40,600,630);
@@ -72,25 +72,25 @@ public class SMFrame extends JFrame {
     }
 
     public void changePanel(){
-        if (dropDown.getSelectedItem()==teacherPan) {
+        if (String.valueOf(dropDown.getSelectedItem())=="Teacher") {
             teacherPan.setVisible(true);
             studentPan.setVisible(false);
             coursePan.setVisible(false);
             sectionPan.setVisible(false);
         }
-        if (dropDown.getSelectedItem()==studentPan) {
+        if (String.valueOf(dropDown.getSelectedItem())=="Student") {
             teacherPan.setVisible(false);
             studentPan.setVisible(true);
             coursePan.setVisible(false);
             sectionPan.setVisible(false);
         }
-        if (dropDown.getSelectedItem()==coursePan) {
+        if (String.valueOf(dropDown.getSelectedItem())=="Course") {
             teacherPan.setVisible(false);
             studentPan.setVisible(false);
             coursePan.setVisible(true);
             sectionPan.setVisible(false);
         }
-        if (dropDown.getSelectedItem()==sectionPan) {
+        if (String.valueOf(dropDown.getSelectedItem())=="Section") {
             teacherPan.setVisible(false);
             studentPan.setVisible(false);
             coursePan.setVisible(false);
