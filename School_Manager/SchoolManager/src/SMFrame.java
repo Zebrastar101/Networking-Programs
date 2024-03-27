@@ -3,20 +3,31 @@ import java.awt.*;
 
 public class SMFrame extends JFrame {
 
-    JLabel MenuLabel = new JLabel("Menu: ");
+    JLabel ViewLabel = new JLabel("View: ");
+
+    JLabel FileLabel = new JLabel("File: ");
+
 
     JComboBox<String> dropDownView = new JComboBox<String>();
-
-    JComboBox<String> dropDownFile = new JComboBox<String>();
-
-    JButton help = new JButton("Help");
-
 
 
     String teacher="Teacher";
     String student="Student";
     String course="Course";
     String section="Section";
+
+    JComboBox<String> dropDownFile = new JComboBox<String>();
+
+    String expData="Export Data";
+    String impData="Import Data";
+    String purge="Purge";
+    String exit="Exit";
+
+    JButton helpButton = new JButton("Help");
+
+
+
+
 
     ViewPanels teacherPan = null;
     ViewPanels studentPan = null;
@@ -31,17 +42,33 @@ public class SMFrame extends JFrame {
         setLayout(null);
         setResizable(false);
 
-        MenuLabel.setBounds(15,0,100,35);
-        add(MenuLabel);
-        MenuLabel.setFont(new Font("Calibri", Font.BOLD, 25));
+        ViewLabel.setBounds(15,5,60,35);
+        add(ViewLabel);
+        ViewLabel.setFont(new Font("Calibri", Font.BOLD, 23));
+        
+        helpButton.setBounds(370,10,100,20);
+        add(helpButton);
+        helpButton.setFont(new Font("Calibri", Font.BOLD, 15));
 
-        dropDownView.setBounds(90, 0, 250, 30);
+        dropDownView.setBounds(75, 10, 100, 20);
         dropDownView.addItem(teacher);
         dropDownView.addItem(student);
         dropDownView.addItem(course);
         dropDownView.addItem(section);
         add(dropDownView);
         dropDownView.addActionListener(e->changePanel());
+
+        FileLabel.setBounds(200,5,100,35);
+        add(FileLabel);
+        FileLabel.setFont(new Font("Calibri", Font.BOLD, 23));
+
+        dropDownFile.setBounds(245, 10, 100, 20);
+        dropDownFile.addItem(expData);
+        dropDownFile.addItem(impData);
+        dropDownFile.addItem(purge);
+        dropDownFile.addItem(exit);
+        add(dropDownFile);
+        //dropDownFile.addActionListener(e->changePanel());
 
         teacherPan = new ViewPanels("teachh");
         teacherPan.setBounds(15,40,600,630);
