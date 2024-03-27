@@ -25,7 +25,7 @@ public class SMFrame extends JFrame {
         setLayout(null);
         setResizable(false);
 
-        NumberOfTermsLabel.setBounds(15,0,100,35);
+        /*NumberOfTermsLabel.setBounds(15,0,100,35);
         add(NumberOfTermsLabel);
         NumberOfTermsLabel.setFont(new Font("Calibri", Font.BOLD, 25));
 
@@ -40,10 +40,12 @@ public class SMFrame extends JFrame {
         teacherPan = new ViewPanels();
         teacherPan.setLocation(120,20);
         teacherPan.setBorder(BorderFactory.createLineBorder(Color.black));
+        */
+
+        teacherPan = new ViewPanels();
+        teacherPan.setBounds(150,150,150,150);
+        teacherPan.setBorder(BorderFactory.createLineBorder(Color.black));
         add(teacherPan);
-
-
-
 
 
 
