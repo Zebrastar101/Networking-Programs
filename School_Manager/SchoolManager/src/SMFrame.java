@@ -5,7 +5,13 @@ public class SMFrame extends JFrame {
 
     JLabel MenuLabel = new JLabel("Menu: ");
 
-    JComboBox<String> dropDown = new JComboBox<String>();
+    JComboBox<String> dropDownView = new JComboBox<String>();
+
+    JComboBox<String> dropDownFile = new JComboBox<String>();
+
+    JButton help = new JButton("Help");
+
+
 
     String teacher="Teacher";
     String student="Student";
@@ -29,13 +35,13 @@ public class SMFrame extends JFrame {
         add(MenuLabel);
         MenuLabel.setFont(new Font("Calibri", Font.BOLD, 25));
 
-        dropDown.setBounds(90, 0, 250, 30);
-        dropDown.addItem(teacher);
-        dropDown.addItem(student);
-        dropDown.addItem(course);
-        dropDown.addItem(section);
-        add(dropDown);
-        dropDown.addActionListener(e->changePanel());
+        dropDownView.setBounds(90, 0, 250, 30);
+        dropDownView.addItem(teacher);
+        dropDownView.addItem(student);
+        dropDownView.addItem(course);
+        dropDownView.addItem(section);
+        add(dropDownView);
+        dropDownView.addActionListener(e->changePanel());
 
         teacherPan = new ViewPanels("teachh");
         teacherPan.setBounds(15,40,600,630);
@@ -72,25 +78,25 @@ public class SMFrame extends JFrame {
     }
 
     public void changePanel(){
-        if (String.valueOf(dropDown.getSelectedItem())=="Teacher") {
+        if (String.valueOf(dropDownView.getSelectedItem())=="Teacher") {
             teacherPan.setVisible(true);
             studentPan.setVisible(false);
             coursePan.setVisible(false);
             sectionPan.setVisible(false);
         }
-        if (String.valueOf(dropDown.getSelectedItem())=="Student") {
+        if (String.valueOf(dropDownView.getSelectedItem())=="Student") {
             teacherPan.setVisible(false);
             studentPan.setVisible(true);
             coursePan.setVisible(false);
             sectionPan.setVisible(false);
         }
-        if (String.valueOf(dropDown.getSelectedItem())=="Course") {
+        if (String.valueOf(dropDownView.getSelectedItem())=="Course") {
             teacherPan.setVisible(false);
             studentPan.setVisible(false);
             coursePan.setVisible(true);
             sectionPan.setVisible(false);
         }
-        if (String.valueOf(dropDown.getSelectedItem())=="Section") {
+        if (String.valueOf(dropDownView.getSelectedItem())=="Section") {
             teacherPan.setVisible(false);
             studentPan.setVisible(false);
             coursePan.setVisible(false);
