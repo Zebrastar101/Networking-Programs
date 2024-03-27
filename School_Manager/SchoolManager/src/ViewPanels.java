@@ -2,9 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ViewPanels extends JPanel {
-    public ViewPanels()
+
+    public ViewPanels(String button)
     {
-        add(new JButton("ha"));
+        add(new JButton(button));
+
+
     }
 
 
