@@ -15,7 +15,7 @@ public class Teacher {
         return this.teacherFirst_name;
     }
 
-    public String getTeacherlast_name() {
+    public String getTeacherLast_name() {
         return teacherlast_name;
     }
 
