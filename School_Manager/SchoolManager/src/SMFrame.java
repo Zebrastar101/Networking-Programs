@@ -80,6 +80,7 @@ public class SMFrame extends JFrame {
         studentPan.setBounds(15,40,600,630);
         studentPan.setBorder(BorderFactory.createLineBorder(Color.black));
         add(studentPan);
+
         studentPan.setVisible(false);
 
         coursePan = new ViewPanels("coursess");
