@@ -87,7 +87,7 @@ public class SMFrame extends JFrame {
 
         studentPan = new StudentPanel();
         add(studentPan);
-        studentPan.setVisible(false);
+        studentPan.setVisible(true);
 
 
         coursePan = new ViewPanels("coursess");
