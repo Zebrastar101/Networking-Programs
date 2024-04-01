@@ -16,8 +16,9 @@ public class Student {
             stm=con.createStatement();
             stm.execute("USE managerschool");
             resultSet=stm.executeQuery("Select*from students");
+           studentTable.setModel((TableModel) buildTable(resultSet));
         }catch(SQLException e){
-            throw new RuntimeException(e);
+            throw  new RuntimeException(e);
 
         }
 
@@ -44,5 +45,5 @@ public class Student {
     public JTable getStudentTable() {
         return studentTable;
     }
-    
+
 }

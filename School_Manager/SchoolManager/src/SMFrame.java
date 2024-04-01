@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.table.TableModel;
 import java.awt.*;
 
 public class SMFrame extends JFrame {
@@ -6,7 +7,6 @@ public class SMFrame extends JFrame {
     JLabel ViewLabel = new JLabel("View: ");
 
     JLabel FileLabel = new JLabel("File: ");
-
 
     JComboBox<String> dropDownView = new JComboBox<String>();
 
@@ -80,7 +80,6 @@ public class SMFrame extends JFrame {
         studentPan.setBounds(15,40,600,630);
         studentPan.setBorder(BorderFactory.createLineBorder(Color.black));
         add(studentPan);
-
         studentPan.setVisible(false);
 
         coursePan = new ViewPanels("coursess");
@@ -115,6 +114,7 @@ public class SMFrame extends JFrame {
         if (String.valueOf(dropDownView.getSelectedItem())=="Student") {
             teacherPan.setVisible(false);
             studentPan.setVisible(true);
+
             coursePan.setVisible(false);
             sectionPan.setVisible(false);
         }
@@ -131,7 +131,6 @@ public class SMFrame extends JFrame {
             sectionPan.setVisible(true);
         }
     }
-
 
 
 
