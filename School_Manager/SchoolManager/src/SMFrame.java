@@ -50,7 +50,7 @@ public class SMFrame extends JFrame {
         setLayout(null);
         setResizable(false);
 
-        ViewLabel.setBounds(15,5,60,35);
+        ViewLabel.setBounds(15,5,100,35);
         add(ViewLabel);
         ViewLabel.setFont(new Font("Calibri", Font.BOLD, 23));
         

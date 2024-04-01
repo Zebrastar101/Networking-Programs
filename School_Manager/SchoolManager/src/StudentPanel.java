@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class StudentPanel extends JPanel {
 
@@ -18,6 +19,8 @@ public class StudentPanel extends JPanel {
 
 
     public StudentPanel(){
-        
+        panelTitleLabel.setBounds(15,5,60,35);
+        add(panelTitleLabel);
+        panelTitleLabel.setFont(new Font("Calibri", Font.BOLD, 23));
     }
 }
