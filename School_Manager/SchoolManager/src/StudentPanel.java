@@ -19,8 +19,13 @@ public class StudentPanel extends JPanel {
 
 
     public StudentPanel(){
-        panelTitleLabel.setBounds(15,5,60,35);
-        add(panelTitleLabel);
+        setLayout(null);
+        setBounds(15,40,600,630);
+        setBorder(BorderFactory.createLineBorder(Color.black));
+
+        panelTitleLabel.setBounds(15,40,60,35);
         panelTitleLabel.setFont(new Font("Calibri", Font.BOLD, 23));
+        add(panelTitleLabel);
+
     }
 }

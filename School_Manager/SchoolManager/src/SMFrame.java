@@ -38,7 +38,7 @@ public class SMFrame extends JFrame {
 
 
     ViewPanels teacherPan = null;
-    ViewPanels studentPan = null;
+    StudentPanel studentPan = null;
     ViewPanels coursePan = null;
     ViewPanels sectionPan = null;
 
@@ -85,11 +85,10 @@ public class SMFrame extends JFrame {
         add(teacherPan);
         teacherPan.setVisible(false);
 
-        studentPan = new ViewPanels("studd");
-        studentPan.setBounds(15,40,600,630);
-        studentPan.setBorder(BorderFactory.createLineBorder(Color.black));
+        studentPan = new StudentPanel();
         add(studentPan);
         studentPan.setVisible(false);
+
 
         coursePan = new ViewPanels("coursess");
         coursePan.setBounds(15,40,600,630);
