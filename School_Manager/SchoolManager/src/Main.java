@@ -2,7 +2,7 @@ import java.sql.*;
 import javax.swing.*;
 
 public class Main {
-   static Connection myConn;
+   public static Connection myConn;
     public static void main(String[] args) throws SQLException {
         String url="jdbc:mysql://localhost:3306/managerschool";
         String user="root";

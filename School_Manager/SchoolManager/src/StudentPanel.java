@@ -21,6 +21,10 @@ public class StudentPanel extends JPanel {
 
 
     public StudentPanel(){
+        Student s = new Student(Main.myConn);
+        studentTable=s.getStudentTable();
+        add(studentTable);
+
         setLayout(null);
         setBounds(15,40,600,630);
         setBorder(BorderFactory.createLineBorder(Color.black));
