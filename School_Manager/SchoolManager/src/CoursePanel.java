@@ -4,11 +4,10 @@ import java.awt.*;
 public class CoursePanel extends JPanel {
 
     JLabel panelTitleLabel = new JLabel("Students");
-    JLabel studentFNLabel = new JLabel("Student's first name: ");
-    JLabel studentLNLabel = new JLabel("Student's last name: ");
+    JLabel courseLabel = new JLabel("Course Name: ");
 
-    JTextField studentFNTextField = new JTextField("");
-    JTextField studentLNTextField = new JTextField("");
+    JTextField courseTextField = new JTextField("");
+
 
     JTable studentTable;
 
@@ -17,7 +16,16 @@ public class CoursePanel extends JPanel {
     JButton newButton = new JButton("New");
     JButton saveButton = new JButton("Save");
     JButton deleteButton = new JButton("Delete");
-    JButton scheduleButton = new JButton("Schedule");
+
+
+
+    JRadioButton acaRadioButton = new JRadioButton("Academic");
+    JRadioButton KAPRadioButton = new JRadioButton("KAP");
+    JRadioButton APRadioButton = new JRadioButton("AP");
+
+
+
+
 
 
     public CoursePanel(){
@@ -29,40 +37,38 @@ public class CoursePanel extends JPanel {
         panelTitleLabel.setFont(new Font("Calibri", Font.BOLD, 23));
         add(panelTitleLabel);
 
-        studentFNLabel.setBounds(120,80,250,20);
-        studentFNLabel.setFont(new Font("Calibri", Font.BOLD, 15));
-        add(studentFNLabel);
+        courseLabel.setBounds(140,110,90,20);
+        courseLabel.setFont(new Font("Calibri", Font.BOLD, 15));
+        add(courseLabel);
 
-        studentFNTextField.setBounds(260,80,230,20);
-        studentFNTextField.setFont(new Font("Calibri", Font.BOLD, 15));
-        add(studentFNTextField);
+        courseTextField.setBounds(240,110,210,20);
+        courseTextField.setFont(new Font("Calibri", Font.BOLD, 15));
+        add(courseTextField);
 
-        studentLNLabel.setBounds(120,110,250,20);
-        studentLNLabel.setFont(new Font("Calibri", Font.BOLD, 15));
-        add(studentLNLabel);
 
-        studentLNTextField.setBounds(260,110,230,20);
-        studentLNTextField.setFont(new Font("Calibri", Font.BOLD, 15));
-        add(studentLNTextField);
 
 
         //buttons
 
-        newButton.setBounds(120,140,70,20);
+        newButton.setBounds(140,140,70,20);
         newButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(newButton);
 
-        saveButton.setBounds(210,140,70,20);
+        saveButton.setBounds(260,140,70,20);
         saveButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(saveButton);
 
-        deleteButton.setBounds(300,140,70,20);
+        deleteButton.setBounds(380,140,70,20);
         deleteButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(deleteButton);
 
-        scheduleButton.setBounds(400,140,90,20);
-        scheduleButton.setFont(new Font("Calibri", Font.BOLD, 10));
-        add(scheduleButton);
+
+
+        //radioButtons
+
+        acaRadioButton.setBounds(140,80,20,20);
+        add(deleteButton);
+
 
 
         //JTable

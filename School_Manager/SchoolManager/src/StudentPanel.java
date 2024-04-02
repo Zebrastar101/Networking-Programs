@@ -35,7 +35,7 @@ public class StudentPanel extends JPanel {
         panelTitleLabel.setFont(new Font("Calibri", Font.BOLD, 23));
         add(panelTitleLabel);
 
-        studentFNLabel.setBounds(120,80,250,20);
+        studentFNLabel.setBounds(120,80,140,20);
         studentFNLabel.setFont(new Font("Calibri", Font.BOLD, 15));
         add(studentFNLabel);
 
@@ -43,7 +43,7 @@ public class StudentPanel extends JPanel {
         studentFNTextField.setFont(new Font("Calibri", Font.BOLD, 15));
         add(studentFNTextField);
 
-        studentLNLabel.setBounds(120,110,250,20);
+        studentLNLabel.setBounds(120,110,130,20);
         studentLNLabel.setFont(new Font("Calibri", Font.BOLD, 15));
         add(studentLNLabel);
 
