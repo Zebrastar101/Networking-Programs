@@ -37,7 +37,7 @@ public class CoursePanel extends JPanel {
         panelTitleLabel.setFont(new Font("Calibri", Font.BOLD, 23));
         add(panelTitleLabel);
 
-        courseLabel.setBounds(140,110,90,20);
+        courseLabel.setBounds(140,110,100,20);
         courseLabel.setFont(new Font("Calibri", Font.BOLD, 15));
         add(courseLabel);
 
@@ -66,10 +66,21 @@ public class CoursePanel extends JPanel {
 
         //radioButtons
 
-        acaRadioButton.setBounds(170,80,100,20);
+        acaRadioButton.setBounds(210,80,80,20);
         acaRadioButton.setFont(new Font("Calibri", Font.BOLD, 12));
-        //acaRadioButton.setText("aaaaaaaaaaaaaaaaaaaaa");
         add(acaRadioButton);
+
+        KAPRadioButton.setBounds(290,80,50,20);
+        KAPRadioButton.setFont(new Font("Calibri", Font.BOLD, 12));
+        add(KAPRadioButton);
+
+        APRadioButton.setBounds(340,80,50,20);
+        APRadioButton.setFont(new Font("Calibri", Font.BOLD, 12));
+        add(APRadioButton);
+
+
+
+
 
 
 
