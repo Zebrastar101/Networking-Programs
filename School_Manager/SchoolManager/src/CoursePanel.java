@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class CoursePanel extends JPanel {
 
-    JLabel panelTitleLabel = new JLabel("Students");
+    JLabel panelTitleLabel = new JLabel("Courses");
     JLabel courseLabel = new JLabel("Course Name: ");
 
     JTextField courseTextField = new JTextField("");
@@ -66,8 +66,10 @@ public class CoursePanel extends JPanel {
 
         //radioButtons
 
-        acaRadioButton.setBounds(140,80,20,20);
-        add(deleteButton);
+        acaRadioButton.setBounds(170,80,100,20);
+        acaRadioButton.setFont(new Font("Calibri", Font.BOLD, 12));
+        //acaRadioButton.setText("aaaaaaaaaaaaaaaaaaaaa");
+        add(acaRadioButton);
 
 
 
