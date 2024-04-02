@@ -67,7 +67,7 @@ public class StudentPanel extends JPanel {
 
         //JTable
 
-        String[] columns = {"ID", "First Name", "Last Name"};
+        /*String[] columns = {"ID", "First Name", "Last Name"};
 
         Object[][] data = {{"1", "Chembian", "Ganeshan"}};
 
@@ -78,6 +78,8 @@ public class StudentPanel extends JPanel {
 
         jScrollPane = new JScrollPane(studentTable);
         add(jScrollPane);
+        
+         */
 
 
 
