@@ -40,10 +40,10 @@ public class SMFrame extends JFrame {
 
 
 
-    ViewPanels teacherPan = null;
+    TeacherPanel teacherPan = null;
     StudentPanel studentPan = null;
-    ViewPanels coursePan = null;
-    ViewPanels sectionPan = null;
+    CoursePanel coursePan = null;
+    SectionPanel sectionPan = null;
 
 
     public SMFrame(){
@@ -82,9 +82,7 @@ public class SMFrame extends JFrame {
         add(dropDownFile);
         //dropDownFile.addActionListener(e->changePanel());
 
-        teacherPan = new ViewPanels("teachh");
-        teacherPan.setBounds(15,40,600,630);
-        teacherPan.setBorder(BorderFactory.createLineBorder(Color.black));
+        teacherPan = new TeacherPanel();
         add(teacherPan);
         teacherPan.setVisible(false);
 
@@ -92,16 +90,11 @@ public class SMFrame extends JFrame {
         add(studentPan);
         studentPan.setVisible(true);
 
-
-        coursePan = new ViewPanels("coursess");
-        coursePan.setBounds(15,40,600,630);
-        coursePan.setBorder(BorderFactory.createLineBorder(Color.black));
+        coursePan = new CoursePanel();
         add(coursePan);
         coursePan.setVisible(false);
 
-        sectionPan = new ViewPanels("sectionss");
-        sectionPan.setBounds(15,40,600,630);
-        sectionPan.setBorder(BorderFactory.createLineBorder(Color.black));
+        sectionPan = new SectionPanel();
         add(sectionPan);
         sectionPan.setVisible(false);
 
