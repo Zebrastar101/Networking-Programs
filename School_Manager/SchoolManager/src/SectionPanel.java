@@ -7,8 +7,8 @@ public class SectionPanel extends JPanel{
     JLabel courseLabel = new JLabel("Teacher's first name: ");
     JLabel teacherLabel = new JLabel("Teacher's last name: ");
 
-    JTextField teacherFNTextField = new JTextField("");
-    JTextField teacherLNTextField = new JTextField("");
+    JComboBox<String> teachersDropDown = new JComboBox<String>();
+    JComboBox<String> coursesDropDown = new JComboBox<String>();
 
     JTable teacherTable;
 
@@ -17,10 +17,10 @@ public class SectionPanel extends JPanel{
     JButton newButton = new JButton("New");
     JButton saveButton = new JButton("Save");
     JButton deleteButton = new JButton("Delete");
-    JButton rosterButton = new JButton("Sections");
+    JButton rosterButton = new JButton("Roster");
 
 
-    public TeacherPanel() {
+    public SectionPanel() {
 
         setLayout(null);
         setBounds(15, 40, 600, 630);
@@ -30,21 +30,19 @@ public class SectionPanel extends JPanel{
         panelTitleLabel.setFont(new Font("Calibri", Font.BOLD, 23));
         add(panelTitleLabel);
 
-        teacherFNLabel.setBounds(120, 80, 250, 20);
-        teacherFNLabel.setFont(new Font("Calibri", Font.BOLD, 15));
-        add(teacherFNLabel);
+        teacherLabel.setBounds(120, 80, 250, 20);
+        teacherLabel.setFont(new Font("Calibri", Font.BOLD, 15));
+        add(teacherLabel);
 
-        teacherFNTextField.setBounds(260, 80, 230, 20);
-        teacherFNTextField.setFont(new Font("Calibri", Font.BOLD, 15));
-        add(teacherFNTextField);
+        teachersDropDown.setBounds(260, 80, 230, 20);
+        add(teachersDropDown);
 
-        teacherLNLabel.setBounds(120, 110, 250, 20);
-        teacherLNLabel.setFont(new Font("Calibri", Font.BOLD, 15));
-        add(teacherLNLabel);
+        courseLabel.setBounds(120, 110, 250, 20);
+        courseLabel.setFont(new Font("Calibri", Font.BOLD, 15));
+        add(courseLabel);
 
-        teacherLNTextField.setBounds(260, 110, 230, 20);
-        teacherLNTextField.setFont(new Font("Calibri", Font.BOLD, 15));
-        add(teacherLNTextField);
+        coursesDropDown.setBounds(260, 110, 230, 20);
+        add(coursesDropDown);
 
 
         //buttons

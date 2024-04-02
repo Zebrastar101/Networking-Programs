@@ -25,9 +25,11 @@ public class StudentPanel extends JPanel {
         setBounds(15,40,600,630);
         setBorder(BorderFactory.createLineBorder(Color.black));
 
-        Student s = new Student(Main.myConn);
+        /*Student s = new Student(Main.myConn);
         studentTable=s.getStudentTable();
         add(studentTable);
+
+         */
 
         panelTitleLabel.setBounds(15,5,100,35);
         panelTitleLabel.setFont(new Font("Calibri", Font.BOLD, 23));

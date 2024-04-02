@@ -2,8 +2,8 @@ import java.sql.*;
 import javax.swing.*;
 
 public class Main {
-   public static Connection myConn;
-    public static void main(String[] args) throws SQLException {
+    public static Connection myConn;
+    /*public static void main(String[] args) throws SQLException {
         String url="jdbc:mysql://localhost:3306/managerschool";
         String user="root";
         String password="password";
@@ -22,5 +22,10 @@ public class Main {
         }
         new SMFrame();
 
+    }
+
+     */
+    public static void main(String[] args) {
+        new SMFrame();
     }
 }

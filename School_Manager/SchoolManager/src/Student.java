@@ -5,6 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Student {
+    /*
     Connection con;
     Statement stm;
     public JTable studentTable;
@@ -45,5 +46,7 @@ public class Student {
     public JTable getStudentTable() {
         return studentTable;
     }
+
+     */
 
 }
