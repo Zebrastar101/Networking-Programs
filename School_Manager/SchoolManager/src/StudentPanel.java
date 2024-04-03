@@ -76,21 +76,7 @@ public class StudentPanel extends JPanel {
         add(scheduleButton);
 
 
-        //JTable
 
-        /*String[] columns = {"ID", "First Name", "Last Name"};
-
-        Object[][] data = {{"1", "Chembian", "Ganeshan"}};
-
-        studentTable = new JTable(data, columns);
-        studentTable.setPreferredScrollableViewportSize(new Dimension(300,300));
-        studentTable.setFillsViewportHeight(true);
-
-
-        jScrollPane = new JScrollPane(studentTable);
-        add(jScrollPane);
-        
-         */
 
 
 

@@ -1,3 +1,5 @@
+import com.mysql.cj.x.protobuf.MysqlxCrud;
+
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.sql.*;
@@ -59,5 +61,22 @@ public class Student {
     public JTable getStudentTable() {
         return studentTable;
     }
+    public JTable addNewStudent(String fn, String ln) throws SQLException {
+        stm.executeUpdate("INSERT INTO students(first_name, last_name) VALUES('"+fn+","+ln+"');");
+        studentTable=buildTable(stm.executeQuery("Select*from students"));
+        return studentTable;
+
+    }
+    public JTable deleteStudent(String fn,String ln) throws SQLException{
+        //Deleting Rows:
+        //DELETE FROM table_name WHERE comparisons;
+        //Example:
+        //DELTE FROM student WHERE student_id=6 OR last_name=’Smith’;
+        stm.executeUpdate("DELETE FROM students WHERE first_name='"+fn+"AND last_name='"+ln+";");
+        studentTable=buildTable(stm.executeQuery("Select*from students"));
+        return studentTable;
+    }
+
+
 
 }
