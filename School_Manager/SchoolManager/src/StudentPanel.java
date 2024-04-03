@@ -21,9 +21,7 @@ public class StudentPanel extends JPanel {
 
 
     public StudentPanel(){
-        Student s = new Student(Main.myConn);
-        studentTable=s.getStudentTable();
-        add(studentTable);
+
 
         setLayout(null);
         setBounds(15,40,600,630);
@@ -48,6 +46,15 @@ public class StudentPanel extends JPanel {
         studentLNTextField.setBounds(260,110,230,20);
         studentLNTextField.setFont(new Font("Calibri", Font.BOLD, 15));
         add(studentLNTextField);
+
+        Student s = new Student(Main.myConn);
+        studentTable=s.getStudentTable();
+        studentTable.setBounds(300,300,100, 100);
+        jScrollPane = new JScrollPane(studentTable);
+        add(jScrollPane);
+
+
+        add(studentTable);
 
 
         //buttons

@@ -45,6 +45,7 @@ public class Student {
         for(int r=0; r< dataArray.length;r++){
             for(int c=0; c<dataArray[0].length;c++){
                 dataArray[r][c]=data.get(r).get(c);
+                System.out.println(dataArray[r][c]);
             }
         }
 
