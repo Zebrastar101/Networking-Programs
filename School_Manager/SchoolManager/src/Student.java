@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,11 +11,11 @@ public class Student {
     ResultSet resultSet;
     public Student(Connection c){
         con =c;
-        studentTable=new JTable();
+        //studentTable=new JTable();
         try{
             stm=con.createStatement();
             stm.execute("USE managerschool");
-            resultSet=stm.executeQuery("Select*from students");
+            resultSet=stm.executeQuery("Select*from students WHERE id >=1");
             studentTable=buildTable(resultSet);
         }catch(SQLException e){
             e.printStackTrace();
@@ -49,7 +50,8 @@ public class Student {
             }
         }
 
-        JTable jTable = new JTable(dataArray, new String[]{"Student ID","First Name", "Last Name"});
+        DefaultTableModel model = new DefaultTableModel(dataArray, new String[]{"Student ID","First Name", "Last Name"});
+        JTable jTable = new JTable(model);
         return jTable;
     }
 
