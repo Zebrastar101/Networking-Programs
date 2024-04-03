@@ -1,8 +1,11 @@
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.sql.SQLException;
 
-public class SMFrame extends JFrame {
+public class SMFrame extends JFrame implements WindowListener {
 
     JLabel ViewLabel = new JLabel("View: ");
 
@@ -163,6 +166,43 @@ public class SMFrame extends JFrame {
     }
 
 
+    @Override
+    public void windowOpened(WindowEvent e) {
 
+    }
 
+    @Override
+    public void windowClosing(WindowEvent e) {
+        try {
+            Main.myConn.close();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        System.exit(0);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
+    }
 }
