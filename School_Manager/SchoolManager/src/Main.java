@@ -13,6 +13,9 @@ public class Main {
             stm.execute("CREATE DATABASE IF NOT EXISTS managerschool");
             stm.execute("USE managerschool");
             stm.execute("CREATE TABLE IF NOT EXISTS students(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
+            for(int x=1; x<4; x++){
+                stm.executeUpdate("INSERT INTO students(first_name, last_name) VALUES('"+x+"jim','"+x+"smith');");
+            }
             stm.execute("CREATE TABLE IF NOT EXISTS teachers(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
             stm.execute("CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL AUTO_INCREMENT, course_name TEXT,type TEXT, PRIMARY KEY(id))");
 
