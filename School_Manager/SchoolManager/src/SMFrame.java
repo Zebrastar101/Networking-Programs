@@ -88,11 +88,11 @@ public class SMFrame extends JFrame {
 
         studentPan = new StudentPanel();
         add(studentPan);
-        studentPan.setVisible(false);
+        studentPan.setVisible(true);
 
         coursePan = new CoursePanel();
         add(coursePan);
-        coursePan.setVisible(true);
+        coursePan.setVisible(false);
 
         sectionPan = new SectionPanel();
         add(sectionPan);
