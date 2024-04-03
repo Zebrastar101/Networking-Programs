@@ -1,7 +1,4 @@
-import com.sun.deploy.util.JVMParameters;
-
 import javax.swing.*;
-import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,7 +15,7 @@ public class Student {
             stm=con.createStatement();
             stm.execute("USE managerschool");
             resultSet=stm.executeQuery("Select*from students");
-           studentTable.setModel((TableModel) buildTable(resultSet));
+           studentTable=buildTable(resultSet);
         }catch(SQLException e){
             e.printStackTrace();
 
@@ -30,12 +27,12 @@ public class Student {
         int colNum=rs.getMetaData().getColumnCount();
         ArrayList<Object> perRow=new ArrayList<>();
         ArrayList<ArrayList<Object>> data= new ArrayList<ArrayList<Object>>();
-        /*ArrayList<String> colN= new ArrayList<>();
+        ArrayList<String> colN= new ArrayList<>();
 
-        for(int x=1; x<=colNum;x++){
+      /*  for(int x=1; x<=colNum;x++){
             colN.add((String) rs.getObject(x));
-        }*/
-        //make data
+        }
+        //make data*/
 
         while(rs.next()&&rs!=null){
 
@@ -50,7 +47,9 @@ public class Student {
                 dataArray[r][c]=data.get(r).get(c);
             }
         }
-        return new JTable((TableModel) dataArray);
+
+        JTable jTable = new JTable(dataArray, new String[]{"Student ID","First Name", "Last Name"});
+        return jTable;
     }
 
 
