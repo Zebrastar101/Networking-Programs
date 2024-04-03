@@ -4,8 +4,8 @@ import java.awt.*;
 public class SectionPanel extends JPanel{
 
     JLabel panelTitleLabel = new JLabel("Sections");
-    JLabel courseLabel = new JLabel("Teacher's first name: ");
-    JLabel teacherLabel = new JLabel("Teacher's last name: ");
+    JLabel teacherLabel = new JLabel("Teacher: ");
+    JLabel courseLabel = new JLabel("Course: ");
 
     JComboBox<String> teachersDropDown = new JComboBox<String>();
     JComboBox<String> coursesDropDown = new JComboBox<String>();
