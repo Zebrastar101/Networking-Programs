@@ -77,11 +77,7 @@ public class StudentPanel extends JPanel {
 
 
 
-
-
-
-
-
-
     }
+
+
 }

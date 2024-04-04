@@ -20,7 +20,7 @@ public class Main {
         catch(SQLException e){
             e.printStackTrace();
         }
-        new SMFrame();
+        new SMFrame(myConn);
 
     }
 

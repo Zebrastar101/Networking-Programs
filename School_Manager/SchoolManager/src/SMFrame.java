@@ -3,9 +3,15 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class SMFrame extends JFrame implements WindowListener {
+
+    Connection con;
+    Statement stm;
+
 
     JLabel ViewLabel = new JLabel("View: ");
 
@@ -49,12 +55,25 @@ public class SMFrame extends JFrame implements WindowListener {
     SectionPanel sectionPan = null;
 
 
-    public SMFrame(){
+    public SMFrame(Connection c){
         super("School Manager");
         setSize(650,720);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setResizable(false);
+
+
+        con =c;
+        //studentTable=new JTable();
+        try{
+            stm=con.createStatement();
+            stm.execute("USE managerschool");
+        }catch(SQLException e){
+            e.printStackTrace();
+
+        }
+
+
 
         ViewLabel.setBounds(15,5,100,35);
         add(ViewLabel);
@@ -83,7 +102,13 @@ public class SMFrame extends JFrame implements WindowListener {
         dropDownFile.addItem(purge);
         dropDownFile.addItem(exit);
         add(dropDownFile);
-        //dropDownFile.addActionListener(e->changePanel());
+        dropDownFile.addActionListener(e-> {
+            try {
+                motion();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         teacherPan = new TeacherPanel();
         add(teacherPan);
@@ -163,6 +188,17 @@ public class SMFrame extends JFrame implements WindowListener {
         aboutLabel.setVisible(true);
         creatorsLabel.setVisible(true);
         versionLabel.setVisible(true);
+    }
+
+    public void motion() throws SQLException {
+        if (String.valueOf(dropDownView.getSelectedItem())=="Purge") {
+            purge();
+        }
+    }
+
+    public void purge() throws SQLException {
+        stm.execute("DROP TABLE IF EXISTS students;");
+        //System.exit(0);
     }
 
 

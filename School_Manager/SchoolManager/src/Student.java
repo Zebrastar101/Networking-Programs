@@ -19,7 +19,12 @@ public class Student {
             stm=con.createStatement();
             stm.execute("USE managerschool");
             resultSet=stm.executeQuery("Select*from students WHERE id >=1");
-            studentTable=buildTable(resultSet);
+            if(resultSet==null){
+                studentTable=new JTable(new Object[][]{{"wefwef","wefwef","wefwefw"}}, new String[]{"Student ID","First Name", "Last Name"});
+            }
+            else{
+                studentTable=buildTable(resultSet);
+            }
         }catch(SQLException e){
             e.printStackTrace();
 
