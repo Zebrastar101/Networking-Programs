@@ -81,9 +81,11 @@ public class Student {
         studentTable=buildTable(stm.executeQuery("Select*from students"));
         return studentTable;
     }
-    public void purgeStudent() throws SQLException {
+    public JTable purgeStudent() throws SQLException {
         stm.execute("DROP TABLE IF EXISTS students;");
+        stm.execute("CREATE TABLE IF NOT EXISTS students(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
         studentTable=buildTable(stm.executeQuery("Select*from students"));
+        return studentTable;
     }
     public void exportStudent(){
 
