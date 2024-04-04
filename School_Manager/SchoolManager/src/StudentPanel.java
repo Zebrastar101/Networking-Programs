@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class StudentPanel extends JPanel {
 
@@ -18,6 +19,8 @@ public class StudentPanel extends JPanel {
     JButton saveButton = new JButton("Save");
     JButton deleteButton = new JButton("Delete");
     JButton scheduleButton = new JButton("Schedule");
+
+    Student s;
 
 
     public StudentPanel(){
@@ -52,6 +55,13 @@ public class StudentPanel extends JPanel {
         newButton.setBounds(120,140,70,20);
         newButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(newButton);
+        newButton.addActionListener(e-> {
+            try {
+                newStudent();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         saveButton.setBounds(210,140,70,20);
         saveButton.setFont(new Font("Calibri", Font.BOLD, 10));
@@ -69,7 +79,7 @@ public class StudentPanel extends JPanel {
 
         //JTable
 
-        Student s = new Student(Main.myConn);
+        s = new Student(Main.myConn);
         studentTable=s.getStudentTable();
         jScrollPane = new JScrollPane(studentTable);
         jScrollPane.setBounds(50,190,500, 400);
@@ -79,8 +89,8 @@ public class StudentPanel extends JPanel {
 
     }
 
-    public void newStudent(String fName, String lName){
-        //studentTable=;
+    public void newStudent() throws SQLException {
+        studentTable=s.addNewStudent("sdcsd", "sdvsdv");
     }
 
 

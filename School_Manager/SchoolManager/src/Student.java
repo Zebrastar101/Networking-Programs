@@ -19,6 +19,7 @@ public class Student {
             stm=con.createStatement();
 
             resultSet=stm.executeQuery("Select*from students WHERE id >=1");
+            //the below while loop checks if there's elements in the resultSet
             int size=0;
             while (resultSet.next()){
                 size++;
@@ -76,8 +77,8 @@ public class Student {
         return studentTable;
     }
     public JTable addNewStudent(String fn, String ln) throws SQLException {
-        stm.executeUpdate("INSERT INTO students(first_name, last_name) VALUES('"+fn+","+ln+"');");
-        studentTable=buildTable(stm.executeQuery("Select*from students"));
+        stm.executeUpdate("INSERT INTO students(first_name, last_name) VALUES('"+fn+"','"+ln+"');");
+        studentTable=buildTable(stm.executeQuery("Select*from students WHERE id >=1"));
         return studentTable;
 
     }
@@ -86,7 +87,7 @@ public class Student {
         //DELETE FROM table_name WHERE comparisons;
         //Example:
         //DELTE FROM student WHERE student_id=6 OR last_name=’Smith’;
-        stm.executeUpdate("DELETE FROM students WHERE first_name='"+fn+"AND last_name='"+ln+";");
+        stm.executeUpdate("DELETE FROM students WHERE first_name='"+fn+"'AND last_name='"+ln+"';");
         studentTable=buildTable(stm.executeQuery("Select*from students"));
         return studentTable;
     }
