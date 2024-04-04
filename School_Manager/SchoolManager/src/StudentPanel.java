@@ -21,17 +21,16 @@ public class StudentPanel extends JPanel {
 
 
     public StudentPanel(){
-
-
         setLayout(null);
         setBounds(15,40,600,630);
         setBorder(BorderFactory.createLineBorder(Color.black));
+
 
         panelTitleLabel.setBounds(15,5,100,35);
         panelTitleLabel.setFont(new Font("Calibri", Font.BOLD, 23));
         add(panelTitleLabel);
 
-        studentFNLabel.setBounds(120,80,250,20);
+        studentFNLabel.setBounds(120,80,140,20);
         studentFNLabel.setFont(new Font("Calibri", Font.BOLD, 15));
         add(studentFNLabel);
 
@@ -39,25 +38,13 @@ public class StudentPanel extends JPanel {
         studentFNTextField.setFont(new Font("Calibri", Font.BOLD, 15));
         add(studentFNTextField);
 
-        studentLNLabel.setBounds(120,110,250,20);
+        studentLNLabel.setBounds(120,110,140,20);
         studentLNLabel.setFont(new Font("Calibri", Font.BOLD, 15));
         add(studentLNLabel);
 
         studentLNTextField.setBounds(260,110,230,20);
         studentLNTextField.setFont(new Font("Calibri", Font.BOLD, 15));
         add(studentLNTextField);
-
-        Student s = new Student(Main.myConn);
-        studentTable=s.getStudentTable();
-
-        jScrollPane = new JScrollPane(studentTable);
-        jScrollPane.setBounds(50,190,500,500);
-
-
-        add(jScrollPane);
-
-
-        //add(studentTable);
 
 
         //buttons
@@ -77,6 +64,17 @@ public class StudentPanel extends JPanel {
         scheduleButton.setBounds(400,140,90,20);
         scheduleButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(scheduleButton);
+
+
+
+        //JTable
+
+        Student s = new Student(Main.myConn);
+        studentTable=s.getStudentTable();
+        jScrollPane = new JScrollPane(studentTable);
+        jScrollPane.setBounds(50,190,500, 400);
+        add(jScrollPane);
+
 
 
 

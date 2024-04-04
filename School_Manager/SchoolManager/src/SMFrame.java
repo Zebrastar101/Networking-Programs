@@ -1,8 +1,11 @@
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.sql.SQLException;
 
-public class SMFrame extends JFrame {
+public class SMFrame extends JFrame implements WindowListener {
 
     JLabel ViewLabel = new JLabel("View: ");
 
@@ -40,10 +43,10 @@ public class SMFrame extends JFrame {
 
 
 
-    ViewPanels teacherPan = null;
+    TeacherPanel teacherPan = null;
     StudentPanel studentPan = null;
-    ViewPanels coursePan = null;
-    ViewPanels sectionPan = null;
+    CoursePanel coursePan = null;
+    SectionPanel sectionPan = null;
 
 
     public SMFrame(){
@@ -82,9 +85,7 @@ public class SMFrame extends JFrame {
         add(dropDownFile);
         //dropDownFile.addActionListener(e->changePanel());
 
-        teacherPan = new ViewPanels("teachh");
-        teacherPan.setBounds(15,40,600,630);
-        teacherPan.setBorder(BorderFactory.createLineBorder(Color.black));
+        teacherPan = new TeacherPanel();
         add(teacherPan);
         teacherPan.setVisible(false);
 
@@ -92,16 +93,11 @@ public class SMFrame extends JFrame {
         add(studentPan);
         studentPan.setVisible(true);
 
-
-        coursePan = new ViewPanels("coursess");
-        coursePan.setBounds(15,40,600,630);
-        coursePan.setBorder(BorderFactory.createLineBorder(Color.black));
+        coursePan = new CoursePanel();
         add(coursePan);
         coursePan.setVisible(false);
 
-        sectionPan = new ViewPanels("sectionss");
-        sectionPan.setBounds(15,40,600,630);
-        sectionPan.setBorder(BorderFactory.createLineBorder(Color.black));
+        sectionPan = new SectionPanel();
         add(sectionPan);
         sectionPan.setVisible(false);
 
@@ -170,6 +166,43 @@ public class SMFrame extends JFrame {
     }
 
 
+    @Override
+    public void windowOpened(WindowEvent e) {
 
+    }
 
+    @Override
+    public void windowClosing(WindowEvent e) {
+        try {
+            Main.myConn.close();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        System.exit(0);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
+    }
 }

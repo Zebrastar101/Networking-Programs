@@ -14,12 +14,12 @@ public class Student {
     ResultSet resultSet;
     public Student(Connection c){
         con =c;
-        studentTable=new JTable();
+        //studentTable=new JTable();
         try{
             stm=con.createStatement();
             stm.execute("USE managerschool");
-            resultSet=stm.executeQuery("Select*from students");
-           studentTable=buildTable(resultSet);
+            resultSet=stm.executeQuery("Select*from students WHERE id >=1");
+            studentTable=buildTable(resultSet);
         }catch(SQLException e){
             e.printStackTrace();
 
@@ -38,12 +38,12 @@ public class Student {
         }
         //make data*/
 
-        while(rs.next()&&rs!=null){
-
+        while(rs!=null && rs.next()){
             for(int z=1; z<=colNum; z++){
                 perRow.add(rs.getObject(z));
             }
             data.add(perRow);
+
             perRow=new ArrayList<>();
         }
         Object[][] dataArray= new Object[data.size()][data.get(0).size()];
