@@ -3,6 +3,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Student {
     Connection con;
@@ -35,21 +36,24 @@ public class Student {
         }
         //make data*/
 
-        while(rs.next()&&rs!=null){
+        while(rs!=null && rs.next()){
 
             for(int z=1; z<=colNum; z++){
                 perRow.add(rs.getObject(z));
             }
             data.add(perRow);
+            perRow = new ArrayList<>();
         }
+        System.out.println(data);
         Object[][] dataArray= new Object[data.size()][data.get(0).size()];
         for(int r=0; r< dataArray.length;r++){
             for(int c=0; c<dataArray[0].length;c++){
-                dataArray[r][c]=data.get(r).get(c);
-                System.out.println(dataArray[r][c]);
+                dataArray[r] = data.get(r).toArray();
+                //dataArray[r][c]=data.get(r).get(c);
             }
         }
 
+        System.out.println(Arrays.deepToString(dataArray));
         DefaultTableModel model = new DefaultTableModel(dataArray, new String[]{"Student ID","First Name", "Last Name"});
         JTable jTable = new JTable(model);
         return jTable;
