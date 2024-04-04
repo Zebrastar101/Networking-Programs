@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public class SMFrame extends JFrame implements WindowListener {
 
-    Connection con;
+    static Connection con;
     Statement stm;
 
 
@@ -63,7 +63,7 @@ public class SMFrame extends JFrame implements WindowListener {
         setResizable(false);
 
 
-        con =c;
+        con=c;
         //studentTable=new JTable();
         try{
             stm=con.createStatement();
@@ -191,14 +191,14 @@ public class SMFrame extends JFrame implements WindowListener {
     }
 
     public void motion() throws SQLException {
-        if (String.valueOf(dropDownView.getSelectedItem())=="Purge") {
+        if (String.valueOf(dropDownFile.getSelectedItem())=="Purge") {
             purge();
         }
     }
 
     public void purge() throws SQLException {
         stm.execute("DROP TABLE IF EXISTS students;");
-        //System.exit(0);
+        System.exit(0);
     }
 
 
