@@ -1,6 +1,7 @@
 import com.mysql.cj.x.protobuf.MysqlxCrud;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,14 +18,14 @@ public class Student {
             stm=con.createStatement();
             stm.execute("USE managerschool");
             resultSet=stm.executeQuery("Select*from students");
-           studentTable=buildTable(resultSet);
+           studentTable.setModel(buildTable(resultSet));
         }catch(SQLException e){
             e.printStackTrace();
 
         }
 
     }
-    public JTable buildTable(ResultSet rs) throws SQLException {
+    public DefaultTableModel buildTable(ResultSet rs) throws SQLException {
         //make colums
         int colNum=rs.getMetaData().getColumnCount();
         ArrayList<Object> perRow=new ArrayList<>();
@@ -51,7 +52,7 @@ public class Student {
             }
         }
 
-        JTable jTable = new JTable(dataArray, new String[]{"Student ID","First Name", "Last Name"});
+        DefaultTableModel jTable = new DefaultTableModel(dataArray, new String[]{"Student ID","First Name", "Last Name"});
         return jTable;
     }
 
@@ -63,7 +64,7 @@ public class Student {
     }
     public JTable addNewStudent(String fn, String ln) throws SQLException {
         stm.executeUpdate("INSERT INTO students(first_name, last_name) VALUES('"+fn+","+ln+"');");
-        studentTable=buildTable(stm.executeQuery("Select*from students"));
+        studentTable.setModel(buildTable(stm.executeQuery("Select*from students")));
         return studentTable;
 
     }
@@ -73,7 +74,7 @@ public class Student {
         //Example:
         //DELTE FROM student WHERE student_id=6 OR last_name=’Smith’;
         stm.executeUpdate("DELETE FROM students WHERE first_name='"+fn+"AND last_name='"+ln+";");
-        studentTable=buildTable(stm.executeQuery("Select*from students"));
+        studentTable.setModel(buildTable(stm.executeQuery("Select*from students")));
         return studentTable;
     }
 
