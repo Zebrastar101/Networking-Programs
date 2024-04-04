@@ -82,9 +82,10 @@ public class Student {
     }
     public void purgeStudent() throws SQLException {
         stm.execute("DROP TABLE IF EXISTS students;");
+        studentTable=buildTable(stm.executeQuery("Select*from students"));
     }
     public void exportStudent(){
-        
+
     }
 
 
