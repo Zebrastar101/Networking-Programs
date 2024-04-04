@@ -67,7 +67,6 @@ public class SMFrame extends JFrame implements WindowListener {
         //studentTable=new JTable();
         try{
             stm=con.createStatement();
-            stm.execute("USE managerschool");
         }catch(SQLException e){
             e.printStackTrace();
 

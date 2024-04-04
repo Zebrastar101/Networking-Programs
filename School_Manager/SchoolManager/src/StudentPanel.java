@@ -79,5 +79,9 @@ public class StudentPanel extends JPanel {
 
     }
 
+    public void newStudent(String fName, String lName){
+        //studentTable=;
+    }
+
 
 }

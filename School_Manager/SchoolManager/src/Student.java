@@ -24,7 +24,7 @@ public class Student {
                 size++;
             }
             if(size==0){
-                studentTable=new JTable(new Object[][]{{"wefwef","wefwef","wefwefw"}}, new String[]{"Student ID","First Name", "Last Name"});
+                studentTable=new JTable(new Object[0][0], new String[]{"Student ID","First Name", "Last Name"});
             }
             else{
                 studentTable=buildTable(resultSet);
