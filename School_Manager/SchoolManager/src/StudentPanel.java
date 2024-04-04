@@ -49,12 +49,15 @@ public class StudentPanel extends JPanel {
 
         Student s = new Student(Main.myConn);
         studentTable=s.getStudentTable();
-        studentTable.setBounds(50,190,500, 500);
+
         jScrollPane = new JScrollPane(studentTable);
+        jScrollPane.setBounds(50,190,500,500);
+
+
         add(jScrollPane);
 
 
-        add(studentTable);
+        //add(studentTable);
 
 
         //buttons

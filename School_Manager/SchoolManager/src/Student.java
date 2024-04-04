@@ -5,6 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Student {
     Connection con;
@@ -18,14 +19,14 @@ public class Student {
             stm=con.createStatement();
             stm.execute("USE managerschool");
             resultSet=stm.executeQuery("Select*from students");
-           studentTable.setModel(buildTable(resultSet));
+           studentTable=buildTable(resultSet);
         }catch(SQLException e){
             e.printStackTrace();
 
         }
 
     }
-    public DefaultTableModel buildTable(ResultSet rs) throws SQLException {
+    public JTable buildTable(ResultSet rs) throws SQLException {
         //make colums
         int colNum=rs.getMetaData().getColumnCount();
         ArrayList<Object> perRow=new ArrayList<>();
@@ -43,16 +44,18 @@ public class Student {
                 perRow.add(rs.getObject(z));
             }
             data.add(perRow);
+            perRow=new ArrayList<>();
         }
         Object[][] dataArray= new Object[data.size()][data.get(0).size()];
         for(int r=0; r< dataArray.length;r++){
             for(int c=0; c<dataArray[0].length;c++){
                 dataArray[r][c]=data.get(r).get(c);
-                System.out.println(dataArray[r][c]);
+
             }
         }
+        System.out.println(Arrays.deepToString(dataArray));
 
-        DefaultTableModel jTable = new DefaultTableModel(dataArray, new String[]{"Student ID","First Name", "Last Name"});
+        JTable jTable = new JTable(dataArray, new String[]{"Student ID","First Name", "Last Name"});
         return jTable;
     }
 
@@ -64,7 +67,7 @@ public class Student {
     }
     public JTable addNewStudent(String fn, String ln) throws SQLException {
         stm.executeUpdate("INSERT INTO students(first_name, last_name) VALUES('"+fn+","+ln+"');");
-        studentTable.setModel(buildTable(stm.executeQuery("Select*from students")));
+        studentTable=buildTable(stm.executeQuery("Select*from students"));
         return studentTable;
 
     }
@@ -74,7 +77,7 @@ public class Student {
         //Example:
         //DELTE FROM student WHERE student_id=6 OR last_name=’Smith’;
         stm.executeUpdate("DELETE FROM students WHERE first_name='"+fn+"AND last_name='"+ln+";");
-        studentTable.setModel(buildTable(stm.executeQuery("Select*from students")));
+        studentTable=buildTable(stm.executeQuery("Select*from students"));
         return studentTable;
     }
 
