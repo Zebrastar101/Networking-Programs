@@ -90,7 +90,7 @@ public class StudentPanel extends JPanel {
     }
 
     public void newStudent() throws SQLException {
-        studentTable=s.addNewStudent("sdcsd", "sdvsdv");
+        studentTable=s.addStudent("sdcsd", "sdvsdv");
     }
 
 

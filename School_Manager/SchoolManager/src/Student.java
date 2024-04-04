@@ -17,11 +17,10 @@ public class Student {
         //studentTable=new JTable();
         try{
             stm=con.createStatement();
-
             resultSet=stm.executeQuery("Select*from students WHERE id >=1");
             //the below while loop checks if there's elements in the resultSet
             int size=0;
-            while (resultSet.next()){
+            while (resultSet!=null && resultSet.next()){
                 size++;
             }
             if(size==0){
@@ -54,6 +53,7 @@ public class Student {
             }
             data.add(perRow);
 
+
             perRow=new ArrayList<>();
         }
         Object[][] dataArray= new Object[data.size()][data.get(0).size()];
@@ -66,8 +66,7 @@ public class Student {
         }
         System.out.println(Arrays.deepToString(dataArray));
 
-        JTable jTable = new JTable(dataArray, new String[]{"Student ID","First Name", "Last Name"});
-        return jTable;
+        return new JTable(dataArray, new String[]{"Student ID","First Name", "Last Name"});
     }
 
 
@@ -76,7 +75,7 @@ public class Student {
     public JTable getStudentTable() {
         return studentTable;
     }
-    public JTable addNewStudent(String fn, String ln) throws SQLException {
+    public JTable addStudent(String fn, String ln) throws SQLException {
         stm.executeUpdate("INSERT INTO students(first_name, last_name) VALUES('"+fn+"','"+ln+"');");
         studentTable=buildTable(stm.executeQuery("Select*from students WHERE id >=1"));
         return studentTable;
