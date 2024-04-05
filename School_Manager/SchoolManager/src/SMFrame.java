@@ -191,14 +191,11 @@ public class SMFrame extends JFrame implements WindowListener {
 
     public void motion() throws SQLException {
         if (String.valueOf(dropDownFile.getSelectedItem())=="Purge") {
-            purge();
+            //purge();
         }
     }
 
-    public void purge() throws SQLException {
-        stm.execute("DROP TABLE IF EXISTS students;");
-        System.exit(0);
-    }
+
 
 
     @Override

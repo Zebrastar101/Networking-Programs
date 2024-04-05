@@ -57,7 +57,7 @@ public class StudentPanel extends JPanel {
         add(newButton);
         newButton.addActionListener(e-> {
             try {
-                newStudent();
+                newStudent(studentFNTextField.getText(), studentLNTextField.getText());
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
@@ -89,9 +89,11 @@ public class StudentPanel extends JPanel {
 
     }
 
-    public void newStudent() throws SQLException {
-        studentTable=s.addStudent("sdcsd", "sdvsdv");
+    public void newStudent(String fName, String lName) throws SQLException {
+        studentTable=s.addStudent(fName, lName);
+        jScrollPane.setViewportView(studentTable);
     }
+
 
 
 }

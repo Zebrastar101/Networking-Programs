@@ -19,16 +19,8 @@ public class Student {
             stm=con.createStatement();
             resultSet=stm.executeQuery("Select*from students WHERE id >=1");
             //the below while loop checks if there's elements in the resultSet
-            int size=0;
-            while (resultSet!=null && resultSet.next()){
-                size++;
-            }
-            if(size==0){
-                studentTable=new JTable(new Object[0][0], new String[]{"Student ID","First Name", "Last Name"});
-            }
-            else{
-                studentTable=buildTable(resultSet);
-            }
+            studentTable=buildTable(resultSet);
+
         }catch(SQLException e){
             e.printStackTrace();
 
