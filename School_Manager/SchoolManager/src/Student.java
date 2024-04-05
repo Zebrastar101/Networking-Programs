@@ -78,12 +78,14 @@ public class Student {
         return studentTable;
 
     }
-    public JTable deleteStudent(String fn,String ln) throws SQLException{
+    public JTable deleteStudent(int id) throws SQLException{
         //Deleting Rows:
         //DELETE FROM table_name WHERE comparisons;
         //Example:
         //DELTE FROM student WHERE student_id=6 OR last_name=’Smith’;
-        stm.executeUpdate("DELETE FROM students WHERE first_name='"+fn+"'AND last_name='"+ln+"';");
+
+        stm.executeUpdate("DELETE FROM students WHERE id="+id+";");
+
         studentTable=buildTable(stm.executeQuery("Select*from students"));
         return studentTable;
     }
@@ -96,8 +98,28 @@ public class Student {
     public void exportStudent(){
 
     }
+    
 
+    public JTable saveStudent(String fn, String ln, int id) throws SQLException {
+        if(fn.length()==0 &&ln.length()!=0){
+            stm.executeUpdate("UPDATE student SET last_name='"+ln+"' WHERE student_id="+id+";");
+            studentTable=buildTable(stm.executeQuery("Select*from students"));
+            return studentTable;
+        }
+        else if(fn.length()!=0 &&ln.length()==0){
+            stm.executeUpdate("UPDATE student SET first_name='"+fn+"' WHERE student_id="+id+";");
+            studentTable=buildTable(stm.executeQuery("Select*from students"));
+            return studentTable;
+        }
+        else if(fn.length()!=0 &&ln.length()!=0){
+            stm.executeUpdate("UPDATE student SET first_name='"+fn+"' WHERE student_id="+id+";");
+            stm.executeUpdate("UPDATE student SET last_name='"+ln+"' WHERE student_id="+id+";");
+            studentTable=buildTable(stm.executeQuery("Select*from students"));
+            return studentTable;
+        }
+        return studentTable;
 
+    }
 
 
 
