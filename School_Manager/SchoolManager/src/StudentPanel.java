@@ -92,6 +92,8 @@ public class StudentPanel extends JPanel {
     public void newStudent(String fName, String lName) throws SQLException {
         studentTable=s.addStudent(fName, lName);
         jScrollPane.setViewportView(studentTable);
+        studentFNTextField.setText("");
+        studentLNTextField.setText("");
     }
 
     public void delStudent(String fName, String lName) throws SQLException {
