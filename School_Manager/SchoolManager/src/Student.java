@@ -18,6 +18,7 @@ public class Student {
         try{
             stm=con.createStatement();
             resultSet=stm.executeQuery("Select*from students WHERE id >=1");
+
             //the below while loop checks if there's elements in the resultSet
             studentTable=buildTable(resultSet);
 
@@ -48,17 +49,21 @@ public class Student {
 
             perRow=new ArrayList<>();
         }
-        Object[][] dataArray= new Object[data.size()][data.get(0).size()];
-        for(int r=0; r< dataArray.length;r++){
-            for(int c=0; c<dataArray[0].length;c++){
-                dataArray[r] = data.get(r).toArray();
-                //dataArray[r][c]=data.get(r).get(c);
+        if(data.size()!=0){
+            Object[][] dataArray= new Object[data.size()][data.get(0).size()];
+            for(int r=0; r< dataArray.length;r++){
+                for(int c=0; c<dataArray[0].length;c++){
+                    dataArray[r] = data.get(r).toArray();
+                    //dataArray[r][c]=data.get(r).get(c);
 
+                }
             }
+            System.out.println(Arrays.deepToString(dataArray));
+            return new JTable(dataArray, new String[]{"Student ID","First Name", "Last Name"});
         }
-        System.out.println(Arrays.deepToString(dataArray));
 
-        return new JTable(dataArray, new String[]{"Student ID","First Name", "Last Name"});
+
+        return new JTable(new Object[0][0], new String[]{"Student ID","First Name", "Last Name"});
     }
 
 

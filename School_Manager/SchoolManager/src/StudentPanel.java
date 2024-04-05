@@ -94,6 +94,10 @@ public class StudentPanel extends JPanel {
         jScrollPane.setViewportView(studentTable);
     }
 
+    public void purge() throws SQLException {
+        s.purgeStudent();
+    }
+
 
 
 }
