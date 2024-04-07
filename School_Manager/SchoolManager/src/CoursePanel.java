@@ -120,15 +120,12 @@ public class CoursePanel extends JPanel {
         if(!courseTextField.getText().isEmpty() && (acaRadioButton.isSelected() || KAPRadioButton.isSelected() || APRadioButton.isSelected())){
             if(acaRadioButton.isSelected()){
                 courseTable=c.addCourse(course, "Academic");
-                acaRadioButton.setSelected(false);
             }
             else if (KAPRadioButton.isSelected()) {
                 courseTable=c.addCourse(course, "KAP");
-                KAPRadioButton.setSelected(false);
             }
             else{
                 courseTable=c.addCourse(course, "AP");
-                APRadioButton.setSelected(false);
             }
             jScrollPane.setViewportView(courseTable);
             courseTextField.setText("");
