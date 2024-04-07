@@ -60,6 +60,13 @@ public class CoursePanel extends JPanel {
         newButton.setBounds(140,140,70,20);
         newButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(newButton);
+        newButton.addActionListener(e -> {
+            try {
+                newCourse(courseTextField.getText());
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         saveButton.setBounds(260,140,70,20);
         saveButton.setFont(new Font("Calibri", Font.BOLD, 10));
