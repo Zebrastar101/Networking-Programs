@@ -1,29 +1,117 @@
+import com.mysql.cj.x.protobuf.MysqlxCrud;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Course {
-    private int courseID;
-    private String name;
-    private String type;
-    public Course(int id, String first_name, String last_name){
-        this.courseID=id;
-        this.name=first_name;
-        this.type=last_name;
+    Connection con;
+    Statement stm;
+    public JTable courseTable;
+    ResultSet resultSet;
+    public Course(Connection c){
+        con =c;
+        //courseTable=new JTable();
+        try{
+            stm=con.createStatement();
+            resultSet=stm.executeQuery("Select*from courses WHERE id >=1");
+
+            //the below while loop checks if there's elements in the resultSet
+            courseTable=buildTable(resultSet);
+
+        }catch(SQLException e){
+            e.printStackTrace();
+
+        }
+
     }
-    public int getCourseID(){
-        return this.courseID;
+    public JTable buildTable(ResultSet rs) throws SQLException {
+        //make colums
+        int colNum=rs.getMetaData().getColumnCount();
+        ArrayList<Object> perRow=new ArrayList<>();
+        ArrayList<ArrayList<Object>> data= new ArrayList<ArrayList<Object>>();
+        ArrayList<String> colN= new ArrayList<>();
+
+      /*  for(int x=1; x<=colNum;x++){
+            colN.add((String) rs.getObject(x));
+        }
+        //make data*/
+
+        while(rs!=null && rs.next()){
+            for(int z=1; z<=colNum; z++){
+                perRow.add(rs.getObject(z));
+            }
+            data.add(perRow);
+
+
+            perRow=new ArrayList<>();
+        }
+        if(data.size()!=0){
+            Object[][] dataArray= new Object[data.size()][data.get(0).size()];
+            for(int r=0; r< dataArray.length;r++){
+                for(int c=0; c<dataArray[0].length;c++){
+                    dataArray[r] = data.get(r).toArray();
+                    //dataArray[r][c]=data.get(r).get(c);
+
+                }
+            }
+            System.out.println(Arrays.deepToString(dataArray));
+            return makeJTable(dataArray);
+        }
+
+
+        return makeJTable(new Object[0][0]);
     }
 
-    public String getName(){
-        return this.name;
+    public JTable makeJTable(Object[][] dataArray){
+        DefaultTableModel tableModel = new DefaultTableModel(dataArray, new String[]{"Student ID","First Name", "Last Name"}) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+        };
+
+        JTable table = new JTable();
+        table.setModel(tableModel);
+        table. getTableHeader().setReorderingAllowed(false);
+
+        return table;
     }
 
-    public String getType() {
-        return getType();
+
+
+
+    public JTable getcourseTable() {
+        return courseTable;
+    }
+    public JTable addStudent(String fn, String ln) throws SQLException {
+        stm.executeUpdate("INSERT INTO courses(first_name, last_name) VALUES('"+fn+"','"+ln+"');");
+        courseTable=buildTable(stm.executeQuery("Select*from courses WHERE id >=1"));
+        return courseTable;
+
+    }
+    public JTable deleteStudent(String fn,String ln) throws SQLException{
+        stm.executeUpdate("DELETE FROM courses WHERE first_name='"+fn+"'AND last_name='"+ln+"';");
+        courseTable=buildTable(stm.executeQuery("Select*from courses"));
+        return courseTable;
+    }
+    public JTable purgeStudent() throws SQLException {
+        stm.execute("DROP TABLE IF EXISTS courses;");
+        stm.execute("CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
+        courseTable=buildTable(stm.executeQuery("Select*from courses"));
+        return courseTable;
+    }
+    public void exportStudent(){
+
     }
 
-    public void setName(String first_name) {
-        this.name = first_name;
-    }
 
-    public void setLast_name(String last_name) {
-        this.type = last_name;
-    }
+
+
+
 }
