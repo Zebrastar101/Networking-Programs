@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 public class CoursePanel extends JPanel {
 
@@ -108,7 +109,29 @@ public class CoursePanel extends JPanel {
 
     }
 
+    public void newCourse(String course) throws SQLException {
+        if(!courseTextField.getText().isEmpty() && (acaRadioButton.isSelected() || KAPRadioButton.isSelected() || APRadioButton.isSelected())){
+            if(acaRadioButton.isSelected()){
+                courseTable=c.addCourse(course, "Academic");
+                acaRadioButton.setSelected(false);
+            }
+            else if (KAPRadioButton.isSelected()) {
+                courseTable=c.addCourse(course, "KAP");
+                KAPRadioButton.setSelected(false);
+            }
+            else{
+                courseTable=c.addCourse(course, "AP");
+                APRadioButton.setSelected(false);
+            }
+            jScrollPane.setViewportView(courseTable);
+            courseTextField.setText("");
 
+        }
+        else{
+            int errorMessage = JOptionPane.showConfirmDialog(null, "Course name and type is needed", "Error", JOptionPane.OK_CANCEL_OPTION);
+        }
+
+    }
 
 
 }
