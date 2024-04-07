@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TeacherPanel extends JPanel{
 
@@ -18,6 +20,8 @@ public class TeacherPanel extends JPanel{
     JButton saveButton = new JButton("Save");
     JButton deleteButton = new JButton("Delete");
     JButton sectionsButton = new JButton("Sections");
+
+    Teacher t;
 
 
     public TeacherPanel() {
@@ -64,5 +68,21 @@ public class TeacherPanel extends JPanel{
         sectionsButton.setBounds(400, 140, 90, 20);
         sectionsButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(sectionsButton);
+
+
+        t = new Teacher(Main.myConn);
+        teacherTable=t.getTeacherTable();
+        //below from https://www.tabnine.com/code/java/methods/javax.swing.JTable/getSelectedRow
+        teacherTable.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                String firstName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 1);
+                String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
+                teacherFNTextField.setText(firstName);
+                teacherLNTextField.setText(lastName);
+            }
+        });
+        jScrollPane = new JScrollPane(teacherTable);
+        jScrollPane.setBounds(50,190,500, 400);
+        add(jScrollPane);
     }
 }
