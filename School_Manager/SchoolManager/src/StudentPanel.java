@@ -107,6 +107,14 @@ public class StudentPanel extends JPanel {
             jScrollPane.setViewportView(studentTable);
             studentFNTextField.setText("");
             studentLNTextField.setText("");
+            studentTable.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    String firstName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 1);
+                    String lastName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 2);
+                    studentFNTextField.setText(firstName);
+                    studentLNTextField.setText(lastName);
+                }
+            });
         }
         else{
             int errorMessage = JOptionPane.showConfirmDialog(null, "Both first and last name are needed", "Error", JOptionPane.OK_CANCEL_OPTION);
@@ -114,7 +122,7 @@ public class StudentPanel extends JPanel {
 
     }
 
-    public void delStudent(String fName, String lName) throws SQLException {
+    public void delStudent(String fName, String lName, int id) throws SQLException {
 
     }
 
