@@ -95,12 +95,12 @@ public class Teacher  {
         return teacherTable;
 
     }
-    public JTable deleteStudent(String fn,String ln) throws SQLException{
+    public JTable deleteTeacher(String fn,String ln) throws SQLException{
         stm.executeUpdate("DELETE FROM teachers WHERE first_name='"+fn+"'AND last_name='"+ln+"';");
         teacherTable=buildTable(stm.executeQuery("Select*from teachers"));
         return teacherTable;
     }
-    public JTable purgeStudent() throws SQLException {
+    public JTable purgeTeacher() throws SQLException {
         stm.execute("DROP TABLE IF EXISTS teachers;");
         stm.execute("CREATE TABLE IF NOT EXISTS teachers(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
         teacherTable=buildTable(stm.executeQuery("Select*from teachers"));
