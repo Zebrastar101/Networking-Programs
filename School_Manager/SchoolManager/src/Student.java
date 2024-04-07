@@ -62,11 +62,28 @@ public class Student {
                 }
             }
             System.out.println(Arrays.deepToString(dataArray));
-            return new JTable(dataArray, new String[]{"Student ID","First Name", "Last Name"});
+            return makeJTable(dataArray);
         }
 
 
-        return new JTable(new Object[0][0], new String[]{"Student ID","First Name", "Last Name"});
+        return makeJTable(new Object[0][0]);
+    }
+
+    public JTable makeJTable(Object[][] dataArray){
+        DefaultTableModel tableModel = new DefaultTableModel(dataArray, new String[]{"Student ID","First Name", "Last Name"}) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+        };
+
+        JTable table = new JTable();
+        table.setModel(tableModel);
+        table. getTableHeader().setReorderingAllowed(false);
+
+        return table;
     }
 
 

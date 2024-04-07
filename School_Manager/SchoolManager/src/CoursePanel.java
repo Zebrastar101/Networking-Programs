@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 public class CoursePanel extends JPanel {
 
@@ -9,7 +12,7 @@ public class CoursePanel extends JPanel {
     JTextField courseTextField = new JTextField("");
 
 
-    JTable studentTable;
+    JTable courseTable;
 
     JScrollPane jScrollPane;
 
@@ -22,6 +25,10 @@ public class CoursePanel extends JPanel {
     JRadioButton acaRadioButton = new JRadioButton("Academic");
     JRadioButton KAPRadioButton = new JRadioButton("KAP");
     JRadioButton APRadioButton = new JRadioButton("AP");
+
+    ButtonGroup G = new ButtonGroup();
+
+    Course c;
 
 
 
@@ -53,6 +60,13 @@ public class CoursePanel extends JPanel {
         newButton.setBounds(140,140,70,20);
         newButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(newButton);
+        newButton.addActionListener(e -> {
+            try {
+                newCourse(courseTextField.getText());
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         saveButton.setBounds(260,140,70,20);
         saveButton.setFont(new Font("Calibri", Font.BOLD, 10));
@@ -65,7 +79,6 @@ public class CoursePanel extends JPanel {
 
 
         //radioButtons
-
         acaRadioButton.setBounds(210,80,80,20);
         acaRadioButton.setFont(new Font("Calibri", Font.BOLD, 12));
         add(acaRadioButton);
@@ -78,32 +91,52 @@ public class CoursePanel extends JPanel {
         APRadioButton.setFont(new Font("Calibri", Font.BOLD, 12));
         add(APRadioButton);
 
+        G.add(acaRadioButton);
+        G.add(KAPRadioButton);
+        G.add(APRadioButton);
 
 
-
-
-
-
-        //JTable
-
-        /*String[] columns = {"ID", "First Name", "Last Name"};
-
-        Object[][] data = {{"1", "Chembian", "Ganeshan"}};
-
-        studentTable = new JTable(data, columns);
-        studentTable.setPreferredScrollableViewportSize(new Dimension(300,300));
-        studentTable.setFillsViewportHeight(true);
-
-
-        jScrollPane = new JScrollPane(studentTable);
+        c = new Course(Main.myConn);
+        courseTable=c.getCourseTable();
+        //below from https://www.tabnine.com/code/java/methods/javax.swing.JTable/getSelectedRow
+        courseTable.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                String courseName = (String) courseTable.getValueAt(courseTable.getSelectedRow() , 1);
+                String type = (String) courseTable.getValueAt(courseTable.getSelectedRow() , 2);
+                courseTextField.setText(courseName);
+                //set the type RadioButtons
+            }
+        });
+        jScrollPane = new JScrollPane(courseTable);
+        jScrollPane.setBounds(50,190,500, 400);
         add(jScrollPane);
-
-         */
-
 
 
 
 
     }
+
+    public void newCourse(String course) throws SQLException {
+        if(!courseTextField.getText().isEmpty() && (acaRadioButton.isSelected() || KAPRadioButton.isSelected() || APRadioButton.isSelected())){
+            if(acaRadioButton.isSelected()){
+                courseTable=c.addCourse(course, "Academic");
+            }
+            else if (KAPRadioButton.isSelected()) {
+                courseTable=c.addCourse(course, "KAP");
+            }
+            else{
+                courseTable=c.addCourse(course, "AP");
+            }
+            jScrollPane.setViewportView(courseTable);
+            courseTextField.setText("");
+
+        }
+        else{
+            int errorMessage = JOptionPane.showConfirmDialog(null, "Course name and type is needed", "Error", JOptionPane.OK_CANCEL_OPTION);
+        }
+
+    }
+
+
 }
 

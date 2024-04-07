@@ -115,7 +115,7 @@ public class SMFrame extends JFrame implements WindowListener {
 
         studentPan = new StudentPanel();
         add(studentPan);
-        studentPan.setVisible(true);
+        studentPan.setVisible(false);
 
         coursePan = new CoursePanel();
         add(coursePan);
@@ -192,6 +192,7 @@ public class SMFrame extends JFrame implements WindowListener {
     public void motion() throws SQLException {
         if (String.valueOf(dropDownFile.getSelectedItem())=="Purge") {
             studentPan.purge();
+            System.exit(0);
         }
     }
 

@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.SQLException;
 
 public class StudentPanel extends JPanel {
@@ -81,6 +84,15 @@ public class StudentPanel extends JPanel {
 
         s = new Student(Main.myConn);
         studentTable=s.getStudentTable();
+        //below from https://www.tabnine.com/code/java/methods/javax.swing.JTable/getSelectedRow
+        studentTable.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                String firstName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 1);
+                String lastName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 2);
+                studentFNTextField.setText(firstName);
+                studentLNTextField.setText(lastName);
+            }
+        });
         jScrollPane = new JScrollPane(studentTable);
         jScrollPane.setBounds(50,190,500, 400);
         add(jScrollPane);
@@ -90,8 +102,16 @@ public class StudentPanel extends JPanel {
     }
 
     public void newStudent(String fName, String lName) throws SQLException {
-        studentTable=s.addStudent(fName, lName);
-        jScrollPane.setViewportView(studentTable);
+        if(!studentFNTextField.getText().isEmpty() && !studentLNTextField.getText().isEmpty()){
+            studentTable=s.addStudent(fName, lName);
+            jScrollPane.setViewportView(studentTable);
+            studentFNTextField.setText("");
+            studentLNTextField.setText("");
+        }
+        else{
+            int errorMessage = JOptionPane.showConfirmDialog(null, "Both first and last name are needed", "Error", JOptionPane.OK_CANCEL_OPTION);
+        }
+
     }
 
     public void delStudent(String fName, String lName) throws SQLException {
