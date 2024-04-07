@@ -84,8 +84,6 @@ public class Course {
     }
 
 
-
-
     public JTable getCourseTable() {
         return courseTable;
     }

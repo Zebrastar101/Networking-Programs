@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class CoursePanel extends JPanel {
 
@@ -9,7 +11,7 @@ public class CoursePanel extends JPanel {
     JTextField courseTextField = new JTextField("");
 
 
-    JTable studentTable;
+    JTable courseTable;
 
     JScrollPane jScrollPane;
 
@@ -24,6 +26,8 @@ public class CoursePanel extends JPanel {
     JRadioButton APRadioButton = new JRadioButton("AP");
 
     ButtonGroup G = new ButtonGroup();
+
+    Course c;
 
 
 
@@ -67,7 +71,6 @@ public class CoursePanel extends JPanel {
 
 
         //radioButtons
-
         acaRadioButton.setBounds(210,80,80,20);
         acaRadioButton.setFont(new Font("Calibri", Font.BOLD, 12));
         add(acaRadioButton);
@@ -85,12 +88,28 @@ public class CoursePanel extends JPanel {
         G.add(APRadioButton);
 
 
-
-
+        c = new Course(Main.myConn);
+        courseTable=c.getCourseTable();
+        //below from https://www.tabnine.com/code/java/methods/javax.swing.JTable/getSelectedRow
+        courseTable.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                String courseName = (String) courseTable.getValueAt(courseTable.getSelectedRow() , 1);
+                String type = (String) courseTable.getValueAt(courseTable.getSelectedRow() , 2);
+                courseTextField.setText(courseName);
+                //set the type RadioButtons
+            }
+        });
+        jScrollPane = new JScrollPane(courseTable);
+        jScrollPane.setBounds(50,190,500, 400);
+        add(jScrollPane);
 
 
 
 
     }
+
+
+
+
 }
 
