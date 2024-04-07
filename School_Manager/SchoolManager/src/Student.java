@@ -3,9 +3,12 @@ import com.mysql.cj.x.protobuf.MysqlxCrud;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Student {
     Connection con;
@@ -85,7 +88,6 @@ public class Student {
         //DELTE FROM student WHERE student_id=6 OR last_name=’Smith’;
 
         stm.executeUpdate("DELETE FROM students WHERE id="+id+";");
-
         studentTable=buildTable(stm.executeQuery("Select*from students"));
         return studentTable;
     }
@@ -95,10 +97,15 @@ public class Student {
         studentTable=buildTable(stm.executeQuery("Select*from students"));
         return studentTable;
     }
-    public void exportStudent(){
+    public void exportStudent(FileWriter fileWriter) throws IOException  {
+        
+
 
     }
-    
+    public void importStudent(Scanner sc){
+
+    }
+
 
     public JTable saveStudent(String fn, String ln, int id) throws SQLException {
         if(fn.length()==0 &&ln.length()!=0){
