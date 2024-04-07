@@ -23,6 +23,8 @@ public class CoursePanel extends JPanel {
     JRadioButton KAPRadioButton = new JRadioButton("KAP");
     JRadioButton APRadioButton = new JRadioButton("AP");
 
+    ButtonGroup G = new ButtonGroup();
+
 
 
 
@@ -78,27 +80,12 @@ public class CoursePanel extends JPanel {
         APRadioButton.setFont(new Font("Calibri", Font.BOLD, 12));
         add(APRadioButton);
 
+        G.add(acaRadioButton);
+        G.add(KAPRadioButton);
+        G.add(APRadioButton);
 
 
 
-
-
-
-        //JTable
-
-        /*String[] columns = {"ID", "First Name", "Last Name"};
-
-        Object[][] data = {{"1", "Chembian", "Ganeshan"}};
-
-        studentTable = new JTable(data, columns);
-        studentTable.setPreferredScrollableViewportSize(new Dimension(300,300));
-        studentTable.setFillsViewportHeight(true);
-
-
-        jScrollPane = new JScrollPane(studentTable);
-        add(jScrollPane);
-
-         */
 
 
 
