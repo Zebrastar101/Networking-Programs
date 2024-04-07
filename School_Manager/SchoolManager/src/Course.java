@@ -67,7 +67,7 @@ public class Course {
     }
 
     public JTable makeJTable(Object[][] dataArray){
-        DefaultTableModel tableModel = new DefaultTableModel(dataArray, new String[]{"Student ID","First Name", "Last Name"}) {
+        DefaultTableModel tableModel = new DefaultTableModel(dataArray, new String[]{"Course ID","Course Name", "Type"}) {
 
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -78,7 +78,7 @@ public class Course {
 
         JTable table = new JTable();
         table.setModel(tableModel);
-        table. getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setReorderingAllowed(false);
 
         return table;
     }
@@ -86,11 +86,11 @@ public class Course {
 
 
 
-    public JTable getcourseTable() {
+    public JTable getCourseTable() {
         return courseTable;
     }
-    public JTable addStudent(String fn, String ln) throws SQLException {
-        stm.executeUpdate("INSERT INTO courses(first_name, last_name) VALUES('"+fn+"','"+ln+"');");
+    public JTable addCourse(String cn, String type) throws SQLException {
+        stm.executeUpdate("INSERT INTO courses(course_name, type) VALUES('"+cn+"','"+type+"');");
         courseTable=buildTable(stm.executeQuery("Select*from courses WHERE id >=1"));
         return courseTable;
 
@@ -100,9 +100,9 @@ public class Course {
         courseTable=buildTable(stm.executeQuery("Select*from courses"));
         return courseTable;
     }
-    public JTable purgeStudent() throws SQLException {
+    public JTable purgeCourse() throws SQLException {
         stm.execute("DROP TABLE IF EXISTS courses;");
-        stm.execute("CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
+        stm.execute("CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL AUTO_INCREMENT, course_name TEXT,type TEXT, PRIMARY KEY(id))");
         courseTable=buildTable(stm.executeQuery("Select*from courses"));
         return courseTable;
     }
