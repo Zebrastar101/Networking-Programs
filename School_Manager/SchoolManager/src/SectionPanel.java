@@ -1,5 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class SectionPanel extends JPanel{
 
@@ -19,8 +24,14 @@ public class SectionPanel extends JPanel{
     JButton deleteButton = new JButton("Delete");
     JButton rosterButton = new JButton("Roster");
 
+    Connection con;
+    Statement stm;
+    ResultSet teacherResultSet;
+    ResultSet courseResultSet;
+    
 
     public SectionPanel() {
+
 
         setLayout(null);
         setBounds(15, 40, 600, 630);
@@ -62,6 +73,33 @@ public class SectionPanel extends JPanel{
         rosterButton.setBounds(400, 140, 90, 20);
         rosterButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(rosterButton);
+
+
     }
+
+    public void reload()
+    {
+        con = Main.myConn;
+        try{
+            stm=con.createStatement();
+            teachersDropDown.removeAllItems();
+            coursesDropDown.removeAllItems();
+            teacherResultSet=stm.executeQuery("Select*from teachers WHERE id >=1");
+            while(teacherResultSet!=null && teacherResultSet.next()){
+                String teacher = teacherResultSet.getObject(2) + " " + teacherResultSet.getObject(3);
+                teachersDropDown.addItem(teacher);
+            }
+            courseResultSet=stm.executeQuery("Select*from courses WHERE id >=1");
+            while(courseResultSet!=null && courseResultSet.next()){
+                String course = String.valueOf(courseResultSet.getObject(2));
+                coursesDropDown.addItem(course);
+            }
+
+        }catch(SQLException e){
+            e.printStackTrace();
+
+        }
+    }
+
 }
 

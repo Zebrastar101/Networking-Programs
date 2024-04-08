@@ -175,6 +175,7 @@ public class SMFrame extends JFrame implements WindowListener {
             studentPan.setVisible(false);
             coursePan.setVisible(false);
             sectionPan.setVisible(true);
+            sectionPan.reload();
         }
     }
 
