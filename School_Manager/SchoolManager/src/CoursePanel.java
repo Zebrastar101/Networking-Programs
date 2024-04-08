@@ -104,7 +104,16 @@ public class CoursePanel extends JPanel {
                 String courseName = (String) courseTable.getValueAt(courseTable.getSelectedRow() , 1);
                 String type = (String) courseTable.getValueAt(courseTable.getSelectedRow() , 2);
                 courseTextField.setText(courseName);
-                //set the type RadioButtons
+                if(type.equals("Academic")){
+                    G.setSelected(acaRadioButton.getModel(), true);
+                }
+                if(type=="KAP"){
+                    G.setSelected(KAPRadioButton.getModel(), true);
+                }
+                if(type=="AP"){
+                    G.setSelected(APRadioButton.getModel(), true);
+                }
+
             }
         });
         jScrollPane = new JScrollPane(courseTable);
