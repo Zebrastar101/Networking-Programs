@@ -96,9 +96,9 @@ public class Teacher  {
 
     }
     public JTable saveTeacher(String fn, String ln, int id) throws SQLException {
-        stm.executeUpdate("UPDATE students SET first_name='"+fn+"' WHERE id="+id+";");
-        stm.executeUpdate("UPDATE students SET last_name='"+ln+"' WHERE id="+id+";");
-        teacherTable=buildTable(stm.executeQuery("Select*from students"));
+        stm.executeUpdate("UPDATE teacher SET first_name='"+fn+"' WHERE id="+id+";");
+        stm.executeUpdate("UPDATE teacher SET last_name='"+ln+"' WHERE id="+id+";");
+        teacherTable=buildTable(stm.executeQuery("Select*from teacher"));
         return teacherTable;
     }
 
