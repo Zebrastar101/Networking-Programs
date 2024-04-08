@@ -99,11 +99,6 @@ public class Student {
 
     }
     public JTable deleteStudent(int id) throws SQLException{
-        //Deleting Rows:
-        //DELETE FROM table_name WHERE comparisons;
-        //Example:
-        //DELTE FROM student WHERE student_id=6 OR last_name=’Smith’;
-
         stm.executeUpdate("DELETE FROM students WHERE id="+id+";");
         studentTable=buildTable(stm.executeQuery("Select*from students"));
         return studentTable;
