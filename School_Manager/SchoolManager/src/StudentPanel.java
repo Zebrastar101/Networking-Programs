@@ -69,7 +69,7 @@ public class StudentPanel extends JPanel {
         saveButton.setBounds(210,140,70,20);
         saveButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(saveButton);
-        newButton.addActionListener(e-> {
+        saveButton.addActionListener(e-> {
             try {
                 saveStudentChanges(studentFNTextField.getText(), studentLNTextField.getText(), (Integer) studentTable.getValueAt(studentTable.getSelectedRow() , 0));
             } catch (SQLException ex) {
