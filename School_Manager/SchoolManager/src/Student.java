@@ -125,24 +125,10 @@ public class Student {
 
 
     public JTable saveStudent(String fn, String ln, int id) throws SQLException {
-        if(fn.length()==0 &&ln.length()!=0){
-            stm.executeUpdate("UPDATE student SET last_name='"+ln+"' WHERE student_id="+id+";");
-            studentTable=buildTable(stm.executeQuery("Select*from students"));
-            return studentTable;
-        }
-        else if(fn.length()!=0 &&ln.length()==0){
-            stm.executeUpdate("UPDATE student SET first_name='"+fn+"' WHERE student_id="+id+";");
-            studentTable=buildTable(stm.executeQuery("Select*from students"));
-            return studentTable;
-        }
-        else if(fn.length()!=0 &&ln.length()!=0){
-            stm.executeUpdate("UPDATE student SET first_name='"+fn+"' WHERE student_id="+id+";");
-            stm.executeUpdate("UPDATE student SET last_name='"+ln+"' WHERE student_id="+id+";");
-            studentTable=buildTable(stm.executeQuery("Select*from students"));
-            return studentTable;
-        }
+        stm.executeUpdate("UPDATE student SET first_name='"+fn+"' WHERE student_id="+id+";");
+        stm.executeUpdate("UPDATE student SET last_name='"+ln+"' WHERE student_id="+id+";");
+        studentTable=buildTable(stm.executeQuery("Select*from students"));
         return studentTable;
-
     }
 
 
