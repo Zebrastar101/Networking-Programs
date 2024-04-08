@@ -192,6 +192,19 @@ public class SMFrame extends JFrame implements WindowListener {
     public void motion() throws SQLException {
         if (String.valueOf(dropDownFile.getSelectedItem())=="Purge") {
             studentPan.purge();
+            try {
+                Main.myConn.close();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            System.exit(0);
+        }
+        if (String.valueOf(dropDownFile.getSelectedItem())=="Exit") {
+            try {
+                Main.myConn.close();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             System.exit(0);
         }
     }
