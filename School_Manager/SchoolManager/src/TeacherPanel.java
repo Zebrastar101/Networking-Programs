@@ -153,7 +153,7 @@ public class TeacherPanel extends JPanel{
             });
         }
         else{
-            int errorMessage = JOptionPane.showConfirmDialog(null, "No student was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
+            int errorMessage = JOptionPane.showConfirmDialog(null, "No teacher was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
         }
     }
     public void purge() throws SQLException {
