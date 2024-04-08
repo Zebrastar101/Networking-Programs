@@ -71,6 +71,13 @@ public class CoursePanel extends JPanel {
         saveButton.setBounds(260,140,70,20);
         saveButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(saveButton);
+        saveButton.addActionListener(e-> {
+            try {
+                saveCourseChanges(courseTextField.getText(), (Integer) courseTable.getValueAt(courseTable.getSelectedRow() , 0));
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         deleteButton.setBounds(380,140,70,20);
         deleteButton.setFont(new Font("Calibri", Font.BOLD, 10));
@@ -107,10 +114,10 @@ public class CoursePanel extends JPanel {
                 if(type.equals("Academic")){
                     G.setSelected(acaRadioButton.getModel(), true);
                 }
-                if(type=="KAP"){
+                if(type.equals("KAP")){
                     G.setSelected(KAPRadioButton.getModel(), true);
                 }
-                if(type=="AP"){
+                if(type.equals("AP")){
                     G.setSelected(APRadioButton.getModel(), true);
                 }
 
@@ -139,7 +146,61 @@ public class CoursePanel extends JPanel {
             G.clearSelection();
             jScrollPane.setViewportView(courseTable);
             courseTextField.setText("");
+            courseTable.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    String courseName = (String) courseTable.getValueAt(courseTable.getSelectedRow() , 1);
+                    String type = (String) courseTable.getValueAt(courseTable.getSelectedRow() , 2);
+                    courseTextField.setText(courseName);
+                    if(type.equals("Academic")){
+                        G.setSelected(acaRadioButton.getModel(), true);
+                    }
+                    if(type.equals("KAP")){
+                        G.setSelected(KAPRadioButton.getModel(), true);
+                    }
+                    if(type.equals("AP")){
+                        G.setSelected(APRadioButton.getModel(), true);
+                    }
 
+                }
+            });
+        }
+        else{
+            int errorMessage = JOptionPane.showConfirmDialog(null, "Course name and type is needed", "Error", JOptionPane.OK_CANCEL_OPTION);
+        }
+
+    }
+
+    public void saveCourseChanges(String course, int id) throws SQLException {
+        if(!courseTextField.getText().isEmpty() && (acaRadioButton.isSelected() || KAPRadioButton.isSelected() || APRadioButton.isSelected())){
+            if(acaRadioButton.isSelected()){
+                courseTable=c.saveCourse(course, "Academic", id);
+            }
+            else if (KAPRadioButton.isSelected()) {
+                courseTable=c.saveCourse(course, "KAP", id);
+            }
+            else{
+                courseTable=c.saveCourse(course, "AP", id);
+            }
+            G.clearSelection();
+            jScrollPane.setViewportView(courseTable);
+            courseTextField.setText("");
+            courseTable.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    String courseName = (String) courseTable.getValueAt(courseTable.getSelectedRow() , 1);
+                    String type = (String) courseTable.getValueAt(courseTable.getSelectedRow() , 2);
+                    courseTextField.setText(courseName);
+                    if(type.equals("Academic")){
+                        G.setSelected(acaRadioButton.getModel(), true);
+                    }
+                    if(type.equals("KAP")){
+                        G.setSelected(KAPRadioButton.getModel(), true);
+                    }
+                    if(type.equals("AP")){
+                        G.setSelected(APRadioButton.getModel(), true);
+                    }
+
+                }
+            });
         }
         else{
             int errorMessage = JOptionPane.showConfirmDialog(null, "Course name and type is needed", "Error", JOptionPane.OK_CANCEL_OPTION);

@@ -98,6 +98,13 @@ public class Course {
         courseTable=buildTable(stm.executeQuery("Select*from courses"));
         return courseTable;
     }
+
+    public JTable saveCourse(String cn, String type, int id) throws SQLException {
+        stm.executeUpdate("UPDATE courses SET course_name='"+cn+"' WHERE id="+id+";");
+        stm.executeUpdate("UPDATE courses SET type='"+type+"' WHERE id="+id+";");
+        courseTable=buildTable(stm.executeQuery("Select*from courses"));
+        return courseTable;
+    }
     public JTable purgeCourse() throws SQLException {
         stm.execute("DROP TABLE IF EXISTS courses;");
         stm.execute("CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL AUTO_INCREMENT, course_name TEXT,type TEXT, PRIMARY KEY(id))");
