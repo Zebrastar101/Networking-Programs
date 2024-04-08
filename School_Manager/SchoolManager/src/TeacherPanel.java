@@ -70,7 +70,12 @@ public class TeacherPanel extends JPanel{
         add(saveButton);
         saveButton.addActionListener(e-> {
             try {
-                saveTeacherChanges(teacherFNTextField.getText(), teacherLNTextField.getText(), (Integer) teacherTable.getValueAt(teacherTable.getSelectedRow() , 0));
+                if(!teacherTable.getSelectionModel().isSelectionEmpty()){
+                    saveTeacherChanges(teacherFNTextField.getText(), teacherLNTextField.getText(), (Integer) teacherTable.getValueAt(teacherTable.getSelectedRow() , 0));
+                }
+                else{
+                    int errorMessage = JOptionPane.showConfirmDialog(null, "No student was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
+                }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
@@ -81,7 +86,12 @@ public class TeacherPanel extends JPanel{
         add(deleteButton);
         deleteButton.addActionListener(e-> {
             try {
-                delTeacher((Integer) teacherTable.getValueAt(teacherTable.getSelectedRow() , 0));
+                if(!teacherTable.getSelectionModel().isSelectionEmpty()){
+                    delTeacher((Integer) teacherTable.getValueAt(teacherTable.getSelectedRow() , 0));
+                }
+                else{
+                    int errorMessage = JOptionPane.showConfirmDialog(null, "No student was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
+                }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
@@ -130,23 +140,19 @@ public class TeacherPanel extends JPanel{
     }
 
     public void delTeacher(int id) throws SQLException {
-        if(!teacherFNTextField.getText().isEmpty() && !teacherLNTextField.getText().isEmpty()){
-            teacherTable=t.deleteTeacher(id);
-            jScrollPane.setViewportView(teacherTable);
-            teacherFNTextField.setText("");
-            teacherLNTextField.setText("");
-            teacherTable.addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent e) {
-                    String firstName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 1);
-                    String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
-                    teacherFNTextField.setText(firstName);
-                    teacherLNTextField.setText(lastName);
-                }
-            });
-        }
-        else{
-            int errorMessage = JOptionPane.showConfirmDialog(null, "No teacher was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
-        }
+        teacherTable=t.deleteTeacher(id);
+        jScrollPane.setViewportView(teacherTable);
+        teacherFNTextField.setText("");
+        teacherLNTextField.setText("");
+        teacherTable.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                String firstName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 1);
+                String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
+                teacherFNTextField.setText(firstName);
+                teacherLNTextField.setText(lastName);
+            }
+        });
+
     }
 
     public void saveTeacherChanges(String fName, String lName, int id) throws SQLException {
