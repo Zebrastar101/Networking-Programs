@@ -99,11 +99,6 @@ public class Student {
 
     }
     public JTable deleteStudent(int id) throws SQLException{
-        //Deleting Rows:
-        //DELETE FROM table_name WHERE comparisons;
-        //Example:
-        //DELTE FROM student WHERE student_id=6 OR last_name=’Smith’;
-
         stm.executeUpdate("DELETE FROM students WHERE id="+id+";");
         studentTable=buildTable(stm.executeQuery("Select*from students"));
         return studentTable;
@@ -125,24 +120,10 @@ public class Student {
 
 
     public JTable saveStudent(String fn, String ln, int id) throws SQLException {
-        if(fn.length()==0 &&ln.length()!=0){
-            stm.executeUpdate("UPDATE student SET last_name='"+ln+"' WHERE student_id="+id+";");
-            studentTable=buildTable(stm.executeQuery("Select*from students"));
-            return studentTable;
-        }
-        else if(fn.length()!=0 &&ln.length()==0){
-            stm.executeUpdate("UPDATE student SET first_name='"+fn+"' WHERE student_id="+id+";");
-            studentTable=buildTable(stm.executeQuery("Select*from students"));
-            return studentTable;
-        }
-        else if(fn.length()!=0 &&ln.length()!=0){
-            stm.executeUpdate("UPDATE student SET first_name='"+fn+"' WHERE student_id="+id+";");
-            stm.executeUpdate("UPDATE student SET last_name='"+ln+"' WHERE student_id="+id+";");
-            studentTable=buildTable(stm.executeQuery("Select*from students"));
-            return studentTable;
-        }
+        stm.executeUpdate("UPDATE students SET first_name='"+fn+"' WHERE id="+id+";");
+        stm.executeUpdate("UPDATE students SET last_name='"+ln+"' WHERE id="+id+";");
+        studentTable=buildTable(stm.executeQuery("Select*from students"));
         return studentTable;
-
     }
 
 

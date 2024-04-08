@@ -69,11 +69,24 @@ public class StudentPanel extends JPanel {
         saveButton.setBounds(210,140,70,20);
         saveButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(saveButton);
+        saveButton.addActionListener(e-> {
+            try {
+                saveStudentChanges(studentFNTextField.getText(), studentLNTextField.getText(), (Integer) studentTable.getValueAt(studentTable.getSelectedRow() , 0));
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         deleteButton.setBounds(300,140,70,20);
         deleteButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(deleteButton);
-
+        deleteButton.addActionListener(e-> {
+            try {
+                delStudent((Integer) studentTable.getValueAt(studentTable.getSelectedRow() , 0));
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         scheduleButton.setBounds(400,140,90,20);
         scheduleButton.setFont(new Font("Calibri", Font.BOLD, 10));
@@ -123,8 +136,44 @@ public class StudentPanel extends JPanel {
 
     }
 
-    public void delStudent(String fName, String lName, int id) throws SQLException {
+    public void saveStudentChanges(String fName, String lName, int id) throws SQLException {
+        if(!studentFNTextField.getText().isEmpty() && !studentLNTextField.getText().isEmpty()){
+            studentTable=s.saveStudent(fName, lName, id);
+            jScrollPane.setViewportView(studentTable);
+            studentFNTextField.setText("");
+            studentLNTextField.setText("");
+            studentTable.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    String firstName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 1);
+                    String lastName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 2);
+                    studentFNTextField.setText(firstName);
+                    studentLNTextField.setText(lastName);
+                }
+            });
+        }
+        else{
+            int errorMessage = JOptionPane.showConfirmDialog(null, "Both first and last name are needed", "Error", JOptionPane.OK_CANCEL_OPTION);
+        }
+    }
 
+    public void delStudent(int id) throws SQLException {
+        if(!studentFNTextField.getText().isEmpty() && !studentLNTextField.getText().isEmpty()){
+            studentTable=s.deleteStudent(id);
+            jScrollPane.setViewportView(studentTable);
+            studentFNTextField.setText("");
+            studentLNTextField.setText("");
+            studentTable.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    String firstName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 1);
+                    String lastName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 2);
+                    studentFNTextField.setText(firstName);
+                    studentLNTextField.setText(lastName);
+                }
+            });
+        }
+        else{
+            int errorMessage = JOptionPane.showConfirmDialog(null, "No student was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
+        }
     }
 
     public void purge() throws SQLException {
