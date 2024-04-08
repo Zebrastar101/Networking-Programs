@@ -103,6 +103,14 @@ public class Student {
         studentTable=buildTable(stm.executeQuery("Select*from students"));
         return studentTable;
     }
+
+    public JTable saveStudent(String fn, String ln, int id) throws SQLException {
+        stm.executeUpdate("UPDATE students SET first_name='"+fn+"' WHERE id="+id+";");
+        stm.executeUpdate("UPDATE students SET last_name='"+ln+"' WHERE id="+id+";");
+        studentTable=buildTable(stm.executeQuery("Select*from students"));
+        return studentTable;
+    }
+
     public JTable purgeStudent() throws SQLException {
         stm.execute("DROP TABLE IF EXISTS students;");
         stm.execute("CREATE TABLE IF NOT EXISTS students(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
@@ -119,12 +127,7 @@ public class Student {
     }
 
 
-    public JTable saveStudent(String fn, String ln, int id) throws SQLException {
-        stm.executeUpdate("UPDATE students SET first_name='"+fn+"' WHERE id="+id+";");
-        stm.executeUpdate("UPDATE students SET last_name='"+ln+"' WHERE id="+id+";");
-        studentTable=buildTable(stm.executeQuery("Select*from students"));
-        return studentTable;
-    }
+
 
 
 

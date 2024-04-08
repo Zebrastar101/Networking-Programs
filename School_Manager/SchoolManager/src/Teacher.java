@@ -95,11 +95,19 @@ public class Teacher  {
         return teacherTable;
 
     }
-    public JTable deleteTeacher(String fn,String ln) throws SQLException{
-        stm.executeUpdate("DELETE FROM teachers WHERE first_name='"+fn+"'AND last_name='"+ln+"';");
+    public JTable deleteTeacher(int id) throws SQLException{
+        stm.executeUpdate("DELETE FROM teachers WHERE id="+id+";");
         teacherTable=buildTable(stm.executeQuery("Select*from teachers"));
         return teacherTable;
     }
+
+    public JTable saveTeacher(String fn, String ln, int id) throws SQLException {
+        stm.executeUpdate("UPDATE teachers SET first_name='"+fn+"' WHERE id="+id+";");
+        stm.executeUpdate("UPDATE teachers SET last_name='"+ln+"' WHERE id="+id+";");
+        teacherTable=buildTable(stm.executeQuery("Select*from teachers"));
+        return teacherTable;
+    }
+
     public JTable purgeTeacher() throws SQLException {
         stm.execute("DROP TABLE IF EXISTS teachers;");
         stm.execute("CREATE TABLE IF NOT EXISTS teachers(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
