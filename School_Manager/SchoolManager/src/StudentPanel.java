@@ -87,7 +87,12 @@ public class StudentPanel extends JPanel {
         add(deleteButton);
         deleteButton.addActionListener(e-> {
             try {
-                delStudent((Integer) studentTable.getValueAt(studentTable.getSelectedRow() , 0));
+                if(!studentTable.getSelectionModel().isSelectionEmpty()){
+                    delStudent((Integer) studentTable.getValueAt(studentTable.getSelectedRow() , 0));
+                }
+                else{
+                    int errorMessage = JOptionPane.showConfirmDialog(null, "No student was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
+                }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
@@ -161,23 +166,20 @@ public class StudentPanel extends JPanel {
     }
 
     public void delStudent(int id) throws SQLException {
-        if(!studentFNTextField.getText().isEmpty() && !studentLNTextField.getText().isEmpty()){
-            studentTable=s.deleteStudent(id);
-            jScrollPane.setViewportView(studentTable);
-            studentFNTextField.setText("");
-            studentLNTextField.setText("");
-            studentTable.addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent e) {
-                    String firstName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 1);
-                    String lastName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 2);
-                    studentFNTextField.setText(firstName);
-                    studentLNTextField.setText(lastName);
-                }
-            });
-        }
-        else{
-            int errorMessage = JOptionPane.showConfirmDialog(null, "No student was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
-        }
+        studentTable=s.deleteStudent(id);
+        jScrollPane.setViewportView(studentTable);
+        studentFNTextField.setText("");
+        studentLNTextField.setText("");
+        studentTable.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                String firstName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 1);
+                String lastName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 2);
+                studentFNTextField.setText(firstName);
+                studentLNTextField.setText(lastName);
+            }
+        });
+
+
     }
 
     public void purge() throws SQLException {
