@@ -127,6 +127,7 @@ public class CoursePanel extends JPanel {
             else{
                 courseTable=c.addCourse(course, "AP");
             }
+            G.clearSelection();
             jScrollPane.setViewportView(courseTable);
             courseTextField.setText("");
 
