@@ -71,7 +71,12 @@ public class StudentPanel extends JPanel {
         add(saveButton);
         saveButton.addActionListener(e-> {
             try {
-                saveStudentChanges(studentFNTextField.getText(), studentLNTextField.getText(), (Integer) studentTable.getValueAt(studentTable.getSelectedRow() , 0));
+                if(!studentTable.getSelectionModel().isSelectionEmpty()){
+                    saveStudentChanges(studentFNTextField.getText(), studentLNTextField.getText(), (Integer) studentTable.getValueAt(studentTable.getSelectedRow() , 0));
+                }
+                else{
+                    int errorMessage = JOptionPane.showConfirmDialog(null, "No student was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
+                }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
@@ -133,7 +138,6 @@ public class StudentPanel extends JPanel {
         else{
             int errorMessage = JOptionPane.showConfirmDialog(null, "Both first and last name are needed", "Error", JOptionPane.OK_CANCEL_OPTION);
         }
-
     }
 
     public void saveStudentChanges(String fName, String lName, int id) throws SQLException {
