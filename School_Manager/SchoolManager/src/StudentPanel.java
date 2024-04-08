@@ -178,8 +178,6 @@ public class StudentPanel extends JPanel {
                 studentLNTextField.setText(lastName);
             }
         });
-
-
     }
 
     public void purge() throws SQLException {

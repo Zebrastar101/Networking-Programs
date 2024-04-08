@@ -73,7 +73,12 @@ public class CoursePanel extends JPanel {
         add(saveButton);
         saveButton.addActionListener(e-> {
             try {
-                saveCourseChanges(courseTextField.getText(), (Integer) courseTable.getValueAt(courseTable.getSelectedRow() , 0));
+                if(!courseTable.getSelectionModel().isSelectionEmpty()){
+                    saveCourseChanges(courseTextField.getText(), (Integer) courseTable.getValueAt(courseTable.getSelectedRow() , 0));
+                }
+                else{
+                    int errorMessage = JOptionPane.showConfirmDialog(null, "No student was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
+                }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
@@ -82,6 +87,18 @@ public class CoursePanel extends JPanel {
         deleteButton.setBounds(380,140,70,20);
         deleteButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(deleteButton);
+        deleteButton.addActionListener(e-> {
+            try {
+                if(!courseTable.getSelectionModel().isSelectionEmpty()){
+                    delCourse((Integer) courseTable.getValueAt(courseTable.getSelectedRow() , 0));
+                }
+                else{
+                    int errorMessage = JOptionPane.showConfirmDialog(null, "No student was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
 
 
@@ -206,6 +223,30 @@ public class CoursePanel extends JPanel {
             int errorMessage = JOptionPane.showConfirmDialog(null, "Course name and type is needed", "Error", JOptionPane.OK_CANCEL_OPTION);
         }
 
+    }
+
+    public void delCourse(int id) throws SQLException {
+        courseTable=c.deleteCourse(id);
+        jScrollPane.setViewportView(courseTable);
+        courseTextField.setText("");
+        G.clearSelection();
+        courseTable.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                String courseName = (String) courseTable.getValueAt(courseTable.getSelectedRow() , 1);
+                String type = (String) courseTable.getValueAt(courseTable.getSelectedRow() , 2);
+                courseTextField.setText(courseName);
+                if(type.equals("Academic")){
+                    G.setSelected(acaRadioButton.getModel(), true);
+                }
+                if(type.equals("KAP")){
+                    G.setSelected(KAPRadioButton.getModel(), true);
+                }
+                if(type.equals("AP")){
+                    G.setSelected(APRadioButton.getModel(), true);
+                }
+
+            }
+        });
     }
 
 
