@@ -73,7 +73,7 @@ public class StudentPanel extends JPanel {
         deleteButton.setBounds(300,140,70,20);
         deleteButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(deleteButton);
-       
+
 
         scheduleButton.setBounds(400,140,90,20);
         scheduleButton.setFont(new Font("Calibri", Font.BOLD, 10));
