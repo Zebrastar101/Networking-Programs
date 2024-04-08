@@ -249,6 +249,10 @@ public class CoursePanel extends JPanel {
         });
     }
 
+    public void purge() throws SQLException {
+        c.purgeCourse();
+    }
+
 
 }
 
