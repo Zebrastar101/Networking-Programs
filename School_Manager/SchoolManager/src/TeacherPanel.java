@@ -94,12 +94,22 @@ public class TeacherPanel extends JPanel{
         add(jScrollPane);
     }
 
+
+
     public void newTeacher(String fName, String lName) throws SQLException {
         if(!teacherFNTextField.getText().isEmpty() && !teacherLNTextField.getText().isEmpty()){
             teacherTable=t.addTeacher(fName, lName);
             jScrollPane.setViewportView(teacherTable);
             teacherFNTextField.setText("");
             teacherLNTextField.setText("");
+            teacherTable.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    String firstName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 1);
+                    String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
+                    teacherFNTextField.setText(firstName);
+                    teacherLNTextField.setText(lastName);
+                }
+            });
         }
         else{
             int errorMessage = JOptionPane.showConfirmDialog(null, "Both first and last name are needed", "Error", JOptionPane.OK_CANCEL_OPTION);
@@ -107,11 +117,45 @@ public class TeacherPanel extends JPanel{
 
     }
 
-    public void delTeacher(String fName, String lName) throws SQLException {
-        teacherTable=t.deleteTeacher(fName, lName);
-        jScrollPane.setViewportView(teacherTable);
+    public void saveStudentChanges(String fName, String lName, int id) throws SQLException {
+        if(!teacherFNTextField.getText().isEmpty() && !teacherLNTextField.getText().isEmpty()){
+            teacherTable=t.saveTeacher(fName, lName, id);
+            jScrollPane.setViewportView(teacherTable);
+            teacherFNTextField.setText("");
+            teacherLNTextField.setText("");
+            teacherTable.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    String firstName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 1);
+                    String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
+                    teacherFNTextField.setText(firstName);
+                    teacherLNTextField.setText(lastName);
+                }
+            });
+        }
+        else{
+            int errorMessage = JOptionPane.showConfirmDialog(null, "Both first and last name are needed", "Error", JOptionPane.OK_CANCEL_OPTION);
+        }
     }
 
+    public void delStudent(int id) throws SQLException {
+        if(!teacherFNTextField.getText().isEmpty() && !teacherLNTextField.getText().isEmpty()){
+            teacherTable=t.deleteTeacher(id);
+            jScrollPane.setViewportView(teacherTable);
+            teacherFNTextField.setText("");
+            teacherLNTextField.setText("");
+            teacherTable.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    String firstName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 1);
+                    String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
+                    teacherFNTextField.setText(firstName);
+                    teacherLNTextField.setText(lastName);
+                }
+            });
+        }
+        else{
+            int errorMessage = JOptionPane.showConfirmDialog(null, "No student was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
+        }
+    }
     public void purge() throws SQLException {
         t.purgeTeacher();
     }
