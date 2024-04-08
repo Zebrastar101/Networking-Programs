@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +17,7 @@ public class SectionPanel extends JPanel{
     JComboBox<String> teachersDropDown = new JComboBox<String>();
     JComboBox<String> coursesDropDown = new JComboBox<String>();
 
-    JTable teacherTable;
+    JTable sectionTable;
 
     JScrollPane jScrollPane;
 
@@ -23,6 +25,8 @@ public class SectionPanel extends JPanel{
     JButton saveButton = new JButton("Save");
     JButton deleteButton = new JButton("Delete");
     JButton rosterButton = new JButton("Roster");
+
+    Section sec;
 
     Connection con;
     Statement stm;
@@ -73,6 +77,21 @@ public class SectionPanel extends JPanel{
         rosterButton.setBounds(400, 140, 90, 20);
         rosterButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(rosterButton);
+
+
+        sec = new Section(Main.myConn);
+        sectionTable=sec.getStudentTable();
+        //below from https://www.tabnine.com/code/java/methods/javax.swing.JTable/getSelectedRow
+        sectionTable.addMouseListener(new MouseAdapter() {
+            //Idk how to get the selected values to pop up for this one
+            public void mouseClicked(MouseEvent e) {
+                teachersDropDown.setSelectedItem((String)sectionTable.getValueAt(sectionTable.getSelectedRow() , 1));
+                teachersDropDown.setSelectedItem((String)sectionTable.getValueAt(sectionTable.getSelectedRow() , 2));
+            }
+        });
+        jScrollPane = new JScrollPane(sectionTable);
+        jScrollPane.setBounds(50,190,500, 400);
+        add(jScrollPane);
 
 
     }
