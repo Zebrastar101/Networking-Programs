@@ -104,6 +104,12 @@ public class Section {
         return sectionTable;
     }
 
+    public JTable deleteSection(int id) throws SQLException{
+        stm.executeUpdate("DELETE FROM sections WHERE id="+id+";");
+        sectionTable=buildTable(stm.executeQuery("Select*from sections"));
+        return sectionTable;
+    }
+
 
 
     public JTable purgeSection() throws SQLException {

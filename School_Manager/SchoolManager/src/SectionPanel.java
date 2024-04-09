@@ -92,6 +92,18 @@ public class SectionPanel extends JPanel{
         deleteButton.setBounds(300, 140, 70, 20);
         deleteButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(deleteButton);
+        deleteButton.addActionListener(e-> {
+            try {
+                if(!sectionTable.getSelectionModel().isSelectionEmpty()){
+                    delSection((Integer) sectionTable.getValueAt(sectionTable.getSelectedRow() , 0));
+                }
+                else{
+                    int errorMessage = JOptionPane.showConfirmDialog(null, "No section was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         rosterButton.setBounds(400, 140, 90, 20);
         rosterButton.setFont(new Font("Calibri", Font.BOLD, 10));
@@ -149,7 +161,10 @@ public class SectionPanel extends JPanel{
         jScrollPane.setViewportView(sectionTable);
     }
 
-
+    public void delSection(int id) throws SQLException {
+        sectionTable=sec.deleteSection(id);
+        jScrollPane.setViewportView(sectionTable);
+    }
 
 
 
