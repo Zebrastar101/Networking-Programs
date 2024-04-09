@@ -95,6 +95,14 @@ public class Section {
         stm.executeUpdate("INSERT INTO sections(teacher_name, course_name) VALUES('"+teacher+"','"+course+"');");
         sectionTable=buildTable(stm.executeQuery("Select*from sections WHERE id >=1"));
         return sectionTable;
+    }
 
+
+
+    public JTable purgeSection() throws SQLException {
+        stm.execute("DROP TABLE IF EXISTS sections;");
+        stm.execute("CREATE TABLE IF NOT EXISTS sections(id INTEGER NOT NULL AUTO_INCREMENT, teacher_name TEXT,course_name TEXT, PRIMARY KEY(id))");
+        sectionTable=buildTable(stm.executeQuery("Select*from sections"));
+        return sectionTable;
     }
 }

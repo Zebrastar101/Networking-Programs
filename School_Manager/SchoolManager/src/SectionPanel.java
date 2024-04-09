@@ -132,5 +132,11 @@ public class SectionPanel extends JPanel{
         jScrollPane.setViewportView(sectionTable);
     }
 
+
+
+    public void purge() throws SQLException {
+        sec.purgeSection();
+    }
+
 }
 

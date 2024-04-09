@@ -195,6 +195,7 @@ public class SMFrame extends JFrame implements WindowListener {
             studentPan.purge();
             teacherPan.purge();
             coursePan.purge();
+            sectionPan.purge();
             try {
                 Main.myConn.close();
             } catch (SQLException ex) {
