@@ -76,6 +76,18 @@ public class SectionPanel extends JPanel{
         saveButton.setBounds(210, 140, 70, 20);
         saveButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(saveButton);
+        saveButton.addActionListener(e -> {
+            try {
+                if(!sectionTable.getSelectionModel().isSelectionEmpty()){
+                    saveSectionChanges((String) teachersDropDown.getSelectedItem(), (String) coursesDropDown.getSelectedItem(), (Integer) sectionTable.getValueAt(sectionTable.getSelectedRow() , 0));
+                }
+                else{
+                    int errorMessage = JOptionPane.showConfirmDialog(null, "No section was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         deleteButton.setBounds(300, 140, 70, 20);
         deleteButton.setFont(new Font("Calibri", Font.BOLD, 10));
@@ -87,7 +99,7 @@ public class SectionPanel extends JPanel{
 
 
         sec = new Section(Main.myConn);
-        sectionTable=sec.getStudentTable();
+        sectionTable=sec.getSectionTable();
         //below from https://www.tabnine.com/code/java/methods/javax.swing.JTable/getSelectedRow
         sectionTable.addMouseListener(new MouseAdapter() {
             //Idk how to get the selected values to pop up for this one
@@ -131,6 +143,13 @@ public class SectionPanel extends JPanel{
         sectionTable=sec.addSection(teacher, course);
         jScrollPane.setViewportView(sectionTable);
     }
+
+    public void saveSectionChanges(String teacher, String course, int id) throws SQLException {
+        sectionTable=sec.saveSection(teacher, course, id);
+        jScrollPane.setViewportView(sectionTable);
+    }
+
+
 
 
 
