@@ -65,6 +65,13 @@ public class SectionPanel extends JPanel{
         newButton.setBounds(120, 140, 70, 20);
         newButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(newButton);
+        newButton.addActionListener(e -> {
+            try {
+                newSection((String) teachersDropDown.getSelectedItem(), (String) coursesDropDown.getSelectedItem());
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         saveButton.setBounds(210, 140, 70, 20);
         saveButton.setFont(new Font("Calibri", Font.BOLD, 10));
@@ -118,6 +125,11 @@ public class SectionPanel extends JPanel{
             e.printStackTrace();
 
         }
+    }
+
+    public void newSection(String teacher, String course) throws SQLException {
+        sectionTable=sec.addSection(teacher, course);
+        jScrollPane.setViewportView(sectionTable);
     }
 
 }

@@ -90,4 +90,11 @@ public class Section {
     public JTable getStudentTable() {
         return sectionTable;
     }
+
+    public JTable addSection(String teacher, String course) throws SQLException {
+        stm.executeUpdate("INSERT INTO sections(teacher_name, course_name) VALUES('"+teacher+"','"+course+"');");
+        sectionTable=buildTable(stm.executeQuery("Select*from sections WHERE id >=1"));
+        return sectionTable;
+
+    }
 }
