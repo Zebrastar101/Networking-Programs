@@ -68,10 +68,34 @@ public class TeacherPanel extends JPanel{
         saveButton.setBounds(210, 140, 70, 20);
         saveButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(saveButton);
+        saveButton.addActionListener(e-> {
+            try {
+                if(!teacherTable.getSelectionModel().isSelectionEmpty()){
+                    saveTeacherChanges(teacherFNTextField.getText(), teacherLNTextField.getText(), (Integer) teacherTable.getValueAt(teacherTable.getSelectedRow() , 0));
+                }
+                else{
+                    int errorMessage = JOptionPane.showConfirmDialog(null, "No student was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         deleteButton.setBounds(300, 140, 70, 20);
         deleteButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(deleteButton);
+        deleteButton.addActionListener(e-> {
+            try {
+                if(!teacherTable.getSelectionModel().isSelectionEmpty()){
+                    delTeacher((Integer) teacherTable.getValueAt(teacherTable.getSelectedRow() , 0));
+                }
+                else{
+                    int errorMessage = JOptionPane.showConfirmDialog(null, "No student was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         sectionsButton.setBounds(400, 140, 90, 20);
         sectionsButton.setFont(new Font("Calibri", Font.BOLD, 10));
@@ -117,7 +141,9 @@ public class TeacherPanel extends JPanel{
 
     }
 
-    public void saveStudentChanges(String fName, String lName, int id) throws SQLException {
+
+    public void saveTeacherChanges(String fName, String lName, int id) throws SQLException {
+
         if(!teacherFNTextField.getText().isEmpty() && !teacherLNTextField.getText().isEmpty()){
             teacherTable=t.saveTeacher(fName, lName, id);
             jScrollPane.setViewportView(teacherTable);

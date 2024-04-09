@@ -93,8 +93,15 @@ public class Course {
         return courseTable;
 
     }
-    public JTable deleteStudent(String fn,String ln) throws SQLException{
-        stm.executeUpdate("DELETE FROM courses WHERE first_name='"+fn+"'AND last_name='"+ln+"';");
+    public JTable deleteCourse(int id) throws SQLException{
+        stm.executeUpdate("DELETE FROM courses WHERE id='"+id+"';");
+        courseTable=buildTable(stm.executeQuery("Select*from courses"));
+        return courseTable;
+    }
+
+    public JTable saveCourse(String cn, String type, int id) throws SQLException {
+        stm.executeUpdate("UPDATE courses SET course_name='"+cn+"' WHERE id="+id+";");
+        stm.executeUpdate("UPDATE courses SET type='"+type+"' WHERE id="+id+";");
         courseTable=buildTable(stm.executeQuery("Select*from courses"));
         return courseTable;
     }
