@@ -163,7 +163,7 @@ public class TeacherPanel extends JPanel{
         }
     }
 
-    public void delStudent(int id) throws SQLException {
+    public void delTeacher(int id) throws SQLException {
         if(!teacherFNTextField.getText().isEmpty() && !teacherLNTextField.getText().isEmpty()){
             teacherTable=t.deleteTeacher(id);
             jScrollPane.setViewportView(teacherTable);
