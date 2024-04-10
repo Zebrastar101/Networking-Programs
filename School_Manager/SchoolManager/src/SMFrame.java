@@ -269,30 +269,46 @@ public class SMFrame extends JFrame implements WindowListener {
         }
 
         if(String.valueOf(dropDownFile.getSelectedItem())=="Import Data"){
+            System.out.println("import");
             JFileChooser chooser = new JFileChooser();
             chooser.setCurrentDirectory(new File("user.home"));
             int result = chooser.showOpenDialog(null);
             if(result!=JFileChooser.APPROVE_OPTION){
+                System.out.println("error");
                 return;
             }
-
-
-
             try{
                 File f = chooser.getSelectedFile();
+                System.out.println("* exists? "+f.exists());
                 if (f.exists()){
                     stm.execute("DROP TABLE IF EXISTS teachers;");
                     stm.execute("CREATE TABLE IF NOT EXISTS teachers(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
                     Scanner fromFile=new Scanner(f);
                     while (fromFile.hasNextLine()){
-                        String s = fromFile.nextLine();
-                        if(s.equals("TEACHERS:")){
-                            s = fromFile.nextLine();
+                        String t = fromFile.nextLine();
+                        if(t.equals("TEACHERS:")){
+                            t = fromFile.nextLine();
                         }
-                        else if(!s.isEmpty()){
-                            String[] parts=s.split(",");
+                        if(!t.isEmpty()){
+                            String[] parts=t.split(",");
                             //System.out.println(Arrays.toString(parts));
                             stm.executeUpdate("INSERT INTO teachers(first_name, last_name) VALUES('"+parts[1]+"','"+parts[2]+"');");
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                    stm.execute("DROP TABLE IF EXISTS students;");
+                    stm.execute("CREATE TABLE IF NOT EXISTS students(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
+                    while (fromFile.hasNextLine()){
+                        String s = fromFile.nextLine();
+                        if(s.equals("STUDENTS:")){
+                            s = fromFile.nextLine();
+                        }
+                        if(!s.isEmpty()){
+                            String[] parts=s.split(",");
+                            //System.out.println(Arrays.toString(parts));
+                            stm.executeUpdate("INSERT INTO students(first_name, last_name) VALUES('"+parts[1]+"','"+parts[2]+"');");
                         }
                         else {
                             break;
@@ -304,6 +320,7 @@ public class SMFrame extends JFrame implements WindowListener {
             catch (Exception error){
                 error.printStackTrace();
             }
+
         }
 
     }
