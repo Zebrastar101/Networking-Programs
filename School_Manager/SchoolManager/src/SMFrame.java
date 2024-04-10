@@ -265,6 +265,20 @@ public class SMFrame extends JFrame implements WindowListener {
                 error.printStackTrace();
             }
         }
+        if(String.valueOf(dropDownFile.getSelectedItem())=="Import Data"){
+            JFileChooser chooser = new JFileChooser();
+            chooser.setCurrentDirectory(new File("user.home"));
+            int result = chooser.showOpenDialog(null);
+            if(result!=JFileChooser.APPROVE_OPTION){
+                return;
+            }
+            File f = chooser.getSelectedFile();
+            stm.execute("DROP TABLE IF EXISTS students;");
+            stm.execute("CREATE TABLE IF NOT EXISTS students(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
+
+
+
+        }
         //writing to a file
 
 
