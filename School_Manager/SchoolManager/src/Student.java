@@ -122,8 +122,26 @@ public class Student {
 
 
     }
-    public void importStudent(Scanner sc){
+    public JTable importFile(Scanner sc) throws SQLException {
+        stm.execute("DROP TABLE IF EXISTS students;");
+        stm.execute("CREATE TABLE IF NOT EXISTS students(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
+        String s = sc.nextLine();
+        while(!s.equals("STUDENTS:")){
+            s = sc.nextLine();
+        }
+        while (sc.hasNextLine()){
+            s = sc.nextLine();
 
+            if(!s.isEmpty()){
+                String[] parts=s.split(",");
+                stm.executeUpdate("INSERT INTO students(first_name, last_name) VALUES('"+parts[1]+"','"+parts[2]+"');");
+            }
+            else {
+                studentTable=buildTable(stm.executeQuery("Select*from students"));
+                return studentTable;
+            }
+        }
+        return null;
     }
 
 

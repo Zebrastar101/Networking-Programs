@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class StudentPanel extends JPanel {
 
@@ -182,6 +183,21 @@ public class StudentPanel extends JPanel {
 
     public void purge() throws SQLException {
         s.purgeStudent();
+    }
+
+    public void fileImport(Scanner sc) throws SQLException {
+        studentTable=s.importFile(sc);
+        jScrollPane.setViewportView(studentTable);
+        studentFNTextField.setText("");
+        studentLNTextField.setText("");
+        studentTable.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                String firstName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 1);
+                String lastName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 2);
+                studentFNTextField.setText(firstName);
+                studentLNTextField.setText(lastName);
+            }
+        });
     }
 
 
