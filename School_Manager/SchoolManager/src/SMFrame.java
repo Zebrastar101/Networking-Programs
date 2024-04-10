@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class SMFrame extends JFrame implements WindowListener {
 
@@ -265,6 +267,7 @@ public class SMFrame extends JFrame implements WindowListener {
                 error.printStackTrace();
             }
         }
+
         if(String.valueOf(dropDownFile.getSelectedItem())=="Import Data"){
             JFileChooser chooser = new JFileChooser();
             chooser.setCurrentDirectory(new File("user.home"));
@@ -272,15 +275,36 @@ public class SMFrame extends JFrame implements WindowListener {
             if(result!=JFileChooser.APPROVE_OPTION){
                 return;
             }
-            File f = chooser.getSelectedFile();
-            stm.execute("DROP TABLE IF EXISTS students;");
-            stm.execute("CREATE TABLE IF NOT EXISTS students(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
 
 
 
+            try{
+                File f = chooser.getSelectedFile();
+                if (f.exists()){
+                    stm.execute("DROP TABLE IF EXISTS teachers;");
+                    stm.execute("CREATE TABLE IF NOT EXISTS teachers(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
+                    Scanner fromFile=new Scanner(f);
+                    while (fromFile.hasNextLine()){
+                        String s = fromFile.nextLine();
+                        if(s.equals("TEACHERS:")){
+                            s = fromFile.nextLine();
+                        }
+                        else if(!s.isEmpty()){
+                            String[] parts=s.split(",");
+                            //System.out.println(Arrays.toString(parts));
+                            stm.executeUpdate("INSERT INTO teachers(first_name, last_name) VALUES('"+parts[1]+"','"+parts[2]+"');");
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                }
+
+            }
+            catch (Exception error){
+                error.printStackTrace();
+            }
         }
-        //writing to a file
-
 
     }
 
