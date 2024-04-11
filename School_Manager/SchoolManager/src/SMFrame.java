@@ -57,7 +57,7 @@ public class SMFrame extends JFrame implements WindowListener {
 
     public SMFrame(Connection c){
         super("School Manager");
-        setSize(650,720);
+        setSize(1000,750);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setResizable(false);

@@ -118,4 +118,5 @@ public class Section {
         sectionTable=buildTable(stm.executeQuery("Select*from sections"));
         return sectionTable;
     }
+
 }

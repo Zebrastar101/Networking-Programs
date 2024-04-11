@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -7,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
+import java.util.*;
 public class SectionPanel extends JPanel{
 
     JLabel panelTitleLabel = new JLabel("Sections");
@@ -16,6 +17,7 @@ public class SectionPanel extends JPanel{
 
     JComboBox<String> teachersDropDown = new JComboBox<String>();
     JComboBox<String> coursesDropDown = new JComboBox<String>();
+    JComboBox<String> studentsDropDown = new JComboBox<String>();
 
     JTable sectionTable;
 
@@ -38,7 +40,7 @@ public class SectionPanel extends JPanel{
 
 
         setLayout(null);
-        setBounds(15, 40, 600, 630);
+        setBounds(15, 40, 950, 630);
         setBorder(BorderFactory.createLineBorder(Color.black));
 
         panelTitleLabel.setBounds(15, 5, 100, 35);
@@ -55,6 +57,11 @@ public class SectionPanel extends JPanel{
         courseLabel.setBounds(120, 110, 250, 20);
         courseLabel.setFont(new Font("Calibri", Font.BOLD, 15));
         add(courseLabel);
+
+        JLabel studentLab= new JLabel();
+        studentLab.setBounds(630, 330, 50,50);
+        studentLab.setFont(new Font("Calibri", Font.BOLD, 15));
+        add(studentLab);
 
         coursesDropDown.setBounds(260, 110, 230, 20);
         add(coursesDropDown);
@@ -105,9 +112,7 @@ public class SectionPanel extends JPanel{
             }
         });
 
-        rosterButton.setBounds(400, 140, 90, 20);
-        rosterButton.setFont(new Font("Calibri", Font.BOLD, 10));
-        add(rosterButton);
+
 
 
         sec = new Section(Main.myConn);
@@ -123,6 +128,11 @@ public class SectionPanel extends JPanel{
         jScrollPane = new JScrollPane(sectionTable);
         jScrollPane.setBounds(50,190,500, 400);
         add(jScrollPane);
+
+        JTable enrollment=new JTable();
+        JScrollPane jscrollEnroll= new JScrollPane(enrollment);
+        jscrollEnroll.setBounds(630,80,250, 200);
+        add(jscrollEnroll);
 
 
     }
@@ -144,6 +154,50 @@ public class SectionPanel extends JPanel{
                 String course = String.valueOf(courseResultSet.getObject(2))+" ("+courseResultSet.getObject(1)+") ";
                 coursesDropDown.addItem(course);
             }
+
+        }catch(SQLException e){
+            e.printStackTrace();
+
+        }
+    }
+    public void reloadStudentDrop( JTable enrollment)
+    {
+        con = Main.myConn;
+
+        try{
+            stm=con.createStatement();
+            studentsDropDown.removeAllItems();
+            ResultSet studentRS=stm.executeQuery("Select*from students WHERE id >=1");
+            ArrayList<String> studs=new ArrayList<>();
+            while(studentRS!=null && studentRS.next()){
+                studs.add(studentRS.getObject(2) + " " + studentRS.getObject(3)+ "("+studentRS.getObject(1)+")");
+
+            }
+            Collections.sort(studs);
+            ArrayList tableList= getTableData(enrollment);
+            Collections.sort(tableList);
+            ArrayList<String> dropList=new ArrayList<>();
+            int same=0;
+            for(int x=0; x<studs.size();x++){
+                String val= studs.get(x);
+                for(int z=0; z<tableList.size(); z++){
+                    if(val==tableList.get(z)){
+                        same+=1;
+                    }
+                }
+                if(same==0){
+                    dropList.add(val);
+                }
+
+            }
+            for(int c=0; c<dropList.size(); c++){
+                String student = dropList.get(c);
+                studentsDropDown.addItem(student);
+            }
+
+
+
+
 
         }catch(SQLException e){
             e.printStackTrace();
@@ -172,5 +226,13 @@ public class SectionPanel extends JPanel{
         sec.purgeSection();
     }
 
+    public ArrayList<String> getTableData (JTable table) {
+        DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+        int nRow = dtm.getRowCount(), nCol = dtm.getColumnCount();
+        ArrayList<String> tableData=new ArrayList<>();
+            for (int j = 0 ; j < nCol ; j++)
+                tableData.add(String.valueOf(dtm.getValueAt(0,j)));
+        return tableData;
+    }
 }
 
