@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class TeacherPanel extends JPanel{
 
@@ -177,6 +178,21 @@ public class TeacherPanel extends JPanel{
 
     public void purge() throws SQLException {
         t.purgeTeacher();
+    }
+
+    public void fileImport(Scanner sc) throws SQLException {
+        teacherTable=t.importFile(sc);
+        jScrollPane.setViewportView(teacherTable);
+        teacherFNTextField.setText("");
+        teacherLNTextField.setText("");
+        teacherTable.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                String firstName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 1);
+                String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
+                teacherFNTextField.setText(firstName);
+                teacherLNTextField.setText(lastName);
+            }
+        });
     }
 
 }

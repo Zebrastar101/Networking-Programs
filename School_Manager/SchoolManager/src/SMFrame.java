@@ -280,27 +280,9 @@ public class SMFrame extends JFrame implements WindowListener {
                 if (f.exists()){
                     Scanner fromFile=new Scanner(f);
                     studentPan.fileImport(fromFile);
-                    /*
-                    stm.execute("DROP TABLE IF EXISTS teachers;");
-                    stm.execute("CREATE TABLE IF NOT EXISTS teachers(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
-                    while (fromFile.hasNextLine()){
-                        String t = fromFile.nextLine();
-                        if(t.equals("TEACHERS:")){
-                            t = fromFile.nextLine();
-                        }
-                        if(!t.isEmpty()){
-                            String[] parts=t.split(",");
-                            //System.out.println(Arrays.toString(parts));
-                            stm.executeUpdate("INSERT INTO teachers(first_name, last_name) VALUES('"+parts[1]+"','"+parts[2]+"');");
-                        }
-                        else {
-                            teacherPan = new TeacherPanel();
-                            break;
-                        }
-                    }
-
-                     */
-
+                    teacherPan.fileImport(fromFile);
+                    //coursePan.fileImport(fromFile);
+                    //sectionPan.fileImport(fromFile);
                 }
 
             }
