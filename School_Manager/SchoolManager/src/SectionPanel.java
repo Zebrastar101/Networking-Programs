@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class SectionPanel extends JPanel{
 
@@ -170,6 +171,12 @@ public class SectionPanel extends JPanel{
 
     public void purge() throws SQLException {
         sec.purgeSection();
+    }
+
+
+    public void fileImport(Scanner sc) throws SQLException {
+        sectionTable=sec.importFile(sc);
+        jScrollPane.setViewportView(sectionTable);
     }
 
 }

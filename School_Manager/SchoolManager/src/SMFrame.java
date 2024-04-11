@@ -280,9 +280,12 @@ public class SMFrame extends JFrame implements WindowListener {
                 if (f.exists()){
                     Scanner fromFile=new Scanner(f);
                     studentPan.fileImport(fromFile);
+                    fromFile = new Scanner(f);
                     teacherPan.fileImport(fromFile);
-                    //coursePan.fileImport(fromFile);
-                    //sectionPan.fileImport(fromFile);
+                    fromFile = new Scanner(f);
+                    coursePan.fileImport(fromFile);
+                    fromFile = new Scanner(f);
+                    sectionPan.fileImport(fromFile);
                 }
 
             }

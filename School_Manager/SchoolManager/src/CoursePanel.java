@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class CoursePanel extends JPanel {
 
@@ -251,6 +252,29 @@ public class CoursePanel extends JPanel {
 
     public void purge() throws SQLException {
         c.purgeCourse();
+    }
+
+    public void fileImport(Scanner sc) throws SQLException {
+        courseTable=c.importFile(sc);
+        jScrollPane.setViewportView(courseTable);
+        courseTextField.setText("");
+        G.clearSelection();
+        courseTable.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                String courseName = (String) courseTable.getValueAt(courseTable.getSelectedRow() , 1);
+                String type = (String) courseTable.getValueAt(courseTable.getSelectedRow() , 2);
+                courseTextField.setText(courseName);
+                if(type.equals("Academic")){
+                    G.setSelected(acaRadioButton.getModel(), true);
+                }
+                if(type.equals("KAP")){
+                    G.setSelected(KAPRadioButton.getModel(), true);
+                }
+                if(type.equals("AP")){
+                    G.setSelected(APRadioButton.getModel(), true);
+                }
+            }
+        });
     }
 
 
