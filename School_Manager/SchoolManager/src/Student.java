@@ -61,7 +61,7 @@ public class Student {
 
                 }
             }
-            System.out.println(Arrays.deepToString(dataArray));
+            System.out.println("data for Student table"+Arrays.deepToString(dataArray));
             return makeJTable(dataArray);
         }
 

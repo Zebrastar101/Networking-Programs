@@ -59,7 +59,7 @@ public class Course {
 
                 }
             }
-            System.out.println(Arrays.deepToString(dataArray));
+            System.out.println("data for Course table"+Arrays.deepToString(dataArray));
             return makeJTable(dataArray);
         }
 

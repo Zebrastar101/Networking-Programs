@@ -61,7 +61,7 @@ public class Section {
 
                 }
             }
-            System.out.println("data for table"+Arrays.deepToString(dataArray));
+            System.out.println("data for Section table"+Arrays.deepToString(dataArray));
 
             return makeJTable(dataArray);
         }
@@ -132,7 +132,6 @@ public class Section {
 
             if(!s.isEmpty()){
                 String[] parts=s.split(",");
-                System.out.println(s);
                 stm.executeUpdate("INSERT INTO sections(teacher_name, course_name) VALUES('"+parts[1]+"','"+parts[2]+"');");
             }
         }

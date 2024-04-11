@@ -59,7 +59,7 @@ public class Teacher  {
 
                 }
             }
-            System.out.println(Arrays.deepToString(dataArray));
+            System.out.println("data for Teacher table"+Arrays.deepToString(dataArray));
             return makeJTable(dataArray);
         }
 
