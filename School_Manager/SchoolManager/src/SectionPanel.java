@@ -288,14 +288,27 @@ public class SectionPanel extends JPanel{
         reloadStudentsTable(tb);
         jscrollEnroll.setViewportView(enrollment);
     }
-    public ArrayList<String> getTableData (JTable table) {
+    public void deleteStudent(String student, int sectionID) throws SQLException {
+        ArrayList<String> tb=new ArrayList<>();
+        for(int x=0; x<fullData.size();x++){
+            if(sectionID==(int) fullData.get(x).get(0)){
+                for(int z=1; x<fullData.get(x).size();z++){
+                    if(student==(String) fullData.get(x).get(z)){
+                        fullData.get(x).remove(z);
 
-        int nRow = table.getRowCount();
-        ArrayList<String> tableData=new ArrayList<>();
-            for (int j = 0 ; j < nRow ; j++)
-                tableData.add(String.valueOf(table.getValueAt(j,0)));
-        return tableData;
+                    }
+                }
+                for(int z=1; z<fullData.get(x).size(); z++){
+                    tb.add((String) fullData.get(x).get(z));
+                }
+                break;
+            }
+        }
+        enrollment=buildEnrollMentTable(tb);
+        reloadStudentsTable(tb);
+        jscrollEnroll.setViewportView(enrollment);
     }
+    
     public JTable buildEnrollMentTable( ArrayList<String> tb){
         String[][] dataArray= new String[tb.size()][1];
         String[] colNames={"Students"};
