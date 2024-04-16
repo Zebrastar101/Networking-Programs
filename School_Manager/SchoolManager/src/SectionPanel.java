@@ -157,7 +157,7 @@ public class SectionPanel extends JPanel{
                     }
                 }
                 enrollment=buildEnrollMentTable(tb);
-                reloadStudentsTable(enrollment, tb);
+                reloadStudentsTable(tb);
                 jscrollEnroll.setViewportView(enrollment);
 
 
@@ -225,7 +225,7 @@ public class SectionPanel extends JPanel{
     }
 
     //ALLL THE ENROLLMENT STUFF
-    public void reloadStudentsTable( JTable enrollment,ArrayList<String> tb)
+    public void reloadStudentsTable(ArrayList<String> tb)
     {
         con = Main.myConn;
 
@@ -247,7 +247,9 @@ public class SectionPanel extends JPanel{
                 String val= studs.get(x);
                 same=0;
                 for(int z=0; z<tb.size(); z++){
-                    if(val==tb.get(z)){
+                    //System.out.println(tb);
+                    if(val.equals(tb.get(z))){
+                        System.out.println("same");
                         same+=1;
                     }
                 }
@@ -256,6 +258,7 @@ public class SectionPanel extends JPanel{
                 }
 
             }
+            System.out.println(dropList);
             for(int c=0; c<dropList.size(); c++){
                 String student = dropList.get(c);
                 studentsDropDown.addItem(student);
@@ -282,7 +285,7 @@ public class SectionPanel extends JPanel{
             }
         }
         enrollment=buildEnrollMentTable(tb);
-        reloadStudentsTable(enrollment, tb);
+        reloadStudentsTable(tb);
         jscrollEnroll.setViewportView(enrollment);
     }
     public ArrayList<String> getTableData (JTable table) {
