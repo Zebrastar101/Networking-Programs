@@ -146,6 +146,20 @@ public class SectionPanel extends JPanel{
             public void mouseClicked(MouseEvent e) {
                 teachersDropDown.setSelectedItem((String)sectionTable.getValueAt(sectionTable.getSelectedRow() , 1));
                 teachersDropDown.setSelectedItem((String)sectionTable.getValueAt(sectionTable.getSelectedRow() , 2));
+                int secID=(int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0);
+                ArrayList<String> tb= new ArrayList<>();
+                for(int x=0; x<fullData.size();x++) {
+                    if (secID == (int) fullData.get(x).get(0)) {
+                        for(int z=1; z<fullData.get(x).size(); z++){
+                            tb.add((String) fullData.get(x).get(z));
+                        }
+                        break;
+                    }
+                }
+                enrollment=buildEnrollMentTable(tb);
+                reloadStudentsTable(enrollment, tb);
+                jscrollEnroll.setViewportView(enrollment);
+
 
 
             }
@@ -224,8 +238,8 @@ public class SectionPanel extends JPanel{
                 studs.add(studentRS.getObject(2) + " " + studentRS.getObject(3)+ "("+studentRS.getObject(1)+")");
 
             }
-            Collections.sort(studs);
-            Collections.sort(tb);
+            //Collections.sort(studs);
+            //Collections.sort(tb);
 
             dropList=new ArrayList<>();
             int same=0;
