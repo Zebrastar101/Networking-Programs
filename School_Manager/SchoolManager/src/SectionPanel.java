@@ -186,7 +186,8 @@ public class SectionPanel extends JPanel{
         jScrollPane.setBounds(50,190,500, 400);
         add(jScrollPane);
 
-
+        ArrayList<String> blank = new ArrayList<>();
+        enrollment=buildEnrollMentTable(blank);
         jscrollEnroll= new JScrollPane(enrollment);
         jscrollEnroll.setBounds(630,80,250, 200);
         add(jscrollEnroll);
