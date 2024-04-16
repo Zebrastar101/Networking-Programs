@@ -97,7 +97,7 @@ public class SectionPanel extends JPanel{
         add(newStudent);
         newStudent.addActionListener(e -> {
             try {
-                addStudent((String) studentsDropDown.getSelectedItem());
+                addStudent((String) studentsDropDown.getSelectedItem(),(int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0));
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
@@ -146,8 +146,8 @@ public class SectionPanel extends JPanel{
             public void mouseClicked(MouseEvent e) {
                 teachersDropDown.setSelectedItem((String)sectionTable.getValueAt(sectionTable.getSelectedRow() , 1));
                 teachersDropDown.setSelectedItem((String)sectionTable.getValueAt(sectionTable.getSelectedRow() , 2));
-                reloadStudentsTable(enrollment);
-                enrollment=buildEnrollMentTable(dropList);
+
+
             }
         });
         jScrollPane = new JScrollPane(sectionTable);
@@ -211,7 +211,7 @@ public class SectionPanel extends JPanel{
     }
 
     //ALLL THE ENROLLMENT STUFF
-    public void reloadStudentsTable( JTable enrollment)
+    public void reloadStudentsTable( JTable enrollment,ArrayList<String> tb)
     {
         con = Main.myConn;
 
@@ -225,16 +225,15 @@ public class SectionPanel extends JPanel{
 
             }
             Collections.sort(studs);
-            tableList= getTableData(enrollment);
-            Collections.sort(tableList);
+            Collections.sort(tb);
 
             dropList=new ArrayList<>();
             int same=0;
             for(int x=0; x<studs.size();x++){
                 String val= studs.get(x);
                 same=0;
-                for(int z=0; z<tableList.size(); z++){
-                    if(val==tableList.get(z)){
+                for(int z=0; z<tb.size(); z++){
+                    if(val==tb.get(z)){
                         same+=1;
                     }
                 }
@@ -257,10 +256,19 @@ public class SectionPanel extends JPanel{
 
         }
     }
-    public void addStudent(String student) throws SQLException {
-        tableList.add(student);
-        enrollment=buildEnrollMentTable(tableList);
-        reloadStudentsTable(enrollment);
+    public void addStudent(String student, int sectionID) throws SQLException {
+         ArrayList<String> tb=new ArrayList<>();
+        for(int x=0; x<fullData.size();x++){
+            if(sectionID==(int) fullData.get(x).get(0)){
+                fullData.get(x).add(student);
+                for(int z=1; z<fullData.get(x).size(); z++){
+                    tb.add((String) fullData.get(x).get(z));
+                }
+                break;
+            }
+        }
+        enrollment=buildEnrollMentTable(tb);
+        reloadStudentsTable(enrollment, tb);
         jscrollEnroll.setViewportView(enrollment);
     }
     public ArrayList<String> getTableData (JTable table) {
@@ -271,11 +279,11 @@ public class SectionPanel extends JPanel{
                 tableData.add(String.valueOf(table.getValueAt(j,0)));
         return tableData;
     }
-    public JTable buildEnrollMentTable( ArrayList<String> dropList){
-        String[][] dataArray= new String[dropList.size()][1];
+    public JTable buildEnrollMentTable( ArrayList<String> tb){
+        String[][] dataArray= new String[tb.size()][1];
         String[] colNames={"Students"};
             for(int c=0; c<dataArray.length;c++){
-                dataArray[c][0] = dropList.get(c);
+                dataArray[c][0] = tb.get(c);
                 //dataArray[r][c]=data.get(r).get(c);
 
             }
