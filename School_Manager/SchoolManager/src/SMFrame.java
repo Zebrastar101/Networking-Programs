@@ -55,7 +55,7 @@ public class SMFrame extends JFrame implements WindowListener {
     SectionPanel sectionPan = null;
 
 
-    public SMFrame(Connection c){
+    public SMFrame(Connection c) throws SQLException {
         super("School Manager");
         setSize(1000,750);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
