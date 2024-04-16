@@ -3,9 +3,15 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class SMFrame extends JFrame implements WindowListener {
 
@@ -211,6 +217,84 @@ public class SMFrame extends JFrame implements WindowListener {
             }
             System.exit(0);
         }
+        if(String.valueOf(dropDownFile.getSelectedItem())=="Export Data"){
+            try{
+                File ContactsFile = new File("ContactsFile.csv");
+                if(!ContactsFile.exists()){
+                    ContactsFile.createNewFile();
+                }
+                FileWriter fw = new FileWriter(ContactsFile, false);
+
+                con = Main.myConn;
+                try{
+                    stm=con.createStatement();
+                    ResultSet teacherResultSet=stm.executeQuery("Select*from teachers WHERE id >=1");
+                    fw.write("TEACHERS:\n");
+                    while(teacherResultSet!=null && teacherResultSet.next()){
+                        String teacher = teacherResultSet.getObject(1) + "," +teacherResultSet.getObject(2) + "," + teacherResultSet.getObject(3)+"\n";
+                        fw.write(teacher);
+                    }
+                    ResultSet studentResultSet=stm.executeQuery("Select*from students WHERE id >=1");
+                    fw.write("\nSTUDENTS:\n");
+                    while(studentResultSet!=null && studentResultSet.next()){
+                        String student = studentResultSet.getObject(1) + "," +studentResultSet.getObject(2) + "," + studentResultSet.getObject(3)+"\n";
+                        fw.write(student);
+                    }
+                    ResultSet courseResultSet=stm.executeQuery("Select*from courses WHERE id >=1");
+                    fw.write("\nCOURSES:\n");
+                    while(courseResultSet!=null && courseResultSet.next()){
+                        String course = courseResultSet.getObject(1) + "," +courseResultSet.getObject(2) + "," + courseResultSet.getObject(3)+"\n";
+                        fw.write(course);
+                    }
+                    ResultSet sectionResultSet=stm.executeQuery("Select*from sections WHERE id >=1");
+                    fw.write("\nSECTIONS:\n");
+                    while(sectionResultSet!=null && sectionResultSet.next()){
+                        String section = sectionResultSet.getObject(1) + "," +sectionResultSet.getObject(2) + "," + sectionResultSet.getObject(3)+"\n";
+                        fw.write(section);
+                    }
+
+
+
+
+                }catch(SQLException e){
+                    e.printStackTrace();
+
+                }
+
+                fw.close();
+            }
+            catch (Exception error){
+                error.printStackTrace();
+            }
+        }
+
+        if(String.valueOf(dropDownFile.getSelectedItem())=="Import Data"){
+            JFileChooser chooser = new JFileChooser();
+            chooser.setCurrentDirectory(new File("user.home"));
+            int result = chooser.showOpenDialog(null);
+            if(result!=JFileChooser.APPROVE_OPTION){
+                return;
+            }
+            try{
+                File f = chooser.getSelectedFile();
+                if (f.exists()){
+                    Scanner fromFile=new Scanner(f);
+                    studentPan.fileImport(fromFile);
+                    fromFile = new Scanner(f);
+                    teacherPan.fileImport(fromFile);
+                    fromFile = new Scanner(f);
+                    coursePan.fileImport(fromFile);
+                    fromFile = new Scanner(f);
+                    sectionPan.fileImport(fromFile);
+                }
+
+            }
+            catch (Exception error){
+                error.printStackTrace();
+            }
+
+        }
+
     }
 
 

@@ -61,7 +61,8 @@ public class Section {
 
                 }
             }
-            System.out.println(Arrays.deepToString(dataArray));
+            System.out.println("data for Section table"+Arrays.deepToString(dataArray));
+
             return makeJTable(dataArray);
         }
 
@@ -115,6 +116,26 @@ public class Section {
     public JTable purgeSection() throws SQLException {
         stm.execute("DROP TABLE IF EXISTS sections;");
         stm.execute("CREATE TABLE IF NOT EXISTS sections(id INTEGER NOT NULL AUTO_INCREMENT, teacher_name TEXT,course_name TEXT, PRIMARY KEY(id))");
+        sectionTable=buildTable(stm.executeQuery("Select*from sections"));
+        return sectionTable;
+    }
+
+    public JTable importFile(Scanner sc) throws SQLException {
+        stm.execute("DROP TABLE IF EXISTS sections;");
+        stm.execute("CREATE TABLE IF NOT EXISTS sections(id INTEGER NOT NULL AUTO_INCREMENT, teacher_name TEXT,course_name TEXT, PRIMARY KEY(id))");
+        String s = sc.nextLine();
+        while(!s.equals("SECTIONS:")){
+            s = sc.nextLine();
+        }
+        while (sc.hasNextLine()){
+            s = sc.nextLine();
+
+            if(!s.isEmpty()){
+                String[] parts=s.split(",");
+                stm.executeUpdate("INSERT INTO sections(teacher_name, course_name) VALUES('"+parts[1]+"','"+parts[2]+"');");
+            }
+        }
+        System.out.println("building table");
         sectionTable=buildTable(stm.executeQuery("Select*from sections"));
         return sectionTable;
     }

@@ -6,6 +6,7 @@ import javax.swing.table.TableModel;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Teacher  {
     Connection con;
@@ -58,7 +59,7 @@ public class Teacher  {
 
                 }
             }
-            System.out.println(Arrays.deepToString(dataArray));
+            System.out.println("data for Teacher table"+Arrays.deepToString(dataArray));
             return makeJTable(dataArray);
         }
 
@@ -117,8 +118,27 @@ public class Teacher  {
         teacherTable=buildTable(stm.executeQuery("Select*from teachers"));
         return teacherTable;
     }
-    public void exportStudent(){
 
+    public JTable importFile(Scanner sc) throws SQLException {
+        stm.execute("DROP TABLE IF EXISTS teachers;");
+        stm.execute("CREATE TABLE IF NOT EXISTS teachers(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
+        String s = sc.nextLine();
+        while(!s.equals("TEACHERS:")){
+            s = sc.nextLine();
+        }
+        while (sc.hasNextLine()){
+            s = sc.nextLine();
+
+            if(!s.isEmpty()){
+                String[] parts=s.split(",");
+                stm.executeUpdate("INSERT INTO teachers(first_name, last_name) VALUES('"+parts[1]+"','"+parts[2]+"');");
+            }
+            else {
+                teacherTable=buildTable(stm.executeQuery("Select*from teachers"));
+                return teacherTable;
+            }
+        }
+        return null;
     }
 
 

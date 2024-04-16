@@ -7,7 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.*;
+import java.util.Scanner;
+
 
 public class SectionPanel extends JPanel{
 
@@ -162,6 +163,7 @@ public class SectionPanel extends JPanel{
 
 
 
+
             }
         });
         jScrollPane = new JScrollPane(sectionTable);
@@ -223,6 +225,7 @@ public class SectionPanel extends JPanel{
     public void purge() throws SQLException {
         sec.purgeSection();
     }
+
 
     //ALLL THE ENROLLMENT STUFF
     public void reloadStudentsTable(ArrayList<String> tb)
@@ -333,6 +336,13 @@ public class SectionPanel extends JPanel{
         return fd;
     }
 
+
+
+
+    public void fileImport(Scanner sc) throws SQLException {
+        sectionTable=sec.importFile(sc);
+        jScrollPane.setViewportView(sectionTable);
+    }
 
 }
 

@@ -6,6 +6,7 @@ import javax.swing.table.TableModel;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Course {
     Connection con;
@@ -58,7 +59,7 @@ public class Course {
 
                 }
             }
-            System.out.println(Arrays.deepToString(dataArray));
+            System.out.println("data for Course table"+Arrays.deepToString(dataArray));
             return makeJTable(dataArray);
         }
 
@@ -111,8 +112,27 @@ public class Course {
         courseTable=buildTable(stm.executeQuery("Select*from courses"));
         return courseTable;
     }
-    public void exportStudent(){
 
+    public JTable importFile(Scanner sc) throws SQLException {
+        stm.execute("DROP TABLE IF EXISTS courses;");
+        stm.execute("CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL AUTO_INCREMENT, course_name TEXT,type TEXT, PRIMARY KEY(id))");
+        String s = sc.nextLine();
+        while(!s.equals("COURSES:")){
+            s = sc.nextLine();
+        }
+        while (sc.hasNextLine()){
+            s = sc.nextLine();
+
+            if(!s.isEmpty()){
+                String[] parts=s.split(",");
+                stm.executeUpdate("INSERT INTO courses(course_name, type) VALUES('"+parts[1]+"','"+parts[2]+"');");
+            }
+            else {
+                courseTable=buildTable(stm.executeQuery("Select*from courses"));
+                return courseTable;
+            }
+        }
+        return null;
     }
 
 
