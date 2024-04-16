@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -14,6 +13,7 @@ public class SectionPanel extends JPanel{
 
     JLabel panelTitleLabel = new JLabel("Sections");
     JLabel teacherLabel = new JLabel("Teacher: ");
+    ArrayList<ArrayList<Object>> fullData;
     ArrayList<String>tableList;
     JLabel courseLabel = new JLabel("Course: ");
     JScrollPane jscrollEnroll;
@@ -42,7 +42,7 @@ public class SectionPanel extends JPanel{
     JLabel studentLab= new JLabel("Student: ");
     
 
-    public SectionPanel() {
+    public SectionPanel() throws SQLException {
 
 
         setLayout(null);
@@ -78,6 +78,9 @@ public class SectionPanel extends JPanel{
 
 
         //buttons
+
+
+
 
         newButton.setBounds(120, 140, 70, 20);
         newButton.setFont(new Font("Calibri", Font.BOLD, 10));
@@ -136,6 +139,8 @@ public class SectionPanel extends JPanel{
         sec = new Section(Main.myConn);
         sectionTable=sec.getSectionTable();
         //below from https://www.tabnine.com/code/java/methods/javax.swing.JTable/getSelectedRow
+        fullData=new ArrayList<ArrayList<Object>>();
+        fullData=makeFullData(fullData);
         sectionTable.addMouseListener(new MouseAdapter() {
             //Idk how to get the selected values to pop up for this one
             public void mouseClicked(MouseEvent e) {
@@ -181,6 +186,31 @@ public class SectionPanel extends JPanel{
         }
 
     }
+
+
+    public void newSection(String teacher, String course) throws SQLException {
+        sectionTable=sec.addSection(teacher, course);
+        jScrollPane.setViewportView(sectionTable);
+    }
+
+
+    public void saveSectionChanges(String teacher, String course, int id) throws SQLException {
+        sectionTable=sec.saveSection(teacher, course, id);
+        jScrollPane.setViewportView(sectionTable);
+    }
+
+    public void delSection(int id) throws SQLException {
+        sectionTable=sec.deleteSection(id);
+        jScrollPane.setViewportView(sectionTable);
+    }
+
+
+
+    public void purge() throws SQLException {
+        sec.purgeSection();
+    }
+
+    //ALLL THE ENROLLMENT STUFF
     public void reloadStudentsTable( JTable enrollment)
     {
         con = Main.myConn;
@@ -227,34 +257,12 @@ public class SectionPanel extends JPanel{
 
         }
     }
-
-    public void newSection(String teacher, String course) throws SQLException {
-        sectionTable=sec.addSection(teacher, course);
-        jScrollPane.setViewportView(sectionTable);
-    }
     public void addStudent(String student) throws SQLException {
         tableList.add(student);
         enrollment=buildEnrollMentTable(tableList);
         reloadStudentsTable(enrollment);
         jscrollEnroll.setViewportView(enrollment);
     }
-
-    public void saveSectionChanges(String teacher, String course, int id) throws SQLException {
-        sectionTable=sec.saveSection(teacher, course, id);
-        jScrollPane.setViewportView(sectionTable);
-    }
-
-    public void delSection(int id) throws SQLException {
-        sectionTable=sec.deleteSection(id);
-        jScrollPane.setViewportView(sectionTable);
-    }
-
-
-
-    public void purge() throws SQLException {
-        sec.purgeSection();
-    }
-
     public ArrayList<String> getTableData (JTable table) {
 
         int nRow = table.getRowCount();
@@ -281,6 +289,23 @@ public class SectionPanel extends JPanel{
         return table;
 
 
+    }
+    public ArrayList<ArrayList<Object>> makeFullData(ArrayList<ArrayList<Object>> fd) throws SQLException {
+        con = Main.myConn;
+         stm=con.createStatement();
+        ResultSet sectionRS=stm.executeQuery("Select*from sections WHERE id >=1");
+        ArrayList<Object> perRow = new ArrayList<>();
+        while (sectionRS != null && sectionRS.next()) {
+
+            for (int z = 1; z <=1 ; z++) {
+                perRow.add(sectionRS.getObject(z));
+            }
+            fd.add(perRow);
+
+
+            perRow = new ArrayList<>();
+        }
+        return fd;
     }
 
 

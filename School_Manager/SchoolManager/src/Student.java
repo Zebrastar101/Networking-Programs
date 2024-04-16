@@ -74,7 +74,8 @@ public class Student {
 
             @Override
             public boolean isCellEditable(int row, int column) {
-                //all cells false
+                //all
+                // cells false
                 return false;
             }
         };
