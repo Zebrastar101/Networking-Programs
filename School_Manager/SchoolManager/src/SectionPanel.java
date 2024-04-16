@@ -145,7 +145,7 @@ public class SectionPanel extends JPanel{
             //Idk how to get the selected values to pop up for this one
             public void mouseClicked(MouseEvent e) {
                 teachersDropDown.setSelectedItem((String)sectionTable.getValueAt(sectionTable.getSelectedRow() , 1));
-                teachersDropDown.setSelectedItem((String)sectionTable.getValueAt(sectionTable.getSelectedRow() , 2));
+                coursesDropDown.setSelectedItem((String)sectionTable.getValueAt(sectionTable.getSelectedRow() , 2));
                 int secID=(int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0);
                 ArrayList<String> tb= new ArrayList<>();
                 for(int x=0; x<fullData.size();x++) {
