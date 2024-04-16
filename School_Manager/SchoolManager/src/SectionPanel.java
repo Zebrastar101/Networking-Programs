@@ -197,10 +197,12 @@ public class SectionPanel extends JPanel{
             Collections.sort(studs);
             tableList= getTableData(enrollment);
             Collections.sort(tableList);
+
             dropList=new ArrayList<>();
             int same=0;
             for(int x=0; x<studs.size();x++){
                 String val= studs.get(x);
+                same=0;
                 for(int z=0; z<tableList.size(); z++){
                     if(val==tableList.get(z)){
                         same+=1;
