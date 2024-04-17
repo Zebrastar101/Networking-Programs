@@ -239,11 +239,6 @@ public class SectionPanel extends JPanel{
 
 
 
-    public void purge() throws SQLException {
-        sec.purgeSection();
-    }
-
-
     //ALLL THE ENROLLMENT STUFF
     public void reloadStudentsTable(ArrayList<String> tb)
     {

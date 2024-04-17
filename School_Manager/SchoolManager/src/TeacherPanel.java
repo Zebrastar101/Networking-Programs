@@ -183,9 +183,6 @@ public class TeacherPanel extends JPanel{
             int errorMessage = JOptionPane.showConfirmDialog(null, "No teacher was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
         }
     }
-    public void purge() throws SQLException {
-        t.purgeTeacher();
-    }
 
     public void fileImport(Scanner sc) throws SQLException {
         teacherTable=t.importFile(sc);

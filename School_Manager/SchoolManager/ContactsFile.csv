@@ -1,11 +1,14 @@
 TEACHERS:
 1,Austin,Bridger
+2,Jason,Tully
 
 STUDENTS:
 1,chem,g
-2,kaleb,noel
+2,kaleb,n
 
 COURSES:
 1,english,Academic
 
 SECTIONS:
+1,1,1
+2,1,2

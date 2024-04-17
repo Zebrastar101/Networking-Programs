@@ -36,8 +36,8 @@ public class Section {
         try{
             Statement stm2 = con.createStatement();
             Statement stm3 = con.createStatement();
-            ResultSet teachResultSet = stm2.executeQuery("Select*from teacher WHERE teacher_id >=1");
-            ResultSet courseResultSet = stm3.executeQuery("Select*from course WHERE course_id >=1");
+            ResultSet teachResultSet;
+            ResultSet courseResultSet;
             //make columns
             int colNum = rs.getMetaData().getColumnCount();
             ArrayList<Object> perRow = new ArrayList<>();
@@ -50,6 +50,8 @@ public class Section {
             //make data*/
 
             while (rs != null && rs.next()) {
+                teachResultSet = stm2.executeQuery("Select*from teacher WHERE teacher_id >=1");
+                courseResultSet = stm3.executeQuery("Select*from course WHERE course_id >=1");
                 for (int z = 1; z <= colNum; z++) {
                     if(z==1){
                         perRow.add(rs.getObject(z));
@@ -58,8 +60,8 @@ public class Section {
                         int courseID= (int) rs.getObject(z);
                         System.out.println(courseID);
                         while(courseResultSet != null && courseResultSet.next()){
+                            System.out.println((int)courseResultSet.getObject(1));
                             if((int)courseResultSet.getObject(1) == courseID){
-                                System.out.println((int)courseResultSet.getObject(1));
                                 System.out.println("same course ID");
                                 String course = String.valueOf(courseResultSet.getObject(2))+" ("+courseResultSet.getObject(1)+") ";
                                 //System.out.println(course);
@@ -109,7 +111,7 @@ public class Section {
     }
 
     public JTable makeJTable(Object[][] dataArray) {
-        DefaultTableModel tableModel = new DefaultTableModel(dataArray, new String[]{"Section ID", "Teacher Name", "Course Name"}) {
+        DefaultTableModel tableModel = new DefaultTableModel(dataArray, new String[]{"Section ID", "Course Name", "Teacher Name"}) {
 
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -153,17 +155,7 @@ public class Section {
         return sectionTable;
     }
 
-
-
-    public JTable purgeSection() throws SQLException {
-        stm.execute("DROP TABLE IF EXISTS section;");
-        stm.execute("CREATE TABLE IF NOT EXISTS section(section_id INTEGER NOT NULL AUTO_INCREMENT, course_id INTEGER, teacher_id INTEGER, PRIMARY KEY(section_id), FOREIGN KEY(course_id) REFERENCES course(course_id), FOREIGN KEY(teacher_id) REFERENCES teacher(teacher_id))");
-        sectionTable=buildTable(stm.executeQuery("Select*from section WHERE section_id >=1"));
-        return sectionTable;
-    }
-
     public JTable importFile(Scanner sc) throws SQLException {
-        stm.execute("DROP TABLE IF EXISTS section;");
         stm.execute("CREATE TABLE IF NOT EXISTS section(section_id INTEGER NOT NULL AUTO_INCREMENT, course_id INTEGER, teacher_id INTEGER, PRIMARY KEY(section_id), FOREIGN KEY(course_id) REFERENCES course(course_id), FOREIGN KEY(teacher_id) REFERENCES teacher(teacher_id))");
         String s = sc.nextLine();
         while(!s.equals("SECTIONS:")){

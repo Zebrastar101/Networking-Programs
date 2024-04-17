@@ -46,7 +46,6 @@ public class SMFrame extends JFrame implements WindowListener {
 
     String expData="Export Data";
     String impData="Import Data";
-    String purge="Purge";
     String exit="Exit";
 
     JButton helpButton = new JButton("Help");
@@ -104,7 +103,6 @@ public class SMFrame extends JFrame implements WindowListener {
         dropDownFile.setBounds(245, 10, 100, 20);
         dropDownFile.addItem(expData);
         dropDownFile.addItem(impData);
-        dropDownFile.addItem(purge);
         dropDownFile.addItem(exit);
         add(dropDownFile);
         dropDownFile.addActionListener(e-> {
@@ -197,18 +195,6 @@ public class SMFrame extends JFrame implements WindowListener {
     }
 
     public void motion() throws SQLException {
-        if (String.valueOf(dropDownFile.getSelectedItem())=="Purge") {
-            studentPan.purge();
-            teacherPan.purge();
-            coursePan.purge();
-            sectionPan.purge();
-            try {
-                Main.myConn.close();
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-            System.exit(0);
-        }
         if (String.valueOf(dropDownFile.getSelectedItem())=="Exit") {
             try {
                 Main.myConn.close();
@@ -276,6 +262,10 @@ public class SMFrame extends JFrame implements WindowListener {
                 return;
             }
             try{
+                stm.execute("DROP TABLE IF EXISTS section;");
+                stm.execute("DROP TABLE IF EXISTS course;");
+                stm.execute("DROP TABLE IF EXISTS teacher;");
+                stm.execute("DROP TABLE IF EXISTS student;");
                 File f = chooser.getSelectedFile();
                 if (f.exists()){
                     Scanner fromFile=new Scanner(f);

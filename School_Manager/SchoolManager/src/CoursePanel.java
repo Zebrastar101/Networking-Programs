@@ -250,9 +250,7 @@ public class CoursePanel extends JPanel {
         });
     }
 
-    public void purge() throws SQLException {
-        c.purgeCourse();
-    }
+
 
     public void fileImport(Scanner sc) throws SQLException {
         courseTable=c.importFile(sc);

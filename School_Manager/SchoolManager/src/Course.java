@@ -106,15 +106,9 @@ public class Course {
         courseTable=buildTable(stm.executeQuery("Select*from course"));
         return courseTable;
     }
-    public JTable purgeCourse() throws SQLException {
-        stm.execute("DROP TABLE IF EXISTS course;");
-        stm.execute("CREATE TABLE IF NOT EXISTS course(course_id INTEGER NOT NULL AUTO_INCREMENT, title TEXT,type TEXT, PRIMARY KEY(course_id))");
-        courseTable=buildTable(stm.executeQuery("Select*from course"));
-        return courseTable;
-    }
+
 
     public JTable importFile(Scanner sc) throws SQLException {
-        stm.execute("DROP TABLE IF EXISTS course;");
         stm.execute("CREATE TABLE IF NOT EXISTS course(course_id INTEGER NOT NULL AUTO_INCREMENT, title TEXT,type TEXT, PRIMARY KEY(course_id))");
         String s = sc.nextLine();
         while(!s.equals("COURSES:")){

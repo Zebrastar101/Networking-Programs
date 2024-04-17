@@ -181,9 +181,6 @@ public class StudentPanel extends JPanel {
         });
     }
 
-    public void purge() throws SQLException {
-        s.purgeStudent();
-    }
 
     public void fileImport(Scanner sc) throws SQLException {
         studentTable=s.importFile(sc);

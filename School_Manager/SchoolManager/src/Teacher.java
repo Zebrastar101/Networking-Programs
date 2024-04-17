@@ -112,15 +112,9 @@ public class Teacher  {
         return teacherTable;
     }
 
-    public JTable purgeTeacher() throws SQLException {
-        stm.execute("DROP TABLE IF EXISTS teachers;");
-        stm.execute("CREATE TABLE IF NOT EXISTS teacher(teacher_id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(teacher_id))");
-        teacherTable=buildTable(stm.executeQuery("Select*from teacher"));
-        return teacherTable;
-    }
+
 
     public JTable importFile(Scanner sc) throws SQLException {
-        stm.execute("DROP TABLE IF EXISTS teacher;");
         stm.execute("CREATE TABLE IF NOT EXISTS teacher(teacher_id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(teacher_id))");
         String s = sc.nextLine();
         while(!s.equals("TEACHERS:")){
