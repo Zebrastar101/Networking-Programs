@@ -110,14 +110,14 @@ public class Course {
     }
     public JTable deleteCourse(int id) throws SQLException{
         stm.executeUpdate("DELETE FROM course WHERE course_id='"+id+"';");
-        courseTable=buildTable(stm.executeQuery("Select*from course"));
+        courseTable=buildTable(stm.executeQuery("Select*from course WHERE course_id >=1"));
         return courseTable;
     }
 
     public JTable saveCourse(String cn, int type, int id) throws SQLException {
         stm.executeUpdate("UPDATE course SET title='"+cn+"' WHERE course_id="+id+";");
         stm.executeUpdate("UPDATE course SET type='"+type+"' WHERE course_id="+id+";");
-        courseTable=buildTable(stm.executeQuery("Select*from course"));
+        courseTable=buildTable(stm.executeQuery("Select*from course WHERE course_id >=1"));
         return courseTable;
     }
 
@@ -136,7 +136,7 @@ public class Course {
                 stm.executeUpdate("INSERT INTO course(title, type) VALUES('"+parts[1]+"','"+parts[2]+"');");
             }
             else {
-                courseTable=buildTable(stm.executeQuery("Select*from course"));
+                courseTable=buildTable(stm.executeQuery("Select*from course WHERE course_id >=1"));
                 return courseTable;
             }
         }

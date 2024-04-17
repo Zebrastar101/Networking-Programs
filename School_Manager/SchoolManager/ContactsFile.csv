@@ -7,9 +7,9 @@ STUDENTS:
 2,kaleb,n
 
 COURSES:
-1,english,Academic
-2,forensics,Academic
+1,english,0
+2,pre cal,1
+3,com sci A,2
 
 SECTIONS:
 1,1,1
-2,1,2
