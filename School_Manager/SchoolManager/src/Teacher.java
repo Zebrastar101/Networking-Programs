@@ -17,7 +17,7 @@ public class Teacher  {
         //studentTable=new JTable();
         try{
             stm=con.createStatement();
-            resultSet=stm.executeQuery("Select*from teachers WHERE id >=1");
+            resultSet=stm.executeQuery("Select*from teacher WHERE teacher_id >=1");
 
             //the below while loop checks if there's elements in the resultSet
             teacherTable=buildTable(resultSet);
@@ -90,31 +90,31 @@ public class Teacher  {
         return teacherTable;
     }
     public JTable addTeacher(String fn, String ln) throws SQLException {
-        stm.executeUpdate("INSERT INTO teachers(first_name, last_name) VALUES('"+fn+"','"+ln+"');");
-        teacherTable=buildTable(stm.executeQuery("Select*from teachers WHERE id >=1"));
+        stm.executeUpdate("INSERT INTO teacher(first_name, last_name) VALUES('"+fn+"','"+ln+"');");
+        teacherTable=buildTable(stm.executeQuery("Select*from teacher WHERE teacher_id >=1"));
         return teacherTable;
 
     }
 
 
     public JTable deleteTeacher(int id) throws SQLException{
-        stm.executeUpdate("DELETE FROM teachers WHERE id='"+id+"';");
+        stm.executeUpdate("DELETE FROM teacher WHERE teacher_id='"+id+"';");
 
-        teacherTable=buildTable(stm.executeQuery("Select*from teachers"));
+        teacherTable=buildTable(stm.executeQuery("Select*from teacher"));
         return teacherTable;
     }
 
     public JTable saveTeacher(String fn, String ln, int id) throws SQLException {
-        stm.executeUpdate("UPDATE teachers SET first_name='"+fn+"' WHERE id="+id+";");
-        stm.executeUpdate("UPDATE teachers SET last_name='"+ln+"' WHERE id="+id+";");
-        teacherTable=buildTable(stm.executeQuery("Select*from teachers"));
+        stm.executeUpdate("UPDATE teacher SET first_name='"+fn+"' WHERE teacher_id="+id+";");
+        stm.executeUpdate("UPDATE teacher SET last_name='"+ln+"' WHERE teacher_id="+id+";");
+        teacherTable=buildTable(stm.executeQuery("Select*from teacher"));
         return teacherTable;
     }
 
     public JTable purgeTeacher() throws SQLException {
         stm.execute("DROP TABLE IF EXISTS teachers;");
-        stm.execute("CREATE TABLE IF NOT EXISTS teachers(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
-        teacherTable=buildTable(stm.executeQuery("Select*from teachers"));
+        stm.execute("CREATE TABLE IF NOT EXISTS teacher(teacher_id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(teacher_id))");
+        teacherTable=buildTable(stm.executeQuery("Select*from teacher"));
         return teacherTable;
     }
     public void exportStudent(){
