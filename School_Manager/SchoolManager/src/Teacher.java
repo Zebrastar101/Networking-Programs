@@ -134,7 +134,7 @@ public class Teacher  {
                 stm.executeUpdate("INSERT INTO teachers(first_name, last_name) VALUES('"+parts[1]+"','"+parts[2]+"');");
             }
             else {
-                teacherTable=buildTable(stm.executeQuery("Select*from teachers"));
+                teacherTable=buildTable(stm.executeQuery("Select*from teacher"));
                 return teacherTable;
             }
         }
