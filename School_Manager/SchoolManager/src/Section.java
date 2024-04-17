@@ -32,7 +32,9 @@ public class Section {
     }
 
     public JTable buildTable(ResultSet rs) throws SQLException {
-        //make colums
+        ResultSet teachResultSet = stm.executeQuery("Select*from teacher WHERE teacher_id >=1");
+        ResultSet courseResultSet = stm.executeQuery("Select*from course WHERE course_id >=1");
+        //make columns
         int colNum = rs.getMetaData().getColumnCount();
         ArrayList<Object> perRow = new ArrayList<>();
         ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
@@ -45,7 +47,27 @@ public class Section {
 
         while (rs != null && rs.next()) {
             for (int z = 1; z <= colNum; z++) {
-                perRow.add(rs.getObject(z));
+                if(z==1){
+                    perRow.add(rs.getObject(z));
+                }
+                if(z==2){
+                    int courseID= (int) rs.getObject(z);
+                    while(courseResultSet != null && courseResultSet.next()){
+                        if((int)courseResultSet.getObject(1) == courseID){
+                            String course = String.valueOf(courseResultSet.getObject(2))+" ("+courseResultSet.getObject(1)+") ";
+                            perRow.add(rs.getObject(course));
+                        }
+                    }
+                }
+                if(z==3){
+                    int teacherID= (int) rs.getObject(z);
+                    while(teachResultSet != null && teachResultSet.next()){
+                        if((int)teachResultSet.getObject(1) == teacherID){
+                            String teacher = teachResultSet.getObject(2) + " " + teachResultSet.getObject(3)+ "("+teachResultSet.getObject(1)+")";
+                            perRow.add(rs.getObject(teacher));
+                        }
+                    }
+                }
             }
             data.add(perRow);
 
