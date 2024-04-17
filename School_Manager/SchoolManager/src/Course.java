@@ -101,8 +101,8 @@ public class Course {
     }
 
     public JTable saveCourse(String cn, String type, int id) throws SQLException {
-        stm.executeUpdate("UPDATE courses SET title='"+cn+"' WHERE course_id="+id+";");
-        stm.executeUpdate("UPDATE courses SET type='"+type+"' WHERE course_id="+id+";");
+        stm.executeUpdate("UPDATE course SET title='"+cn+"' WHERE course_id="+id+";");
+        stm.executeUpdate("UPDATE course SET type='"+type+"' WHERE course_id="+id+";");
         courseTable=buildTable(stm.executeQuery("Select*from course"));
         return courseTable;
     }
