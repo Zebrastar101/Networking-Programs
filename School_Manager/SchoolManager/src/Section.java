@@ -58,11 +58,8 @@ public class Section {
                     }
                     if(z==2){
                         int courseID= (int) rs.getObject(z);
-                        System.out.println(courseID);
                         while(courseResultSet != null && courseResultSet.next()){
-                            System.out.println((int)courseResultSet.getObject(1));
                             if((int)courseResultSet.getObject(1) == courseID){
-                                System.out.println("same course ID");
                                 String course = String.valueOf(courseResultSet.getObject(2))+" ("+courseResultSet.getObject(1)+") ";
                                 //System.out.println(course);
                                 perRow.add(course);
@@ -95,7 +92,7 @@ public class Section {
 
                     }
                 }
-                //System.out.println("data for Section table"+Arrays.deepToString(dataArray));
+                System.out.println("data for Section table"+Arrays.deepToString(dataArray));
 
                 return makeJTable(dataArray);
             }
