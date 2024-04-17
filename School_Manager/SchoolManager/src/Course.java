@@ -114,8 +114,8 @@ public class Course {
     }
 
     public JTable importFile(Scanner sc) throws SQLException {
-        stm.execute("DROP TABLE IF EXISTS courses;");
-        stm.execute("CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL AUTO_INCREMENT, course_name TEXT,type TEXT, PRIMARY KEY(id))");
+        stm.execute("DROP TABLE IF EXISTS course;");
+        stm.execute("CREATE TABLE IF NOT EXISTS course(course_id INTEGER NOT NULL AUTO_INCREMENT, title TEXT,type TEXT, PRIMARY KEY(course_id))");
         String s = sc.nextLine();
         while(!s.equals("COURSES:")){
             s = sc.nextLine();
@@ -125,10 +125,10 @@ public class Course {
 
             if(!s.isEmpty()){
                 String[] parts=s.split(",");
-                stm.executeUpdate("INSERT INTO courses(course_name, type) VALUES('"+parts[1]+"','"+parts[2]+"');");
+                stm.executeUpdate("INSERT INTO course(title, type) VALUES('"+parts[1]+"','"+parts[2]+"');");
             }
             else {
-                courseTable=buildTable(stm.executeQuery("Select*from courses"));
+                courseTable=buildTable(stm.executeQuery("Select*from course"));
                 return courseTable;
             }
         }

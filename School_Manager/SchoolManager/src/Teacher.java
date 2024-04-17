@@ -120,8 +120,8 @@ public class Teacher  {
     }
 
     public JTable importFile(Scanner sc) throws SQLException {
-        stm.execute("DROP TABLE IF EXISTS teachers;");
-        stm.execute("CREATE TABLE IF NOT EXISTS teachers(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
+        stm.execute("DROP TABLE IF EXISTS teacher;");
+        stm.execute("CREATE TABLE IF NOT EXISTS teacher(teacher_id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(teacher_id))");
         String s = sc.nextLine();
         while(!s.equals("TEACHERS:")){
             s = sc.nextLine();
@@ -131,7 +131,7 @@ public class Teacher  {
 
             if(!s.isEmpty()){
                 String[] parts=s.split(",");
-                stm.executeUpdate("INSERT INTO teachers(first_name, last_name) VALUES('"+parts[1]+"','"+parts[2]+"');");
+                stm.executeUpdate("INSERT INTO teacher(first_name, last_name) VALUES('"+parts[1]+"','"+parts[2]+"');");
             }
             else {
                 teacherTable=buildTable(stm.executeQuery("Select*from teacher"));

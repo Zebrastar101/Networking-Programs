@@ -252,7 +252,7 @@ public class SectionPanel extends JPanel{
         try{
             stm=con.createStatement();
             studentsDropDown.removeAllItems();
-            ResultSet studentRS=stm.executeQuery("Select*from students WHERE id >=1");
+            ResultSet studentRS=stm.executeQuery("Select*from student WHERE student_id >=1");
             ArrayList<String> studs=new ArrayList<>();
             while(studentRS!=null && studentRS.next()){
                 studs.add(studentRS.getObject(2) + " " + studentRS.getObject(3)+ "("+studentRS.getObject(1)+")");
