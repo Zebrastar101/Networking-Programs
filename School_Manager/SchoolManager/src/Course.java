@@ -17,7 +17,7 @@ public class Course {
         //courseTable=new JTable();
         try{
             stm=con.createStatement();
-            resultSet=stm.executeQuery("Select*from courses WHERE id >=1");
+            resultSet=stm.executeQuery("Select*from course WHERE course_id >=1");
 
             //the below while loop checks if there's elements in the resultSet
             courseTable=buildTable(resultSet);
@@ -88,27 +88,27 @@ public class Course {
         return courseTable;
     }
     public JTable addCourse(String cn, String type) throws SQLException {
-        stm.executeUpdate("INSERT INTO courses(course_name, type) VALUES('"+cn+"','"+type+"');");
-        courseTable=buildTable(stm.executeQuery("Select*from courses WHERE id >=1"));
+        stm.executeUpdate("INSERT INTO course(title, type) VALUES('"+cn+"','"+type+"');");
+        courseTable=buildTable(stm.executeQuery("Select*from course WHERE course_id >=1"));
         return courseTable;
 
     }
     public JTable deleteCourse(int id) throws SQLException{
-        stm.executeUpdate("DELETE FROM courses WHERE id='"+id+"';");
-        courseTable=buildTable(stm.executeQuery("Select*from courses"));
+        stm.executeUpdate("DELETE FROM course WHERE course_id='"+id+"';");
+        courseTable=buildTable(stm.executeQuery("Select*from course"));
         return courseTable;
     }
 
     public JTable saveCourse(String cn, String type, int id) throws SQLException {
-        stm.executeUpdate("UPDATE courses SET course_name='"+cn+"' WHERE id="+id+";");
-        stm.executeUpdate("UPDATE courses SET type='"+type+"' WHERE id="+id+";");
-        courseTable=buildTable(stm.executeQuery("Select*from courses"));
+        stm.executeUpdate("UPDATE courses SET title='"+cn+"' WHERE course_id="+id+";");
+        stm.executeUpdate("UPDATE courses SET type='"+type+"' WHERE course_id="+id+";");
+        courseTable=buildTable(stm.executeQuery("Select*from course"));
         return courseTable;
     }
     public JTable purgeCourse() throws SQLException {
-        stm.execute("DROP TABLE IF EXISTS courses;");
-        stm.execute("CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL AUTO_INCREMENT, course_name TEXT,type TEXT, PRIMARY KEY(id))");
-        courseTable=buildTable(stm.executeQuery("Select*from courses"));
+        stm.execute("DROP TABLE IF EXISTS course;");
+        stm.execute("CREATE TABLE IF NOT EXISTS course(course_id INTEGER NOT NULL AUTO_INCREMENT, title TEXT,type TEXT, PRIMARY KEY(course_id))");
+        courseTable=buildTable(stm.executeQuery("Select*from course"));
         return courseTable;
     }
     public void exportStudent(){
