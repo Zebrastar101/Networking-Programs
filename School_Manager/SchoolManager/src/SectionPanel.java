@@ -202,12 +202,12 @@ public class SectionPanel extends JPanel{
             stm=con.createStatement();
             teachersDropDown.removeAllItems();
             coursesDropDown.removeAllItems();
-            teacherResultSet=stm.executeQuery("Select*from teachers WHERE id >=1");
+            teacherResultSet=stm.executeQuery("Select*from teacher WHERE teacher_id >=1");
             while(teacherResultSet!=null && teacherResultSet.next()){
                 String teacher = teacherResultSet.getObject(2) + " " + teacherResultSet.getObject(3)+ "("+teacherResultSet.getObject(1)+")";
                 teachersDropDown.addItem(teacher);
             }
-            courseResultSet=stm.executeQuery("Select*from courses WHERE id >=1");
+            courseResultSet=stm.executeQuery("Select*from course WHERE course_id >=1");
             while(courseResultSet!=null && courseResultSet.next()){
                 String course = String.valueOf(courseResultSet.getObject(2))+" ("+courseResultSet.getObject(1)+") ";
                 coursesDropDown.addItem(course);
