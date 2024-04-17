@@ -360,7 +360,7 @@ public class SectionPanel extends JPanel{
     public ArrayList<ArrayList<Object>> makeFullData(ArrayList<ArrayList<Object>> fd) throws SQLException {
         con = Main.myConn;
          stm=con.createStatement();
-        ResultSet sectionRS=stm.executeQuery("Select*from sections WHERE id >=1");
+        ResultSet sectionRS=stm.executeQuery("Select*from sections WHERE section_id >=1");
         ArrayList<Object> perRow = new ArrayList<>();
         while (sectionRS != null && sectionRS.next()) {
 
