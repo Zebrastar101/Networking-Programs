@@ -15,8 +15,9 @@ public class Main {
             stm.execute("CREATE TABLE IF NOT EXISTS students(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
             stm.execute("CREATE TABLE IF NOT EXISTS teachers(id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(id))");
             stm.execute("CREATE TABLE IF NOT EXISTS courses(id INTEGER NOT NULL AUTO_INCREMENT, course_name TEXT,type TEXT, PRIMARY KEY(id))");
-            stm.execute("CREATE TABLE IF NOT EXISTS sections(id INTEGER NOT NULL AUTO_INCREMENT, teacher_name TEXT,course_name TEXT, PRIMARY KEY(id))");
 
+            stm.execute("CREATE TABLE IF NOT EXISTS sections(section_id INTEGER NOT NULL AUTO_INCREMENT, teacher_name TEXT,course_name TEXT, PRIMARY KEY(section_id))");
+            stm.execute("CREATE TABLE IF NOT EXISTS enrollment(section_id INTEGER, student_id INTEGER, FOREIGN KEY(section_id),FOREIGN KEY(student_id)");
         }
         catch(SQLException e){
             e.printStackTrace();

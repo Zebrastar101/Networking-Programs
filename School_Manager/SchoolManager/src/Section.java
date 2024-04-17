@@ -19,7 +19,7 @@ public class Section {
         //studentTable=new JTable();
         try {
             stm = con.createStatement();
-            resultSet = stm.executeQuery("Select*from sections WHERE id >=1");
+            resultSet = stm.executeQuery("Select*from sections WHERE section_id >=1");
 
             //the below while loop checks if there's elements in the resultSet
             sectionTable = buildTable(resultSet);
@@ -94,20 +94,20 @@ public class Section {
 
     public JTable addSection(String teacher, String course) throws SQLException {
         stm.executeUpdate("INSERT INTO sections(teacher_name, course_name) VALUES('"+teacher+"','"+course+"');");
-        sectionTable=buildTable(stm.executeQuery("Select*from sections WHERE id >=1"));
+        sectionTable=buildTable(stm.executeQuery("Select*from sections WHERE section_id >=1"));
         return sectionTable;
     }
 
     public JTable saveSection(String teacher, String course, int id) throws SQLException {
-        stm.executeUpdate("UPDATE sections SET teacher_name='"+teacher+"' WHERE id="+id+";");
-        stm.executeUpdate("UPDATE sections SET course_name='"+course+"' WHERE id="+id+";");
-        sectionTable=buildTable(stm.executeQuery("Select*from sections"));
+        stm.executeUpdate("UPDATE sections SET teacher_name='"+teacher+"' WHERE section_id="+id+";");
+        stm.executeUpdate("UPDATE sections SET course_name='"+course+"' WHERE section_id="+id+";");
+        sectionTable=buildTable(stm.executeQuery("Select*from sections WHERE section_id >=1"));
         return sectionTable;
     }
 
     public JTable deleteSection(int id) throws SQLException{
-        stm.executeUpdate("DELETE FROM sections WHERE id="+id+";");
-        sectionTable=buildTable(stm.executeQuery("Select*from sections"));
+        stm.executeUpdate("DELETE FROM sections WHERE section_id="+id+";");
+        sectionTable=buildTable(stm.executeQuery("Select*from sections WHERE section_id >=1"));
         return sectionTable;
     }
 
@@ -115,14 +115,14 @@ public class Section {
 
     public JTable purgeSection() throws SQLException {
         stm.execute("DROP TABLE IF EXISTS sections;");
-        stm.execute("CREATE TABLE IF NOT EXISTS sections(id INTEGER NOT NULL AUTO_INCREMENT, teacher_name TEXT,course_name TEXT, PRIMARY KEY(id))");
-        sectionTable=buildTable(stm.executeQuery("Select*from sections"));
+        stm.execute("CREATE TABLE IF NOT EXISTS sections(section_id INTEGER NOT NULL AUTO_INCREMENT, teacher_name TEXT,course_name TEXT, PRIMARY KEY(section_id))");
+        sectionTable=buildTable(stm.executeQuery("Select*from sections WHERE section_id >=1"));
         return sectionTable;
     }
 
     public JTable importFile(Scanner sc) throws SQLException {
         stm.execute("DROP TABLE IF EXISTS sections;");
-        stm.execute("CREATE TABLE IF NOT EXISTS sections(id INTEGER NOT NULL AUTO_INCREMENT, teacher_name TEXT,course_name TEXT, PRIMARY KEY(id))");
+        stm.execute("CREATE TABLE IF NOT EXISTS sections(section_id INTEGER NOT NULL AUTO_INCREMENT, teacher_name TEXT,course_name TEXT, PRIMARY KEY(section_id))");
         String s = sc.nextLine();
         while(!s.equals("SECTIONS:")){
             s = sc.nextLine();
@@ -136,7 +136,7 @@ public class Section {
             }
         }
         System.out.println("building table");
-        sectionTable=buildTable(stm.executeQuery("Select*from sections"));
+        sectionTable=buildTable(stm.executeQuery("Select*from sections WHERE section_id >=1"));
         return sectionTable;
     }
 
