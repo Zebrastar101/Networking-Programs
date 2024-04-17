@@ -13,8 +13,8 @@ public class Teacher  {
     Statement stm;
     public JTable teacherTable;
     ResultSet resultSet;
-    public Teacher(Connection c){
-        con =c;
+    public Teacher(){
+        con =Main.myConn;
         //studentTable=new JTable();
         try{
             stm=con.createStatement();

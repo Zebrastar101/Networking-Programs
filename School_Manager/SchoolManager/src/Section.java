@@ -14,8 +14,8 @@ public class Section {
     public JTable sectionTable;
     ResultSet resultSet;
 
-    public Section(Connection c) {
-        con = c;
+    public Section() {
+        con = Main.myConn;
         //studentTable=new JTable();
         try {
             stm = con.createStatement();

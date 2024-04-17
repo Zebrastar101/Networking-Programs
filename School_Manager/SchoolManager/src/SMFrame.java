@@ -211,7 +211,6 @@ public class SMFrame extends JFrame implements WindowListener {
                 }
                 FileWriter fw = new FileWriter(ContactsFile, false);
 
-                con = Main.myConn;
                 try{
                     stm=con.createStatement();
                     ResultSet teacherResultSet=stm.executeQuery("Select*from teacher WHERE teacher_id >=1");

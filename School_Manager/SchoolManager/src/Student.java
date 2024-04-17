@@ -15,8 +15,8 @@ public class Student {
     Statement stm;
     public JTable studentTable;
     ResultSet resultSet;
-    public Student(Connection c){
-        con =c;
+    public Student(){
+        con = Main.myConn;
         //studentTable=new JTable();
         try{
             stm=con.createStatement();

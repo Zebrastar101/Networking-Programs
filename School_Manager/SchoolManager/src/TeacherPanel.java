@@ -103,7 +103,7 @@ public class TeacherPanel extends JPanel{
         add(sectionsButton);
 
 
-        t = new Teacher(Main.myConn);
+        t = new Teacher();
         teacherTable=t.getTeacherTable();
         //below from https://www.tabnine.com/code/java/methods/javax.swing.JTable/getSelectedRow
         teacherTable.addMouseListener(new MouseAdapter() {

@@ -121,7 +121,7 @@ public class CoursePanel extends JPanel {
         G.add(APRadioButton);
 
 
-        c = new Course(Main.myConn);
+        c = new Course();
         courseTable=c.getCourseTable();
         //below from https://www.tabnine.com/code/java/methods/javax.swing.JTable/getSelectedRow
         courseTable.addMouseListener(new MouseAdapter() {
