@@ -93,7 +93,9 @@ public class Section {
     }
 
     public JTable addSection(String teacher, String course) throws SQLException {
-        stm.executeUpdate("INSERT INTO section(teacher_name, course_name) VALUES('"+teacher+"','"+course+"');");
+        int teacherID= Integer.parseInt(teacher.substring(teacher.indexOf('(')+1,teacher.indexOf(')')));
+        int courseID= Integer.parseInt(course.substring(course.indexOf('(')+1,course.indexOf(')')));
+        stm.executeUpdate("INSERT INTO section(course_id, teacher_id) VALUES('"+courseID+"','"+teacherID+"');");
         sectionTable=buildTable(stm.executeQuery("Select*from section WHERE section_id >=1"));
         return sectionTable;
     }
