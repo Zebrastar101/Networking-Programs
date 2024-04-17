@@ -153,13 +153,13 @@ public class CoursePanel extends JPanel {
     public void newCourse(String course) throws SQLException {
         if(!courseTextField.getText().isEmpty() && (acaRadioButton.isSelected() || KAPRadioButton.isSelected() || APRadioButton.isSelected())){
             if(acaRadioButton.isSelected()){
-                courseTable=c.addCourse(course, "Academic");
+                courseTable=c.addCourse(course, 0);
             }
             else if (KAPRadioButton.isSelected()) {
-                courseTable=c.addCourse(course, "KAP");
+                courseTable=c.addCourse(course, 1);
             }
             else{
-                courseTable=c.addCourse(course, "AP");
+                courseTable=c.addCourse(course, 2);
             }
             G.clearSelection();
             jScrollPane.setViewportView(courseTable);
@@ -191,13 +191,13 @@ public class CoursePanel extends JPanel {
     public void saveCourseChanges(String course, int id) throws SQLException {
         if(!courseTextField.getText().isEmpty() && (acaRadioButton.isSelected() || KAPRadioButton.isSelected() || APRadioButton.isSelected())){
             if(acaRadioButton.isSelected()){
-                courseTable=c.saveCourse(course, "Academic", id);
+                courseTable=c.saveCourse(course, 0, id);
             }
             else if (KAPRadioButton.isSelected()) {
-                courseTable=c.saveCourse(course, "KAP", id);
+                courseTable=c.saveCourse(course, 1, id);
             }
             else{
-                courseTable=c.saveCourse(course, "AP", id);
+                courseTable=c.saveCourse(course, 2, id);
             }
             G.clearSelection();
             jScrollPane.setViewportView(courseTable);
