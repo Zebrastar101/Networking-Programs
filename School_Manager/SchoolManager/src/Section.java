@@ -32,64 +32,80 @@ public class Section {
     }
 
     public JTable buildTable(ResultSet rs) throws SQLException {
-        ResultSet teachResultSet = stm.executeQuery("Select*from teacher WHERE teacher_id >=1");
-        ResultSet courseResultSet = stm.executeQuery("Select*from course WHERE course_id >=1");
-        //make columns
-        int colNum = rs.getMetaData().getColumnCount();
-        ArrayList<Object> perRow = new ArrayList<>();
-        ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
-        ArrayList<String> colN = new ArrayList<>();
+        con = Main.myConn;
+        try{
+            Statement stm2 = con.createStatement();
+            Statement stm3 = con.createStatement();
+            ResultSet teachResultSet = stm2.executeQuery("Select*from teacher WHERE teacher_id >=1");
+            ResultSet courseResultSet = stm3.executeQuery("Select*from course WHERE course_id >=1");
+            //make columns
+            int colNum = rs.getMetaData().getColumnCount();
+            ArrayList<Object> perRow = new ArrayList<>();
+            ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
+            ArrayList<String> colN = new ArrayList<>();
 
-      /*  for(int x=1; x<=colNum;x++){
+            /*  for(int x=1; x<=colNum;x++){
             colN.add((String) rs.getObject(x));
-        }
-        //make data*/
+            }
+            //make data*/
 
-        while (rs != null && rs.next()) {
-            for (int z = 1; z <= colNum; z++) {
-                if(z==1){
-                    perRow.add(rs.getObject(z));
-                }
-                if(z==2){
-                    int courseID= (int) rs.getObject(z);
-                    while(courseResultSet != null && courseResultSet.next()){
-                        if((int)courseResultSet.getObject(1) == courseID){
-                            String course = String.valueOf(courseResultSet.getObject(2))+" ("+courseResultSet.getObject(1)+") ";
-                            perRow.add(rs.getObject(course));
+            while (rs != null && rs.next()) {
+                for (int z = 1; z <= colNum; z++) {
+                    if(z==1){
+                        perRow.add(rs.getObject(z));
+                    }
+                    if(z==2){
+                        int courseID= (int) rs.getObject(z);
+                        System.out.println(courseID);
+                        while(courseResultSet != null && courseResultSet.next()){
+                            if((int)courseResultSet.getObject(1) == courseID){
+                                System.out.println((int)courseResultSet.getObject(1));
+                                System.out.println("same course ID");
+                                String course = String.valueOf(courseResultSet.getObject(2))+" ("+courseResultSet.getObject(1)+") ";
+                                //System.out.println(course);
+                                perRow.add(course);
+                            }
+                        }
+                    }
+                    if(z==3){
+                        int teacherID= (int) rs.getObject(z);
+                        while(teachResultSet != null && teachResultSet.next()){
+                            if((int)teachResultSet.getObject(1) == teacherID){
+                                String teacher = teachResultSet.getObject(2) + " " + teachResultSet.getObject(3)+ "("+teachResultSet.getObject(1)+")";
+                                //System.out.println(teacher);
+                                perRow.add(teacher);
+                            }
                         }
                     }
                 }
-                if(z==3){
-                    int teacherID= (int) rs.getObject(z);
-                    while(teachResultSet != null && teachResultSet.next()){
-                        if((int)teachResultSet.getObject(1) == teacherID){
-                            String teacher = teachResultSet.getObject(2) + " " + teachResultSet.getObject(3)+ "("+teachResultSet.getObject(1)+")";
-                            perRow.add(rs.getObject(teacher));
-                        }
+                data.add(perRow);
+
+
+
+                perRow = new ArrayList<>();
+            }
+            if (data.size() != 0) {
+                Object[][] dataArray = new Object[data.size()][data.get(0).size()];
+                for (int r = 0; r < dataArray.length; r++) {
+                    for (int c = 0; c < dataArray[0].length; c++) {
+                        dataArray[r] = data.get(r).toArray();
+                        //dataArray[r][c]=data.get(r).get(c);
+
                     }
                 }
+                //System.out.println("data for Section table"+Arrays.deepToString(dataArray));
+
+                return makeJTable(dataArray);
             }
-            data.add(perRow);
 
 
-            perRow = new ArrayList<>();
+            return makeJTable(new Object[0][0]);
         }
-        if (data.size() != 0) {
-            Object[][] dataArray = new Object[data.size()][data.get(0).size()];
-            for (int r = 0; r < dataArray.length; r++) {
-                for (int c = 0; c < dataArray[0].length; c++) {
-                    dataArray[r] = data.get(r).toArray();
-                    //dataArray[r][c]=data.get(r).get(c);
+        catch (SQLException e) {
+            e.printStackTrace();
 
-                }
-            }
-            System.out.println("data for Section table"+Arrays.deepToString(dataArray));
-
-            return makeJTable(dataArray);
         }
-
-
-        return makeJTable(new Object[0][0]);
+        return null;
     }
 
     public JTable makeJTable(Object[][] dataArray) {
@@ -123,8 +139,10 @@ public class Section {
     }
 
     public JTable saveSection(String teacher, String course, int id) throws SQLException {
-        stm.executeUpdate("UPDATE section SET teacher_name='"+teacher+"' WHERE section_id="+id+";");
-        stm.executeUpdate("UPDATE section SET course_name='"+course+"' WHERE section_id="+id+";");
+        int teacherID= Integer.parseInt(teacher.substring(teacher.indexOf('(')+1,teacher.indexOf(')')));
+        int courseID= Integer.parseInt(course.substring(course.indexOf('(')+1,course.indexOf(')')));
+        stm.executeUpdate("UPDATE section SET teacher_id='"+teacherID+"' WHERE section_id="+id+";");
+        stm.executeUpdate("UPDATE section SET course_id='"+courseID+"' WHERE section_id="+id+";");
         sectionTable=buildTable(stm.executeQuery("Select*from section WHERE section_id >=1"));
         return sectionTable;
     }
@@ -139,14 +157,14 @@ public class Section {
 
     public JTable purgeSection() throws SQLException {
         stm.execute("DROP TABLE IF EXISTS section;");
-        stm.execute("CREATE TABLE IF NOT EXISTS section(section_id INTEGER NOT NULL AUTO_INCREMENT, teacher_name TEXT,course_name TEXT, PRIMARY KEY(section_id))");
+        stm.execute("CREATE TABLE IF NOT EXISTS section(section_id INTEGER NOT NULL AUTO_INCREMENT, course_id INTEGER, teacher_id INTEGER, PRIMARY KEY(section_id), FOREIGN KEY(course_id) REFERENCES course(course_id), FOREIGN KEY(teacher_id) REFERENCES teacher(teacher_id))");
         sectionTable=buildTable(stm.executeQuery("Select*from section WHERE section_id >=1"));
         return sectionTable;
     }
 
     public JTable importFile(Scanner sc) throws SQLException {
         stm.execute("DROP TABLE IF EXISTS section;");
-        stm.execute("CREATE TABLE IF NOT EXISTS section(section_id INTEGER NOT NULL AUTO_INCREMENT, teacher_name TEXT,course_name TEXT, PRIMARY KEY(section_id))");
+        stm.execute("CREATE TABLE IF NOT EXISTS section(section_id INTEGER NOT NULL AUTO_INCREMENT, course_id INTEGER, teacher_id INTEGER, PRIMARY KEY(section_id), FOREIGN KEY(course_id) REFERENCES course(course_id), FOREIGN KEY(teacher_id) REFERENCES teacher(teacher_id))");
         String s = sc.nextLine();
         while(!s.equals("SECTIONS:")){
             s = sc.nextLine();
@@ -156,7 +174,7 @@ public class Section {
 
             if(!s.isEmpty()){
                 String[] parts=s.split(",");
-                stm.executeUpdate("INSERT INTO section(teacher_name, course_name) VALUES('"+parts[1]+"','"+parts[2]+"');");
+                stm.executeUpdate("INSERT INTO section(course_id, teacher_id) VALUES('"+parts[1]+"','"+parts[2]+"');");
             }
         }
         System.out.println("building table");
