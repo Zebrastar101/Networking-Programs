@@ -294,19 +294,28 @@ public class SectionPanel extends JPanel{
         }
     }
     public void addStudent(String student, int sectionID) throws SQLException {
-         ArrayList<String> tb=new ArrayList<>();
-        for(int x=0; x<fullData.size();x++){
-            if(sectionID==(int) fullData.get(x).get(0)){
-                fullData.get(x).add(student);
-                for(int z=1; z<fullData.get(x).size(); z++){
-                    tb.add((String) fullData.get(x).get(z));
+        con = Main.myConn;
+        try{
+            stm=con.createStatement();
+            //insert into enrollment table
+            ArrayList<String> tb=new ArrayList<>();
+            for(int x=0; x<fullData.size();x++){
+                if(sectionID==(int) fullData.get(x).get(0)){
+                    fullData.get(x).add(student);
+                    for(int z=1; z<fullData.get(x).size(); z++){
+                        tb.add((String) fullData.get(x).get(z));
+                    }
+                    break;
                 }
-                break;
             }
+            enrollment=buildEnrollMentTable(tb);
+            reloadStudentsTable(tb);
+            jscrollEnroll.setViewportView(enrollment);
         }
-        enrollment=buildEnrollMentTable(tb);
-        reloadStudentsTable(tb);
-        jscrollEnroll.setViewportView(enrollment);
+        catch(SQLException e){
+            e.printStackTrace();
+
+        }
     }
     public void deleteStudent(String student, int sectionID) throws SQLException {
         ArrayList<String> tb=new ArrayList<>();
