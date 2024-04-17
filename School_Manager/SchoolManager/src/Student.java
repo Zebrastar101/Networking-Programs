@@ -20,7 +20,7 @@ public class Student {
         //studentTable=new JTable();
         try{
             stm=con.createStatement();
-            resultSet=stm.executeQuery("Select*from students WHERE student_id >=1");
+            resultSet=stm.executeQuery("Select*from student WHERE student_id >=1");
 
             //the below while loop checks if there's elements in the resultSet
             studentTable=buildTable(resultSet);
@@ -89,28 +89,28 @@ public class Student {
         return studentTable;
     }
     public JTable addStudent(String fn, String ln) throws SQLException {
-        stm.executeUpdate("INSERT INTO students(first_name, last_name) VALUES('"+fn+"','"+ln+"');");
-        studentTable=buildTable(stm.executeQuery("Select*from students WHERE student_id >=1"));
+        stm.executeUpdate("INSERT INTO student(first_name, last_name) VALUES('"+fn+"','"+ln+"');");
+        studentTable=buildTable(stm.executeQuery("Select*from student WHERE student_id >=1"));
         return studentTable;
 
     }
     public JTable deleteStudent(int id) throws SQLException{
-        stm.executeUpdate("DELETE FROM students WHERE student_id="+id+";");
-        studentTable=buildTable(stm.executeQuery("Select*from students WHERE student_id >=1"));
+        stm.executeUpdate("DELETE FROM student WHERE student_id="+id+";");
+        studentTable=buildTable(stm.executeQuery("Select*from student WHERE student_id >=1"));
         return studentTable;
     }
 
     public JTable saveStudent(String fn, String ln, int id) throws SQLException {
-        stm.executeUpdate("UPDATE students SET first_name='"+fn+"' WHERE student_id="+id+";");
-        stm.executeUpdate("UPDATE students SET last_name='"+ln+"' WHERE student_id="+id+";");
-        studentTable=buildTable(stm.executeQuery("Select*from students WHERE student_id >=1"));
+        stm.executeUpdate("UPDATE student SET first_name='"+fn+"' WHERE student_id="+id+";");
+        stm.executeUpdate("UPDATE student SET last_name='"+ln+"' WHERE student_id="+id+";");
+        studentTable=buildTable(stm.executeQuery("Select*from student WHERE student_id >=1"));
         return studentTable;
     }
 
     public JTable purgeStudent() throws SQLException {
-        stm.execute("DROP TABLE IF EXISTS students;");
-        stm.execute("CREATE TABLE IF NOT EXISTS students(student_id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(student_id))");
-        studentTable=buildTable(stm.executeQuery("Select*from students WHERE student_id >=1"));
+        stm.execute("DROP TABLE IF EXISTS student;");
+        stm.execute("CREATE TABLE IF NOT EXISTS student(student_id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(student_id))");
+        studentTable=buildTable(stm.executeQuery("Select*from student WHERE student_id >=1"));
         return studentTable;
     }
     public void exportStudent(FileWriter fileWriter) throws IOException  {
@@ -119,8 +119,8 @@ public class Student {
 
     }
     public JTable importFile(Scanner sc) throws SQLException {
-        stm.execute("DROP TABLE IF EXISTS students;");
-        stm.execute("CREATE TABLE IF NOT EXISTS students(student_id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(student_id))");
+        stm.execute("DROP TABLE IF EXISTS student;");
+        stm.execute("CREATE TABLE IF NOT EXISTS student(student_id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(student_id))");
         String s = sc.nextLine();
         while(!s.equals("STUDENTS:")){
             s = sc.nextLine();
@@ -130,10 +130,10 @@ public class Student {
 
             if(!s.isEmpty()){
                 String[] parts=s.split(",");
-                stm.executeUpdate("INSERT INTO students(first_name, last_name) VALUES('"+parts[1]+"','"+parts[2]+"');");
+                stm.executeUpdate("INSERT INTO student(first_name, last_name) VALUES('"+parts[1]+"','"+parts[2]+"');");
             }
             else {
-                studentTable=buildTable(stm.executeQuery("Select*from students WHERE student_id >=1"));
+                studentTable=buildTable(stm.executeQuery("Select*from student WHERE student_id >=1"));
                 return studentTable;
             }
         }
