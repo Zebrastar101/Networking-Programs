@@ -129,7 +129,7 @@ public class SMFrame extends JFrame implements WindowListener {
 
         sectionPan = new SectionPanel();
         add(sectionPan);
-        sectionPan.setVisible(false);
+        sectionPan.setVisible(true);
 
         aboutLabel.setBounds(285,100,100,35);
         add(aboutLabel);
