@@ -275,12 +275,17 @@ public class SectionPanel extends JPanel{
 
             }
             System.out.println(dropList);
+
             for(int c=0; c<dropList.size(); c++){
-                while(studentRS!=null && studentRS.next()){
-                    String v=studentRS.getObject(1).toString();
+                ResultSet sRS=stm.executeQuery("Select*from student WHERE student_id >=1");
+                while(sRS!=null && sRS.next()){
+                    System.out.println("here");
+                    String v=sRS.getObject(1).toString();
+
                     if(v.equals(dropList.get(c)) ){
-                        String student = studentRS.getObject(2) + " " + studentRS.getObject(3)+ "("+studentRS.getObject(1)+")";
-                        System.out.println(student);
+                        System.out.println("here");
+                        String student = sRS.getObject(2) + " " + sRS.getObject(3)+ "("+sRS.getObject(1)+")";
+
                         studentsDropDown.addItem(student);
                     }
 
