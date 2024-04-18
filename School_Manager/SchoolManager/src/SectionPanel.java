@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static oracle.jrockit.jfr.events.Bits.intValue;
+
 
 public class SectionPanel extends JPanel{
 
@@ -139,7 +141,25 @@ public class SectionPanel extends JPanel{
         add(addStudentButton);
         addStudentButton.addActionListener(e -> {
             try {
-                addStudent((String) studentsDropDown.getSelectedItem(),(int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0));
+                String v=(String) studentsDropDown.getSelectedItem();
+                String turn ="";
+                for(int x=0; x<v.length(); x++){
+                    if(v.charAt(x)=='('){
+                        for(int z=0; z<v.length(); z++){
+                            if(v.charAt(z+1)!=')'){
+                                turn+=v.charAt(z+1);
+                            }
+                            else{
+                                break;
+                            }
+                        }
+                    }
+                    else{
+                        break;
+                    }
+                }
+                System.out.println(turn);
+                addStudent(Integer.parseInt(turn),(int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0));
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
@@ -166,12 +186,20 @@ public class SectionPanel extends JPanel{
                 int secID=(int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0);
 
                 ArrayList<String> tb= new ArrayList<>();
-                for(int x=0; x<fullData.size();x++) {
-                    if (secID == (int) fullData.get(x).get(0)) {
-                        for(int z=1; z<fullData.get(x).size(); z++){
-                            tb.add((String) fullData.get(x).get(z));
+                try {
+                    fullData=makeFullData(fullData);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                if(fullData.size()!=0){
+                    for(int x=0; x<fullData.size();x++) {
+                        if ( secID == (int) fullData.get(x).get(0)) {
+                            for(int z=1; z<fullData.get(x).size(); z++){
+                                tb.add((String) fullData.get(x).get(z));
+                            }
+                            break;
                         }
-                        break;
                     }
                 }
                 enrollment=buildEnrollMentTable(tb);
@@ -274,17 +302,16 @@ public class SectionPanel extends JPanel{
                 }
 
             }
-            System.out.println(dropList);
 
             for(int c=0; c<dropList.size(); c++){
                 ResultSet sRS=stm.executeQuery("Select*from student WHERE student_id >=1");
                 while(sRS!=null && sRS.next()){
-                    System.out.println("here");
+
                     String v=sRS.getObject(1).toString();
 
                     if(v.equals(dropList.get(c)) ){
-                        System.out.println("here");
-                        String student = sRS.getObject(2) + " " + sRS.getObject(3)+ "("+sRS.getObject(1)+")";
+
+                        String student = "("+sRS.getObject(1)+")"+sRS.getObject(2) + " " + sRS.getObject(3);
 
                         studentsDropDown.addItem(student);
                     }
@@ -301,17 +328,24 @@ public class SectionPanel extends JPanel{
 
         }
     }
-    public void addStudent(String student, int sectionID) throws SQLException {
+    public void addStudent(int student, int sectionID) throws SQLException {
         con = Main.myConn;
         try{
             stm=con.createStatement();
             //insert into enrollment table
             ArrayList<String> tb=new ArrayList<>();
+            ResultSet enrollRs= stm.executeQuery("Select*from enrollment WHERE section_id >=1");
+            while(enrollRs != null && enrollRs.next()){
+                if(enrollRs.getObject(1).equals(sectionID)){
+                    stm.executeUpdate("INSERT INTO enrollment(section_id, student_id) VALUES('"+sectionID+"','"+student+"');");
+                    break;
+                }
+            }
+            fullData=makeFullData(fullData);
             for(int x=0; x<fullData.size();x++){
-                if(sectionID==(int) fullData.get(x).get(0)){
-                    fullData.get(x).add(student);
+                if(sectionID==Integer.parseInt(fullData.get(x).get(0).toString()) ){
                     for(int z=1; z<fullData.get(x).size(); z++){
-                        tb.add((String) fullData.get(x).get(z));
+                        tb.add(findStudent((int) fullData.get(x).get(z)));
                     }
                     break;
                 }
@@ -332,15 +366,15 @@ public class SectionPanel extends JPanel{
                 for(int z=1; x<fullData.get(x).size();z++){
                     if(student==(String) fullData.get(x).get(z)){
                         fullData.get(x).remove(z);
-
                     }
                 }
                 for(int z=1; z<fullData.get(x).size(); z++){
-                    tb.add((String) fullData.get(x).get(z));
+                    tb.add(findStudent((int) fullData.get(x).get(z)));
                 }
                 break;
             }
         }
+
         enrollment=buildEnrollMentTable(tb);
         reloadStudentsTable(tb);
         jscrollEnroll.setViewportView(enrollment);
@@ -375,9 +409,11 @@ public class SectionPanel extends JPanel{
 
             for (int z = 1; z <=1 ; z++) {
                 same=0;
-                for(int x=0; x<fd.size();x++){
-                    if(sectionRS.getObject(z).equals(fd.get(x).get(0))){
-                        same+=1;
+                if(fd.size()!=0){
+                    for(int x=0; x<fd.size();x++){
+                        if(sectionRS.getObject(z)==fd.get(x).get(0)){
+                            same+=1;
+                        }
                     }
                 }
                 if(same==0){
@@ -401,8 +437,16 @@ public class SectionPanel extends JPanel{
         return fd;
     }
 
-
-
+    public String findStudent(int id) throws SQLException {
+        stm=con.createStatement();
+        ResultSet studentRS=stm.executeQuery("Select*from student WHERE student_id >=1");
+        while (studentRS!=null && studentRS.next()){
+            if(id==(int)studentRS.getObject(1)){
+                return "("+studentRS.getObject(1)+")"+studentRS.getObject(2) + " " + studentRS.getObject(3);
+            }
+        }
+        return null;
+    }
 
     public void fileImport(Scanner sc) throws SQLException {
         sectionTable=sec.importFile(sc);
