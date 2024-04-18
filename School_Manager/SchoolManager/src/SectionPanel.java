@@ -355,17 +355,35 @@ public class SectionPanel extends JPanel{
     public ArrayList<ArrayList<Object>> makeFullData(ArrayList<ArrayList<Object>> fd) throws SQLException {
         con = Main.myConn;
          stm=con.createStatement();
-        ResultSet sectionRS=stm.executeQuery("Select*from section WHERE section_id >=1");
+        ResultSet sectionRS=stm.executeQuery("Select*from enrollment WHERE section_id >=1");
         ArrayList<Object> perRow = new ArrayList<>();
+        int same=0;
         while (sectionRS != null && sectionRS.next()) {
 
             for (int z = 1; z <=1 ; z++) {
-                perRow.add(sectionRS.getObject(z));
+                same=0;
+                for(int x=0; x<fd.size();x++){
+                    if(sectionRS.getObject(z).equals(fd.get(x).get(0))){
+                        same+=1;
+                    }
+                }
+                if(same==0){
+                    perRow.add(sectionRS.getObject(z));
+                }
             }
             fd.add(perRow);
 
-
             perRow = new ArrayList<>();
+        }
+        while(sectionRS!=null&&sectionRS.next()){
+            for (int z = 2; z <=2 ; z++) {
+                for(int x=0; x<fd.size();x++){
+                    if(sectionRS.getObject(z-1).equals(fd.get(x).get(0))){
+                        fd.get(x).add(sectionRS.getObject(z));
+                    }
+                }
+
+            }
         }
         return fd;
     }
