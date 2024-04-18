@@ -153,7 +153,7 @@ public class SectionPanel extends JPanel{
 
 
 
-        sec = new Section(Main.myConn);
+        sec = new Section();
         sectionTable=sec.getSectionTable();
         //below from https://www.tabnine.com/code/java/methods/javax.swing.JTable/getSelectedRow
         fullData=new ArrayList<ArrayList<Object>>();
@@ -237,11 +237,6 @@ public class SectionPanel extends JPanel{
         jScrollPane.setViewportView(sectionTable);
     }
 
-
-
-    public void purge() throws SQLException {
-        sec.purgeSection();
-    }
 
 
     //ALLL THE ENROLLMENT STUFF

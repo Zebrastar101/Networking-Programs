@@ -103,7 +103,7 @@ public class TeacherPanel extends JPanel{
         add(sectionsButton);
 
 
-        t = new Teacher(Main.myConn);
+        t = new Teacher();
         teacherTable=t.getTeacherTable();
         //below from https://www.tabnine.com/code/java/methods/javax.swing.JTable/getSelectedRow
         teacherTable.addMouseListener(new MouseAdapter() {
@@ -182,9 +182,6 @@ public class TeacherPanel extends JPanel{
         else{
             int errorMessage = JOptionPane.showConfirmDialog(null, "No teacher was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
         }
-    }
-    public void purge() throws SQLException {
-        t.purgeTeacher();
     }
 
     public void fileImport(Scanner sc) throws SQLException {

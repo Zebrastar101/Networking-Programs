@@ -107,7 +107,7 @@ public class StudentPanel extends JPanel {
 
         //JTable
 
-        s = new Student(Main.myConn);
+        s = new Student();
         studentTable=s.getStudentTable();
         //below from https://www.tabnine.com/code/java/methods/javax.swing.JTable/getSelectedRow
         studentTable.addMouseListener(new MouseAdapter() {
@@ -181,9 +181,6 @@ public class StudentPanel extends JPanel {
         });
     }
 
-    public void purge() throws SQLException {
-        s.purgeStudent();
-    }
 
     public void fileImport(Scanner sc) throws SQLException {
         studentTable=s.importFile(sc);

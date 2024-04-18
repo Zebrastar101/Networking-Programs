@@ -13,8 +13,8 @@ public class Course {
     Statement stm;
     public JTable courseTable;
     ResultSet resultSet;
-    public Course(Connection c){
-        con =c;
+    public Course(){
+        con =Main.myConn;
         //courseTable=new JTable();
         try{
             stm=con.createStatement();
@@ -43,7 +43,21 @@ public class Course {
 
         while(rs!=null && rs.next()){
             for(int z=1; z<=colNum; z++){
-                perRow.add(rs.getObject(z));
+                if(z!=3){
+                    perRow.add(rs.getObject(z));
+                }
+                else{
+                    if((int)rs.getObject(z)==0){
+                        perRow.add("Academic");
+                    }
+                    if((int)rs.getObject(z)==1){
+                        perRow.add("KAP");
+                    }
+                    if((int)rs.getObject(z)==2){
+                        perRow.add("AP");
+                    }
+
+                }
             }
             data.add(perRow);
 
@@ -88,7 +102,7 @@ public class Course {
     public JTable getCourseTable() {
         return courseTable;
     }
-    public JTable addCourse(String cn, String type) throws SQLException {
+    public JTable addCourse(String cn, int type) throws SQLException {
         stm.executeUpdate("INSERT INTO course(title, type) VALUES('"+cn+"','"+type+"');");
         courseTable=buildTable(stm.executeQuery("Select*from course WHERE course_id >=1"));
         return courseTable;
@@ -96,25 +110,19 @@ public class Course {
     }
     public JTable deleteCourse(int id) throws SQLException{
         stm.executeUpdate("DELETE FROM course WHERE course_id='"+id+"';");
-        courseTable=buildTable(stm.executeQuery("Select*from course"));
+        courseTable=buildTable(stm.executeQuery("Select*from course WHERE course_id >=1"));
         return courseTable;
     }
 
-    public JTable saveCourse(String cn, String type, int id) throws SQLException {
+    public JTable saveCourse(String cn, int type, int id) throws SQLException {
         stm.executeUpdate("UPDATE course SET title='"+cn+"' WHERE course_id="+id+";");
         stm.executeUpdate("UPDATE course SET type='"+type+"' WHERE course_id="+id+";");
-        courseTable=buildTable(stm.executeQuery("Select*from course"));
-        return courseTable;
-    }
-    public JTable purgeCourse() throws SQLException {
-        stm.execute("DROP TABLE IF EXISTS course;");
-        stm.execute("CREATE TABLE IF NOT EXISTS course(course_id INTEGER NOT NULL AUTO_INCREMENT, title TEXT,type TEXT, PRIMARY KEY(course_id))");
-        courseTable=buildTable(stm.executeQuery("Select*from course"));
+        courseTable=buildTable(stm.executeQuery("Select*from course WHERE course_id >=1"));
         return courseTable;
     }
 
+
     public JTable importFile(Scanner sc) throws SQLException {
-        stm.execute("DROP TABLE IF EXISTS course;");
         stm.execute("CREATE TABLE IF NOT EXISTS course(course_id INTEGER NOT NULL AUTO_INCREMENT, title TEXT,type TEXT, PRIMARY KEY(course_id))");
         String s = sc.nextLine();
         while(!s.equals("COURSES:")){
@@ -128,7 +136,7 @@ public class Course {
                 stm.executeUpdate("INSERT INTO course(title, type) VALUES('"+parts[1]+"','"+parts[2]+"');");
             }
             else {
-                courseTable=buildTable(stm.executeQuery("Select*from course"));
+                courseTable=buildTable(stm.executeQuery("Select*from course WHERE course_id >=1"));
                 return courseTable;
             }
         }

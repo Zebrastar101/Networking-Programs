@@ -15,8 +15,8 @@ public class Student {
     Statement stm;
     public JTable studentTable;
     ResultSet resultSet;
-    public Student(Connection c){
-        con =c;
+    public Student(){
+        con = Main.myConn;
         //studentTable=new JTable();
         try{
             stm=con.createStatement();
@@ -107,19 +107,8 @@ public class Student {
         return studentTable;
     }
 
-    public JTable purgeStudent() throws SQLException {
-        stm.execute("DROP TABLE IF EXISTS student;");
-        stm.execute("CREATE TABLE IF NOT EXISTS student(student_id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(student_id))");
-        studentTable=buildTable(stm.executeQuery("Select*from student WHERE student_id >=1"));
-        return studentTable;
-    }
-    public void exportStudent(FileWriter fileWriter) throws IOException  {
 
-
-
-    }
     public JTable importFile(Scanner sc) throws SQLException {
-        stm.execute("DROP TABLE IF EXISTS student;");
         stm.execute("CREATE TABLE IF NOT EXISTS student(student_id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(student_id))");
         String s = sc.nextLine();
         while(!s.equals("STUDENTS:")){
