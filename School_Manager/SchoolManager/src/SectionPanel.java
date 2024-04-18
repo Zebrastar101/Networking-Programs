@@ -260,7 +260,7 @@ public class SectionPanel extends JPanel{
             dropList=new ArrayList<>();
             int same=0;
             for(int x=0; x<studs.size();x++){
-                String val= (String) studs.get(x);
+                String val= studs.get(x).toString();
                 same=0;
                 for(int z=0; z<tb.size(); z++){
                     //System.out.println(tb);
@@ -274,11 +274,14 @@ public class SectionPanel extends JPanel{
                 }
 
             }
-            //System.out.println(dropList);
+            System.out.println(dropList);
             for(int c=0; c<dropList.size(); c++){
                 while(studentRS!=null && studentRS.next()){
-                    if(dropList.get(c).equals((String) studentRS.getObject(1)) ){
-                        
+                    String v=studentRS.getObject(1).toString();
+                    if(v.equals(dropList.get(c)) ){
+                        String student = studentRS.getObject(2) + " " + studentRS.getObject(3)+ "("+studentRS.getObject(1)+")";
+                        System.out.println(student);
+                        studentsDropDown.addItem(student);
                     }
 
                 }
