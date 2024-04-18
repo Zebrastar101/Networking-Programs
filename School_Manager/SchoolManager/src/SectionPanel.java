@@ -164,6 +164,7 @@ public class SectionPanel extends JPanel{
                 teachersDropDown.setSelectedItem((String)sectionTable.getValueAt(sectionTable.getSelectedRow() , 1));
                 coursesDropDown.setSelectedItem((String)sectionTable.getValueAt(sectionTable.getSelectedRow() , 2));
                 int secID=(int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0);
+
                 ArrayList<String> tb= new ArrayList<>();
                 for(int x=0; x<fullData.size();x++) {
                     if (secID == (int) fullData.get(x).get(0)) {
@@ -248,9 +249,9 @@ public class SectionPanel extends JPanel{
             stm=con.createStatement();
             studentsDropDown.removeAllItems();
             ResultSet studentRS=stm.executeQuery("Select*from student WHERE student_id >=1");
-            ArrayList<String> studs=new ArrayList<>();
+            ArrayList<Object> studs=new ArrayList<>();
             while(studentRS!=null && studentRS.next()){
-                studs.add(studentRS.getObject(2) + " " + studentRS.getObject(3)+ "("+studentRS.getObject(1)+")");
+                studs.add(studentRS.getObject(1));
 
             }
             //Collections.sort(studs);
@@ -259,7 +260,7 @@ public class SectionPanel extends JPanel{
             dropList=new ArrayList<>();
             int same=0;
             for(int x=0; x<studs.size();x++){
-                String val= studs.get(x);
+                String val= (String) studs.get(x);
                 same=0;
                 for(int z=0; z<tb.size(); z++){
                     //System.out.println(tb);
@@ -275,8 +276,12 @@ public class SectionPanel extends JPanel{
             }
             //System.out.println(dropList);
             for(int c=0; c<dropList.size(); c++){
-                String student = dropList.get(c);
-                studentsDropDown.addItem(student);
+                while(studentRS!=null && studentRS.next()){
+                    if(dropList.get(c).equals((String) studentRS.getObject(1)) ){
+                        
+                    }
+
+                }
             }
 
 
