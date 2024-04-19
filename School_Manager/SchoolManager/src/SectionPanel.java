@@ -9,8 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static oracle.jrockit.jfr.events.Bits.intValue;
-
 
 public class SectionPanel extends JPanel{
 
