@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.*;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -16,13 +17,23 @@ public class TeacherPanel extends JPanel{
 
     JTable teacherTable;
 
+    JTable sectionsTaughtTable;
+
+    Connection con;
+
+
+
     JScrollPane jScrollPane;
+
+    JScrollPane jScrollSection;
 
     JButton newButton = new JButton("New");
     JButton saveButton = new JButton("Save");
     JButton deleteButton = new JButton("Delete");
 
     Teacher t;
+
+
 
 
     public TeacherPanel() {
@@ -113,6 +124,12 @@ public class TeacherPanel extends JPanel{
         jScrollPane = new JScrollPane(teacherTable);
         jScrollPane.setBounds(50,190,500, 400);
         add(jScrollPane);
+
+        sectionsTaughtTable=buildSectionTable();
+        jScrollSection = new JScrollPane(sectionsTaughtTable);
+        jScrollSection.setBounds(630,80,250, 200);
+        add(jScrollSection);
+
     }
 
 
@@ -193,6 +210,22 @@ public class TeacherPanel extends JPanel{
                 teacherLNTextField.setText(lastName);
             }
         });
+    }
+
+    public JTable buildSectionTable(){
+        con=Main.myConn;
+        try{
+            Statement stm1 = con.createStatement();
+            Statement stm2 = con.createStatement();
+            Statement stm3 = con.createStatement();
+            ResultSet secResultSet;
+            ResultSet teachResultSet;
+            ResultSet courseResultSet;
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

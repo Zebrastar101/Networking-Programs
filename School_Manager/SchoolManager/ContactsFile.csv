@@ -1,9 +1,13 @@
 TEACHERS:
+1,Lauren,Tamayo
+2,Jason,Tully
 
 STUDENTS:
 
 COURSES:
-2,english,0
-3,com sci,1
+1,english,0
+2,com sci,1
 
 SECTIONS:
+1,1,1
+2,2,1
