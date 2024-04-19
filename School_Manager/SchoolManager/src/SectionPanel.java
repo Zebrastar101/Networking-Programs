@@ -156,7 +156,7 @@ public class SectionPanel extends JPanel{
                         break;
                     }
                 }
-                System.out.println(turn);
+
                 addStudent(Integer.parseInt(turn),(int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0));
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
@@ -348,6 +348,7 @@ public class SectionPanel extends JPanel{
                 if(sectionID==Integer.parseInt(fullData.get(x).get(0).toString()) ){
                     for(int z=1; z<fullData.get(x).size(); z++){
                         tb.add(findStudent((int) fullData.get(x).get(z)));
+                        System.out.println(tb.get(z));
                     }
                     break;
                 }
@@ -439,7 +440,7 @@ public class SectionPanel extends JPanel{
                         }
                         if(s==0){
                             fd.get(x).add(sRS.getObject(2));
-                            
+
                         }
 
                     }
