@@ -240,14 +240,11 @@ public class TeacherPanel extends JPanel{
         con=Main.myConn;
         try{
             Statement stm1 = con.createStatement();
-            Statement stm2 = con.createStatement();
             Statement stm3 = con.createStatement();
             ResultSet secResultSet;
-            ResultSet teachResultSet;
+
             ResultSet courseResultSet;
             secResultSet = stm1.executeQuery("Select*from section WHERE section_id >=1");
-            teachResultSet = stm2.executeQuery("Select*from teacher WHERE teacher_id >=1");
-            courseResultSet = stm3.executeQuery("Select*from course WHERE course_id >=1");
 
             ArrayList<Object> perRow = new ArrayList<>();
             ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
