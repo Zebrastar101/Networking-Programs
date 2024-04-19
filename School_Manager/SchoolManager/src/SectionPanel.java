@@ -405,32 +405,32 @@ public class SectionPanel extends JPanel{
         int same=0;
         while (sectionRS != null && sectionRS.next()) {
 
-            for (int z = 1; z <=1 ; z++) {
+
                 same=0;
                 for(int x=0; x<fd.size();x++){
-                        if(sectionRS.getObject(z)==fd.get(x).get(0)){
+                        if(sectionRS.getObject(1)==fd.get(x).get(0)){
                             same+=1;
                         }
                 }
 
                 if(same==0){
-                    perRow.add(sectionRS.getObject(z));
+                    perRow.add(sectionRS.getObject(1));
+                    fd.add(perRow);
                 }
-            }
-            fd.add(perRow);
+
+
 
             perRow = new ArrayList<>();
         }
         sectionRS=stm.executeQuery("Select*from enrollment WHERE section_id >=1");
         while(sectionRS!=null&&sectionRS.next()){
-            for (int z = 2; z <=2 ; z++) {
+
                 for(int x=0; x<fd.size();x++){
-                    if(sectionRS.getObject(z-1).equals(fd.get(x).get(0))){
-                        fd.get(x).add(sectionRS.getObject(z));
+                    if(sectionRS.getObject(1).equals(fd.get(x).get(0))){
+                        fd.get(x).add(sectionRS.getObject(1));
                     }
                 }
 
-            }
         }
         return fd;
     }
