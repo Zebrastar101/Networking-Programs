@@ -432,11 +432,16 @@ public class SectionPanel extends JPanel{
                 for(int x=0; x<fd.size();x++){
                     if(sRS.getObject(1).equals(fd.get(x).get(0))){
                         int s=0;
-                        for( int b=0; b<fd.get(x).size(); b++){
-                            if(sRS.getObject(2)==fd.get(x).get(b))
+                        for( int b=1; b<fd.get(x).size(); b++){
+                            if(sRS.getObject(2)==fd.get(x).get(b)){
+                                s+=1;
+                            }
                         }
-                        fd.get(x).add(sRS.getObject(2));
-                        System.out.println("Row" +x+ "  " +fd.get(x));
+                        if(s==0){
+                            fd.get(x).add(sRS.getObject(2));
+                            
+                        }
+
                     }
                 }
 
