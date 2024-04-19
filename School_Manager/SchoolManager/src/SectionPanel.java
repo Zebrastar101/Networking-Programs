@@ -423,6 +423,7 @@ public class SectionPanel extends JPanel{
 
             perRow = new ArrayList<>();
         }
+        sectionRS=stm.executeQuery("Select*from enrollment WHERE section_id >=1");
         while(sectionRS!=null&&sectionRS.next()){
             for (int z = 2; z <=2 ; z++) {
                 for(int x=0; x<fd.size();x++){
