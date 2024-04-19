@@ -47,13 +47,13 @@ public class Course {
                     perRow.add(rs.getObject(z));
                 }
                 else{
-                    if((int)rs.getObject(z)==0){
+                    if(String.valueOf(rs.getObject(z)).equals("0")){
                         perRow.add("Academic");
                     }
-                    if((int)rs.getObject(z)==1){
+                    if(String.valueOf(rs.getObject(z)).equals("1")){
                         perRow.add("KAP");
                     }
-                    if((int)rs.getObject(z)==2){
+                    if(String.valueOf(rs.getObject(z)).equals("2")){
                         perRow.add("AP");
                     }
 
