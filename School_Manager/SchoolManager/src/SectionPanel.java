@@ -194,7 +194,11 @@ public class SectionPanel extends JPanel{
                     for(int x=0; x<fullData.size();x++) {
                         if ( secID == (int) fullData.get(x).get(0)) {
                             for(int z=1; z<fullData.get(x).size(); z++){
-                                tb.add((String) fullData.get(x).get(z));
+                                try {
+                                    tb.add(findStudent( (int)fullData.get(x).get(z)));
+                                } catch (SQLException ex) {
+                                    throw new RuntimeException(ex);
+                                }
                             }
                             break;
                         }
@@ -422,12 +426,17 @@ public class SectionPanel extends JPanel{
 
             perRow = new ArrayList<>();
         }
-        sectionRS=stm.executeQuery("Select*from enrollment WHERE section_id >=1");
-        while(sectionRS!=null&&sectionRS.next()){
+        ResultSet sRS=stm.executeQuery("Select*from enrollment WHERE section_id >=1");
+        while(sRS!=null&&sRS.next()){
 
                 for(int x=0; x<fd.size();x++){
-                    if(sectionRS.getObject(1).equals(fd.get(x).get(0))){
-                        fd.get(x).add(sectionRS.getObject(1));
+                    if(sRS.getObject(1).equals(fd.get(x).get(0))){
+                        int s=0;
+                        for( int b=0; b<fd.get(x).size(); b++){
+                            if(sRS.getObject(2)==fd.get(x).get(b))
+                        }
+                        fd.get(x).add(sRS.getObject(2));
+                        System.out.println("Row" +x+ "  " +fd.get(x));
                     }
                 }
 
