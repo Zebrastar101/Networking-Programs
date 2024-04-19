@@ -409,13 +409,12 @@ public class SectionPanel extends JPanel{
 
             for (int z = 1; z <=1 ; z++) {
                 same=0;
-                if(fd.size()!=0){
-                    for(int x=0; x<fd.size();x++){
+                for(int x=0; x<fd.size();x++){
                         if(sectionRS.getObject(z)==fd.get(x).get(0)){
                             same+=1;
                         }
-                    }
                 }
+
                 if(same==0){
                     perRow.add(sectionRS.getObject(z));
                 }
