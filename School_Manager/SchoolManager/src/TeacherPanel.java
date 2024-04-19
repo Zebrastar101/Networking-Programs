@@ -21,7 +21,6 @@ public class TeacherPanel extends JPanel{
     JButton newButton = new JButton("New");
     JButton saveButton = new JButton("Save");
     JButton deleteButton = new JButton("Delete");
-    JButton sectionsButton = new JButton("Sections");
 
     Teacher t;
 
@@ -29,7 +28,7 @@ public class TeacherPanel extends JPanel{
     public TeacherPanel() {
 
         setLayout(null);
-        setBounds(15, 40, 600, 630);
+        setBounds(15, 40, 950, 630);
         setBorder(BorderFactory.createLineBorder(Color.black));
 
         panelTitleLabel.setBounds(15, 5, 100, 35);
@@ -66,7 +65,7 @@ public class TeacherPanel extends JPanel{
             }
         });
 
-        saveButton.setBounds(210, 140, 70, 20);
+        saveButton.setBounds(270, 140, 70, 20);
         saveButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(saveButton);
         saveButton.addActionListener(e-> {
@@ -82,7 +81,7 @@ public class TeacherPanel extends JPanel{
             }
         });
 
-        deleteButton.setBounds(300, 140, 70, 20);
+        deleteButton.setBounds(420, 140, 70, 20);
         deleteButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(deleteButton);
         deleteButton.addActionListener(e-> {
@@ -98,9 +97,6 @@ public class TeacherPanel extends JPanel{
             }
         });
 
-        sectionsButton.setBounds(400, 140, 90, 20);
-        sectionsButton.setFont(new Font("Calibri", Font.BOLD, 10));
-        add(sectionsButton);
 
 
         t = new Teacher();
