@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.sql.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class TeacherPanel extends JPanel{
@@ -34,6 +35,8 @@ public class TeacherPanel extends JPanel{
     JButton deleteButton = new JButton("Delete");
 
     Teacher t;
+    JLabel secTaughtLab= new JLabel("Sections Taught");
+
 
 
 
@@ -63,6 +66,10 @@ public class TeacherPanel extends JPanel{
         teacherLNTextField.setBounds(260, 110, 230, 20);
         teacherLNTextField.setFont(new Font("Calibri", Font.BOLD, 15));
         add(teacherLNTextField);
+
+        secTaughtLab.setBounds(690, 40, 140,35);
+        secTaughtLab.setFont(new Font("Calibri", Font.BOLD, 20));
+        add(secTaughtLab);
 
 
         //buttons
@@ -246,18 +253,39 @@ public class TeacherPanel extends JPanel{
             ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
 
             while(secResultSet!=null && secResultSet.next()){
+                courseResultSet = stm3.executeQuery("Select*from course WHERE course_id >=1");
                 if((int)secResultSet.getObject(3)==teacherID){
                     perRow.add(secResultSet.getObject(1));
-                    
+                    int courseID= (int) secResultSet.getObject(2);
+                    while(courseResultSet != null && courseResultSet.next()){
+                        if((int)courseResultSet.getObject(1) == courseID){
+                            String course = String.valueOf(courseResultSet.getObject(2))+" ("+courseResultSet.getObject(1)+") ";
+                            //System.out.println(course);
+                            perRow.add(course);
+                            break;
+                        }
+                    }
+                    data.add(perRow);
+                    perRow = new ArrayList<>();
                 }
             }
 
+            if (data.size() != 0) {
+                Object[][] dataArray = new Object[data.size()][data.get(0).size()];
+                for (int r = 0; r < dataArray.length; r++) {
+                    for (int c = 0; c < dataArray[0].length; c++) {
+                        dataArray[r] = data.get(r).toArray();
+                        //dataArray[r][c]=data.get(r).get(c);
+
+                    }
+                }
+                System.out.println("data for SectionsTaught table"+ Arrays.deepToString(dataArray));
+
+                return makeJTable(dataArray);
+            }
 
 
-
-
-
-
+            return makeJTable(new Object[0][0]);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
