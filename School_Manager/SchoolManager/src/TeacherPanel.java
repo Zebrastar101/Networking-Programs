@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -119,13 +120,16 @@ public class TeacherPanel extends JPanel{
                 String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
                 teacherFNTextField.setText(firstName);
                 teacherLNTextField.setText(lastName);
+
+                sectionsTaughtTable=buildSectionTable((int)teacherTable.getValueAt(teacherTable.getSelectedRow() , 0));
+                jScrollSection.setViewportView(sectionsTaughtTable);
             }
         });
         jScrollPane = new JScrollPane(teacherTable);
         jScrollPane.setBounds(50,190,500, 400);
         add(jScrollPane);
 
-        sectionsTaughtTable=buildSectionTable();
+        sectionsTaughtTable=makeJTable(new Object[0][0]);
         jScrollSection = new JScrollPane(sectionsTaughtTable);
         jScrollSection.setBounds(630,80,250, 200);
         add(jScrollSection);
@@ -212,7 +216,7 @@ public class TeacherPanel extends JPanel{
         });
     }
 
-    public JTable buildSectionTable(){
+    public JTable buildSectionTable(int teacherID){
         con=Main.myConn;
         try{
             Statement stm1 = con.createStatement();
@@ -223,9 +227,28 @@ public class TeacherPanel extends JPanel{
             ResultSet courseResultSet;
 
 
+
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public JTable makeJTable(Object[][] dataArray) {
+        DefaultTableModel tableModel = new DefaultTableModel(dataArray, new String[]{"Section ID", "Course Name"}) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+        };
+
+        JTable table = new JTable();
+        table.setModel(tableModel);
+        table.getTableHeader().setReorderingAllowed(false);
+
+        return table;
     }
 
 }
