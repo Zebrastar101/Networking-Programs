@@ -150,6 +150,9 @@ public class TeacherPanel extends JPanel{
                     String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
                     teacherFNTextField.setText(firstName);
                     teacherLNTextField.setText(lastName);
+
+                    sectionsTaughtTable=buildSectionTable((int)teacherTable.getValueAt(teacherTable.getSelectedRow() , 0));
+                    jScrollSection.setViewportView(sectionsTaughtTable);
                 }
             });
         }
@@ -173,6 +176,9 @@ public class TeacherPanel extends JPanel{
                     String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
                     teacherFNTextField.setText(firstName);
                     teacherLNTextField.setText(lastName);
+
+                    sectionsTaughtTable=buildSectionTable((int)teacherTable.getValueAt(teacherTable.getSelectedRow() , 0));
+                    jScrollSection.setViewportView(sectionsTaughtTable);
                 }
             });
         }
@@ -193,6 +199,9 @@ public class TeacherPanel extends JPanel{
                     String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
                     teacherFNTextField.setText(firstName);
                     teacherLNTextField.setText(lastName);
+
+                    sectionsTaughtTable=buildSectionTable((int)teacherTable.getValueAt(teacherTable.getSelectedRow() , 0));
+                    jScrollSection.setViewportView(sectionsTaughtTable);
                 }
             });
         }
@@ -212,6 +221,9 @@ public class TeacherPanel extends JPanel{
                 String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
                 teacherFNTextField.setText(firstName);
                 teacherLNTextField.setText(lastName);
+
+                sectionsTaughtTable=buildSectionTable((int)teacherTable.getValueAt(teacherTable.getSelectedRow() , 0));
+                jScrollSection.setViewportView(sectionsTaughtTable);
             }
         });
     }
