@@ -5,6 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TeacherPanel extends JPanel{
@@ -237,6 +238,23 @@ public class TeacherPanel extends JPanel{
             ResultSet secResultSet;
             ResultSet teachResultSet;
             ResultSet courseResultSet;
+            secResultSet = stm1.executeQuery("Select*from section WHERE section_id >=1");
+            teachResultSet = stm2.executeQuery("Select*from teacher WHERE teacher_id >=1");
+            courseResultSet = stm3.executeQuery("Select*from course WHERE course_id >=1");
+
+            ArrayList<Object> perRow = new ArrayList<>();
+            ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
+
+            while(secResultSet!=null && secResultSet.next()){
+                if((int)secResultSet.getObject(3)==teacherID){
+                    perRow.add(secResultSet.getObject(1));
+                    
+                }
+            }
+
+
+
+
 
 
 

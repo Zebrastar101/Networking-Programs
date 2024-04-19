@@ -42,7 +42,6 @@ public class Section {
             int colNum = rs.getMetaData().getColumnCount();
             ArrayList<Object> perRow = new ArrayList<>();
             ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
-            ArrayList<String> colN = new ArrayList<>();
 
             /*  for(int x=1; x<=colNum;x++){
             colN.add((String) rs.getObject(x));
