@@ -337,20 +337,27 @@ public class SectionPanel extends JPanel{
             //insert into enrollment table
             ArrayList<String> tb=new ArrayList<>();
             ResultSet enrollRs= stm.executeQuery("Select*from enrollment WHERE section_id >=1");
-            while(enrollRs != null && enrollRs.next()){
-                if(enrollRs.getObject(1).equals(sectionID)){
+           /* while(enrollRs.next()){
+                if(Integer.parseInt(String.valueOf(enrollRs.getObject(1)))==sectionID){
+                    System.out.println(" Reached sectionId="+ sectionID+"      studentID="+student);
                     stm.executeUpdate("INSERT INTO enrollment(section_id, student_id) VALUES('"+sectionID+"','"+student+"');");
                     break;
                 }
-            }
+            }*/
+            stm.executeUpdate("INSERT INTO enrollment(section_id, student_id) VALUES('"+sectionID+"','"+student+"');");
             fullData=makeFullData(fullData);
+            tb=getTableData(enrollment);
             for(int x=0; x<fullData.size();x++){
                 if(sectionID==Integer.parseInt(fullData.get(x).get(0).toString()) ){
                     for(int z=1; z<fullData.get(x).size(); z++){
-                        tb.add(findStudent((int) fullData.get(x).get(z)));
-                        System.out.println(tb.get(z));
+                        if(student==Integer.valueOf(fullData.get(x).get(z).toString())){
+                            tb.add(findStudent((int) fullData.get(x).get(z)));
+                           
+                            break;
+                        }
+
                     }
-                    break;
+
                 }
             }
             enrollment=buildEnrollMentTable(tb);
@@ -459,6 +466,14 @@ public class SectionPanel extends JPanel{
             }
         }
         return null;
+    }
+    public ArrayList<String> getTableData(JTable table){
+        int nRow = table.getRowCount();
+        ArrayList<String> tableData=new ArrayList<>();
+        for (int j = 0 ; j < nRow ; j++){
+                tableData.add(String.valueOf(table.getValueAt(j,0)));}
+        return tableData;
+
     }
 
     public void fileImport(Scanner sc) throws SQLException {
