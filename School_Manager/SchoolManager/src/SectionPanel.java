@@ -297,6 +297,52 @@ public class SectionPanel extends JPanel{
     public void newSection(String teacher, String course) throws SQLException {
         sectionTable=sec.addSection(teacher, course);
         jScrollPane.setViewportView(sectionTable);
+        sectionTable.addMouseListener(new MouseAdapter() {
+            //Idk how to get the selected values to pop up for this one
+            public void mouseClicked(MouseEvent e) {
+
+                teachersDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1));
+                coursesDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2));
+                int secID = (int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0);
+
+                ArrayList<String> tb = new ArrayList<>();
+                ArrayList<String> idList = new ArrayList<>();
+                try {
+                    fullData = makeFullData(fullData);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                int track = 0;
+                for(int z=0; z<fullData.size();z++){
+                    if(secID==Integer.parseInt(fullData.get(z).get(0).toString())){
+                        track+=1;
+                        break;
+                    }
+                }
+                if(track!=0){
+                    if (fullData.size() != 0) {
+                        for (int x = 0; x < fullData.size(); x++) {
+
+                            if (secID == (int) fullData.get(x).get(0)) {
+                                for (int z = 1; z < fullData.get(x).size(); z++) {
+                                    try {
+                                        tb.add(findStudent((int) fullData.get(x).get(z)));
+                                        idList.add( fullData.get(x).get(z).toString());
+                                    } catch (SQLException ex) {
+                                        throw new RuntimeException(ex);
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+                enrollment = buildEnrollMentTable(tb);
+                reloadStudentsTable(idList);
+                jscrollEnroll.setViewportView(enrollment);
+
+
+            }});
     }
 
 
@@ -308,6 +354,52 @@ public class SectionPanel extends JPanel{
     public void delSection(int id) throws SQLException {
         sectionTable=sec.deleteSection(id);
         jScrollPane.setViewportView(sectionTable);
+        sectionTable.addMouseListener(new MouseAdapter() {
+                                          //Idk how to get the selected values to pop up for this one
+                                          public void mouseClicked(MouseEvent e) {
+
+                                              teachersDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1));
+                                              coursesDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2));
+                                              int secID = (int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0);
+
+                                              ArrayList<String> tb = new ArrayList<>();
+                                              ArrayList<String> idList = new ArrayList<>();
+                                              try {
+                                                  fullData = makeFullData(fullData);
+                                              } catch (SQLException ex) {
+                                                  throw new RuntimeException(ex);
+                                              }
+                                              int track = 0;
+                                              for(int z=0; z<fullData.size();z++){
+                                                  if(secID==Integer.parseInt(fullData.get(z).get(0).toString())){
+                                                      track+=1;
+                                                      break;
+                                                  }
+                                              }
+                                              if(track!=0){
+                                                  if (fullData.size() != 0) {
+                                                      for (int x = 0; x < fullData.size(); x++) {
+
+                                                          if (secID == (int) fullData.get(x).get(0)) {
+                                                              for (int z = 1; z < fullData.get(x).size(); z++) {
+                                                                  try {
+                                                                      tb.add(findStudent((int) fullData.get(x).get(z)));
+                                                                      idList.add( fullData.get(x).get(z).toString());
+                                                                  } catch (SQLException ex) {
+                                                                      throw new RuntimeException(ex);
+                                                                  }
+                                                              }
+                                                              break;
+                                                          }
+                                                      }
+                                                  }
+                                              }
+                                              enrollment = buildEnrollMentTable(tb);
+                                              reloadStudentsTable(idList);
+                                              jscrollEnroll.setViewportView(enrollment);
+
+
+                                          }});
     }
 
 
