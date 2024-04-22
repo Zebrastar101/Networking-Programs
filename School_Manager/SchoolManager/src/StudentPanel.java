@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -200,6 +201,21 @@ public class StudentPanel extends JPanel {
         });
     }
 
+    public JTable makeJTable(Object[][] dataArray) {
+        DefaultTableModel tableModel = new DefaultTableModel(dataArray, new String[]{"Classes"}) {
 
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+        };
+
+        JTable table = new JTable();
+        table.setModel(tableModel);
+        table.getTableHeader().setReorderingAllowed(false);
+
+        return table;
+    }
 
 }
