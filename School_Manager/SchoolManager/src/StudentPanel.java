@@ -153,6 +153,15 @@ public class StudentPanel extends JPanel {
                     String lastName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 2);
                     studentFNTextField.setText(firstName);
                     studentLNTextField.setText(lastName);
+
+                    try {
+                        schedule=makeJTable(scheduleMaker((int)studentTable.getValueAt(studentTable.getSelectedRow() , 0)));
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    jScrollEnrollment = new JScrollPane(schedule);
+                    jScrollEnrollment.setBounds(630,80,250, 200);
+                    add(jScrollEnrollment);
                 }
             });
         }
@@ -173,6 +182,15 @@ public class StudentPanel extends JPanel {
                     String lastName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 2);
                     studentFNTextField.setText(firstName);
                     studentLNTextField.setText(lastName);
+
+                    try {
+                        schedule=makeJTable(scheduleMaker((int)studentTable.getValueAt(studentTable.getSelectedRow() , 0)));
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    jScrollEnrollment = new JScrollPane(schedule);
+                    jScrollEnrollment.setBounds(630,80,250, 200);
+                    add(jScrollEnrollment);
                 }
             });
         }
@@ -192,6 +210,15 @@ public class StudentPanel extends JPanel {
                 String lastName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 2);
                 studentFNTextField.setText(firstName);
                 studentLNTextField.setText(lastName);
+
+                try {
+                    schedule=makeJTable(scheduleMaker((int)studentTable.getValueAt(studentTable.getSelectedRow() , 0)));
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                jScrollEnrollment = new JScrollPane(schedule);
+                jScrollEnrollment.setBounds(630,80,250, 200);
+                add(jScrollEnrollment);
             }
         });
     }
@@ -208,6 +235,15 @@ public class StudentPanel extends JPanel {
                 String lastName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 2);
                 studentFNTextField.setText(firstName);
                 studentLNTextField.setText(lastName);
+
+                try {
+                    schedule=makeJTable(scheduleMaker((int)studentTable.getValueAt(studentTable.getSelectedRow() , 0)));
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                jScrollEnrollment = new JScrollPane(schedule);
+                jScrollEnrollment.setBounds(630,80,250, 200);
+                add(jScrollEnrollment);
             }
         });
     }
