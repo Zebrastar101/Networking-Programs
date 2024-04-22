@@ -18,7 +18,8 @@ public class StudentPanel extends JPanel {
     JTable studentTable;
 
     JScrollPane jScrollPane;
-
+    JTable schedule;
+    JScrollPane jScrollEnrollment;
     JButton newButton = new JButton("New");
     JButton saveButton = new JButton("Save");
     JButton deleteButton = new JButton("Delete");
@@ -52,8 +53,10 @@ public class StudentPanel extends JPanel {
         studentLNTextField.setBounds(260,110,230,20);
         studentLNTextField.setFont(new Font("Calibri", Font.BOLD, 15));
         add(studentLNTextField);
-
-
+        schedule=makeJTable(new Object[0][0]);
+        jScrollEnrollment = new JScrollPane(schedule);
+        jScrollEnrollment.setBounds(630,80,250, 200);
+        add(jScrollEnrollment);
         //buttons
 
         newButton.setBounds(120,140,70,20);
