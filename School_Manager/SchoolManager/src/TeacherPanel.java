@@ -1,3 +1,5 @@
+import com.mysql.cj.jdbc.ha.StandardLoadBalanceExceptionChecker;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -36,6 +38,8 @@ public class TeacherPanel extends JPanel{
 
     Teacher t;
     JLabel secTaughtLab= new JLabel("Sections Taught");
+
+    SectionPanel secz;
 
 
 
@@ -196,6 +200,8 @@ public class TeacherPanel extends JPanel{
     }
 
     public void delTeacher(int id) throws SQLException {
+        secz=new SectionPanel();
+        secz.deleteTeacher(id);
         if(!teacherFNTextField.getText().isEmpty() && !teacherLNTextField.getText().isEmpty()){
             teacherTable=t.deleteTeacher(id);
             jScrollPane.setViewportView(teacherTable);

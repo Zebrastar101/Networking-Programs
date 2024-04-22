@@ -67,13 +67,19 @@ public class Section {
                     }
                     if(z==3){
                         int teacherID= (int) rs.getObject(z);
-                        while(teachResultSet != null && teachResultSet.next()){
-                            if((int)teachResultSet.getObject(1) == teacherID){
-                                String teacher = teachResultSet.getObject(2) + " " + teachResultSet.getObject(3)+ "("+teachResultSet.getObject(1)+")";
-                                //System.out.println(teacher);
-                                perRow.add(teacher);
+                        if(teacherID==-1){
+                            perRow.add("no teacher");
+                        }
+                        else{
+                            while(teachResultSet != null && teachResultSet.next()){
+                                if((int)teachResultSet.getObject(1) == teacherID){
+                                    String teacher = teachResultSet.getObject(2) + " " + teachResultSet.getObject(3)+ "("+teachResultSet.getObject(1)+")";
+                                    //System.out.println(teacher);
+                                    perRow.add(teacher);
+                                }
                             }
                         }
+
                     }
                 }
                 data.add(perRow);
@@ -166,6 +172,12 @@ public class Section {
             }
         }
         System.out.println("building table");
+        sectionTable=buildTable(stm.executeQuery("Select*from section WHERE section_id >=1"));
+        return sectionTable;
+    }
+
+    public JTable deletedTeacher(int id) throws SQLException {
+        stm.executeUpdate("UPDATE section SET teacher_id='-1' WHERE teacher_id="+id+";");
         sectionTable=buildTable(stm.executeQuery("Select*from section WHERE section_id >=1"));
         return sectionTable;
     }

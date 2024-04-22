@@ -237,6 +237,13 @@ public class SectionPanel extends JPanel{
         jScrollPane.setViewportView(sectionTable);
     }
 
+    public void deleteTeacher(int id) throws SQLException {
+        sectionTable=sec.deletedTeacher(id);
+        jScrollPane.setViewportView(sectionTable);
+    }
+
+
+
 
 
     //ALLL THE ENROLLMENT STUFF
