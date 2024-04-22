@@ -166,6 +166,37 @@ public class SectionPanel extends JPanel{
         removeStudentButton.setBounds(760, 340, 110, 20);
         removeStudentButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(removeStudentButton);
+        removeStudentButton.addActionListener(e -> {
+
+                if(!enrollment.getSelectionModel().isSelectionEmpty()){
+                    try {
+                        String v=(String) enrollment.getValueAt(enrollment.getSelectedRow(), 0);
+                        String turn ="";
+                            if(v.charAt(x)=='('){
+                                for(int z=0; z<v.length(); z++){
+                                    if(v.charAt(z+1)!=')'){
+                                    turn+=v.charAt(z+1);
+                                    }
+                                    else{
+                                        break;
+                                    }
+                                }
+                            }
+                            else{
+                                break;
+                            }
+                        }
+
+                    deleteStudent(Integer.parseInt(turn),(int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0));
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                }
+                else{
+                    int errorMessage = JOptionPane.showConfirmDialog(null, "No student was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
+                }
+
+        });
 
 
 
@@ -297,7 +328,7 @@ public class SectionPanel extends JPanel{
                 for(int z=0; z<tb.size(); z++){
                     //System.out.println(tb);
                     if(val.equals(tb.get(z))){
-                        System.out.println("same");
+                        
                         same+=1;
                     }
                 }
@@ -377,10 +408,11 @@ public class SectionPanel extends JPanel{
     public void deleteStudent(int student, int sectionID) throws SQLException {
         ArrayList<String> tb=new ArrayList<>();
         ArrayList<String> idList=new ArrayList<>();
-        stm.executeUpdate("DELETE FROM enrollment WHERE section_id='"+sectionID+"' AND student_id="+student+"';");
+        stm.executeUpdate("DELETE FROM enrollment WHERE section_id='"+sectionID+"' AND student_id='"+student+"';");
+
         for(int x=0; x<fullData.size();x++){
             if(sectionID==(int) fullData.get(x).get(0)){
-                for(int z=1; x<fullData.get(x).size();z++){
+                for(int z=1; z<fullData.get(x).size();z++){
                     if(student==Integer.parseInt(fullData.get(x).get(z).toString())){
                         fullData.get(x).remove(z);
                     }
