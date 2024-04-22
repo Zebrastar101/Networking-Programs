@@ -4,11 +4,16 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StudentPanel extends JPanel {
-
+    Connection con;
+    Statement stm;
     JLabel panelTitleLabel = new JLabel("Students");
     JLabel studentFNLabel = new JLabel("Student's first name: ");
     JLabel studentLNLabel = new JLabel("Student's last name: ");
@@ -103,9 +108,6 @@ public class StudentPanel extends JPanel {
             }
         });
 
-        scheduleButton.setBounds(400,140,90,20);
-        scheduleButton.setFont(new Font("Calibri", Font.BOLD, 10));
-        add(scheduleButton);
 
 
 
@@ -120,6 +122,15 @@ public class StudentPanel extends JPanel {
                 String lastName = (String) studentTable.getValueAt(studentTable.getSelectedRow() , 2);
                 studentFNTextField.setText(firstName);
                 studentLNTextField.setText(lastName);
+
+                try {
+                    schedule=makeJTable(scheduleMaker((int)studentTable.getValueAt(studentTable.getSelectedRow() , 0)));
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                jScrollEnrollment = new JScrollPane(schedule);
+                jScrollEnrollment.setBounds(630,80,250, 200);
+                add(jScrollEnrollment);
             }
         });
         jScrollPane = new JScrollPane(studentTable);
@@ -202,7 +213,7 @@ public class StudentPanel extends JPanel {
     }
 
     public JTable makeJTable(Object[][] dataArray) {
-        DefaultTableModel tableModel = new DefaultTableModel(dataArray, new String[]{"Classes"}) {
+        DefaultTableModel tableModel = new DefaultTableModel(dataArray, new String[]{"Section","Course","Teacher"}) {
 
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -217,5 +228,65 @@ public class StudentPanel extends JPanel {
 
         return table;
     }
+    public Object[][] scheduleMaker(int sID) throws SQLException {
+        con = Main.myConn;
+        stm=con.createStatement();
+        ResultSet sectionRS=stm.executeQuery("Select*from enrollment WHERE student_id >=1");
+        ArrayList<Object> sectionList = new ArrayList<>();
+        while(sectionRS!=null && sectionRS.next()){
+            if(sID==(int)sectionRS.getObject(2)){
+                sectionList.add(sectionRS.getObject(1));
+            }
+        }
+        ResultSet sRS=stm.executeQuery("Select*from section WHERE section_id >=1");
+        Object[][] dataArray= new Object[sectionList.size()][3];
+        for(int x=0; x< dataArray.length; x++){
+            dataArray[x][0]=sectionList.get(x);
+            dataArray[x][2]=findTeacher((int)findTeacherID((int)sectionList.get(x)));
+            dataArray[x][1]=findCourse((int)findCourseID((int)sectionList.get(x)));
 
+        }
+        return dataArray;
+    }
+
+    public Object findTeacher(int id) throws SQLException {
+        stm=con.createStatement();
+        ResultSet studentRS=stm.executeQuery("Select*from teacher WHERE teacher_id >=1");
+        while (studentRS!=null && studentRS.next()){
+            if(id==(int)studentRS.getObject(1)){
+                return studentRS.getObject(2) + " " + studentRS.getObject(3);
+            }
+        }
+        return null;
+    }
+    public Object findCourse(int id) throws SQLException {
+        stm=con.createStatement();
+        ResultSet studentRS=stm.executeQuery("Select*from course WHERE course_id >=1");
+        while (studentRS!=null && studentRS.next()){
+            if(id==(int)studentRS.getObject(1)){
+                return studentRS.getObject(2);
+            }
+        }
+        return null;
+    }
+    public Object findTeacherID(int id) throws  SQLException{
+        stm=con.createStatement();
+        ResultSet studentRS=stm.executeQuery("Select*from section WHERE section_id >=1");
+        while (studentRS!=null && studentRS.next()){
+            if(id==(int)studentRS.getObject(1)){
+                return studentRS.getObject(3);
+            }
+        }
+        return null;
+    }
+    public Object findCourseID(int id) throws  SQLException{
+        stm=con.createStatement();
+        ResultSet studentRS=stm.executeQuery("Select*from section WHERE section_id >=1");
+        while (studentRS!=null && studentRS.next()){
+            if(id==(int)studentRS.getObject(1)){
+                return studentRS.getObject(2);
+            }
+        }
+        return null;
+    }
 }
