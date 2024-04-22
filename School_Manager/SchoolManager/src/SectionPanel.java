@@ -172,6 +172,7 @@ public class SectionPanel extends JPanel{
                     try {
                         String v=(String) enrollment.getValueAt(enrollment.getSelectedRow(), 0);
                         String turn ="";
+                        for(int x=0; x<v.length(); x++){
                             if(v.charAt(x)=='('){
                                 for(int z=0; z<v.length(); z++){
                                     if(v.charAt(z+1)!=')'){
