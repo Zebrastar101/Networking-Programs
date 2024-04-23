@@ -24,7 +24,7 @@ public class StudentPanel extends JPanel {
     JTable studentTable;
 
     JScrollPane jScrollPane;
-    JTable schedule;
+    JTable schedule=new JTable();
     JScrollPane jScrollEnrollment;
     JButton newButton = new JButton("New");
     JButton saveButton = new JButton("Save");
@@ -59,6 +59,8 @@ public class StudentPanel extends JPanel {
         studentLNTextField.setBounds(260,110,230,20);
         studentLNTextField.setFont(new Font("Calibri", Font.BOLD, 15));
         add(studentLNTextField);
+
+        schedule=new JTable();
         schedule=makeJTable(new Object[0][0]);
         jScrollEnrollment = new JScrollPane(schedule);
         jScrollEnrollment.setBounds(630,80,250, 200);
@@ -249,6 +251,7 @@ public class StudentPanel extends JPanel {
     }
 
     public JTable makeJTable(Object[][] dataArray) {
+        System.out.println("found make Jtable");
         DefaultTableModel tableModel = new DefaultTableModel(dataArray, new String[]{"Section","Course","Teacher"}) {
 
             @Override
@@ -261,6 +264,7 @@ public class StudentPanel extends JPanel {
         JTable table = new JTable();
         table.setModel(tableModel);
         table.getTableHeader().setReorderingAllowed(false);
+        System.out.print(table);
 
         return table;
     }
