@@ -36,7 +36,7 @@ public class StudentPanel extends JPanel {
 
     public StudentPanel(){
         setLayout(null);
-        setBounds(15,40,600,630);
+        setBounds(15,40,950,630);
         setBorder(BorderFactory.createLineBorder(Color.black));
 
 
@@ -65,6 +65,7 @@ public class StudentPanel extends JPanel {
         jScrollEnrollment = new JScrollPane(schedule);
         jScrollEnrollment.setBounds(630,80,250, 200);
         add(jScrollEnrollment);
+        jScrollEnrollment.setVisible(true);
         //buttons
 
         newButton.setBounds(120,140,70,20);
