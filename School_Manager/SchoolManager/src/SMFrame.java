@@ -94,7 +94,13 @@ public class SMFrame extends JFrame implements WindowListener {
         dropDownView.addItem(course);
         dropDownView.addItem(section);
         add(dropDownView);
-        dropDownView.addActionListener(e->changePanel());
+        dropDownView.addActionListener(e-> {
+            try {
+                changePanel();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         FileLabel.setBounds(200,5,100,35);
         add(FileLabel);
@@ -154,7 +160,7 @@ public class SMFrame extends JFrame implements WindowListener {
 
     }
 
-    public void changePanel(){
+    public void changePanel() throws SQLException {
         if (String.valueOf(dropDownView.getSelectedItem())=="Teacher") {
             teacherPan.setVisible(true);
             studentPan.setVisible(false);
@@ -180,6 +186,9 @@ public class SMFrame extends JFrame implements WindowListener {
             coursePan.setVisible(false);
             sectionPan.setVisible(true);
             sectionPan.reload();
+            sectionPan.reloadSectionTable();
+
+
         }
     }
 

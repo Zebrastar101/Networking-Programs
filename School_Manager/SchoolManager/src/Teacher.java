@@ -101,14 +101,14 @@ public class Teacher  {
     public JTable deleteTeacher(int id) throws SQLException{
         stm.executeUpdate("DELETE FROM teacher WHERE teacher_id='"+id+"';");
 
-        teacherTable=buildTable(stm.executeQuery("Select*from teacher"));
+        teacherTable=buildTable(stm.executeQuery("Select*from teacher WHERE teacher_id >=1"));
         return teacherTable;
     }
 
     public JTable saveTeacher(String fn, String ln, int id) throws SQLException {
         stm.executeUpdate("UPDATE teacher SET first_name='"+fn+"' WHERE teacher_id="+id+";");
         stm.executeUpdate("UPDATE teacher SET last_name='"+ln+"' WHERE teacher_id="+id+";");
-        teacherTable=buildTable(stm.executeQuery("Select*from teacher"));
+        teacherTable=buildTable(stm.executeQuery("Select*from teacher WHERE teacher_id >=1"));
         return teacherTable;
     }
 
@@ -116,6 +116,7 @@ public class Teacher  {
 
     public JTable importFile(Scanner sc) throws SQLException {
         stm.execute("CREATE TABLE IF NOT EXISTS teacher(teacher_id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT,last_name TEXT, PRIMARY KEY(teacher_id))");
+        stm.executeUpdate("INSERT INTO teacher(teacher_id, first_name, last_name) VALUES('-1','no teacher','assigned');");
         String s = sc.nextLine();
         while(!s.equals("TEACHERS:")){
             s = sc.nextLine();
@@ -128,12 +129,14 @@ public class Teacher  {
                 stm.executeUpdate("INSERT INTO teacher(first_name, last_name) VALUES('"+parts[1]+"','"+parts[2]+"');");
             }
             else {
-                teacherTable=buildTable(stm.executeQuery("Select*from teacher"));
+                teacherTable=buildTable(stm.executeQuery("Select*from teacher WHERE teacher_id >=1"));
                 return teacherTable;
             }
         }
         return null;
     }
+
+
 
 
 

@@ -244,7 +244,11 @@ public class SectionPanel extends JPanel{
 
 
 
-
+    public void reloadSectionTable() throws SQLException {
+        ResultSet sectionRS=stm.executeQuery("Select*from section WHERE section_id >=1");
+        sectionTable=sec.buildTable(sectionRS);
+        jScrollPane.setViewportView(sectionTable);
+    }
 
     //ALLL THE ENROLLMENT STUFF
     public void reloadStudentsTable(ArrayList<String> tb)
