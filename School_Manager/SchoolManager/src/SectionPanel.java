@@ -495,7 +495,7 @@ public class SectionPanel extends JPanel{
     }
 
     public void deleteTeacher(int id) throws SQLException {
-        //sectionTable=sec.deletedTeacher(id);
+        sectionTable=sec.deletedTeacher(id);
         jScrollPane.setViewportView(sectionTable);
     }
 
@@ -775,7 +775,7 @@ public class SectionPanel extends JPanel{
     }
 
     public void fileImport(Scanner sc) throws SQLException {
-        //sectionTable=sec.importFile(sc);
+        sectionTable=sec.importFile(sc);
         jScrollPane.setViewportView(sectionTable);
     }
 
