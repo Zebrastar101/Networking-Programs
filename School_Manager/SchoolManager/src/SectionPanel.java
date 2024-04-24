@@ -726,7 +726,7 @@ public class SectionPanel extends JPanel{
                 enrollment = buildEnrollMentTable(tb);
                 reloadStudentsTable(idList);
                 jscrollEnroll.setViewportView(enrollment);
-
+                break;
             }
         }
     }
