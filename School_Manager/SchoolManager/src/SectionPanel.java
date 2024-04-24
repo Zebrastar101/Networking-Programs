@@ -678,7 +678,7 @@ public class SectionPanel extends JPanel{
                         ArrayList<String> tb = new ArrayList<>();
                         ArrayList<String> idList = new ArrayList<>();
                         try {
-                            fullData = makeFullData(fullData);
+                            fullData = makeFullData(new ArrayList<ArrayList<Object>>());
                         } catch (SQLException ex) {
                             throw new RuntimeException(ex);
                         }
