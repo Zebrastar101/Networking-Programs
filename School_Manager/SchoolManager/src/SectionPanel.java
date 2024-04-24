@@ -840,11 +840,14 @@ public class SectionPanel extends JPanel{
 
                     }
                 });
-                ArrayList<String> blank = new ArrayList<>();
+                ArrayList<String> tb = new ArrayList<>();
+                ArrayList<String> idList = new ArrayList<>();
 
-                enrollment = buildEnrollMentTable(blank);
+                enrollment = buildEnrollMentTable(tb);
+                reloadStudentsTable(idList);
                 jscrollEnroll.setViewportView(enrollment);
                 break;
+
 
             }
         }
