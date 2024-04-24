@@ -295,8 +295,13 @@ public class StudentPanel extends JPanel {
         ResultSet studentRS=stm.executeQuery("Select*from teacher WHERE teacher_id >=1");
         while (studentRS!=null && studentRS.next()){
             if(id==(int)studentRS.getObject(1)){
+
                 return studentRS.getObject(2) + " " + studentRS.getObject(3);
             }
+
+        }
+        if(id==-1){
+            return  "no teacher";
         }
         return null;
     }

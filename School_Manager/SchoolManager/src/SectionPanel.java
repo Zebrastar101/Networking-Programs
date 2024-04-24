@@ -100,6 +100,20 @@ public class SectionPanel extends JPanel{
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
+            fullData=new ArrayList<ArrayList<Object>>();
+            try {
+                fullData=makeFullData(fullData);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+           
+            ArrayList<String> blank = new ArrayList<>();
+            enrollment=buildEnrollMentTable(blank);
+            jscrollEnroll= new JScrollPane(enrollment);
+            jscrollEnroll.setBounds(630,80,250, 200);
+            add(jscrollEnroll);
+
+
         });
 
         saveButton.setBounds(270, 140, 70, 20);
@@ -141,23 +155,28 @@ public class SectionPanel extends JPanel{
             try {
                 String v=(String) studentsDropDown.getSelectedItem();
                 String turn ="";
-                for(int x=0; x<v.length(); x++){
-                    if(v.charAt(x)=='('){
-                        for(int z=0; z<v.length(); z++){
-                            if(v.charAt(z+1)!=')'){
-                                turn+=v.charAt(z+1);
-                            }
-                            else{
-                                break;
+                if(v!=null){
+                    for(int x=0; x<v.length(); x++){
+                        if(v.charAt(x)=='('){
+                            for(int z=0; z<v.length(); z++){
+                                if(v.charAt(z+1)!=')'){
+                                    turn+=v.charAt(z+1);
+                                }
+                                else{
+                                    break;
+                                }
                             }
                         }
+                        else{
+                            break;
+                        }
                     }
-                    else{
-                        break;
-                    }
-                }
 
-                addStudent(Integer.parseInt(turn),(int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0));
+                    addStudent(Integer.parseInt(turn),(int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0));
+                }
+                else{
+                    int errorMessage = JOptionPane.showConfirmDialog(null, "No students to add", "Error", JOptionPane.OK_CANCEL_OPTION);
+                }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
