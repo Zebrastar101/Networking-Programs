@@ -15,9 +15,10 @@ public class Main {
             stm.execute("USE managerschool");
             
             //stm.executeUpdate("INSERT INTO students(first_name, last_name) VALUES('jim','smith');");
-            ResultSet teacherRS=stm1.executeQuery("Select*from teacher");
+
             int i = 0;
             stm.execute("CREATE TABLE IF NOT EXISTS teacher(teacher_id INTEGER NOT NULL AUTO_INCREMENT, first_name TEXT, last_name TEXT, PRIMARY KEY(teacher_id))");
+            ResultSet teacherRS=stm1.executeQuery("Select*from teacher");
             while(teacherRS!=null && teacherRS.next()){
                 if((int) teacherRS.getObject(1)==-1){
                     i=1;
