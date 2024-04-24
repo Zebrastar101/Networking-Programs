@@ -94,7 +94,13 @@ public class SMFrame extends JFrame implements WindowListener {
         dropDownView.addItem(course);
         dropDownView.addItem(section);
         add(dropDownView);
-        dropDownView.addActionListener(e->changePanel());
+        dropDownView.addActionListener(e-> {
+            try {
+                changePanel();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         FileLabel.setBounds(200,5,100,35);
         add(FileLabel);
@@ -154,7 +160,7 @@ public class SMFrame extends JFrame implements WindowListener {
 
     }
 
-    public void changePanel(){
+    public void changePanel() throws SQLException {
         if (String.valueOf(dropDownView.getSelectedItem())=="Teacher") {
             teacherPan.setVisible(true);
             studentPan.setVisible(false);
@@ -178,8 +184,12 @@ public class SMFrame extends JFrame implements WindowListener {
             teacherPan.setVisible(false);
             studentPan.setVisible(false);
             coursePan.setVisible(false);
-            sectionPan.setVisible(true);
             sectionPan.reload();
+            sectionPan.reloadSectionTable();
+            sectionPan.changeFullData();
+            sectionPan.setVisible(true);
+
+
         }
     }
 
@@ -231,6 +241,12 @@ public class SMFrame extends JFrame implements WindowListener {
                         String course = courseResultSet.getObject(1) + "," +courseResultSet.getObject(2) + "," + courseResultSet.getObject(3)+"\n";
                         fw.write(course);
                     }
+                    ResultSet enrollResultSet=stm.executeQuery("Select*from enrollment WHERE enrollment_id >=1");
+                    fw.write("\nENROLLMENT:\n");
+                    while(enrollResultSet!=null && enrollResultSet.next()){
+                        String enroll = enrollResultSet.getObject(1) + "," +enrollResultSet.getObject(2)+"\n";
+                        fw.write(enroll);
+                    }
                     ResultSet sectionResultSet=stm.executeQuery("Select*from section WHERE section_id >=1");
                     fw.write("\nSECTIONS:\n");
                     while(sectionResultSet!=null && sectionResultSet.next()){
@@ -261,6 +277,7 @@ public class SMFrame extends JFrame implements WindowListener {
                 return;
             }
             try{
+                stm.execute("DROP TABLE IF EXISTS enrollment;");
                 stm.execute("DROP TABLE IF EXISTS section;");
                 stm.execute("DROP TABLE IF EXISTS course;");
                 stm.execute("DROP TABLE IF EXISTS teacher;");
@@ -275,6 +292,9 @@ public class SMFrame extends JFrame implements WindowListener {
                     coursePan.fileImport(fromFile);
                     fromFile = new Scanner(f);
                     sectionPan.fileImport(fromFile);
+                    fromFile = new Scanner(f);
+                    sectionPan.importFileEnrollment(fromFile);
+
                 }
 
             }

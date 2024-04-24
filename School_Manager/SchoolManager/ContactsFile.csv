@@ -1,15 +1,13 @@
 TEACHERS:
-1,Austin,Bridger
+1,Lauren,Tamayo
 2,Jason,Tully
 
 STUDENTS:
-1,chem,g
-2,kaleb,n
 
 COURSES:
 1,english,0
-2,pre cal,1
-3,com sci A,2
+2,com sci,1
 
 SECTIONS:
 1,1,1
+2,2,1

@@ -1,8 +1,14 @@
+import com.mysql.cj.jdbc.ha.StandardLoadBalanceExceptionChecker;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class TeacherPanel extends JPanel{
@@ -16,20 +22,33 @@ public class TeacherPanel extends JPanel{
 
     JTable teacherTable;
 
+    JTable sectionsTaughtTable;
+
+    Connection con;
+
+
+
     JScrollPane jScrollPane;
+
+    JScrollPane jScrollSection;
 
     JButton newButton = new JButton("New");
     JButton saveButton = new JButton("Save");
     JButton deleteButton = new JButton("Delete");
-    JButton sectionsButton = new JButton("Sections");
 
     Teacher t;
+    JLabel secTaughtLab= new JLabel("Sections Taught");
+
+    SectionPanel secz;
+
+
+
 
 
     public TeacherPanel() {
 
         setLayout(null);
-        setBounds(15, 40, 600, 630);
+        setBounds(15, 40, 950, 630);
         setBorder(BorderFactory.createLineBorder(Color.black));
 
         panelTitleLabel.setBounds(15, 5, 100, 35);
@@ -52,6 +71,10 @@ public class TeacherPanel extends JPanel{
         teacherLNTextField.setFont(new Font("Calibri", Font.BOLD, 15));
         add(teacherLNTextField);
 
+        secTaughtLab.setBounds(690, 40, 140,35);
+        secTaughtLab.setFont(new Font("Calibri", Font.BOLD, 20));
+        add(secTaughtLab);
+
 
         //buttons
 
@@ -66,7 +89,7 @@ public class TeacherPanel extends JPanel{
             }
         });
 
-        saveButton.setBounds(210, 140, 70, 20);
+        saveButton.setBounds(270, 140, 70, 20);
         saveButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(saveButton);
         saveButton.addActionListener(e-> {
@@ -82,7 +105,7 @@ public class TeacherPanel extends JPanel{
             }
         });
 
-        deleteButton.setBounds(300, 140, 70, 20);
+        deleteButton.setBounds(420, 140, 70, 20);
         deleteButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(deleteButton);
         deleteButton.addActionListener(e-> {
@@ -98,9 +121,6 @@ public class TeacherPanel extends JPanel{
             }
         });
 
-        sectionsButton.setBounds(400, 140, 90, 20);
-        sectionsButton.setFont(new Font("Calibri", Font.BOLD, 10));
-        add(sectionsButton);
 
 
         t = new Teacher();
@@ -112,11 +132,20 @@ public class TeacherPanel extends JPanel{
                 String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
                 teacherFNTextField.setText(firstName);
                 teacherLNTextField.setText(lastName);
+
+                sectionsTaughtTable=buildSectionTable((int)teacherTable.getValueAt(teacherTable.getSelectedRow() , 0));
+                jScrollSection.setViewportView(sectionsTaughtTable);
             }
         });
         jScrollPane = new JScrollPane(teacherTable);
         jScrollPane.setBounds(50,190,500, 400);
         add(jScrollPane);
+
+        sectionsTaughtTable=makeJTable(new Object[0][0]);
+        jScrollSection = new JScrollPane(sectionsTaughtTable);
+        jScrollSection.setBounds(630,80,250, 200);
+        add(jScrollSection);
+
     }
 
 
@@ -133,6 +162,9 @@ public class TeacherPanel extends JPanel{
                     String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
                     teacherFNTextField.setText(firstName);
                     teacherLNTextField.setText(lastName);
+
+                    sectionsTaughtTable=buildSectionTable((int)teacherTable.getValueAt(teacherTable.getSelectedRow() , 0));
+                    jScrollSection.setViewportView(sectionsTaughtTable);
                 }
             });
         }
@@ -156,6 +188,9 @@ public class TeacherPanel extends JPanel{
                     String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
                     teacherFNTextField.setText(firstName);
                     teacherLNTextField.setText(lastName);
+
+                    sectionsTaughtTable=buildSectionTable((int)teacherTable.getValueAt(teacherTable.getSelectedRow() , 0));
+                    jScrollSection.setViewportView(sectionsTaughtTable);
                 }
             });
         }
@@ -165,6 +200,8 @@ public class TeacherPanel extends JPanel{
     }
 
     public void delTeacher(int id) throws SQLException {
+        secz=new SectionPanel();
+        secz.deleteTeacher(id);
         if(!teacherFNTextField.getText().isEmpty() && !teacherLNTextField.getText().isEmpty()){
             teacherTable=t.deleteTeacher(id);
             jScrollPane.setViewportView(teacherTable);
@@ -176,6 +213,9 @@ public class TeacherPanel extends JPanel{
                     String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
                     teacherFNTextField.setText(firstName);
                     teacherLNTextField.setText(lastName);
+
+                    sectionsTaughtTable=buildSectionTable((int)teacherTable.getValueAt(teacherTable.getSelectedRow() , 0));
+                    jScrollSection.setViewportView(sectionsTaughtTable);
                 }
             });
         }
@@ -195,8 +235,81 @@ public class TeacherPanel extends JPanel{
                 String lastName = (String) teacherTable.getValueAt(teacherTable.getSelectedRow() , 2);
                 teacherFNTextField.setText(firstName);
                 teacherLNTextField.setText(lastName);
+
+                sectionsTaughtTable=buildSectionTable((int)teacherTable.getValueAt(teacherTable.getSelectedRow() , 0));
+                jScrollSection.setViewportView(sectionsTaughtTable);
             }
         });
+    }
+
+    public JTable buildSectionTable(int teacherID){
+        con=Main.myConn;
+        try{
+            Statement stm1 = con.createStatement();
+            Statement stm3 = con.createStatement();
+            ResultSet secResultSet;
+
+            ResultSet courseResultSet;
+            secResultSet = stm1.executeQuery("Select*from section WHERE section_id >=1");
+
+            ArrayList<Object> perRow = new ArrayList<>();
+            ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
+
+            while(secResultSet!=null && secResultSet.next()){
+                courseResultSet = stm3.executeQuery("Select*from course WHERE course_id >=1");
+                if((int)secResultSet.getObject(3)==teacherID){
+                    perRow.add(secResultSet.getObject(1));
+                    int courseID= (int) secResultSet.getObject(2);
+                    while(courseResultSet != null && courseResultSet.next()){
+                        if((int)courseResultSet.getObject(1) == courseID){
+                            String course = String.valueOf(courseResultSet.getObject(2))+" ("+courseResultSet.getObject(1)+") ";
+                            //System.out.println(course);
+                            perRow.add(course);
+                            break;
+                        }
+                    }
+                    data.add(perRow);
+                    perRow = new ArrayList<>();
+                }
+            }
+
+            if (data.size() != 0) {
+                Object[][] dataArray = new Object[data.size()][data.get(0).size()];
+                for (int r = 0; r < dataArray.length; r++) {
+                    for (int c = 0; c < dataArray[0].length; c++) {
+                        dataArray[r] = data.get(r).toArray();
+                        //dataArray[r][c]=data.get(r).get(c);
+
+                    }
+                }
+                System.out.println("data for SectionsTaught table"+ Arrays.deepToString(dataArray));
+
+                return makeJTable(dataArray);
+            }
+
+
+            return makeJTable(new Object[0][0]);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public JTable makeJTable(Object[][] dataArray) {
+        DefaultTableModel tableModel = new DefaultTableModel(dataArray, new String[]{"Section ID", "Course Name"}) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+        };
+
+        JTable table = new JTable();
+        table.setModel(tableModel);
+        table.getTableHeader().setReorderingAllowed(false);
+
+        return table;
     }
 
 }

@@ -252,7 +252,7 @@ public class StudentPanel extends JPanel {
     }
 
     public JTable makeJTable(Object[][] dataArray) {
-        System.out.println("found make Jtable");
+
         DefaultTableModel tableModel = new DefaultTableModel(dataArray, new String[]{"Section","Course","Teacher"}) {
 
             @Override
@@ -265,7 +265,7 @@ public class StudentPanel extends JPanel {
         JTable table = new JTable();
         table.setModel(tableModel);
         table.getTableHeader().setReorderingAllowed(false);
-        System.out.print(table);
+
 
         return table;
     }
@@ -295,8 +295,13 @@ public class StudentPanel extends JPanel {
         ResultSet studentRS=stm.executeQuery("Select*from teacher WHERE teacher_id >=1");
         while (studentRS!=null && studentRS.next()){
             if(id==(int)studentRS.getObject(1)){
+
                 return studentRS.getObject(2) + " " + studentRS.getObject(3);
             }
+
+        }
+        if(id==-1){
+            return  "no teacher";
         }
         return null;
     }
