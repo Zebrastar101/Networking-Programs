@@ -265,7 +265,7 @@ public class StudentPanel extends JPanel {
         JTable table = new JTable();
         table.setModel(tableModel);
         table.getTableHeader().setReorderingAllowed(false);
-        
+
 
         return table;
     }
