@@ -271,6 +271,7 @@ public class SMFrame extends JFrame implements WindowListener {
                 return;
             }
             try{
+                stm.execute("DROP TABLE IF EXISTS enrollment;");
                 stm.execute("DROP TABLE IF EXISTS section;");
                 stm.execute("DROP TABLE IF EXISTS course;");
                 stm.execute("DROP TABLE IF EXISTS teacher;");
