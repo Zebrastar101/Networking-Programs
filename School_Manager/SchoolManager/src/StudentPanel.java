@@ -252,7 +252,7 @@ public class StudentPanel extends JPanel {
     }
 
     public JTable makeJTable(Object[][] dataArray) {
-        System.out.println("found make Jtable");
+
         DefaultTableModel tableModel = new DefaultTableModel(dataArray, new String[]{"Section","Course","Teacher"}) {
 
             @Override
@@ -265,7 +265,7 @@ public class StudentPanel extends JPanel {
         JTable table = new JTable();
         table.setModel(tableModel);
         table.getTableHeader().setReorderingAllowed(false);
-        System.out.print(table);
+        
 
         return table;
     }
