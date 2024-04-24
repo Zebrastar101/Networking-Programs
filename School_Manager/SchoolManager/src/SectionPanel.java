@@ -651,6 +651,28 @@ public class SectionPanel extends JPanel{
         sectionTable=sec.importFile(sc);
         jScrollPane.setViewportView(sectionTable);
     }
+
+    public void importFileEnrollment(Scanner sc) throws SQLException {
+        stm.execute("CREATE TABLE IF NOT EXISTS enrollment(section_id INTEGER, student_id INTEGER,FOREIGN KEY(section_id) REFERENCES section(section_id) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(student_id) REFERENCES student(student_id) ON DELETE CASCADE ON UPDATE CASCADE) ;");
+        String s = sc.nextLine();
+        while(!s.equals("ENROLLMENT:")){
+            s = sc.nextLine();
+        }
+        while (sc.hasNextLine()){
+            s = sc.nextLine();
+
+            if(!s.isEmpty()){
+                String[] parts=s.split(",");
+                stm.executeUpdate("INSERT INTO enrollment(section_id, student_id) VALUES('"+parts[0]+"','"+parts[1]+"');");
+            }
+            else {
+                teacherTable=buildTable(stm.executeQuery("Select*from teacher WHERE teacher_id >=1"));
+                return teacherTable;
+            }
+        }
+        return null;
+    }
+
     public void changeFullData(){
         try{
         fullData=makeFullData(fullData);}
