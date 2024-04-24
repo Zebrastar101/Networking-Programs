@@ -155,7 +155,7 @@ public class SectionPanel extends JPanel{
             try {
                 String v=(String) studentsDropDown.getSelectedItem();
                 String turn ="";
-                if(v!=null){
+                if(v!=null&&!sectionTable.getSelectionModel().isSelectionEmpty()){
                     for(int x=0; x<v.length(); x++){
                         if(v.charAt(x)=='('){
                             for(int z=0; z<v.length(); z++){
@@ -175,7 +175,7 @@ public class SectionPanel extends JPanel{
                     addStudent(Integer.parseInt(turn),(int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0));
                 }
                 else{
-                    int errorMessage = JOptionPane.showConfirmDialog(null, "No students to add", "Error", JOptionPane.OK_CANCEL_OPTION);
+                    int errorMessage = JOptionPane.showConfirmDialog(null, "No students to add or no selected section", "Error", JOptionPane.OK_CANCEL_OPTION);
                 }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
