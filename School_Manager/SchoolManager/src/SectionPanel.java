@@ -328,8 +328,6 @@ public class SectionPanel extends JPanel{
         sectionTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                System.out.print((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1) + " ");
-                System.out.print((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2) + "\n");
                 teachersDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1));
                 coursesDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2));
             }
@@ -510,6 +508,8 @@ public class SectionPanel extends JPanel{
         sectionTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
+                System.out.print((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1) + " ");
+                System.out.print((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2) + "\n");
                 teachersDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1));
                 coursesDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2));
             }
