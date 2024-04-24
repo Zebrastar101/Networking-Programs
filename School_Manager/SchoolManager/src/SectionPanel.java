@@ -664,8 +664,6 @@ public class SectionPanel extends JPanel{
             if(!s.isEmpty()){
                 System.out.println(s);
                 String[] parts=s.split(",");
-                System.out.println(parts[0]);
-                System.out.println(parts[1]);
                 stm.executeUpdate("INSERT INTO enrollment(section_id, student_id) VALUES('"+parts[0]+"','"+parts[1]+"');");
             }
             else {
@@ -716,17 +714,12 @@ public class SectionPanel extends JPanel{
 
                     }
                 });
-                ArrayList<String> tb = new ArrayList<>();
-                ArrayList<String> idList = new ArrayList<>();
-                try {
-                    fullData = makeFullData(fullData);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-                enrollment = buildEnrollMentTable(tb);
-                reloadStudentsTable(idList);
+                ArrayList<String> blank = new ArrayList<>();
+
+                enrollment = buildEnrollMentTable(blank);
                 jscrollEnroll.setViewportView(enrollment);
                 break;
+
             }
         }
     }
