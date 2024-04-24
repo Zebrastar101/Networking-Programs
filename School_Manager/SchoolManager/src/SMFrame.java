@@ -241,7 +241,7 @@ public class SMFrame extends JFrame implements WindowListener {
                         String course = courseResultSet.getObject(1) + "," +courseResultSet.getObject(2) + "," + courseResultSet.getObject(3)+"\n";
                         fw.write(course);
                     }
-                    ResultSet enrollResultSet=stm.executeQuery("Select*from enrollment WHERE enrollment_id >=1");
+                    ResultSet enrollResultSet=stm.executeQuery("Select*from enrollment");
                     fw.write("\nENROLLMENT:\n");
                     while(enrollResultSet!=null && enrollResultSet.next()){
                         String enroll = enrollResultSet.getObject(1) + "," +enrollResultSet.getObject(2)+"\n";

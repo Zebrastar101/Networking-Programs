@@ -662,7 +662,10 @@ public class SectionPanel extends JPanel{
             s = sc.nextLine();
 
             if(!s.isEmpty()){
+                System.out.println(s);
                 String[] parts=s.split(",");
+                System.out.println(parts[0]);
+                System.out.println(parts[1]);
                 stm.executeUpdate("INSERT INTO enrollment(section_id, student_id) VALUES('"+parts[0]+"','"+parts[1]+"');");
             }
             else {
