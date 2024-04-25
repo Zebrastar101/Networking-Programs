@@ -109,7 +109,7 @@ public class SectionPanel extends JPanel{
                 throw new RuntimeException(ex);
             }
            
-            
+
 
 
         });
@@ -433,6 +433,16 @@ public class SectionPanel extends JPanel{
 
             }
         });
+        ArrayList<String> tb = new ArrayList<>();
+        ArrayList<String> idList = new ArrayList<>();
+        try {
+            fullData = makeFullData(fullData);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        enrollment = buildEnrollMentTable(tb);
+        reloadStudentsTable(idList);
+        jscrollEnroll.setViewportView(enrollment);
     }
 
     public void delSection(int id) throws SQLException {
