@@ -229,19 +229,11 @@ public class SectionPanel extends JPanel{
         //below from https://www.tabnine.com/code/java/methods/javax.swing.JTable/getSelectedRow
         fullData=new ArrayList<ArrayList<Object>>();
         fullData=makeFullData(fullData);
-        sectionTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                System.out.print((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1) + " ");
-                System.out.print((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2) + "\n");
-                teachersDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1));
-                coursesDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2));
-            }
-        });
         sectionTable.addMouseListener(new MouseAdapter() {
             //Idk how to get the selected values to pop up for this one
             public void mouseClicked(MouseEvent e) {
-
+                teachersDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2));
+                coursesDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1));
                 int secID = (int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0);
 
                 ArrayList<String> tb = new ArrayList<>();
@@ -325,17 +317,11 @@ public class SectionPanel extends JPanel{
     public void newSection(String teacher, String course) throws SQLException {
         sectionTable=sec.addSection(teacher, course);
         jScrollPane.setViewportView(sectionTable);
-        sectionTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                teachersDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1));
-                coursesDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2));
-            }
-        });
         sectionTable.addMouseListener(new MouseAdapter() {
             //Idk how to get the selected values to pop up for this one
             public void mouseClicked(MouseEvent e) {
-
+                teachersDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2));
+                coursesDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1));
                 int secID = (int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0);
 
                 ArrayList<String> tb = new ArrayList<>();
@@ -383,17 +369,11 @@ public class SectionPanel extends JPanel{
     public void saveSectionChanges(String teacher, String course, int id) throws SQLException {
         sectionTable=sec.saveSection(teacher, course, id);
         jScrollPane.setViewportView(sectionTable);
-        sectionTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                teachersDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1));
-                coursesDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2));
-            }
-        });
         sectionTable.addMouseListener(new MouseAdapter() {
             //Idk how to get the selected values to pop up for this one
             public void mouseClicked(MouseEvent e) {
-
+                teachersDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2));
+                coursesDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1));
                 int secID = (int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0);
 
                 ArrayList<String> tb = new ArrayList<>();
@@ -440,17 +420,11 @@ public class SectionPanel extends JPanel{
     public void delSection(int id) throws SQLException {
         sectionTable=sec.deleteSection(id);
         jScrollPane.setViewportView(sectionTable);
-        sectionTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                teachersDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1));
-                coursesDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2));
-            }
-        });
         sectionTable.addMouseListener(new MouseAdapter() {
             //Idk how to get the selected values to pop up for this one
             public void mouseClicked(MouseEvent e) {
-
+                teachersDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2));
+                coursesDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1));
                 int secID = (int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0);
 
                 ArrayList<String> tb = new ArrayList<>();
@@ -505,19 +479,11 @@ public class SectionPanel extends JPanel{
         ResultSet sectionRS=stm.executeQuery("Select*from section WHERE section_id >=1");
         sectionTable=sec.buildTable(sectionRS);
         jScrollPane.setViewportView(sectionTable);
-        sectionTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                System.out.print((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1) + " ");
-                System.out.print((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2) + "\n");
-                teachersDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1));
-                coursesDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2));
-            }
-        });
         sectionTable.addMouseListener(new MouseAdapter() {
             //Idk how to get the selected values to pop up for this one
             public void mouseClicked(MouseEvent e) {
-
+                teachersDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2));
+                coursesDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1));
                 int secID = (int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0);
 
                 ArrayList<String> tb = new ArrayList<>();
@@ -797,8 +763,8 @@ public class SectionPanel extends JPanel{
                     //Idk how to get the selected values to pop up for this one
                     public void mouseClicked(MouseEvent e) {
 
-                        teachersDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1));
-                        coursesDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2));
+                        teachersDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 2));
+                        coursesDropDown.setSelectedItem((String) sectionTable.getValueAt(sectionTable.getSelectedRow(), 1));
                         int secID = (int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0);
 
                         ArrayList<String> tb = new ArrayList<>();
