@@ -109,11 +109,7 @@ public class SectionPanel extends JPanel{
                 throw new RuntimeException(ex);
             }
            
-            ArrayList<String> blank = new ArrayList<>();
-            enrollment=buildEnrollMentTable(blank);
-            jscrollEnroll= new JScrollPane(enrollment);
-            jscrollEnroll.setBounds(630,80,250, 200);
-            add(jscrollEnroll);
+
 
 
         });
@@ -132,6 +128,18 @@ public class SectionPanel extends JPanel{
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
+            fullData=new ArrayList<ArrayList<Object>>();
+            try {
+                fullData=makeFullData(fullData);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
+            ArrayList<String> blank = new ArrayList<>();
+
+
+            reloadStudentsTable(blank);
+
         });
 
         deleteButton.setBounds(420, 140, 70, 20);
@@ -188,10 +196,10 @@ public class SectionPanel extends JPanel{
         removeStudentButton.setFont(new Font("Calibri", Font.BOLD, 10));
         add(removeStudentButton);
         removeStudentButton.addActionListener(e -> {
-
-                if(!enrollment.getSelectionModel().isSelectionEmpty()){
+                if(!enrollment.getSelectionModel().isSelectionEmpty()&&!sectionTable.getSelectionModel().isSelectionEmpty()){
                     try {
                         String v=(String) enrollment.getValueAt(enrollment.getSelectedRow(), 0);
+                        System.out.println(v);
                         String turn ="";
                         for(int x=0; x<v.length(); x++){
                             if(v.charAt(x)=='('){
@@ -209,10 +217,10 @@ public class SectionPanel extends JPanel{
                             }
                         }
 
-                    deleteStudent(Integer.parseInt(turn),(int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0));
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
+                        deleteStudent(Integer.parseInt(turn),(int) sectionTable.getValueAt(sectionTable.getSelectedRow(), 0));
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
                 else{
                     int errorMessage = JOptionPane.showConfirmDialog(null, "No student was selected", "Error", JOptionPane.OK_CANCEL_OPTION);
@@ -363,6 +371,16 @@ public class SectionPanel extends JPanel{
 
             }
         });
+        ArrayList<String> tb = new ArrayList<>();
+        ArrayList<String> idList = new ArrayList<>();
+        try {
+            fullData = makeFullData(fullData);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        enrollment = buildEnrollMentTable(tb);
+        reloadStudentsTable(idList);
+        jscrollEnroll.setViewportView(enrollment);
     }
 
 
@@ -415,6 +433,16 @@ public class SectionPanel extends JPanel{
 
             }
         });
+        ArrayList<String> tb = new ArrayList<>();
+        ArrayList<String> idList = new ArrayList<>();
+        try {
+            fullData = makeFullData(fullData);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        enrollment = buildEnrollMentTable(tb);
+        reloadStudentsTable(idList);
+        jscrollEnroll.setViewportView(enrollment);
     }
 
     public void delSection(int id) throws SQLException {
