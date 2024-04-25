@@ -25,7 +25,7 @@ public class Main {
                 }
             }
             if(i==0){
-                //stm.executeUpdate("INSERT INTO teacher(teacher_id, first_name, last_name) VALUES('-1','no teacher','assigned');");
+                stm.executeUpdate("INSERT INTO teacher(teacher_id, first_name, last_name) VALUES('-1','no teacher','assigned');");
             }
 
             stm.execute("CREATE TABLE IF NOT EXISTS course(course_id INTEGER NOT NULL AUTO_INCREMENT, title TEXT, type INTEGER, PRIMARY KEY(course_id))");
