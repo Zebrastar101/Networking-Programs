@@ -8,4 +8,27 @@ public class WumpusPlayer {
     private int rowPos;
     private boolean arrow;
     private boolean gold;
+    public int WumpusPlayer(){
+        public int getDirection() {
+            return direction;
+        }
+
+        public int getColPos() {
+            return colPos;
+        }
+
+        public int getRowPos() {
+            return rowPos;
+        }
+
+        public boolean isArrow() {
+            return arrow;
+        }
+
+        public boolean isGold() {
+            return gold;
+        }
+    }
 }
+
+
