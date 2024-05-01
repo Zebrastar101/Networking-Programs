@@ -86,4 +86,31 @@ public class WumpusSquare {
     public void setVisited(boolean visited) {
         this.visited = visited;
     }
+
+    public String toString(){
+        if(ladder){
+            return "L";
+        }
+        else if (pit) {
+            return "P";
+        }
+        else if (gold) {
+            if (wumpus){
+                return "@";
+            }
+            if (deadWumpus){
+                return "!";
+            }
+            return "G";
+        }
+        else if (wumpus) {
+            return "W";
+        }
+        else if (deadWumpus) {
+            return "D";
+        }
+        else{
+            return "*";
+        }
+    }
 }
