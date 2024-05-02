@@ -11,7 +11,12 @@ public class WumpusMap {
     }
 
     public void createMap(){
+        grid= new WumpusSquare[10][10];
+        for(int r = 0; r<=9; r++){
+            for(int c = 0; c<=9; c++){
 
+            }
+        }
     }
 
     public int getLadderColumn() {
