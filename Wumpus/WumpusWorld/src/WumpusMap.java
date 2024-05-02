@@ -11,10 +11,26 @@ public class WumpusMap {
     }
 
     public void createMap(){
+        for(int r = 0; r<=9; r++){
+            for(int c = 0; c<=9; c++){
+                grid[r][c]= new WumpusSquare() idk;
+            }
+        }
         grid= new WumpusSquare[10][10];
         for(int r = 0; r<=9; r++){
             for(int c = 0; c<=9; c++){
+                for(int i=1; i<=10; i++){
+                    //pits
+                    //int randomNum = min + (int)(Math.random() * ((max – min) + 1));
+                    int randRow = 0+(int)(Math.random()*((9-0)+1));
+                    int randCol = 0+(int)(Math.random()*((9-0)+1));
+                    while(grid[randRow][randCol]){
 
+                    }
+
+
+
+                }
             }
         }
     }
