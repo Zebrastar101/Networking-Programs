@@ -81,6 +81,8 @@ public class WumpusMap {
             randCol = 0+(int)(Math.random()*((9-0)+1));
         }
         grid[randRow][randCol].setLadder(true);
+        ladderRow=randRow;
+        ladderColumn=randCol;
     }
 
     public int getLadderColumn() {
