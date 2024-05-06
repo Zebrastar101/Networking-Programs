@@ -35,7 +35,7 @@ public class WumpusPanel {
     }
     public void paint(Graphics g){}
 
-    
+
 
 
 
