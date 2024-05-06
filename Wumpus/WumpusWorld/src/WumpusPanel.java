@@ -27,6 +27,8 @@ public class WumpusPanel extends JPanel implements KeyListener{
     private BufferedImage playerLeft;
     private BufferedImage playerRight;
     public WumpusPanel(){
+        setSize(800,800);
+
 
     }
 
@@ -40,7 +42,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
 
     }
     public void paint(Graphics g){
-        
+
     }
 
 
