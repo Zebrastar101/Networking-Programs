@@ -9,6 +9,7 @@ public class WumpusPlayer {
     private boolean arrow;
     private boolean gold;
 
+
     public  WumpusPlayer() {
         direction=NORTH;
         gold=false;
