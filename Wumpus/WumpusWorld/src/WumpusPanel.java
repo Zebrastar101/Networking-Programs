@@ -50,7 +50,9 @@ public class WumpusPanel extends JPanel implements KeyListener{
         playerDown=ImageIO.read(new File("Wumpus World Images\\playerDown.gif"));
         playerLeft=ImageIO.read(new File("Wumpus World Images\\playerLeft.gif"));
         playerRight=ImageIO.read(new File("Wumpus World Images\\playerRight.gif"));
-        
+
+        //reset call
+        reset();
 
 
     }
@@ -65,7 +67,8 @@ public class WumpusPanel extends JPanel implements KeyListener{
         player.setColPos(map.getLadderColumn());
     }
     public void addNotify(){
-
+        super.addNotify();
+        requestFocus();
     }
     public void paint(Graphics g){
 
