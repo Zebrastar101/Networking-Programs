@@ -1,8 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class WumpusPanel extends JPanel implements KeyListener{
     public final int PLAYING=0;
@@ -26,8 +29,28 @@ public class WumpusPanel extends JPanel implements KeyListener{
     private BufferedImage playerDown;
     private BufferedImage playerLeft;
     private BufferedImage playerRight;
-    public WumpusPanel(){
+    public WumpusPanel() throws IOException {
         setSize(800,800);
+
+        //picked a random one not sure if its right
+        buffer=new BufferedImage(800,800,BufferedImage.TYPE_4BYTE_ABGR);
+
+        //load images
+        floor= ImageIO.read(new File("Wumpus World Images\\Floor.gif"));
+        arrow=ImageIO.read(new File("Wumpus World Images\\arrow.gif"));
+        fog=ImageIO.read(new File("Wumpus World Images\\fog.gif"));
+        gold=ImageIO.read(new File("Wumpus World Images\\gold.gif"));
+        ladder=ImageIO.read(new File("Wumpus World Images\\ladder.gif"));
+        pit=ImageIO.read(new File("Wumpus World Images\\pit.gif"));
+        breeze=ImageIO.read(new File("Wumpus World Images\\breeze.gif"));
+        wumpus=ImageIO.read(new File("Wumpus World Images\\wumpus.gif"));
+        deadWumpus=ImageIO.read(new File("Wumpus World Images\\deadWumpus.gif"));
+        stench=ImageIO.read(new File("Wumpus World Images\\stench.gif"));
+        playerUp=ImageIO.read(new File("Wumpus World Images\\playerUp.gif"));
+        playerDown=ImageIO.read(new File("Wumpus World Images\\playerDown.gif"));
+        playerLeft=ImageIO.read(new File("Wumpus World Images\\playerLeft.gif"));
+        playerRight=ImageIO.read(new File("Wumpus World Images\\playerRight.gif"));
+        
 
 
     }
@@ -37,6 +60,9 @@ public class WumpusPanel extends JPanel implements KeyListener{
         status=PLAYING;
         map= new WumpusMap();
         //still need player at ladder
+        player=new WumpusPlayer();
+        player.setRowPos(map.getLadderRow());
+        player.setColPos(map.getLadderColumn());
     }
     public void addNotify(){
 
