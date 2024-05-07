@@ -53,8 +53,6 @@ public class WumpusPanel extends JPanel implements KeyListener{
 
         //reset call
         reset();
-
-
     }
 
 
