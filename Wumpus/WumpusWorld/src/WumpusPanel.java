@@ -29,13 +29,14 @@ public class WumpusPanel extends JPanel implements KeyListener{
     private BufferedImage playerDown;
     private BufferedImage playerLeft;
     private BufferedImage playerRight;
-    public WumpusPanel() throws IOException {
+    public WumpusPanel(){
         setSize(800,800);
 
         //picked a random one not sure if its right
         buffer=new BufferedImage(800,800,BufferedImage.TYPE_4BYTE_ABGR);
 
         //load images
+        try{
         floor= ImageIO.read(new File("Wumpus World Images\\Floor.gif"));
         arrow=ImageIO.read(new File("Wumpus World Images\\arrow.gif"));
         fog=ImageIO.read(new File("Wumpus World Images\\fog.gif"));
@@ -49,8 +50,10 @@ public class WumpusPanel extends JPanel implements KeyListener{
         playerUp=ImageIO.read(new File("Wumpus World Images\\playerUp.gif"));
         playerDown=ImageIO.read(new File("Wumpus World Images\\playerDown.gif"));
         playerLeft=ImageIO.read(new File("Wumpus World Images\\playerLeft.gif"));
-        playerRight=ImageIO.read(new File("Wumpus World Images\\playerRight.gif"));
-
+        playerRight=ImageIO.read(new File("Wumpus World Images\\playerRight.gif"));}
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         //reset call
         reset();
     }
