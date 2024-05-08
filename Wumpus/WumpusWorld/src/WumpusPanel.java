@@ -138,13 +138,13 @@ public class WumpusPanel extends JPanel implements KeyListener{
     @Override
     public void keyTyped(KeyEvent e) {
         char event=e.getKeyChar();
-        if ((event == 'S' || event == 's') && player.getRowPos()<=9 && status==PLAYING){
+        if ((event == 'S' || event == 's') && player.getRowPos()<9 && status==PLAYING){
             player.setRowPos(player.getRowPos()+1);
             map.getSquare(player.getRowPos(),player.getColPos()).setVisited(true);
             player.setDirection(0);
             repaint();
         }
-        if ((event == 'D' || event == 'd') && player.getColPos()<=9 && status==PLAYING){
+        if ((event == 'D' || event == 'd') && player.getColPos()<9 && status==PLAYING){
             player.setColPos(player.getColPos()+1);
             map.getSquare(player.getRowPos(),player.getColPos()).setVisited(true);
             player.setDirection(WumpusPlayer.EAST);
