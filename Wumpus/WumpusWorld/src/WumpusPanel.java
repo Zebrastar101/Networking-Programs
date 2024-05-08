@@ -67,10 +67,9 @@ public class WumpusPanel extends JPanel implements KeyListener{
         map= new WumpusMap();
         //still need player at ladder
         player=new WumpusPlayer();
-        player.setRowPos(map.getLadderRow());
-        player.setColPos(map.getLadderColumn());
+
         start=0;
-        System.out.print(start);
+        System.out.print(start+"Start");
         repaint();
     }
     public void addNotify(){
@@ -91,32 +90,32 @@ public class WumpusPanel extends JPanel implements KeyListener{
                 WumpusSquare track=map.getSquare(x,z);
 
                 if(track.isVisited()==true ||cheat==true){
-                    g.drawImage(floor,z*50, x*50,null);
+                    g.drawImage(floor,x*50, z*50,null);
                     track=map.getSquare(x,z);
                     if(track.isBreeze()==true){
-                        g.drawImage(breeze,z*50,x*50,null);
+                        g.drawImage(breeze,x*50,z*50,null);
                     }
                     if(track.isDeadWumpus()==true){
-                        g.drawImage(deadWumpus,z*50,x*50,null);
+                        g.drawImage(deadWumpus,x*50,z*50,null);
                     }
                     if(track.isGold()==true){
-                        g.drawImage(gold,z*50,x*50,null);
+                        g.drawImage(gold,x*50,z*50,null);
                     }
                     if(track.isLadder()==true){
-                        g.drawImage(ladder,z*50,x*50,null);
+                        g.drawImage(ladder,x*50,z*50,null);
                     }
                     if(track.isStench()==true){
-                        g.drawImage(stench,z*50,x*50,null);
+                        g.drawImage(stench,x*50,z*50,null);
                     }
                     if(track.isWumpus()==true){
-                        g.drawImage(wumpus,z*50,x*50,null);
+                        g.drawImage(wumpus,x*50,z*50,null);
                     }
                     if(track.isPit()==true){
-                        g.drawImage(pit,z*50,x*50,null);
+                        g.drawImage(pit,x*50,z*50,null);
                     }
                 }
                 else if(track.isVisited()!=true&&cheat==false){
-                    g.drawImage(fog,z*50,x*50,null);
+                    g.drawImage(fog,x*50,z*50,null);
                 }
             }
         }
@@ -164,8 +163,8 @@ public class WumpusPanel extends JPanel implements KeyListener{
             player.setDirection(WumpusPlayer.WEST);
             repaint();
         }
-        if ((event == 'i' || event == 'I')&&player.isArrow()==true&&status==PLAYING) {
-            //nio clue how to shoot arrow yet;
+        if ((event == 'k' || event == 'K')&&player.isArrow()==true&&status==PLAYING) {
+            //shoot down
             player.setArrow(false);
             for(int x=player.getRowPos()+1; x<10;x++){
                 if(map.getSquare(x,player.getColPos()).isWumpus()==true){
@@ -177,8 +176,8 @@ public class WumpusPanel extends JPanel implements KeyListener{
             repaint();
 
         }
-        if ((event == 'l' || event == 'L')&&player.isArrow()==true&&status==PLAYING) {
-            //nio clue how to shoot arrow yet;
+        if ((event == 'j' || event == 'J')&&player.isArrow()==true&&status==PLAYING) {
+            //shoot right
             player.setArrow(false);
             for(int x=player.getColPos()+1; x<10;x++){
                 if(map.getSquare(player.getRowPos(),x).isWumpus()==true){
@@ -189,8 +188,8 @@ public class WumpusPanel extends JPanel implements KeyListener{
             }
             repaint();
         }
-        if ((event == 'k' || event == 'K')&&player.isArrow()==true&&status==PLAYING) {
-            //nio clue how to shoot arrow yet;
+        if ((event == 'i' || event == 'I')&&player.isArrow()==true&&status==PLAYING) {
+            //shoot up
             player.setArrow(false);
             for(int x=player.getRowPos()+1; x<10;x++){
                 if(map.getSquare(x,player.getColPos()).isWumpus()==true){
@@ -201,8 +200,8 @@ public class WumpusPanel extends JPanel implements KeyListener{
             }
             repaint();
         }
-        if ((event == 'j' || event == 'J')&&player.isArrow()==true&&status==PLAYING) {
-            //nio clue how to shoot arrow yet;
+        if ((event == 'l' || event == 'L')&&player.isArrow()==true&&status==PLAYING) {
+            //shoot lefft;
             player.setArrow(false);
             for(int x=player.getColPos()-1; x>-1;x--){
                 if(map.getSquare(player.getRowPos(),x).isWumpus()==true){
@@ -211,6 +210,11 @@ public class WumpusPanel extends JPanel implements KeyListener{
 
                 }
             }
+            repaint();
+        }
+        if ((event == 'p' || event == 'P')&&player.isGold()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isGold()) {
+            //nio clue how to shoot arrow yet;
+            status=WON;
             repaint();
         }
         if ((event == 'c' || event == 'C')&&player.isGold()==true&&player.getColPos()==map.getLadderColumn()&&player.getRowPos()==map.getLadderRow()&&status==PLAYING) {
