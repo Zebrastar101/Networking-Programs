@@ -40,7 +40,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
         //load images
         try{
         floor= ImageIO.read(new File("Wumpus World Images\\Floor.gif"));
-       arrow=ImageIO.read(new File("Wumpus World Images\\arrow.gif"));
+        arrow=ImageIO.read(new File("Wumpus World Images\\arrow.gif"));
         fog=ImageIO.read(new File("Wumpus World Images\\black.gif"));
         gold=ImageIO.read(new File("Wumpus World Images\\gold.gif"));
         ladder=ImageIO.read(new File("Wumpus World Images\\ladder.gif"));
@@ -138,33 +138,33 @@ public class WumpusPanel extends JPanel implements KeyListener{
     @Override
     public void keyTyped(KeyEvent e) {
         char event=e.getKeyChar();
-        if ((event == 'S' || event == 's') &&status==PLAYING){
+        if ((event == 'S' || event == 's') && player.getRowPos()<=9 && status==PLAYING){
             player.setRowPos(player.getRowPos()+1);
             map.getSquare(player.getRowPos(),player.getColPos()).setVisited(true);
             player.setDirection(0);
             repaint();
         }
-        if ((event == 'D' || event == 'd') &&status==PLAYING){
+        if ((event == 'D' || event == 'd') && player.getColPos()<=9 && status==PLAYING){
             player.setColPos(player.getColPos()+1);
             map.getSquare(player.getRowPos(),player.getColPos()).setVisited(true);
             player.setDirection(WumpusPlayer.EAST);
             repaint();
 
         }
-        if ((event == 'W' || event == 'w')&&player.getRowPos()>0&&status==PLAYING) {
+        if ((event == 'W' || event == 'w') && player.getRowPos()>0 && status==PLAYING) {
             player.setRowPos(player.getRowPos()-1);
             map.getSquare(player.getRowPos(),player.getColPos()).setVisited(true);
             player.setDirection(WumpusPlayer.SOUTH);
             repaint();
 
         }
-        if ((event == 'a' || event == 'A')&&player.getColPos()>0&&status==PLAYING) {
+        if ((event == 'a' || event == 'A') && player.getColPos()>0 && status==PLAYING) {
             player.setColPos(player.getColPos()-1);
             map.getSquare(player.getRowPos(),player.getColPos()).setVisited(true);
             player.setDirection(WumpusPlayer.WEST);
             repaint();
         }
-        if ((event == 'i' || event == 'I')&&player.isArrow()==true&&status==PLAYING) {
+        if ((event == 'i' || event == 'I') && player.isArrow()==true && status==PLAYING) {
             //nio clue how to shoot arrow yet;
             player.setArrow(false);
             for(int x=player.getRowPos()+1; x<10;x++){
