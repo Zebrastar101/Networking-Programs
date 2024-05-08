@@ -11,6 +11,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
     public final int PLAYING=0;
     public final int DEAD=1;
     public final int WON=2;
+    int start=0;
     private int status;
     private WumpusPlayer player;
     private WumpusMap map;
@@ -32,7 +33,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
     boolean cheat=false;
     public WumpusPanel(){
         setSize(800,800);
-
+        addKeyListener(this);
         //picked a random one not sure if its right
         buffer=new BufferedImage(800,800,BufferedImage.TYPE_4BYTE_ABGR);
 
@@ -68,6 +69,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
         player=new WumpusPlayer();
         player.setRowPos(map.getLadderRow());
         player.setColPos(map.getLadderColumn());
+        start=0;
         repaint();
     }
     public void addNotify(){
@@ -76,6 +78,13 @@ public class WumpusPanel extends JPanel implements KeyListener{
     }
     public void paint(Graphics g){
         System.out.print("paint");
+        if(start==0){
+            player.setColPos(map.getLadderColumn());
+            player.setRowPos(map.getLadderRow());
+            start=1;s
+        }
+
+        map.getSquare(player.getRowPos(),player.getColPos()).setVisited(true);
         for( int x=0; x<10; x++ ){
             for(int z=0; z<10; z++){
                 WumpusSquare track=map.getSquare(x,z);
