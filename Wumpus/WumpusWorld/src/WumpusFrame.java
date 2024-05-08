@@ -3,7 +3,7 @@ import javax.swing.*;
 
 public class WumpusFrame extends JFrame {
     public WumpusFrame() throws IIOException {
-        setSize(800,800);
+        setSize(801,801);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocale(null);
         WumpusPanel p= new WumpusPanel();
