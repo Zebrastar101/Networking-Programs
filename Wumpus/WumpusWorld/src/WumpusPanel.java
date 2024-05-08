@@ -227,6 +227,12 @@ public class WumpusPanel extends JPanel implements KeyListener{
             reset();
 
         }
+        if ((event == 'p' || event == 'P')&&status==PLAYING&&map.getSquare(player.getRowPos(),player.getColPos()).isGold()) {
+           player.setGold(true);
+            map.getSquare(player.getRowPos(),player.getColPos()).setGold(false);
+            repaint();
+
+        }
         if (event=='*'&&status==PLAYING) {
             if(cheat==true){
                 cheat=false;
