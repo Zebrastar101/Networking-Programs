@@ -30,9 +30,12 @@ public class WumpusPanel extends JPanel implements KeyListener{
     private BufferedImage playerDown;
     private BufferedImage playerLeft;
     private BufferedImage playerRight;
+    JLabel inventory=new JLabel("INVENTORY");
+    int arrowHit=1;
+
     boolean cheat=false;
     public WumpusPanel(){
-        setSize(800,800);
+        setSize(500,800);
         addKeyListener(this);
         //picked a random one not sure if its right
         buffer=new BufferedImage(800,800,BufferedImage.TYPE_4BYTE_ABGR);
@@ -58,6 +61,11 @@ public class WumpusPanel extends JPanel implements KeyListener{
             e.printStackTrace();
         }
         //reset call
+        inventory.setBounds(100, 600, 50, 50);
+        inventory.setFont(new Font("Calibri", Font.BOLD, 23));
+        inventory.setForeground(Color.red);
+        add(inventory);
+        inventory.setVisible(true);
         reset();
     }
 
@@ -78,7 +86,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
         requestFocus();
     }
     public void paint(Graphics g){
-        System.out.print("paint");
+
         if(start==0){
             player.setColPos(map.getLadderColumn());
             player.setRowPos(map.getLadderRow());
@@ -132,6 +140,66 @@ public class WumpusPanel extends JPanel implements KeyListener{
         if(player.getDirection()==WumpusPlayer.WEST){
             g.drawImage(playerLeft,player.getColPos()*50, player.getRowPos()*50,null);
         }
+
+
+
+        g.setColor(Color.black);
+        g.fillRect(0,510,200,130);
+        g.fillRect(210,510,300,130);
+        g.setColor(Color.MAGENTA);
+        g.setFont(new Font("Agency FB", Font.BOLD, 25));
+        g.drawString("Inventory:",10,550);
+        g.drawString("Messages:",220,550);
+        if(player.isArrow()==true){
+            g.drawImage(arrow,50,570,null);
+        }
+        if(player.isGold()==true){
+            g.drawImage(gold, 80, 570, null);
+        }
+        g.setColor(Color.white);
+        g.setFont(new Font("Agency FB", Font.BOLD, 15));
+        if(map.getSquare(player.getRowPos(),player.getColPos()).isWumpus()==true){
+            g.drawString("You are eaten by the Wumpus",230,570);
+        }
+        if(map.getSquare(player.getRowPos(),player.getColPos()).isLadder()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()!=true){
+            g.drawString("You bump into a ladder",230,570);
+        }
+        if(map.getSquare(player.getRowPos(),player.getColPos()).isBreeze()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isLadder()!=true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()!=true){
+            g.drawString("You feel a breeze",230,570);
+        }
+        if(map.getSquare(player.getRowPos(),player.getColPos()).isBreeze()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isLadder()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()!=true){
+            g.drawString("You bump into a ladder",230,570);
+            g.drawString("You feel a breeze",230,590);
+        }
+        if(map.getSquare(player.getRowPos(),player.getColPos()).isBreeze()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isLadder()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()==true){
+            g.drawString("You bump into a ladder",230,570);
+            g.drawString("You feel a breeze",230,590);
+            g.drawString("You smell a stench ",230,610);
+        }if(map.getSquare(player.getRowPos(),player.getColPos()).isBreeze()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isLadder()!=true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()==true){
+
+            g.drawString("You feel a breeze",230,590);
+            g.drawString("You smell a stench ",230,610);
+        }
+        if((map.getSquare(player.getRowPos(),player.getColPos()).isStench()==true||map.getSquare(player.getRowPos(),player.getColPos()).isDeadWumpus()==true)&&map.getSquare(player.getRowPos(),player.getColPos()).isBreeze()!=true&&map.getSquare(player.getRowPos(),player.getColPos()).isLadder()!=true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()==true){
+            g.drawString("You smell a stench ",230,570);
+        }
+        
+        if(map.getSquare(player.getRowPos(),player.getColPos()).isGold()==true){
+            g.drawString("You see a glimmer",230,570);
+        }
+        if(map.getSquare(player.getRowPos(),player.getColPos()).isPit()==true){
+            g.drawString("You fell down a pit to your death",230,570);
+        }
+        if(arrowHit==0){
+            g.drawString("You hear a scream ",230,570);
+            arrowHit=1;
+        }
+
+
+
+
+
+
     }
 
 
@@ -171,7 +239,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
                 if(map.getSquare(x,player.getColPos()).isWumpus()==true){
                     map.getSquare(x,player.getColPos()).setWumpus(false);
                     map.getSquare(x,player.getColPos()).setDeadWumpus(true);
-
+                    arrowHit=0;
                 }
             }
             repaint();
@@ -184,6 +252,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
                 if(map.getSquare(player.getRowPos(),x).isWumpus()==true){
                     map.getSquare(player.getRowPos(),x).setWumpus(false);
                     map.getSquare(player.getRowPos(),x).setDeadWumpus(true);
+                    arrowHit=0;
                     repaint();
                 }
             }
@@ -196,7 +265,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
                 if(map.getSquare(x,player.getColPos()).isWumpus()==true){
                     map.getSquare(x,player.getColPos()).setWumpus(false);
                     map.getSquare(x,player.getColPos()).setDeadWumpus(true);
-
+                    arrowHit=0;
                 }
             }
             repaint();
@@ -208,7 +277,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
                 if(map.getSquare(player.getRowPos(),x).isWumpus()==true){
                     map.getSquare(player.getRowPos(),x).setWumpus(false);
                     map.getSquare(player.getRowPos(),x).setDeadWumpus(true);
-
+                    arrowHit=0;
                 }
             }
             repaint();
