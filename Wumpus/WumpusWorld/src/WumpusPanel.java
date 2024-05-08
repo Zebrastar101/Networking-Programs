@@ -81,7 +81,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
         if(start==0){
             player.setColPos(map.getLadderColumn());
             player.setRowPos(map.getLadderRow());
-            start=1;s
+            start=1;
         }
 
         map.getSquare(player.getRowPos(),player.getColPos()).setVisited(true);
