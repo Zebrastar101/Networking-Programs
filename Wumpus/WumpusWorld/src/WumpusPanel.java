@@ -40,7 +40,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
         try{
         floor= ImageIO.read(new File("Wumpus World Images\\Floor.gif"));
        arrow=ImageIO.read(new File("Wumpus World Images\\arrow.gif"));
-        fog=ImageIO.read(new File("Wumpus World Images\\fog.gif"));
+        fog=ImageIO.read(new File("Wumpus World Images\\black.gif"));
         gold=ImageIO.read(new File("Wumpus World Images\\gold.gif"));
         ladder=ImageIO.read(new File("Wumpus World Images\\ladder.gif"));
         pit=ImageIO.read(new File("Wumpus World Images\\pit.gif"));
@@ -48,12 +48,13 @@ public class WumpusPanel extends JPanel implements KeyListener{
         wumpus=ImageIO.read(new File("Wumpus World Images\\wumpus.gif"));
         deadWumpus=ImageIO.read(new File("Wumpus World Images\\deadWumpus.gif"));
         stench=ImageIO.read(new File("Wumpus World Images\\stench.gif"));
-        playerUp=ImageIO.read(new File("Wumpus World Images\\playerUp.gif"));
-        playerDown=ImageIO.read(new File("Wumpus World Images\\playerDown.gif"));
-        playerLeft=ImageIO.read(new File("Wumpus World Images\\playerLeft.gif"));
-        playerRight=ImageIO.read(new File("Wumpus World Images\\playerRight.gif"));}
+        playerUp=ImageIO.read(new File("Wumpus World Images\\playerUp.png"));
+        playerDown=ImageIO.read(new File("Wumpus World Images\\playerDown.png"));
+        playerLeft=ImageIO.read(new File("Wumpus World Images\\playerLeft.png"));
+        playerRight=ImageIO.read(new File("Wumpus World Images\\playerRight.png"));}
         catch (IOException e) {
             System.out.print("failed to load");
+            e.printStackTrace();
         }
         //reset call
         reset();
@@ -74,6 +75,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
         requestFocus();
     }
     public void paint(Graphics g){
+        System.out.print("paint");
         for( int x=0; x<10; x++ ){
             for(int z=0; z<10; z++){
                 WumpusSquare track=map.getSquare(x,z);

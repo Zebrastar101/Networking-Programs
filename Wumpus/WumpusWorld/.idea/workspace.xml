@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b600f1-d3ef-47b6-8129-aca4550f641c" name="Changes" comment="" />
+    <list default="true" id="52b600f1-d3ef-47b6-8129-aca4550f641c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Wumpus World Images/Floor.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Wumpus World Images/Floor.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Wumpus World Images/arrow.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Wumpus World Images/arrow.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Wumpus World Images/black.GIF" beforeDir="false" afterPath="$PROJECT_DIR$/Wumpus World Images/black.GIF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Wumpus World Images/breeze.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Wumpus World Images/breeze.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Wumpus World Images/deadwumpus.GIF" beforeDir="false" afterPath="$PROJECT_DIR$/Wumpus World Images/deadwumpus.GIF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Wumpus World Images/desktop.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Wumpus World Images/desktop.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Wumpus World Images/gold.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Wumpus World Images/gold.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Wumpus World Images/ladder.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Wumpus World Images/ladder.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Wumpus World Images/pit.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Wumpus World Images/pit.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Wumpus World Images/playerDown.png" beforeDir="false" afterPath="$PROJECT_DIR$/Wumpus World Images/playerDown.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Wumpus World Images/playerLeft.png" beforeDir="false" afterPath="$PROJECT_DIR$/Wumpus World Images/playerLeft.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Wumpus World Images/playerRight.png" beforeDir="false" afterPath="$PROJECT_DIR$/Wumpus World Images/playerRight.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Wumpus World Images/playerUp.png" beforeDir="false" afterPath="$PROJECT_DIR$/Wumpus World Images/playerUp.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Wumpus World Images/stench.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Wumpus World Images/stench.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Wumpus World Images/wumpus.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Wumpus World Images/wumpus.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WumpusPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WumpusPanel.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
