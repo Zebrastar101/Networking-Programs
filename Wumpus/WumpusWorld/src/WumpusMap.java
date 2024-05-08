@@ -112,7 +112,7 @@ public class WumpusMap {
         return ladderRow;
     }
 
-    public WumpusSquare getSquare(int col, int row){
+    public WumpusSquare getSquare(int row, int col){
         if(row>=0 && row<=9 && col>=0 && col<=9){
 
             return grid[row][col];
