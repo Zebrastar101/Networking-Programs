@@ -113,9 +113,10 @@ public class WumpusMap {
 
     public WumpusSquare getSquare(int col, int row){
         if(row>=0 && row<=9 && col>=0 && col<=9){
-            return null;
+
+            return grid[row][col];
         }
-        return grid[row][col];
+        return null;
     }
 
     public String toString(){
