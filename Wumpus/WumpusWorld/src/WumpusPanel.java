@@ -70,6 +70,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
         player.setRowPos(map.getLadderRow());
         player.setColPos(map.getLadderColumn());
         start=0;
+        System.out.print(start);
         repaint();
     }
     public void addNotify(){
@@ -137,7 +138,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
     @Override
     public void keyTyped(KeyEvent e) {
         char event=e.getKeyChar();
-        if ((event == 'W' || event == 'w') &&status==PLAYING){
+        if ((event == 'S' || event == 's') &&status==PLAYING){
             player.setRowPos(player.getRowPos()+1);
             map.getSquare(player.getRowPos(),player.getColPos()).setVisited(true);
             player.setDirection(0);
@@ -150,7 +151,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
             repaint();
 
         }
-        if ((event == 'S' || event == 's')&&player.getRowPos()>0&&status==PLAYING) {
+        if ((event == 'W' || event == 'w')&&player.getRowPos()>0&&status==PLAYING) {
             player.setRowPos(player.getRowPos()-1);
             map.getSquare(player.getRowPos(),player.getColPos()).setVisited(true);
             player.setDirection(WumpusPlayer.SOUTH);
