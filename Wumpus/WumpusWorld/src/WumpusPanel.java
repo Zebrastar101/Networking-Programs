@@ -238,7 +238,8 @@ public class WumpusPanel extends JPanel implements KeyListener{
         if ((event == 'i') && player.isArrow()==true && status==PLAYING) {
             //nio clue how to shoot arrow yet;
             player.setArrow(false);
-            for(int x=player.getRowPos()+1; x<10;x++){
+            player.setDirection(WumpusPlayer.SOUTH);
+            for(int x=player.getRowPos()-1; x>=0;x--){
                 if(map.getSquare(x,player.getColPos()).isWumpus()==true){
                     map.getSquare(x,player.getColPos()).setWumpus(false);
                     map.getSquare(x,player.getColPos()).setDeadWumpus(true);
@@ -251,6 +252,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
         if ((event == 'l')&&player.isArrow()==true&&status==PLAYING) {
             //nio clue how to shoot arrow yet;
             player.setArrow(false);
+            player.setDirection(WumpusPlayer.WEST);
             for(int x=player.getColPos()+1; x<10;x++){
                 if(map.getSquare(player.getRowPos(),x).isWumpus()==true){
                     map.getSquare(player.getRowPos(),x).setWumpus(false);
@@ -264,6 +266,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
         if ((event == 'k')&&player.isArrow()==true&&status==PLAYING) {
             //nio clue how to shoot arrow yet;
             player.setArrow(false);
+            player.setDirection(WumpusPlayer.NORTH);
             for(int x=player.getRowPos()+1; x<10;x++){
                 if(map.getSquare(x,player.getColPos()).isWumpus()==true){
                     map.getSquare(x,player.getColPos()).setWumpus(false);
@@ -276,6 +279,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
         if ((event == 'j')&&player.isArrow()==true&&status==PLAYING) {
             //nio clue how to shoot arrow yet;
             player.setArrow(false);
+            player.setDirection(WumpusPlayer.EAST);
             for(int x=player.getColPos()-1; x>-1;x--){
                 if(map.getSquare(player.getRowPos(),x).isWumpus()==true){
                     map.getSquare(player.getRowPos(),x).setWumpus(false);
