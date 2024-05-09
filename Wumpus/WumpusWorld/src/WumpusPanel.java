@@ -209,33 +209,33 @@ public class WumpusPanel extends JPanel implements KeyListener{
     @Override
     public void keyTyped(KeyEvent e) {
         char event=e.getKeyChar();
-        if ((event == 'S' || event == 's') && player.getRowPos()<9 && status==PLAYING){
+        if ((event == 's') && player.getRowPos()<9 && status==PLAYING){
             player.setRowPos(player.getRowPos()+1);
             map.getSquare(player.getRowPos(),player.getColPos()).setVisited(true);
             player.setDirection(0);
             repaint();
         }
-        if ((event == 'D' || event == 'd') && player.getColPos()<9 && status==PLAYING){
+        if ((event == 'd') && player.getColPos()<9 && status==PLAYING){
             player.setColPos(player.getColPos()+1);
             map.getSquare(player.getRowPos(),player.getColPos()).setVisited(true);
             player.setDirection(WumpusPlayer.EAST);
             repaint();
 
         }
-        if ((event == 'W' || event == 'w') && player.getRowPos()>0 && status==PLAYING) {
+        if ((event == 'w') && player.getRowPos()>0 && status==PLAYING) {
             player.setRowPos(player.getRowPos()-1);
             map.getSquare(player.getRowPos(),player.getColPos()).setVisited(true);
             player.setDirection(WumpusPlayer.SOUTH);
             repaint();
 
         }
-        if ((event == 'a' || event == 'A') && player.getColPos()>0 && status==PLAYING) {
+        if ((event == 'a') && player.getColPos()>0 && status==PLAYING) {
             player.setColPos(player.getColPos()-1);
             map.getSquare(player.getRowPos(),player.getColPos()).setVisited(true);
             player.setDirection(WumpusPlayer.WEST);
             repaint();
         }
-        if ((event == 'i' || event == 'I') && player.isArrow()==true && status==PLAYING) {
+        if ((event == 'i') && player.isArrow()==true && status==PLAYING) {
             //nio clue how to shoot arrow yet;
             player.setArrow(false);
             for(int x=player.getRowPos()+1; x<10;x++){
@@ -248,7 +248,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
             repaint();
 
         }
-        if ((event == 'l' || event == 'L')&&player.isArrow()==true&&status==PLAYING) {
+        if ((event == 'l')&&player.isArrow()==true&&status==PLAYING) {
             //nio clue how to shoot arrow yet;
             player.setArrow(false);
             for(int x=player.getColPos()+1; x<10;x++){
@@ -261,7 +261,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
             }
             repaint();
         }
-        if ((event == 'k' || event == 'K')&&player.isArrow()==true&&status==PLAYING) {
+        if ((event == 'k')&&player.isArrow()==true&&status==PLAYING) {
             //nio clue how to shoot arrow yet;
             player.setArrow(false);
             for(int x=player.getRowPos()+1; x<10;x++){
@@ -273,7 +273,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
             }
             repaint();
         }
-        if ((event == 'j' || event == 'J')&&player.isArrow()==true&&status==PLAYING) {
+        if ((event == 'j')&&player.isArrow()==true&&status==PLAYING) {
             //nio clue how to shoot arrow yet;
             player.setArrow(false);
             for(int x=player.getColPos()-1; x>-1;x--){
@@ -285,7 +285,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
             }
             repaint();
         }
-        if ((event == 'c' || event == 'C')&&player.isGold()==true&&player.getColPos()==map.getLadderColumn()&&player.getRowPos()==map.getLadderRow()&&status==PLAYING) {
+        if ((event == 'c')&&player.isGold()==true&&player.getColPos()==map.getLadderColumn()&&player.getRowPos()==map.getLadderRow()&&status==PLAYING) {
             //nio clue how to shoot arrow yet;
             status=WON;
             repaint();
@@ -294,12 +294,12 @@ public class WumpusPanel extends JPanel implements KeyListener{
             status=DEAD;
             repaint();
         }
-        if ((event == 'n' || event == 'N')&&status!=PLAYING) {
+        if ((event == 'n')&&status!=PLAYING) {
             //nio clue how to shoot arrow yet;
             reset();
 
         }
-        if ((event == 'p' || event == 'P')&&status==PLAYING&&map.getSquare(player.getRowPos(),player.getColPos()).isGold()) {
+        if ((event == 'p')&&status==PLAYING&&map.getSquare(player.getRowPos(),player.getColPos()).isGold()) {
            player.setGold(true);
             map.getSquare(player.getRowPos(),player.getColPos()).setGold(false);
             repaint();
