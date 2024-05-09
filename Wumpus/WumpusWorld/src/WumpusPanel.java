@@ -128,10 +128,10 @@ public class WumpusPanel extends JPanel implements KeyListener{
                 }
             }
         }
-        if(player.getDirection()==WumpusPlayer.NORTH){
+        if(player.getDirection()==WumpusPlayer.SOUTH){
             g.drawImage(playerUp,player.getColPos()*50, player.getRowPos()*50,null);
         }
-        if(player.getDirection()==WumpusPlayer.SOUTH){
+        if(player.getDirection()==WumpusPlayer.NORTH){
             g.drawImage(playerDown,player.getColPos()*50, player.getRowPos()*50,null);
         }
         if(player.getDirection()==WumpusPlayer.EAST){
@@ -161,7 +161,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
         if(map.getSquare(player.getRowPos(),player.getColPos()).isWumpus()==true){
             g.drawString("You are eaten by the Wumpus",230,570);
         }
-        if(map.getSquare(player.getRowPos(),player.getColPos()).isLadder()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()!=true){
+        if(map.getSquare(player.getRowPos(),player.getColPos()).isLadder()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()!=true&&status==PLAYING){
             g.drawString("You bump into a ladder",230,570);
         }
         if(map.getSquare(player.getRowPos(),player.getColPos()).isBreeze()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isLadder()!=true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()!=true){
@@ -193,6 +193,9 @@ public class WumpusPanel extends JPanel implements KeyListener{
         if(arrowHit==0){
             g.drawString("You hear a scream ",230,570);
             arrowHit=1;
+        }
+        if(map.getSquare(player.getRowPos(),player.getColPos()).isLadder()==true&& player.isGold()==true&& status==WON){
+            g.drawString("You Win. N for new game.",230,570);
         }
 
 
