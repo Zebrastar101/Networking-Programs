@@ -195,7 +195,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
             arrowHit=1;
         }
         if(map.getSquare(player.getRowPos(),player.getColPos()).isLadder()==true&& player.isGold()==true&& status==WON){
-            g.drawString("You Win. N for new game.",230,570);
+            g.drawString("You Win. N for new game.",230,610);
         }
 
 
