@@ -167,25 +167,25 @@ public class WumpusPanel extends JPanel implements KeyListener{
         if(map.getSquare(player.getRowPos(),player.getColPos()).isBreeze()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isLadder()!=true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()!=true){
             g.drawString("You feel a breeze",230,570);
         }
-        if(map.getSquare(player.getRowPos(),player.getColPos()).isBreeze()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isLadder()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()!=true){
+        if(map.getSquare(player.getRowPos(),player.getColPos()).isBreeze()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isLadder()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()!=true&&status==PLAYING){
             g.drawString("You bump into a ladder",230,570);
             g.drawString("You feel a breeze",230,590);
         }
-        if(map.getSquare(player.getRowPos(),player.getColPos()).isBreeze()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isLadder()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()==true){
+        if(map.getSquare(player.getRowPos(),player.getColPos()).isBreeze()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isLadder()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()==true&&status==PLAYING){
             g.drawString("You bump into a ladder",230,570);
             g.drawString("You feel a breeze",230,590);
             g.drawString("You smell a stench ",230,610);
-        }if(map.getSquare(player.getRowPos(),player.getColPos()).isBreeze()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isLadder()!=true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()==true){
+        }if(map.getSquare(player.getRowPos(),player.getColPos()).isBreeze()==true&&map.getSquare(player.getRowPos(),player.getColPos()).isLadder()!=true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()==true&status==PLAYING){
 
             g.drawString("You feel a breeze",230,590);
             g.drawString("You smell a stench ",230,610);
         }
-        if((map.getSquare(player.getRowPos(),player.getColPos()).isStench()==true||map.getSquare(player.getRowPos(),player.getColPos()).isDeadWumpus()==true)&&map.getSquare(player.getRowPos(),player.getColPos()).isBreeze()!=true&&map.getSquare(player.getRowPos(),player.getColPos()).isLadder()!=true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()==true){
+        if((map.getSquare(player.getRowPos(),player.getColPos()).isStench()==true||map.getSquare(player.getRowPos(),player.getColPos()).isDeadWumpus()==true)&&map.getSquare(player.getRowPos(),player.getColPos()).isBreeze()!=true&&map.getSquare(player.getRowPos(),player.getColPos()).isLadder()!=true&&map.getSquare(player.getRowPos(),player.getColPos()).isStench()==true&status==PLAYING){
             g.drawString("You smell a stench ",230,570);
         }
         
         if(map.getSquare(player.getRowPos(),player.getColPos()).isGold()==true){
-            g.drawString("You see a glimmer",230,570);
+            g.drawString("You see a glimmer",230,610);
         }
         if(map.getSquare(player.getRowPos(),player.getColPos()).isPit()==true){
             g.drawString("You fell down a pit to your death",230,570);
@@ -195,7 +195,7 @@ public class WumpusPanel extends JPanel implements KeyListener{
             arrowHit=1;
         }
         if(map.getSquare(player.getRowPos(),player.getColPos()).isLadder()==true&& player.isGold()==true&& status==WON){
-            g.drawString("You Win. N for new game.",230,610);
+            g.drawString("You Win. N for new game.",230,570);
         }
 
 
